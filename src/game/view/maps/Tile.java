@@ -11,7 +11,7 @@ public class Tile extends JLabel
 	//Colors
 	public static final Color UNEXPLORED = Color.BLACK;
 	public static final Color SHORE = new Color(14, 114, 150);
-	public static final Color ICE = new Color(150, 173, 212);
+	public static final Color COLD = new Color(150, 173, 212);
 	public static final Color OCEAN = new Color(3, 7, 84);
 	public static final Color FERTILE = new Color(47, 89, 19);
 	public static final Color DESERT = new Color(163, 152, 95);
