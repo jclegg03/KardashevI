@@ -14,6 +14,7 @@ public class Tile extends JLabel
 	public static final Color ICE = new Color(150, 173, 212);
 	public static final Color OCEAN = new Color(3, 7, 84);
 	public static final Color FERTILE = new Color(47, 89, 19);
+	public static final Color DESERT = new Color(163, 152, 95);
 	
 	private Color color;
 	private ImageIcon icon;
@@ -27,6 +28,7 @@ public class Tile extends JLabel
 		this.setBackground(color);
 		
 		this.setHorizontalAlignment(CENTER);
+		this.setVerticalAlignment(CENTER);
 		
 		this.setVisible(true);
 		this.setOpaque(true);
