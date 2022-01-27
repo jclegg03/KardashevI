@@ -1,7 +1,9 @@
 package game.view.maps;
 
-import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -12,6 +14,7 @@ public class Map extends JPanel
 //	private int length;
 	private final int rows;
 	private final int cols;
+//	private Image background;
 	
 	public Map(int rows, int cols)
 	{
@@ -30,6 +33,13 @@ public class Map extends JPanel
 			}
 		}
 	}
+	
+//	@Override
+//	protected void paintComponent(Graphics image)
+//	{
+//		this.paint(image);
+//		image.drawImage(background, 0, 0, null);
+//	}
 	
 	public Tile[][] getMap()
 	{

@@ -1,4 +1,4 @@
-package game.empire;
+package game.model.empire;
 
 import java.io.Serializable;
 

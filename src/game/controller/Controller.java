@@ -2,8 +2,8 @@ package game.controller;
 
 import java.io.Serializable;
 
-import game.lists.CaveAgeTech;
-import game.units.Resource;
+import game.model.resources.lists.CaveAgeTech;
+import game.model.units.Resource;
 
 public class Controller implements Serializable
 {

@@ -1,4 +1,4 @@
-package game.units;
+package game.model.units;
 
 public interface Describable
 {

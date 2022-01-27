@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import game.units.Resource;
+import game.model.units.Resource;
 import game.view.maps.LocalMap;
 import game.view.maps.Map;
 import game.view.maps.WorldMap;
@@ -23,7 +23,7 @@ public class GameView
 	private JFrame view;
 	private JPanel resources;
 	private Toolbar toolbar;
-	private MapController mapController;
+	private MapManager mapController;
 	private JPanel settlements;
 	private Map map;
 	private ImageIcon icon;
@@ -40,7 +40,7 @@ public class GameView
 		this.resources = new JPanel();
 		this.toolbar = new Toolbar(view);
 		this.mapLevel = LOCAL_MAP;
-		this.mapController = new MapController(mapLevel);
+		this.mapController = new MapManager(mapLevel);
 		this.settlements = new JPanel();
 		this.map = new WorldMap();
 		this.icon = new ImageIcon("C:/Users/unlim/eclipse-workspace/KardashevI/src/game/view/game icon.png");

@@ -1,8 +1,8 @@
-package game.lists;
+package game.model.resources.lists;
 
 import java.util.ArrayList;
 
-import game.units.Resource;
+import game.model.units.Resource;
 
 public class ResourceList
 {

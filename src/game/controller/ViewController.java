@@ -1,6 +1,6 @@
 package game.controller;
 
-import game.units.Resource;
+import game.model.units.Resource;
 import game.view.game.GameView;
 import game.view.menu.MainMenuView;
 
