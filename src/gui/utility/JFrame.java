@@ -6,7 +6,7 @@ import game.controller.Controller;
 
 public class JFrame extends javax.swing.JFrame
 {
-	private Controller app;
+	protected Controller app;
 	
 	public JFrame(Controller app)
 	{

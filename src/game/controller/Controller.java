@@ -2,15 +2,15 @@ package game.controller;
 
 import java.io.Serializable;
 
-import gui.utility.JFrame;
+import game.view.mainMenu.MainMenu;
 
 public class Controller implements Serializable
 {
 	static final long serialVersionUID = 0l;
-	private JFrame test;
+	private MainMenu test;
 	
 	public Controller()
 	{
-		this.test = new JFrame(this);
+		this.test = new MainMenu(this);
 	}
 }
