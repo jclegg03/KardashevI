@@ -11,8 +11,11 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import game.controller.Controller;
+
 public class GameMenuView
 {
+	private Controller app;
 	private JFrame parent;
 	private JDialog view;
 	private JPanel buttons;
@@ -22,8 +25,9 @@ public class GameMenuView
 	private JButton save;
 	private JButton load;
 	
-	public GameMenuView(JFrame parent)
+	public GameMenuView(Controller app, JFrame parent)
 	{
+		this.app = app;
 		this.parent = parent;
 		this.view = new JDialog(parent, true);
 		this.buttons = new JPanel();
