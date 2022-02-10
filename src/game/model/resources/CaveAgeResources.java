@@ -1,4 +1,4 @@
-package game.model.resources.lists;
+package game.model.resources;
 
 public class CaveAgeResources extends ResourceList
 {

@@ -1,4 +1,4 @@
-package game.model.resources.lists;
+package game.model.resources;
 
 import game.model.units.Tech;
 
