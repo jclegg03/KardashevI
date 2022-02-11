@@ -1,6 +1,7 @@
 package game.view.mainMenu;
 
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -26,7 +27,7 @@ public class ContentPane extends JPanel
 		this.app = app;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel();
-
+		
 		this.newButton = new JButton("New Game");
 		this.loadButton = new JButton("Load Game");
 		this.settingsButton = new JButton("Settings");
@@ -42,23 +43,26 @@ public class ContentPane extends JPanel
 		setupButtonPanel();
 		this.add(buttonPanel);
 		this.setFocusable(true);
+		this.setBackground(java.awt.Color.BLUE);
 	}
 	
 	private void setupButtonPanel()
 	{
-		buttonPanel.setLayout(new GridLayout(1, 0, 10, 0));
+		buttonPanel.setLayout(new GridLayout(1, 0, 20, 0));
 		buttonPanel.add(newButton);
 		buttonPanel.add(loadButton);
 		buttonPanel.add(settingsButton);
 		buttonPanel.add(quitButton);
+		buttonPanel.setOpaque(false);
 	}
 	
 	private void setupLayout()
 	{
 		this.setLayout(layout);
-		layout.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, buttonPanel, Toolkit.getDefaultToolkit().getScreenSize().height / -8, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.WEST, buttonPanel, 20, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.EAST, buttonPanel, -20, SpringLayout.EAST, this);
 	}
 	
 	private void setupListeners()

@@ -31,6 +31,6 @@ public class Controller implements Serializable
 	
 	public void quit()
 	{
-		
+		test.dispose();
 	}
 }
