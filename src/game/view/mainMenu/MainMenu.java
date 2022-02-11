@@ -5,12 +5,12 @@ import gui.utility.JFrame;
 
 public class MainMenu extends JFrame
 {
-	private ContentPane contentPane;
+	private MainContentPane contentPane;
 	
 	public MainMenu (Controller app)
 	{
 		super(app);
-		this.contentPane = new ContentPane(this.app);
+		this.contentPane = new MainContentPane(this.app);
 		
 		setupFrame();
 	}

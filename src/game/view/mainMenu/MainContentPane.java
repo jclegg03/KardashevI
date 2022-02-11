@@ -11,7 +11,7 @@ import javax.swing.SpringLayout;
 import game.controller.Controller;
 import gui.utility.JButton;
 
-public class ContentPane extends JPanel
+public class MainContentPane extends JPanel
 {
 	private Controller app;
 	private SpringLayout layout;
@@ -21,7 +21,7 @@ public class ContentPane extends JPanel
 	private JButton settingsButton;
 	private JButton quitButton;
 	
-	public ContentPane(Controller app)
+	public MainContentPane(Controller app)
 	{
 		super();
 		this.app = app;
