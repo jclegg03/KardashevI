@@ -19,9 +19,8 @@ public class JFrame extends javax.swing.JFrame
 	private void setupFrame()
 	{
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setUndecorated(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
-		
-		this.setVisible(true);
 	}
 }

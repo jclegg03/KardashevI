@@ -13,4 +13,24 @@ public class Controller implements Serializable
 	{
 		this.test = new MainMenu(this);
 	}
+	
+	public void newGame()
+	{
+		
+	}
+	
+	public void loadGame()
+	{
+		
+	}
+	
+	public void settings()
+	{
+		
+	}
+	
+	public void quit()
+	{
+		
+	}
 }
