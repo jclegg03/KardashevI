@@ -29,7 +29,15 @@ public class NewContentPane extends JPanel
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.textField = new JTextField("Empire Name");
+		layout.putConstraint(SpringLayout.NORTH, textField, 10, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, textField, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, textField, -100, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, textField, -10, SpringLayout.EAST, this);
 		this.buttonPanel = new JPanel();
+		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.SOUTH, textField);
+		layout.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 		this.cancelButton = new JButton("Cancel");
 		this.confirmButton = new JButton("Confirm");
 		
@@ -118,13 +126,16 @@ public class NewContentPane extends JPanel
 			@Override
 			public void mouseEntered(MouseEvent e) 
 			{
-				textField.setText("");
+				if(textField.getText().equals("Empire Name"))
+				{
+					textField.setText("");
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e)
 			{
-				if(! textField.getText().equals(""))
+				if(textField.getText().equals("") && ! textField.hasFocus())
 				{
 					textField.setText("Empire Name");
 				}

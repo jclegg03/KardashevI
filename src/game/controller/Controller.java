@@ -20,6 +20,7 @@ public class Controller implements Serializable
 	public void newGame()
 	{
 		new NewGameMenu(this, test);
+		test.getContentPane().requestFocus();
 	}
 	
 	public void loadGame()

@@ -21,6 +21,7 @@ public class NewGameMenu extends javax.swing.JDialog
 		this.setLocationRelativeTo(null);
 		this.setUndecorated(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setSize(500, 200);
 		this.setContentPane(contentPane);
 		
 		this.setVisible(true);
