@@ -1,5 +1,7 @@
 package game.view.mainMenu;
 
+import java.awt.Toolkit;
+
 import game.controller.Controller;
 
 public class NewGameMenu extends javax.swing.JDialog
@@ -18,7 +20,8 @@ public class NewGameMenu extends javax.swing.JDialog
 	
 	private void setupFrame()
 	{
-		this.setLocationRelativeTo(null);
+		this.setLocation((int) (getParent().getBounds().getCenterX() - 250),
+				(int) (getParent().getBounds().getCenterY() - 100));
 		this.setUndecorated(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(500, 200);

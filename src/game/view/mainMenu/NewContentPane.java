@@ -88,6 +88,38 @@ public class NewContentPane extends JPanel
 					confirmButton.doClick();
 					return;
 				}
+				else
+				{
+					if(textField.getText().equals("Empire Name"))
+					{
+						if(key.getKeyChar() == KeyEvent.VK_DELETE || key.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+						{
+							textField.setText("");
+							confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + "\"");
+						}
+						else
+						{
+							textField.setText(Character.toString(key.getKeyChar()));
+							confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + key.getKeyChar() + "\"");
+						}
+					}
+					else
+					{
+						if(key.getKeyChar() != KeyEvent.VK_BACK_SPACE && key.getKeyChar() != KeyEvent.VK_DELETE)
+						{
+							textField.setText(textField.getText() + Character.toString(key.getKeyChar()));
+							confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + key.getKeyChar() + "\"");
+						}
+						else if(key.getKeyChar() == KeyEvent.VK_BACK_SPACE)
+						{
+							if(textField.getText().length() != 0)
+							{
+								textField.setText(textField.getText().substring(0, textField.getText().length() - 1));
+								confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + "\"");
+							}
+						}
+					}
+				}
 			}
 
 			@Override
@@ -139,6 +171,49 @@ public class NewContentPane extends JPanel
 				{
 					textField.setText("Empire Name");
 				}
+			}
+			
+		});
+		
+		textField.addKeyListener(new KeyListener()
+		{
+
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
+				if(key.getKeyChar() == KeyEvent.VK_ENTER)
+				{
+					confirmButton.doClick();
+					return;
+				}
+				else if(key.getKeyChar() == KeyEvent.VK_ESCAPE)
+				{
+					cancelButton.doClick();
+				}
+				else
+				{
+					if(key.getKeyChar() != KeyEvent.VK_DELETE && key.getKeyChar() != KeyEvent.VK_BACK_SPACE)
+					{
+						confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + key.getKeyChar() + "\"");
+					}
+					else
+					{
+						if(textField.getText().length() != 0)
+						{
+							confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + "\"");
+						}
+					}
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e)
+			{
 			}
 			
 		});
