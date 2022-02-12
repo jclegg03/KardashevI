@@ -25,6 +25,7 @@ public class NewContentPane extends JPanel
 	
 	public NewContentPane(Controller app, NewGameMenu frame)
 	{
+		super();
 		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
