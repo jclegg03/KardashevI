@@ -2,21 +2,25 @@ package game.view.mainMenu;
 
 import javax.swing.JDialog;
 
+import game.controller.Controller;
+
 public class ExitDialog extends JDialog
 {
 	private ExitContentPane contentPane;
 	
-	public ExitDialog(MainMenu parent)
+	public ExitDialog(Controller app, MainMenu parent)
 	{
 		super(parent, true);
-		this.contentPane = new ExitContentPane(this);
+		this.contentPane = new ExitContentPane(app, this);
 		
 		setupFrame();
 	}
 	
 	private void setupFrame()
 	{
-		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setSize(500, 200);
+		this.setContentPane(contentPane);
 		
 		this.setVisible(true);
 	}

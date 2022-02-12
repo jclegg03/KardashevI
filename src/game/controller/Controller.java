@@ -2,8 +2,9 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
-import game.view.mainMenu.NewGameMenu;
+import game.view.mainMenu.NewGameDialog;
 
 public class Controller implements Serializable
 {
@@ -19,7 +20,7 @@ public class Controller implements Serializable
 	
 	public void newGame()
 	{
-		new NewGameMenu(this, test);
+		new NewGameDialog(this, test);
 		test.getContentPane().requestFocus();
 	}
 	
@@ -33,9 +34,9 @@ public class Controller implements Serializable
 		
 	}
 	
-	public void quit()
+	public void confirmQuit()
 	{
-		test.dispose();
+		new ExitDialog(this, test);
 	}
 	
 	public void createEmpire(String empireName)

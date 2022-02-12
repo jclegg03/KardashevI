@@ -109,6 +109,6 @@ public class MainContentPane extends JPanel
 		newButton.addActionListener(click -> app.newGame());
 		loadButton.addActionListener(click -> app.loadGame());
 		settingsButton.addActionListener(click -> app.settings());
-		quitButton.addActionListener(click -> app.quit());
+		quitButton.addActionListener(click -> app.confirmQuit());
 	}
 }

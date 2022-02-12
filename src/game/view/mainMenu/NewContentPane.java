@@ -16,14 +16,14 @@ import gui.utility.JButton;
 public class NewContentPane extends JPanel
 {
 	private Controller app;
-	private NewGameMenu frame;
+	private NewGameDialog frame;
 	private SpringLayout layout;
 	private JTextField textField;
 	private JPanel buttonPanel;
 	private JButton cancelButton;
 	private JButton confirmButton;
 	
-	public NewContentPane(Controller app, NewGameMenu frame)
+	public NewContentPane(Controller app, NewGameDialog frame)
 	{
 		super();
 		this.app = app;

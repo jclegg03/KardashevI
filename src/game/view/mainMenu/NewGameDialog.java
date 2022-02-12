@@ -4,12 +4,12 @@ import java.awt.Toolkit;
 
 import game.controller.Controller;
 
-public class NewGameMenu extends javax.swing.JDialog
+public class NewGameDialog extends javax.swing.JDialog
 {
 	private Controller app;
 	private NewContentPane contentPane;
 	
-	public NewGameMenu(Controller app, MainMenu parent)
+	public NewGameDialog(Controller app, MainMenu parent)
 	{
 		super(parent, true);
 		this.app = app;
