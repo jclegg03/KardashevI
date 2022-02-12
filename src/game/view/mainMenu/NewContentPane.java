@@ -29,15 +29,7 @@ public class NewContentPane extends JPanel
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.textField = new JTextField("Empire Name");
-		layout.putConstraint(SpringLayout.NORTH, textField, 10, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, textField, 10, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.SOUTH, textField, -100, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, textField, -10, SpringLayout.EAST, this);
 		this.buttonPanel = new JPanel();
-		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.SOUTH, textField);
-		layout.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 		this.cancelButton = new JButton("Cancel");
 		this.confirmButton = new JButton("Confirm");
 		
@@ -68,6 +60,14 @@ public class NewContentPane extends JPanel
 	private void setupLayout()
 	{
 		this.setLayout(layout);
+		layout.putConstraint(SpringLayout.NORTH, textField, 10, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, textField, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, textField, -100, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, textField, -10, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.SOUTH, textField);
+		layout.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 	}
 	
 	private void setupListeners()
