@@ -10,7 +10,7 @@ public class MainMenu extends JFrame
 	public MainMenu (Controller app)
 	{
 		super(app);
-		this.contentPane = new MainContentPane(this.app);
+		this.contentPane = new MainContentPane(app, this);
 		
 		setupFrame();
 	}

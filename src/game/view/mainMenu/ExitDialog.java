@@ -22,6 +22,7 @@ public class ExitDialog extends JDialog
 		this.setSize(500, 200);
 		this.setLocation((int) (getParent().getBounds().getCenterX() - 250),
 				(int) (getParent().getBounds().getCenterY() - 100));
+		this.setUndecorated(true);
 		this.setContentPane(contentPane);
 		
 		this.setVisible(true);

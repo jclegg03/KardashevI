@@ -2,7 +2,6 @@ package game.controller;
 
 import java.io.Serializable;
 
-import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
 
@@ -34,9 +33,9 @@ public class Controller implements Serializable
 		
 	}
 	
-	public void confirmQuit()
+	public void quit()
 	{
-		new ExitDialog(this, test);
+		test.dispose();
 	}
 	
 	public void createEmpire(String empireName)

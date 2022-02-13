@@ -14,6 +14,7 @@ import gui.utility.JButton;
 public class MainContentPane extends JPanel
 {
 	private Controller app;
+	private MainMenu frame;
 	private SpringLayout layout;
 	private JPanel buttonPanel;
 	private JButton newButton;
@@ -21,10 +22,11 @@ public class MainContentPane extends JPanel
 	private JButton settingsButton;
 	private JButton quitButton;
 	
-	public MainContentPane(Controller app)
+	public MainContentPane(Controller app, MainMenu frame)
 	{
 		super();
 		this.app = app;
+		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel();
 		
@@ -83,11 +85,6 @@ public class MainContentPane extends JPanel
 					quitButton.doClick();
 					return;
 				}
-				else if(key.getKeyChar() == 'n')
-				{
-					newButton.doClick();
-					return;
-				}
 				else if(key.getKeyChar() == 'l')
 				{
 					loadButton.doClick();
@@ -100,8 +97,13 @@ public class MainContentPane extends JPanel
 			}
 
 			@Override
-			public void keyReleased(KeyEvent e)
+			public void keyReleased(KeyEvent key)
 			{
+				if(key.getKeyChar() == 'n')
+				{
+					newButton.doClick();
+					return;
+				}
 			}
 			
 		});
@@ -109,6 +111,6 @@ public class MainContentPane extends JPanel
 		newButton.addActionListener(click -> app.newGame());
 		loadButton.addActionListener(click -> app.loadGame());
 		settingsButton.addActionListener(click -> app.settings());
-		quitButton.addActionListener(click -> app.confirmQuit());
+		quitButton.addActionListener(click -> new ExitDialog(app, frame));
 	}
 }
