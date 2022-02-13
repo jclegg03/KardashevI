@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
+import gui.utility.JFrame;
 
 public class Controller implements Serializable
 {
 	static final long serialVersionUID = 0l;
-	private MainMenu test;
+	private JFrame test;
 	private String empireName;
 	
 	public Controller()
@@ -19,7 +20,7 @@ public class Controller implements Serializable
 	
 	public void newGame()
 	{
-		new NewGameDialog(this, test);
+		new NewGameDialog(this, (MainMenu) test);
 		test.getContentPane().requestFocus();
 	}
 	
