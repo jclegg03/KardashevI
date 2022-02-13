@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.view.inGameView.GameFrame;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
 import gui.utility.JFrame;
@@ -39,8 +40,12 @@ public class Controller implements Serializable
 		test.dispose();
 	}
 	
-	public void createEmpire(String empireName)
+	public void createEmpire(String empireName, NewGameDialog frame)
 	{
 		this.empireName = empireName;
+		
+		frame.dispose();
+		test.dispose();
+		test = new GameFrame(this);
 	}
 }

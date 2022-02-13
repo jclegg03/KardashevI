@@ -220,6 +220,6 @@ public class NewContentPane extends JPanel
 		});
 		
 		cancelButton.addActionListener(click -> frame.dispose());
-		confirmButton.addActionListener(click -> app.createEmpire(textField.getText()));
+		confirmButton.addActionListener(click -> app.createEmpire(textField.getText(), frame));
 	}
 }
