@@ -1,6 +1,7 @@
 package game.view.gameView;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,7 +12,7 @@ import javax.swing.SpringLayout;
 import game.controller.Controller;
 import gui.utility.JButton;
 
-public class GameView extends JPanel
+public class GameContentPane extends JPanel
 {
 	private Controller app;
 	private GameFrame frame;
@@ -20,7 +21,7 @@ public class GameView extends JPanel
 	private JButton researchButton;
 	private JButton menuButton;
 	
-	public GameView(Controller app, GameFrame frame)
+	public GameContentPane(Controller app, GameFrame frame)
 	{
 		this.app = app;
 		this.frame = frame;
@@ -80,6 +81,14 @@ public class GameView extends JPanel
 			}	
 		});
 		
-		menuButton.addActionListener(click -> new GameMenu(app, frame));
+		menuButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent click)
+			{
+				new GameMenu(app, frame);
+				frame.getContentPane().requestFocus();
+			}
+		});
 	}
 }

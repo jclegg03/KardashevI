@@ -13,7 +13,7 @@ public class GameFrame extends JFrame
 	public GameFrame(Controller app)
 	{
 		super(app);
-		this.contentPane = new GameView(app, this);
+		this.contentPane = new GameContentPane(app, this);
 		
 		setupFrame();
 	}
