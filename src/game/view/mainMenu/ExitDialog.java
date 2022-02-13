@@ -20,6 +20,8 @@ public class ExitDialog extends JDialog
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(500, 200);
+		this.setLocation((int) (getParent().getBounds().getCenterX() - 250),
+				(int) (getParent().getBounds().getCenterY() - 100));
 		this.setContentPane(contentPane);
 		
 		this.setVisible(true);
