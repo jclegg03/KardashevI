@@ -1,6 +1,9 @@
-package game.view.inGameView;
+package game.view.gameView;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -54,6 +57,29 @@ public class GameView extends JPanel
 	
 	private void setupListeners()
 	{
+		this.addKeyListener(new KeyListener()
+		{
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
+			}
+
+			@Override
+			public void keyPressed(KeyEvent key)
+			{
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent key)
+			{
+				if(key.getKeyChar() == KeyEvent.VK_ESCAPE)
+				{
+					menuButton.doClick();
+				}
+			}	
+		});
 		
+		menuButton.addActionListener(click -> new GameMenu(app, frame));
 	}
 }

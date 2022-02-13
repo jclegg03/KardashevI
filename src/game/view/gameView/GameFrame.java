@@ -1,4 +1,4 @@
-package game.view.inGameView;
+package game.view.gameView;
 
 import javax.swing.JPanel;
 

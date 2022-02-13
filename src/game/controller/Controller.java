@@ -2,7 +2,7 @@ package game.controller;
 
 import java.io.Serializable;
 
-import game.view.inGameView.GameFrame;
+import game.view.gameView.GameFrame;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
 import gui.utility.JFrame;
