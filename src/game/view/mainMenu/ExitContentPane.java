@@ -96,7 +96,7 @@ public class ExitContentPane extends JPanel
 			}
 		});
 		
-		confirmButton.addActionListener(click -> app.quit());
+		confirmButton.addActionListener(click -> app.quit(frame));
 		cancelButton.addActionListener(click -> frame.dispose());
 	}
 }

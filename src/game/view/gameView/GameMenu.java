@@ -25,6 +25,7 @@ public class GameMenu extends JDialog
 		this.setLocation((int) (getParent().getBounds().getCenterX() - 150),
 				(int) (getParent().getBounds().getCenterY() - 250));
 		this.setContentPane(contentPane);
+		this.setUndecorated(true);
 		
 		this.setVisible(true);
 	}

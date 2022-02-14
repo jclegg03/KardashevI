@@ -3,12 +3,13 @@ package game.view.mainMenu;
 import javax.swing.JDialog;
 
 import game.controller.Controller;
+import gui.utility.JFrame;
 
 public class ExitDialog extends JDialog
 {
 	private ExitContentPane contentPane;
 	
-	public ExitDialog(Controller app, MainMenu parent)
+	public ExitDialog(Controller app, JFrame parent)
 	{
 		super(parent, true);
 		this.contentPane = new ExitContentPane(app, this);

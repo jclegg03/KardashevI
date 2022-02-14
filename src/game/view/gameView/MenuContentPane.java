@@ -1,6 +1,8 @@
 package game.view.gameView;
 
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -27,10 +29,6 @@ public class MenuContentPane extends JPanel
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel(new GridLayout(0, 1, 0, 5));
-		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 		this.resumeButton = new JButton("Resume Game");
 		this.settingsButton = new JButton("Settings");
 		this.saveButton = new JButton("Save Game");
@@ -61,10 +59,42 @@ public class MenuContentPane extends JPanel
 	private void setupLayout()
 	{
 		this.setLayout(layout);
+
+		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, buttonPanel, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 	}
 	
 	private void setupListeners()
 	{
+		this.addKeyListener(new KeyListener()
+		{
+			@Override
+			public void keyTyped(KeyEvent key)
+			{				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent key)
+			{
+			}
+
+			@Override
+			public void keyReleased(KeyEvent key)
+			{
+				if(key.getKeyChar() == KeyEvent.VK_ESCAPE)
+				{
+					frame.dispose();
+				}
+			}
+		});
 		
+		resumeButton.addActionListener(click -> frame.dispose());
+		//settings
+		//save
+		//load
+		mainMenuButton.addActionListener(click -> app.returnToMainMenu(frame));
+		quitButton.addActionListener(click -> app.quit(frame));
 	}
 }

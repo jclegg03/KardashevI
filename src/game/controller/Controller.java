@@ -3,6 +3,8 @@ package game.controller;
 import java.io.Serializable;
 
 import game.view.gameView.GameFrame;
+import game.view.gameView.GameMenu;
+import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
 import gui.utility.JFrame;
@@ -35,9 +37,39 @@ public class Controller implements Serializable
 		
 	}
 	
-	public void quit()
+	/**
+	 * Quits the game.
+	 * @param dialog The exit dialog.
+	 */
+	public void quit(ExitDialog dialog)
 	{
+		dialog.dispose();
 		test.dispose();
+	}
+	
+	/**
+	 * Quits the game from in a game.
+	 * @param menu The in game menu.
+	 */
+	public void quit(GameMenu menu)
+	{
+		menu.setVisible(false);
+		new ExitDialog(this, test);
+		if(test.isActive())
+		{
+			menu.setVisible(true);
+		}
+		else
+		{
+			menu.dispose();
+		}
+	}
+	
+	public void returnToMainMenu(GameMenu menu)
+	{
+		menu.dispose();
+		test.dispose();
+		test = new MainMenu(this);
 	}
 	
 	public void createEmpire(String empireName, NewGameDialog frame)
