@@ -1,8 +1,9 @@
-package game.view.gameView;
+package game.view.gameMenu;
 
 import javax.swing.JDialog;
 
 import game.controller.Controller;
+import game.view.gameView.GameFrame;
 
 public class GameMenu extends JDialog
 {

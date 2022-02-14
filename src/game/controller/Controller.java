@@ -2,8 +2,8 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.view.gameMenu.GameMenu;
 import game.view.gameView.GameFrame;
-import game.view.gameView.GameMenu;
 import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
@@ -70,6 +70,11 @@ public class Controller implements Serializable
 		menu.dispose();
 		test.dispose();
 		test = new MainMenu(this);
+	}
+	
+	public void selectSettlement(String name)
+	{
+		
 	}
 	
 	public void createEmpire(String empireName, NewGameDialog frame)

@@ -1,4 +1,4 @@
-package game.view.gameView;
+package game.view.gameMenu;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;

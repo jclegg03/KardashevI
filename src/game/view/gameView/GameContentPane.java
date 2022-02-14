@@ -1,6 +1,7 @@
 package game.view.gameView;
 
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,13 +11,16 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import game.controller.Controller;
+import game.view.gameMenu.GameMenu;
 import gui.utility.JButton;
+import javax.swing.border.BevelBorder;
 
 public class GameContentPane extends JPanel
 {
 	private Controller app;
 	private GameFrame frame;
 	private SpringLayout layout;
+	private SettlementPanel settlementPanel;
 	private JPanel utilityPanel;
 	private JButton researchButton;
 	private JButton menuButton;
@@ -26,7 +30,16 @@ public class GameContentPane extends JPanel
 		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
+		this.settlementPanel = new SettlementPanel(app);
+		layout.putConstraint(SpringLayout.NORTH, settlementPanel, 50, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, settlementPanel, 0, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, settlementPanel, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, settlementPanel, (int) (-9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.EAST, this);
 		this.utilityPanel = new JPanel();
+		layout.putConstraint(SpringLayout.NORTH, utilityPanel, -50, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, utilityPanel, (int) (9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, utilityPanel, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, utilityPanel, 0, SpringLayout.EAST, this);
 		this.researchButton = new JButton("Research");
 		this.menuButton = new JButton("Menu");
 		
@@ -39,12 +52,13 @@ public class GameContentPane extends JPanel
 	{
 		this.setFocusable(true);
 		
-		setupButtonPanel();
+		setupUtilityPanel();
 		
+		this.add(settlementPanel);
 		this.add(utilityPanel);
 	}
 	
-	private void setupButtonPanel()
+	private void setupUtilityPanel()
 	{
 		utilityPanel.setLayout(new GridLayout(0, 1, 0, 5));
 		utilityPanel.add(researchButton);
