@@ -75,6 +75,9 @@ public class Controller implements Serializable
 	public void selectSettlement(String name)
 	{
 		
+		
+		
+		returnFocus();
 	}
 	
 	public void createEmpire(String empireName, NewGameDialog frame)
@@ -91,6 +94,6 @@ public class Controller implements Serializable
 	 */
 	private void returnFocus()
 	{
-		test.requestFocus();
+		test.getContentPane().requestFocus();
 	}
 }
