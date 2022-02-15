@@ -85,4 +85,12 @@ public class Controller implements Serializable
 		test.dispose();
 		test = new GameFrame(this);
 	}
+	
+	/**
+	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button listneer.
+	 */
+	private void returnFocus()
+	{
+		test.requestFocus();
+	}
 }

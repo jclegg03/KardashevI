@@ -1,5 +1,7 @@
 package gui.utility;
 
+import java.awt.Dimension;
+
 public class JButton extends javax.swing.JButton
 {
 	public JButton(String text)
