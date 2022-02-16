@@ -68,11 +68,6 @@ public class SettlementPanel extends JPanel
 		settlementList.setLayout(settlementLayout);
 	}
 	
-	public JScrollPane getSettlementList()
-	{
-		return this.settlementListHolder;
-	}
-	
 	public void addSettlement(String name)
 	{
 		JButton settlement = new JButton(name);
@@ -82,13 +77,26 @@ public class SettlementPanel extends JPanel
 	
 	public void removeSettlement(String name)
 	{
+		this.remove(getSettlement(name));
+	}
+	
+	public void setSettlement(String name, String newName)
+	{
+		JButton settlement = getSettlement(name);
+		settlement.setText(newName);
+	}
+	
+	private JButton getSettlement(String name)
+	{
 		for(Component component : this.settlementList.getComponents())
 		{
 			JButton temp = (JButton) component;
 			if(temp.getText().equals(name))
 			{
-				settlementList.remove(component);
+				return temp;
 			}
 		}
+		
+		return null;
 	}
 }
