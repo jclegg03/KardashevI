@@ -20,6 +20,7 @@ public class GameContentPane extends JPanel
 	private Controller app;
 	private GameFrame frame;
 	private SpringLayout layout;
+	private ResourcePanel resourcePanel;
 	private SettlementPanel settlementPanel;
 	private JPanel utilityPanel;
 	private JButton researchButton;
@@ -30,7 +31,12 @@ public class GameContentPane extends JPanel
 		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
+		this.resourcePanel = new ResourcePanel(app);
+		layout.putConstraint(SpringLayout.NORTH, resourcePanel, 0, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, resourcePanel, 0, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.EAST, resourcePanel, 0, SpringLayout.EAST, this);
 		this.settlementPanel = new SettlementPanel(app);
+		layout.putConstraint(SpringLayout.SOUTH, resourcePanel, 0, SpringLayout.NORTH, settlementPanel);
 		layout.putConstraint(SpringLayout.NORTH, settlementPanel, 50, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, settlementPanel, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.SOUTH, settlementPanel, 0, SpringLayout.SOUTH, this);
@@ -54,6 +60,7 @@ public class GameContentPane extends JPanel
 		
 		setupUtilityPanel();
 		
+		this.add(resourcePanel);
 		this.add(settlementPanel);
 		this.add(utilityPanel);
 	}
