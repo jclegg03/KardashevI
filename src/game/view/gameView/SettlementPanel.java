@@ -1,5 +1,6 @@
 package game.view.gameView;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 
@@ -77,5 +78,17 @@ public class SettlementPanel extends JPanel
 		JButton settlement = new JButton(name);
 		settlement.addActionListener(click -> app.selectSettlement(settlement.getText()));
 		settlementList.add(settlement);
+	}
+	
+	public void removeSettlement(String name)
+	{
+		for(Component component : this.settlementList.getComponents())
+		{
+			JButton temp = (JButton) component;
+			if(temp.getText().equals(name))
+			{
+				settlementList.remove(component);
+			}
+		}
 	}
 }
