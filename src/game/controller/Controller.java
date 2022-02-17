@@ -7,6 +7,7 @@ import game.view.gameView.GameFrame;
 import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
+import game.view.map.Tile;
 import gui.utility.JFrame;
 
 public class Controller implements Serializable
@@ -75,6 +76,13 @@ public class Controller implements Serializable
 	public void selectSettlement(String name)
 	{
 		
+		
+		
+		returnFocus();
+	}
+	
+	public void build(Tile tile)
+	{
 		
 		
 		returnFocus();
