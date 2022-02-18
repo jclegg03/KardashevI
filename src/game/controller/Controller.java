@@ -3,6 +3,7 @@ package game.controller;
 import java.io.Serializable;
 
 import game.view.gameMenu.GameMenu;
+import game.view.gameView.BuildingMenu;
 import game.view.gameView.GameFrame;
 import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
@@ -83,7 +84,7 @@ public class Controller implements Serializable
 	
 	public void build(Tile tile)
 	{
-		
+		BuildingMenu buildingMenu = new BuildingMenu(this, (GameFrame) test);
 		
 		returnFocus();
 	}
