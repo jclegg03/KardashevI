@@ -84,8 +84,14 @@ public class Controller implements Serializable
 	
 	public void build(Tile tile)
 	{
-		BuildingMenu buildingMenu = new BuildingMenu(this, (GameFrame) test);
-		
+		if(tile.isVisible())
+		{
+			BuildingMenu buildingMenu = new BuildingMenu(this, (GameFrame) test);
+		}
+		else
+		{
+			
+		}
 		returnFocus();
 	}
 	
@@ -99,7 +105,7 @@ public class Controller implements Serializable
 	}
 	
 	/**
-	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button listneer.
+	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button action.
 	 */
 	private void returnFocus()
 	{

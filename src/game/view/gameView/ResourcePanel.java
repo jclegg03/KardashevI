@@ -49,6 +49,8 @@ public class ResourcePanel extends JPanel
 		{
 			resource.setToolTipText("Yearly gain: " + increase);
 		}
+		
+		resource.setHorizontalTextPosition(JLabel.CENTER);
 		this.add(resource);
 	}
 	
