@@ -2,12 +2,13 @@ package game.controller;
 
 import java.io.Serializable;
 
-import game.view.buildingMenu.BuildingMenu;
 import game.view.gameMenu.GameMenu;
 import game.view.gameView.GameFrame;
 import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
+import game.view.map.BuildingMenu;
+import game.view.map.ExploreMenu;
 import game.view.map.Tile;
 import gui.utility.JFrame;
 
@@ -22,6 +23,7 @@ public class Controller implements Serializable
 	private JFrame frame;
 	private String empireName;
 	private BuildingMenu buildingMenu;
+	private ExploreMenu exploreMenu;
 	
 	/**
 	 * Builds the game controller.
@@ -31,6 +33,8 @@ public class Controller implements Serializable
 	{
 		this.frame = new MainMenu(this);
 		this.empireName = "";
+		this.buildingMenu = null;
+		this.exploreMenu = null;
 	}
 	
 	/**
@@ -106,22 +110,43 @@ public class Controller implements Serializable
 	 * @author Jay Clegg
 	 * @param tile
 	 */
-	public void buildBuilding(Tile tile)
+	public void tileOptions(Tile tile)
 	{
 		if(tile.getIsExplored())
 		{
-			if(buildingMenu != null)
-			{
-				buildingMenu.setVisible(false);
-				buildingMenu.dispose();
-			}
-			buildingMenu = new BuildingMenu(this, (GameFrame) frame);
+			buildingMenu();
 		}
 		else
 		{
-			
+			exploreMenu();
 		}
 		returnFocus();
+	}
+	
+	/**
+	 * Handles the building menu.
+	 * @author Jay Clegg
+	 */
+	private void buildingMenu()
+	{
+		if(buildingMenu != null)
+		{
+			buildingMenu.dispose();
+		}
+		buildingMenu = new BuildingMenu(this, (GameFrame) frame);
+	}
+	
+	/**
+	 * Handles the explore menu.
+	 * @author Jay Clegg
+	 */
+	private void exploreMenu()
+	{
+		if(exploreMenu != null)
+		{
+			exploreMenu.dispose();
+		}
+		exploreMenu = new ExploreMenu(this, (GameFrame) frame);
 	}
 	
 	/**
