@@ -1,8 +1,9 @@
-package game.view.gameView;
+package game.view.buildingMenu;
 
 import javax.swing.JDialog;
 
 import game.controller.Controller;
+import game.view.gameView.GameFrame;
 
 public class BuildingMenu extends JDialog
 {
@@ -20,7 +21,7 @@ public class BuildingMenu extends JDialog
 	{
 		this.setResizable(false);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setModalityType(null);
+	
 		
 		this.setVisible(true);
 	}

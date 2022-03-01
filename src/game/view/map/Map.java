@@ -36,8 +36,6 @@ public class Map extends JPanel
 		}
 		
 		this.setBackground(Color.BLACK);
-		
-		getTile(1, 1).setIsExplored(true);
 	}
 	
 	private Tile getTile(int row, int col)
