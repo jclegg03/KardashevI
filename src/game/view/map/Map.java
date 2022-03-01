@@ -37,7 +37,7 @@ public class Map extends JPanel
 		
 		this.setBackground(Color.BLACK);
 		
-		getTile(1, 1).setExplored(true);
+		getTile(1, 1).setIsExplored(true);
 	}
 	
 	private Tile getTile(int row, int col)
@@ -55,6 +55,6 @@ public class Map extends JPanel
 	
 	public void explore(int row, int col)
 	{
-		getTile(row, col).setExplored(true);
+		getTile(row, col).setIsExplored(true);
 	}
 }

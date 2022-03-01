@@ -11,22 +11,36 @@ import game.view.mainMenu.NewGameDialog;
 import game.view.map.Tile;
 import gui.utility.JFrame;
 
+/**
+ * The main controller for the game.
+ * @author Jay Clegg
+ *
+ */
 public class Controller implements Serializable
 {
 	static final long serialVersionUID = 0l;
-	private JFrame test;
+	private JFrame frame;
 	private String empireName;
+	private BuildingMenu buildingMenu;
 	
+	/**
+	 * Builds the game controller.
+	 * @author Jay Clegg
+	 */
 	public Controller()
 	{
-		this.test = new MainMenu(this);
+		this.frame = new MainMenu(this);
 		this.empireName = "";
 	}
 	
+	/**
+	 * Begins the new game.
+	 * @author Jay Clegg
+	 */
 	public void newGame()
 	{
-		new NewGameDialog(this, (MainMenu) test);
-		test.getContentPane().requestFocus();
+		new NewGameDialog(this, (MainMenu) frame);
+		frame.getContentPane().requestFocus();
 	}
 	
 	public void loadGame()
@@ -46,7 +60,7 @@ public class Controller implements Serializable
 	public void quit(ExitDialog dialog)
 	{
 		dialog.dispose();
-		test.dispose();
+		frame.dispose();
 	}
 	
 	/**
@@ -56,8 +70,8 @@ public class Controller implements Serializable
 	public void quit(GameMenu menu)
 	{
 		menu.setVisible(false);
-		new ExitDialog(this, test);
-		if(test.isActive())
+		new ExitDialog(this, frame);
+		if(frame.isActive())
 		{
 			menu.setVisible(true);
 		}
@@ -67,11 +81,16 @@ public class Controller implements Serializable
 		}
 	}
 	
+	/**
+	 * Returns to the main menu from the game.
+	 * @author Jay Clegg
+	 * @param menu The in game menu.
+	 */
 	public void returnToMainMenu(GameMenu menu)
 	{
 		menu.dispose();
-		test.dispose();
-		test = new MainMenu(this);
+		frame.dispose();
+		frame = new MainMenu(this);
 	}
 	
 	public void selectSettlement(String name)
@@ -82,11 +101,21 @@ public class Controller implements Serializable
 		returnFocus();
 	}
 	
-	public void build(Tile tile)
+	/**
+	 * Once a tile is clicked, this method gives the option to explore or build on it.
+	 * @author Jay Clegg
+	 * @param tile
+	 */
+	public void buildBuilding(Tile tile)
 	{
-		if(tile.isVisible())
+		if(tile.getIsExplored())
 		{
-			BuildingMenu buildingMenu = new BuildingMenu(this, (GameFrame) test);
+			if(buildingMenu != null)
+			{
+				buildingMenu.setVisible(false);
+				buildingMenu.dispose();
+			}
+			buildingMenu = new BuildingMenu(this, (GameFrame) frame);
 		}
 		else
 		{
@@ -95,13 +124,19 @@ public class Controller implements Serializable
 		returnFocus();
 	}
 	
-	public void createEmpire(String empireName, NewGameDialog frame)
+	/**
+	 * Once the user has entered an empire name, this method starts the game and builds the empire.
+	 * @author Jay Clegg
+	 * @param empireName The name of the empire.
+	 * @param dialog The dialog used to interact with the user.
+	 */
+	public void createEmpire(String empireName, NewGameDialog dialog)
 	{
 		this.empireName = empireName;
 		
+		dialog.dispose();
 		frame.dispose();
-		test.dispose();
-		test = new GameFrame(this);
+		frame = new GameFrame(this);
 	}
 	
 	/**
@@ -109,6 +144,6 @@ public class Controller implements Serializable
 	 */
 	private void returnFocus()
 	{
-		test.getContentPane().requestFocus();
+		frame.getContentPane().requestFocus();
 	}
 }
