@@ -36,6 +36,7 @@ public class Map extends JPanel
 		}
 		
 		this.setBackground(Color.BLACK);
+		this.getTile((int) (Math.random() * rows), (int) (Math.random() * cols)).setIsExplored(true);
 	}
 	
 	private Tile getTile(int row, int col)
