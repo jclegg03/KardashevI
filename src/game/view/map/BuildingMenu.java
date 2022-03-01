@@ -1,4 +1,4 @@
-package game.view.buildingMenu;
+package game.view.map;
 
 import javax.swing.JDialog;
 
@@ -21,7 +21,6 @@ public class BuildingMenu extends JDialog
 	{
 		this.setResizable(false);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	
 		
 		this.setVisible(true);
 	}
