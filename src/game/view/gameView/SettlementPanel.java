@@ -77,13 +77,23 @@ public class SettlementPanel extends JPanel
 	
 	public void removeSettlement(String name)
 	{
-		this.remove(getSettlement(name));
+		try
+		{
+			this.remove(getSettlement(name));
+		}
+		catch(NullPointerException nullSettlement)
+		{
+			
+		}
 	}
 	
 	public void setSettlement(String name, String newName)
 	{
 		JButton settlement = getSettlement(name);
-		settlement.setText(newName);
+		if(settlement != null)
+		{
+			settlement.setText(newName);
+		}
 	}
 	
 	private JButton getSettlement(String name)
