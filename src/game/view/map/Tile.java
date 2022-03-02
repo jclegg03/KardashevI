@@ -32,7 +32,7 @@ public class Tile extends JButton
 		this.setOpaque(true);
 		this.setBackground(Color.BLUE);
 		
-		this.addActionListener(click -> app.buildBuilding(this));
+		this.addActionListener(click -> app.tileOptions(this));
 	}
 
 	/**

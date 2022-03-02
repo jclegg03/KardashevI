@@ -24,6 +24,7 @@ public class Controller implements Serializable
 	private String empireName;
 	private BuildingMenu buildingMenu;
 	private ExploreMenu exploreMenu;
+	private Tile selectedTile;
 	
 	/**
 	 * Builds the game controller.
@@ -112,6 +113,7 @@ public class Controller implements Serializable
 	 */
 	public void tileOptions(Tile tile)
 	{
+		this.selectedTile = tile;
 		if(tile.getIsExplored())
 		{
 			buildingMenu();
@@ -146,7 +148,13 @@ public class Controller implements Serializable
 		{
 			exploreMenu.dispose();
 		}
-		exploreMenu = new ExploreMenu(this, (GameFrame) frame);
+		exploreMenu = new ExploreMenu(this, (GameFrame) frame, selectedTile);
+	}
+	
+	public void exploreTile()
+	{
+		selectedTile.setIsExplored(true);
+		exploreMenu.dispose();
 	}
 	
 	/**
