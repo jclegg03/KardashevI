@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Save
+public class SaveController
 {
 	public void save(Controller empire)
 	{
