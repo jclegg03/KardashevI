@@ -106,7 +106,7 @@ public class Controller implements Serializable
 	
 	public void selectSettlement(String name)
 	{
-		
+		settlementPanel.addSettlement("hello");
 		
 		
 		returnFocus();

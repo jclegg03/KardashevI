@@ -72,7 +72,8 @@ public class SettlementPanel extends JPanel
 		settlementList.setLayout(listLayout);
 		listLayoutConstraints.gridx = 0;
 		listLayoutConstraints.weightx = 1.0;
-		listLayoutConstraints.gridheight = 2;
+		listLayoutConstraints.weighty = 0;
+//		listLayoutConstraints.gridheight = 2;
 		listLayoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		listLayoutConstraints.anchor = GridBagConstraints.NORTH;
 	}
@@ -83,12 +84,14 @@ public class SettlementPanel extends JPanel
 		settlement.addActionListener(click -> app.selectSettlement(settlement.getText()));
 		listLayoutConstraints.gridy = settlementCount;
 		settlementList.add(settlement, listLayoutConstraints);
-		settlementCount += 2;
+		settlementCount += 1;
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 	
 	public int getSettlementCount()
 	{
-		return this.settlementCount / 2;
+		return this.settlementCount;
 	}
 	
 	public void removeSettlement(String name)
