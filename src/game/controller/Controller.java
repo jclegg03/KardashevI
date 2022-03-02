@@ -182,6 +182,7 @@ public class Controller implements Serializable
 		contentPane = (GameContentPane) (frame.getContentPane());
 		settlementPanel = contentPane.getSettlementPanel();
 		settlementPanel.addSettlement("Cave");
+		settlementPanel.addSettlement("test");
 	}
 	
 	/**

@@ -34,7 +34,7 @@ public class SettlementPanel extends JPanel
 		this.title = new JLabel("Settlements", SwingConstants.CENTER);
 		this.listLayout = new GridBagLayout();
 		this.listLayoutConstraints = new GridBagConstraints();
-		this.settlementCount = 1;
+		this.settlementCount = 0;
 		
 		setupPanel();
 		setupLayout();
@@ -70,19 +70,25 @@ public class SettlementPanel extends JPanel
 		layout.putConstraint(SpringLayout.SOUTH, settlementListHolder, 0, SpringLayout.SOUTH, this);
 		
 		settlementList.setLayout(listLayout);
+		listLayoutConstraints.gridx = 0;
+		listLayoutConstraints.weightx = 1.0;
+		listLayoutConstraints.gridheight = 2;
+		listLayoutConstraints.fill = GridBagConstraints.HORIZONTAL;
+		listLayoutConstraints.anchor = GridBagConstraints.NORTH;
 	}
 	
 	public void addSettlement(String name)
 	{
 		JButton settlement = new JButton(name);
 		settlement.addActionListener(click -> app.selectSettlement(settlement.getText()));
-		settlementList.add(settlement);
-		settlementCount++;
+		listLayoutConstraints.gridy = settlementCount;
+		settlementList.add(settlement, listLayoutConstraints);
+		settlementCount += 2;
 	}
 	
 	public int getSettlementCount()
 	{
-		return this.settlementCount;
+		return this.settlementCount / 2;
 	}
 	
 	public void removeSettlement(String name)
