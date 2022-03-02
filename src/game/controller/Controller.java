@@ -3,6 +3,7 @@ package game.controller;
 import java.io.Serializable;
 
 import game.view.gameMenu.GameMenu;
+import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
 import game.view.gameView.SettlementPanel;
 import game.view.mainMenu.ExitDialog;
@@ -176,6 +177,8 @@ public class Controller implements Serializable
 		frame.dispose();
 		frame = new GameFrame(this);
 		
+		GameContentPane contentPane = (GameContentPane) (frame.getContentPane());
+		settlementPanel = contentPane.getSettlementPanel();
 		settlementPanel.addSettlement("Cave");
 	}
 	

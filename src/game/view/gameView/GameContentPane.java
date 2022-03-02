@@ -119,4 +119,9 @@ public class GameContentPane extends JPanel
 			}
 		});
 	}
+	
+	public SettlementPanel getSettlementPanel()
+	{
+		return this.settlementPanel;
+	}
 }
