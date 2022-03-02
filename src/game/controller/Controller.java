@@ -28,6 +28,7 @@ public class Controller implements Serializable
 	private ExploreMenu exploreMenu;
 	private Tile selectedTile;
 	private SettlementPanel settlementPanel;
+	private GameContentPane contentPane;
 	
 	/**
 	 * Builds the game controller.
@@ -40,6 +41,7 @@ public class Controller implements Serializable
 		this.buildingMenu = null;
 		this.exploreMenu = null;
 		this.settlementPanel = null;
+		this.contentPane = null;
 	}
 	
 	/**
@@ -177,7 +179,7 @@ public class Controller implements Serializable
 		frame.dispose();
 		frame = new GameFrame(this);
 		
-		GameContentPane contentPane = (GameContentPane) (frame.getContentPane());
+		contentPane = (GameContentPane) (frame.getContentPane());
 		settlementPanel = contentPane.getSettlementPanel();
 		settlementPanel.addSettlement("Cave");
 	}
