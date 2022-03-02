@@ -1,8 +1,8 @@
 package game.view.gameView;
 
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +20,9 @@ public class SettlementPanel extends JPanel
 	private JScrollPane settlementListHolder;
 	private JPanel settlementList;
 	private JLabel title;
+	private GridBagLayout listLayout;
+	private GridBagConstraints listLayoutConstraints;
+	private int settlementCount;
 		
 	public SettlementPanel(Controller app)
 	{
@@ -29,6 +32,9 @@ public class SettlementPanel extends JPanel
 		this.settlementListHolder = new JScrollPane();
 		this.settlementList = new JPanel();
 		this.title = new JLabel("Settlements", SwingConstants.CENTER);
+		this.listLayout = new GridBagLayout();
+		this.listLayoutConstraints = new GridBagConstraints();
+		this.settlementCount = 1;
 		
 		setupPanel();
 		setupLayout();
@@ -44,7 +50,6 @@ public class SettlementPanel extends JPanel
 		this.add(settlementListHolder);
 		settlementListHolder.setViewportView(settlementList);
 		
-		addSettlement("Cave");
 	}
 	
 	private void setupListeners()
@@ -64,8 +69,7 @@ public class SettlementPanel extends JPanel
 		layout.putConstraint(SpringLayout.EAST, title, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, settlementListHolder, 0, SpringLayout.SOUTH, this);
 		
-		GridLayout settlementLayout = new GridLayout(0, 1, 0, 2);
-		settlementList.setLayout(settlementLayout);
+		settlementList.setLayout(listLayout);
 	}
 	
 	public void addSettlement(String name)
@@ -73,6 +77,12 @@ public class SettlementPanel extends JPanel
 		JButton settlement = new JButton(name);
 		settlement.addActionListener(click -> app.selectSettlement(settlement.getText()));
 		settlementList.add(settlement);
+		settlementCount++;
+	}
+	
+	public int getSettlementCount()
+	{
+		return this.settlementCount;
 	}
 	
 	public void removeSettlement(String name)

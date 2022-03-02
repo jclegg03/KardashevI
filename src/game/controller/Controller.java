@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import game.view.gameMenu.GameMenu;
 import game.view.gameView.GameFrame;
+import game.view.gameView.SettlementPanel;
 import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.mainMenu.NewGameDialog;
@@ -25,6 +26,7 @@ public class Controller implements Serializable
 	private BuildingMenu buildingMenu;
 	private ExploreMenu exploreMenu;
 	private Tile selectedTile;
+	private SettlementPanel settlementPanel;
 	
 	/**
 	 * Builds the game controller.
@@ -36,6 +38,7 @@ public class Controller implements Serializable
 		this.empireName = "";
 		this.buildingMenu = null;
 		this.exploreMenu = null;
+		this.settlementPanel = null;
 	}
 	
 	/**
@@ -151,6 +154,7 @@ public class Controller implements Serializable
 		exploreMenu = new ExploreMenu(this, (GameFrame) frame, selectedTile);
 	}
 	
+	@WIP
 	public void exploreTile()
 	{
 		selectedTile.setIsExplored(true);
@@ -163,6 +167,7 @@ public class Controller implements Serializable
 	 * @param empireName The name of the empire.
 	 * @param dialog The dialog used to interact with the user.
 	 */
+	@WIP
 	public void createEmpire(String empireName, NewGameDialog dialog)
 	{
 		this.empireName = empireName;
@@ -170,6 +175,8 @@ public class Controller implements Serializable
 		dialog.dispose();
 		frame.dispose();
 		frame = new GameFrame(this);
+		
+		settlementPanel.addSettlement("Cave");
 	}
 	
 	/**
