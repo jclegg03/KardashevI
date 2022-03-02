@@ -135,7 +135,7 @@ public class Controller implements Serializable
 		{
 			buildingMenu.dispose();
 		}
-		buildingMenu = new BuildingMenu(this, (GameFrame) frame);
+		buildingMenu = new BuildingMenu(this, (GameFrame) frame, selectedTile);
 	}
 	
 	/**
