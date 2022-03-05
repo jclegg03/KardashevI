@@ -2,34 +2,33 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.view.buildingMenu.BuildingMenu;
+import game.view.exitDialog.ExitDialog;
+import game.view.exploreMenu.ExploreMenu;
 import game.view.gameMenu.GameMenu;
 import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
 import game.view.gameView.SettlementPanel;
-import game.view.mainMenu.ExitDialog;
 import game.view.mainMenu.MainMenu;
-import game.view.mainMenu.NewGameDialog;
-import game.view.map.BuildingMenu;
-import game.view.map.ExploreMenu;
-import game.view.map.Tile;
+import game.view.maps.Tile;
+import game.view.newGameDialog.NewGameDialog;
 import gui.utility.JFrame;
 
 /**
- * The main controller for the game.
+ * One Controller to rule them all, One Controller to find them,<br>
+ * One Controller to bring them all, and in the darkness bind them<br>
+ * Inspired by JRR Tolkien
  * @author Jay Clegg
  *
  */
 public class Controller implements Serializable
 {
-	static final long serialVersionUID = 0l;
 	private JFrame frame;
-	private String empireName;
 	private BuildingMenu buildingMenu;
 	private ExploreMenu exploreMenu;
 	private Tile selectedTile;
 	private SettlementPanel settlementPanel;
 	private GameContentPane contentPane;
-	
 	/**
 	 * Builds the game controller.
 	 * @author Jay Clegg
@@ -37,7 +36,6 @@ public class Controller implements Serializable
 	public Controller()
 	{
 		this.frame = new MainMenu(this);
-		this.empireName = "";
 		this.buildingMenu = null;
 		this.exploreMenu = null;
 		this.settlementPanel = null;
@@ -173,7 +171,6 @@ public class Controller implements Serializable
 	@WIP
 	public void createEmpire(String empireName, NewGameDialog dialog)
 	{
-		this.empireName = empireName;
 		
 		dialog.dispose();
 		frame.dispose();

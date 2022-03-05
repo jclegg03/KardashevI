@@ -7,13 +7,11 @@ import game.view.gameView.GameFrame;
 
 public class GameMenu extends JDialog
 {
-	private Controller app;
 	private MenuContentPane contentPane;
 	
 	public GameMenu(Controller app, GameFrame parent)
 	{
 		super(parent, true);
-		this.app = app;
 		this.contentPane = new MenuContentPane(app, this);
 		
 		setupFrame();

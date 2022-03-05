@@ -1,6 +1,8 @@
-package game.model.units;
+package game.model.resources;
 
 import java.io.Serializable;
+
+import game.model.units.Describable;
 
 /**
  * The structure for technologies.
@@ -9,7 +11,6 @@ import java.io.Serializable;
  */
 public class Tech implements Serializable, Describable
 {
-	static final long serialVersionUID = 1415930728l;
 	private String name;
 	private String description;
 	private int cost;
@@ -132,7 +133,6 @@ public class Tech implements Serializable, Describable
 		this.isResearched = isResearched;
 	}
 	
-	//Has documentation by Oracle.
 	@Override
 	public String toString()
 	{
@@ -151,5 +151,29 @@ public class Tech implements Serializable, Describable
 		}
 		
 		return details;
+	}
+	
+	/**
+	 * Determines if a tech can be researched.
+	 * @author Jay Clegg
+	 * @return if the tech can be researched.
+	 */
+	public boolean canBeResearched()
+	{
+		if(requirements.length == 0)
+		{
+			return true;
+		}
+		else
+		{
+			for(Tech tech : requirements)
+			{
+				if(! tech.getIsResearched())
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 }

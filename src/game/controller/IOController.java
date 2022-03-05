@@ -5,11 +5,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class SaveController
+public abstract class IOController
 {
-	public void save(Controller empire)
+	public static void saveGame(Controller empire)
 	{
-		try(FileOutputStream saveStream = new FileOutputStream("empire.kdsI");
+		try(FileOutputStream saveStream = new FileOutputStream("empire.kdsi");
 				ObjectOutputStream output = new ObjectOutputStream(saveStream))
 		{
 			output.writeObject(empire);
@@ -20,10 +20,10 @@ public class SaveController
 		}
 	}
 	
-	public Controller load()
+	public static Controller loadGame(String empire)
 	{
 		Controller loaded = new Controller();
-		try(FileInputStream loadStream = new FileInputStream("empire.kdsI");
+		try(FileInputStream loadStream = new FileInputStream("empire.kdsi");
 				ObjectInputStream input = new ObjectInputStream(loadStream))
 		{
 			loaded = (Controller) (input.readObject());

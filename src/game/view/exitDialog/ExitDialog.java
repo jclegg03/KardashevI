@@ -1,4 +1,4 @@
-package game.view.mainMenu;
+package game.view.exitDialog;
 
 import javax.swing.JDialog;
 
@@ -14,10 +14,10 @@ public class ExitDialog extends JDialog
 		super(parent, true);
 		this.contentPane = new ExitContentPane(app, this);
 		
-		setupFrame();
+		setupDialog();
 	}
 	
-	private void setupFrame()
+	private void setupDialog()
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(500, 200);

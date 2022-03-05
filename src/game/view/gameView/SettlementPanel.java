@@ -1,8 +1,6 @@
 package game.view.gameView;
 
 import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,28 +10,25 @@ import javax.swing.SwingConstants;
 
 import game.controller.Controller;
 import gui.utility.JButton;
+import gui.utility.MainPanel;
 
-public class SettlementPanel extends JPanel
+public class SettlementPanel extends MainPanel
 {
-	private Controller app;
 	private SpringLayout layout;
+	private SpringLayout settlementLayout;
 	private JScrollPane settlementListHolder;
 	private JPanel settlementList;
 	private JLabel title;
-	private GridBagLayout listLayout;
-	private GridBagConstraints listLayoutConstraints;
 	private int settlementCount;
 		
 	public SettlementPanel(Controller app)
 	{
-		super();
-		this.app = app;
+		super(app);
 		this.layout = new SpringLayout();
+		this.settlementLayout = new SpringLayout();
 		this.settlementListHolder = new JScrollPane();
 		this.settlementList = new JPanel();
 		this.title = new JLabel("Settlements", SwingConstants.CENTER);
-		this.listLayout = new GridBagLayout();
-		this.listLayoutConstraints = new GridBagConstraints();
 		this.settlementCount = 0;
 		
 		setupPanel();
@@ -41,7 +36,7 @@ public class SettlementPanel extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	protected void setupPanel()
 	{
 		settlementListHolder.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		settlementListHolder.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -52,11 +47,11 @@ public class SettlementPanel extends JPanel
 		
 	}
 	
-	private void setupListeners()
+	protected void setupListeners()
 	{
 	}
 	
-	private void setupLayout()
+	protected void setupLayout()
 	{
 		this.setLayout(layout);
 		
@@ -68,25 +63,21 @@ public class SettlementPanel extends JPanel
 		layout.putConstraint(SpringLayout.WEST, title, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.EAST, title, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, settlementListHolder, 0, SpringLayout.SOUTH, this);
-		
-		settlementList.setLayout(listLayout);
-		listLayoutConstraints.gridx = 0;
-		listLayoutConstraints.weightx = 1.0;
-		listLayoutConstraints.weighty = 0;
-//		listLayoutConstraints.gridheight = 2;
-		listLayoutConstraints.fill = GridBagConstraints.HORIZONTAL;
-		listLayoutConstraints.anchor = GridBagConstraints.NORTH;
+	}
+	
+	private void update()
+	{
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 	
 	public void addSettlement(String name)
 	{
 		JButton settlement = new JButton(name);
 		settlement.addActionListener(click -> app.selectSettlement(settlement.getText()));
-		listLayoutConstraints.gridy = settlementCount;
-		settlementList.add(settlement, listLayoutConstraints);
+		settlementList.add(settlement);
 		settlementCount += 1;
-		this.setVisible(false);
-		this.setVisible(true);
+		update();
 	}
 	
 	public int getSettlementCount()
@@ -99,10 +90,11 @@ public class SettlementPanel extends JPanel
 		try
 		{
 			this.remove(getSettlement(name));
+			update();
 		}
 		catch(NullPointerException nullSettlement)
 		{
-			
+			System.out.println("No such settlement");
 		}
 	}
 	
@@ -112,10 +104,15 @@ public class SettlementPanel extends JPanel
 		if(settlement != null)
 		{
 			settlement.setText(newName);
+			update();
+		}
+		else
+		{
+			System.out.println("No such settlement");
 		}
 	}
 	
-	private JButton getSettlement(String name)
+	public JButton getSettlement(String name)
 	{
 		for(Component component : this.settlementList.getComponents())
 		{

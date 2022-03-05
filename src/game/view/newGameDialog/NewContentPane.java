@@ -1,4 +1,4 @@
-package game.view.mainMenu;
+package game.view.newGameDialog;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -12,10 +12,10 @@ import javax.swing.SpringLayout;
 
 import game.controller.Controller;
 import gui.utility.JButton;
+import gui.utility.MainPanel;
 
-public class NewContentPane extends JPanel
+public class NewContentPane extends MainPanel
 {
-	private Controller app;
 	private NewGameDialog frame;
 	private SpringLayout layout;
 	private JTextField textField;
@@ -25,8 +25,7 @@ public class NewContentPane extends JPanel
 	
 	public NewContentPane(Controller app, NewGameDialog frame)
 	{
-		super();
-		this.app = app;
+		super(app);
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.textField = new JTextField("Empire Name");
@@ -39,7 +38,7 @@ public class NewContentPane extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	protected void setupPanel()
 	{
 		setupButtonPanel();
 		this.add(textField);
@@ -58,7 +57,7 @@ public class NewContentPane extends JPanel
 		confirmButton.setToolTipText("Create your empire named \"" + textField.getText() + "\"");
 	}
 	
-	private void setupLayout()
+	protected void setupLayout()
 	{
 		this.setLayout(layout);
 		layout.putConstraint(SpringLayout.NORTH, textField, 10, SpringLayout.NORTH, this);
@@ -71,7 +70,7 @@ public class NewContentPane extends JPanel
 		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 	}
 	
-	private void setupListeners()
+	protected void setupListeners()
 	{
 		this.addKeyListener(new KeyListener()
 		{

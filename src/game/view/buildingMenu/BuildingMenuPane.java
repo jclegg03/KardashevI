@@ -1,23 +1,22 @@
-package game.view.map;
-
-import javax.swing.JPanel;
+package game.view.buildingMenu;
 
 import game.controller.Controller;
+import game.controller.WIP;
+import gui.utility.MainPanel;
 
 /**
  * The content pane for the Building menu.
  * @author Jay Clegg
  *
  */
-public class BuildingMenuPane extends JPanel
+public class BuildingMenuPane extends MainPanel
 {
-	private Controller app;
 	private BuildingMenu frame;
 	
 	
 	public BuildingMenuPane(Controller app, BuildingMenu frame)
 	{
-		this.app = app;
+		super(app);
 		this.frame = frame;
 		
 		setupPanel();
@@ -25,17 +24,20 @@ public class BuildingMenuPane extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	@WIP
+	protected void setupPanel()
 	{
 		
 	}
 	
-	private void setupLayout()
+	@WIP
+	protected void setupLayout()
 	{
 		
 	}
 	
-	private void setupListeners()
+	@WIP
+	protected void setupListeners()
 	{
 		
 	}

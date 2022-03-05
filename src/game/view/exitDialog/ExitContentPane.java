@@ -1,4 +1,4 @@
-package game.view.mainMenu;
+package game.view.exitDialog;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -11,24 +11,23 @@ import javax.swing.SwingConstants;
 
 import game.controller.Controller;
 import gui.utility.JButton;
+import gui.utility.MainPanel;
 
-public class ExitContentPane extends JPanel
+public class ExitContentPane extends MainPanel
 {
-	private Controller app;
 	private ExitDialog frame;
 	private SpringLayout layout;
-	private JLabel text;
+	private JLabel prompt;
 	private JPanel buttonPanel;
 	private JButton confirmButton;
 	private JButton cancelButton;
 	
 	public ExitContentPane(Controller app, ExitDialog frame)
 	{
-		super();
-		this.app = app;
+		super(app);
 		this.frame = frame;
 		this.layout = new SpringLayout();
-		this.text = new JLabel("Are you sure you want to quit?", SwingConstants.CENTER);
+		this.prompt = new JLabel("Are you sure you want to quit?", SwingConstants.CENTER);
 		this.buttonPanel = new JPanel();
 		this.confirmButton = new JButton("Yes");
 		this.cancelButton = new JButton("No");
@@ -38,13 +37,13 @@ public class ExitContentPane extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	protected void setupPanel()
 	{
 		this.setFocusable(true);
 		
 		setupButtonPanel();
 		
-		this.add(text);
+		this.add(prompt);
 		this.add(buttonPanel);
 	}
 	
@@ -55,20 +54,20 @@ public class ExitContentPane extends JPanel
 		buttonPanel.add(cancelButton);
 	}
 	
-	private void setupLayout()
+	protected void setupLayout()
 	{
 		this.setLayout(layout);
-		layout.putConstraint(SpringLayout.NORTH, text, 10, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, text, 10, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.SOUTH, text, -90, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, text, -10, SpringLayout.EAST, this);
-		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.SOUTH, text);
-		layout.putConstraint(SpringLayout.WEST, buttonPanel, 0, SpringLayout.WEST, text);
+		layout.putConstraint(SpringLayout.NORTH, prompt, 10, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, prompt, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, prompt, -90, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, prompt, -10, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 10, SpringLayout.SOUTH, prompt);
+		layout.putConstraint(SpringLayout.WEST, buttonPanel, 0, SpringLayout.WEST, prompt);
 		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, buttonPanel, 0, SpringLayout.EAST, text);
+		layout.putConstraint(SpringLayout.EAST, buttonPanel, 0, SpringLayout.EAST, prompt);
 	}
 	
-	private void setupListeners()
+	protected void setupListeners()
 	{
 		this.addKeyListener(new KeyListener()
 		{

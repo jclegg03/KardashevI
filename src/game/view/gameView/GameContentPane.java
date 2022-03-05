@@ -12,12 +12,12 @@ import javax.swing.SpringLayout;
 
 import game.controller.Controller;
 import game.view.gameMenu.GameMenu;
-import game.view.map.Map;
+import game.view.maps.Map;
 import gui.utility.JButton;
+import gui.utility.MainPanel;
 
-public class GameContentPane extends JPanel
+public class GameContentPane extends MainPanel
 {
-	private Controller app;
 	private GameFrame frame;
 	private SpringLayout layout;
 	private Map map;
@@ -29,7 +29,7 @@ public class GameContentPane extends JPanel
 	
 	public GameContentPane(Controller app, GameFrame frame)
 	{
-		this.app = app;
+		super(app);
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.map = new Map(app, 20, 20);
@@ -60,7 +60,7 @@ public class GameContentPane extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	protected void setupPanel()
 	{
 		this.setFocusable(true);
 		
@@ -79,12 +79,12 @@ public class GameContentPane extends JPanel
 		utilityPanel.add(menuButton);
 	}
 	
-	private void setupLayout()
+	protected void setupLayout()
 	{
 		this.setLayout(layout);
 	}
 	
-	private void setupListeners()
+	protected void setupListeners()
 	{
 		this.addKeyListener(new KeyListener()
 		{
@@ -123,5 +123,15 @@ public class GameContentPane extends JPanel
 	public SettlementPanel getSettlementPanel()
 	{
 		return this.settlementPanel;
+	}
+	
+	public ResourcePanel getResourcePanel()
+	{
+		return this.resourcePanel;
+	}
+	
+	public Map getMap()
+	{
+		return this.map;
 	}
 }

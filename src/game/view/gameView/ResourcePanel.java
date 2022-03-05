@@ -52,6 +52,7 @@ public class ResourcePanel extends JPanel
 		
 		resource.setHorizontalTextPosition(JLabel.CENTER);
 		this.add(resource);
+		update();
 	}
 	
 	/**
@@ -61,7 +62,15 @@ public class ResourcePanel extends JPanel
 	 */
 	public void removeResource(String name)
 	{
-		this.remove(getResource(name));
+		try
+		{
+			this.remove(getResource(name));
+			update();
+		}
+		catch(NullPointerException noSuchSettlement)
+		{
+			System.out.println("No such settlement");
+		}
 	}
 	
 	/**
@@ -74,14 +83,22 @@ public class ResourcePanel extends JPanel
 	public void setResource(String name, int quantity, int increase)
 	{
 		JLabel resource = getResource(name);
-		resource.setText("<html>" + name +":<br>" + quantity);
-		if(increase > 0)
+		if(resource != null)
 		{
-			resource.setToolTipText("Yearly gain: +" + increase);
+			resource.setText("<html>" + name +":<br>" + quantity);
+			if(increase > 0)
+			{
+				resource.setToolTipText("Yearly gain: +" + increase);
+			}
+			else if(increase <0)
+			{
+				resource.setToolTipText("Yearly gain: " + increase);
+			}
+			update();
 		}
-		else if(increase <0)
+		else
 		{
-			resource.setToolTipText("Yearly gain: " + increase);
+			System.out.println("No such resource");
 		}
 	}
 	
@@ -91,7 +108,7 @@ public class ResourcePanel extends JPanel
 	 * @param name The name of the resource
 	 * @return The resource. If the resource is not found will return null.
 	 */
-	private JLabel getResource(String name)
+	public JLabel getResource(String name)
 	{
 		for(Component component : this.getComponents())
 		{
@@ -103,5 +120,11 @@ public class ResourcePanel extends JPanel
 		}
 		
 		return null;
+	}
+	
+	private void update()
+	{
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 }

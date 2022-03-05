@@ -1,24 +1,23 @@
-package game.view.mainMenu;
+package game.view.newGameDialog;
 
 import java.awt.Toolkit;
 
 import game.controller.Controller;
+import game.view.mainMenu.MainMenu;
 
 public class NewGameDialog extends javax.swing.JDialog
 {
-	private Controller app;
 	private NewContentPane contentPane;
 	
 	public NewGameDialog(Controller app, MainMenu parent)
 	{
 		super(parent, true);
-		this.app = app;
 		this.contentPane = new NewContentPane(app, this);
 		
-		setupFrame();
+		setupDialog();
 	}
 	
-	private void setupFrame()
+	private void setupDialog()
 	{
 		this.setLocation((int) (getParent().getBounds().getCenterX() - 250),
 				(int) (getParent().getBounds().getCenterY() - 100));

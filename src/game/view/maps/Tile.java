@@ -1,4 +1,4 @@
-package game.view.map;
+package game.view.maps;
 
 import java.awt.Color;
 

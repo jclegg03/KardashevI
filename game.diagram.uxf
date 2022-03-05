@@ -1,0 +1,1521 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>2</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>712</x>
+      <y>394</y>
+      <w>46</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>/JFrame/
+--
+# app : Controller
+--
++ JFrame(Controller) : Constructor
+- setupFrame() : void
+
+
+group=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>394</y>
+      <w>48</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>MainMenu
+--
+- contentPane : MainContentPane
+--
++ MainMenu(Controller) : Constructor
+- setupFrame() : void
+
+layer=1
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>400</y>
+      <w>56</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>708</x>
+      <y>386</y>
+      <w>54</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>gui.utility
+--
+bg=orange
+group=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>712</x>
+      <y>416</y>
+      <w>40</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>JButton
+--
+
+--
++ JButton(String) : Constructor
++ JButton() : Constructor
+- configureButton() : void
+layer=1
+group=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>418</y>
+      <w>72</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>MainContentPane
+--
+- frame : MainMenu
+- layout : SprintLayout
+- buttonPanel : JPanel
+- newButton : JButton
+- loadButton : JButton
+- settingsButton : JButton
+- quitButton : JButton
+--
++ MainContentPane(Controller, MainMenu) : Constructor
+- setupPanel() : void
+- setupButtonPanel() : void
+- setupLayout() : void
+- setupListeners() : void
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>788</x>
+      <y>488</y>
+      <w>72</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>NewGameDialog
+--
+- contentPane : NewContentPane
+--
++ NewGameDialog(Controller, MainMenu) : Constructor
+- setupDialog : void
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>788</x>
+      <y>512</y>
+      <w>80</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>NewContentPane
+--
+- frame : NewGameDialog
+- layout : SpringLayout
+- textField : JTextField
+- buttonPanel : JPanel
+- cancelButton : JButton
+- confirmButton : JButton
+--
++ NewContentPane(Controller, NewGameDialog) : Constructor
+- setupPanel() : void
+- setupButtonPanel() : void
+- setupLayout() : void
+- setupListeners() : void
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>802</x>
+      <y>388</y>
+      <w>82</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>game.view.mainMenu
+--
+bg=orange
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>698</x>
+      <y>486</y>
+      <w>60</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>ExitDialog
+--
+- contentPane : ExitContentPane
+--
++ ExitDialog(Controller, JFrame) : Constructor
+- setupDialog : void
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>698</x>
+      <y>510</y>
+      <w>72</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>ExitContentPane
+--
+- frame : ExitDialog
+- layout : SpringLayout
+- prompt : JLabel
+- buttonPanel : JPanel
+- confirmButton : JButton
+- cancelButton : JButton
+--
++ ExitContentPane(Controller, ExitDialog) : Constructor
+- setupPanel() : void
+- setupButtonPanel() : void
+- setupLauout() : void
+- setupListeners() : void
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>696</x>
+      <y>480</y>
+      <w>76</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>game.view.exitDialog
+--
+bg=orange
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>786</x>
+      <y>480</y>
+      <w>86</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>game.view.newGameDialog
+--
+bg=orange
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>386</y>
+      <w>50</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>/Map/
+--
+# app : Controller
+# layout : GridLayout
+--
++ Map(Controller, int, int) : Constructor
+- getTile(int, int) : Tile
++ exploreTile(int, int) : void
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>416</y>
+      <w>50</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Tile
+--
+- app : Controller
+- isExplored : boolean
+--
++ Tile(Controller, int, int) : Constructor
++ setIsExplored() : void
++ getIsExplored() : boolean
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>668</x>
+      <y>426</y>
+      <w>48</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>618</x>
+      <y>380</y>
+      <w>54</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>game.view.maps
+--
+bg=orange
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>346</y>
+      <w>52</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>GameFrame
+--
+- contentPane : GameContentPane
+--
++ GameFrame(Controller) : Constructor
+- setupFrame() : void
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>734</x>
+      <y>362</y>
+      <w>6</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>286</y>
+      <w>78</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>GameContentPane
+--
+- frame : GameFrame
+- layout : SpringLayout
+- map : Map
+- resourcePanel : ResourcePanel
+- settlementPanel : SettlementPanel
+- utilityPanel : JPanel
+- researchButton : JButton
+- menuButton : JButton
+--
++ GameContentPane(Controller, GameFrame) : Constructor
+- setupPanel() : void
+- setupLayout() : void
+- setupListeners() : void
++ getSettlementPanel() : SettlementPanel
++ getResourcePanel() : ResourcePanel
++ getMap() : Map
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>794</x>
+      <y>282</y>
+      <w>54</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ResourcePanel
+--
+- app : Controller
+--
++ resourcePanel(Controller) : Constructor
++ addResource(String, int, int) : void
++ removeResource(String) : void
++ setResource(String, int, int) : void
++ getResource() : JButton
+- update()
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>794</x>
+      <y>314</y>
+      <w>56</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>SettlementPanel
+--
+- app : Controller
+- layout : SpringLayout
+- settlementLayout : SpringLayout
+- settlementListHolder : JScrollPane
+- settlementList : JPanel
+- title : JLabel
+- settlementCount : int
+--
++ SettlementPanel(Controller) : Constructor
+- setupPanel() : void
+- setupListeners() : void
+- setupLayout() : void
+- update() : void
++ addSettlement(String) : void
++ getSettlementCount() : int
++ removeSettlement(String) : void
++ setSettlement(String, String) : void
++ getSettlement(String) : JButton
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>706</x>
+      <y>276</y>
+      <w>146</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>game.view.gameView
+--
+bg=orange
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>614</x>
+      <y>280</y>
+      <w>68</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>GameMenu
+--
+- contentPane - MenuContentPane
+--
++ GameMenu(Controller, GameFrame) : Constructor
+- setupFrame() : void
+group=8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>614</x>
+      <y>302</y>
+      <w>76</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>MenuContentPane
+--
+- frame : GameMenu
+- layout : SpringLayout
+- buttonPanel : JPanel
+- resumeButton : JButton
+- settingsButton : JButton
+- saveButton : JButton
+- loadButton : JButton
+- mainMenuButton : JButton
+- quitButton : JButton
+--
++ MenuContentPane(Controller, GameMenu) : Constructor
+- setupPanel() : void
+- setupLayout() : void
+- setupListeners() : void
+
+group=8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>610</x>
+      <y>274</y>
+      <w>86</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>game.view.gameMenu
+--
+bg=orange
+group=8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>208</y>
+      <w>70</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>ExploreMenu
+--
+- contentPane : ExploreMenuPane
+--
++ ExploreMenu(Controller, GameFrame) : Constructor
+- setupFrame() : void
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>230</y>
+      <w>78</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>ExploreMenuPane
+--
+- exploreButton : JButton
+- cancelButton : JButton
+- frame : ExploreMenu
+--
++ ExploreMenuPane(Controller, ExploreMenu) : Constructor
+- setupFrame() : void
+- setupLayout() : void
+- setupListeners() : void
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>610</x>
+      <y>202</y>
+      <w>82</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>game.view.exploreMenu
+--
+bg=orange
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>748</x>
+      <y>184</y>
+      <w>28</w>
+      <h>10</h>
+    </coordinates>
+    <panel_attributes>Orange Packages
+are part of the view
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>480</x>
+      <y>182</y>
+      <w>28</w>
+      <h>10</h>
+    </coordinates>
+    <panel_attributes>Blue Packages
+are part of the model
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>930</x>
+      <y>186</y>
+      <w>32</w>
+      <h>10</h>
+    </coordinates>
+    <panel_attributes>Magenta Packages
+are part of the controller
+bg=magenta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>464</x>
+      <y>312</y>
+      <w>80</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Army
+--
+- name : String
+- type : String
+- requirement : Tech
+- health : int
+- morale : int
+- damage : int
+- buildTime : int
+--
++ Army(String, String, String, Tech, int, int, int, int) : Constructor
++ toString() : String
++ getters() : Type
++ setters(Type) : void
+bg=orange
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>322</y>
+      <w>40</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>/Describable/
+--
+/+ setDescription(String) : void/
+/+ getDescription() : String/
+bg=yellow
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>330</y>
+      <w>20</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>464</x>
+      <y>360</y>
+      <w>112</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Building
+--
+# name : String
+# employs : Job[]
+# produces : Resource[]
+# consumes : Resource[]
+# size : int
+# upgradesTo : Building
+# description : String
+# requirement : Tech
+--
++ Building(String, Job[], Resource[], Resource[], int, Building, String, Tech) : Constructor
++ getters() : Type
++ setters(Type) : void
+bg=orange
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>350</y>
+      <w>36</w>
+      <h>10</h>
+    </coordinates>
+    <panel_attributes>/Requires/
+--
+/+ getRequirement() : Tech/
+bg=red
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>444</x>
+      <y>346</y>
+      <w>24</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;50.0;50.0;50.0;50.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>334</y>
+      <w>38</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;150.0;30.0;150.0;160.0;170.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>424</x>
+      <y>358</y>
+      <w>44</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;200.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>346</x>
+      <y>310</y>
+      <w>46</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Job
+--
+- name : String
+- description : String
+- resourcesProduced : Resource[]
+- resourcesConsumed : Resource[]
+- numAvailable : int
+- numEmployed : int
+--
++ getters() : Type
++ setters(Type) : void
++ addAvailable(int) : void
++ addEmployed(int) : void
+bg=yellow
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>330</y>
+      <w>24</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>348</x>
+      <y>368</y>
+      <w>58</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>Population
+--
+- name : String
+- size : int
+- growthRate : double
+--
++ Population(String, int, double) : Constructor
++ Population(String, int) : Constructor
++ getters() : Type
++ setters(Type) : void
++ grow() : void
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>344</x>
+      <y>304</y>
+      <w>236</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>game.model.units
+--
+bg=blue
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>354</y>
+      <w>42</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>/TechList/
+--
+# ageTechs : ArrayList &lt;Tech&gt;
+# requirements : Tech[]
+--
++ TechList() : Constructor
++ isFinished() : boolean
+# setupRequirements(int) : void
+# copyRequirements() : Tech[]
+
+group=15</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>358</x>
+      <y>236</y>
+      <w>62</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Tech
+--
+- name : String
+- description : String
+- cost : int
+- requirements : Tech[]
+- isResearched : boolean
+--
++ Tech(String, int, Tech[]) : Constructor
++ Tech(String, int) : Constructor
++ Tech(String, int, Tech[], boolean) : Constructor
++ Tech(String, int, boolean) : Constructor
++ getters() : Type
++ setters(Type) : void
++ toString() : String
++ canBeResearched() : boolean
+bg=yellow
+
+group=13</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>418</x>
+      <y>258</y>
+      <w>16</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>60.0;320.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>454</x>
+      <y>244</y>
+      <w>72</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>Resource
+--
+- numOwned : int
+- numProduced : int
+- name : String
+- description : String
+--
++ Resource(int, int, String) : Constructor
++ Resource(int, int, String, String) : Constructor
++ getters() : Type
++ setters(Type) : void
+bg=yellow
+group=13</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>436</x>
+      <y>260</y>
+      <w>22</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;310.0;10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>356</x>
+      <y>230</y>
+      <w>172</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>game.model.resources
+--
+bg=blue
+layer=-1
+group=13</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>354</y>
+      <w>58</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>/ResourceList/
+--
+# ageResources : ArrayList &lt;Resource&gt;
+--
++ ResourceList() : Constructor
++ getAgeResources() : ArrayList &lt;Resource&gt;
+
+group=15</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>392</y>
+      <w>42</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>CaveAgeTech
+--
+--
++ CaveAgeTech() : Constructor
+group=15</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>302</x>
+      <y>378</y>
+      <w>6</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=15</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>194</x>
+      <y>392</y>
+      <w>50</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>CaveAgeResources
+--
+--
++ CaveAgeResources() : Constructor
+group=15</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>370</y>
+      <w>6</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=15</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>116</x>
+      <y>348</y>
+      <w>220</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>game.model.lists
+--
+bg=blue
+group=15</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>304</x>
+      <y>238</y>
+      <w>46</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>Empire
+--
+_+ OWNED : int_
+_+ CLAIMED : int_
+_+ EXPLORED : int_
+_+ UNEXPLORED : int_
+- localMaps : LocalMap[]
+- regionalMaps : RegionalMap[]
+- worldMap : WorldMap
+- technologies : ArrayList &lt;Tech&gt;
+- resources : ArrayList &lt;Resource&gt;
+- jobs : ArrayList &lt;Job&gt;
+- armies : ArrayList &lt;Army&gt;
+- buildings : ArrayList &lt;Building&gt;
+--
++ getters() : Type
++ setters(Type) : void
++ explore(String, int) : void
++ explore(String, int, int) : void
+group=17</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>712</x>
+      <y>438</y>
+      <w>34</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>/MainPanel/
+--
+# app : Controller
+--
+/# setupPanel() : void/
+/# setupLayout() : void/
+/# setupListeners() : void/
+
+
+layer=1
+group=16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>682</x>
+      <y>456</y>
+      <w>46</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;210.0;100.0;10.0;100.0;10.0;370.0;80.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>456</y>
+      <w>62</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;230.0;90.0;230.0;340.0;290.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>744</x>
+      <y>452</y>
+      <w>68</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>654</x>
+      <y>352</y>
+      <w>62</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>290.0;490.0;170.0;490.0;170.0;130.0;10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>592</x>
+      <y>252</y>
+      <w>130</w>
+      <h>222</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>630.0;1030.0;630.0;1090.0;10.0;1090.0;10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>322</y>
+      <w>20</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>80.0;610.0;10.0;610.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>744</x>
+      <y>370</y>
+      <w>72</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;400.0;120.0;400.0;120.0;70.0;340.0;70.0;340.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>302</x>
+      <y>232</y>
+      <w>50</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>game.model.empire
+--
+bg=blue
+group=17</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>224</x>
+      <y>238</y>
+      <w>56</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>/EmpireMap/
+--
+_+ LOCAL : String_
+_+ REGIONAL : String_
+_+ WORLD : String_
+# map : int[][]
+# empire : Empire
+--
++ EmpireMap(int, int, Empire) : Constructor
++ explore(int, int) : void
++ claim(int, int) : void
++ own(int, int) : void
++ transfer(int, int, Empire)
++ getters() : Type
++ setters(Type) : void
+
+
+group=19</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>294</y>
+      <w>46</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>WorldMap
+--
+--
++ WorldMap(Empire) : Constructor
+group=19</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>308</y>
+      <w>50</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>RegionalMap
+--
+--
++ RegionalMap(Empire) : Constructor
+group=19</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>322</y>
+      <w>46</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>LocalMap
+--
+--
++ LocalMap(Empire) : Constructor
+group=19</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>212</x>
+      <y>276</y>
+      <w>20</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=19</panel_attributes>
+    <additional_attributes>80.0;200.0;10.0;200.0;10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>282</y>
+      <w>6</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=19</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>276</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=19</panel_attributes>
+    <additional_attributes>10.0;260.0;100.0;260.0;100.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>222</x>
+      <y>232</y>
+      <w>60</w>
+      <h>106</h>
+    </coordinates>
+    <panel_attributes>game.model.maps
+--
+bg=blue
+group=19</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>908</x>
+      <y>210</y>
+      <w>30</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>KardashevI
+--
+--
+_+ main(String[]) : void_
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>942</x>
+      <y>210</y>
+      <w>26</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>/@WIP/
+--
+@Target : method
+--
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>908</x>
+      <y>232</y>
+      <w>84</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>SettlementController
+--
+- app : Controller
+- panel : SettlementPanel
+--
++ SettlementController(Controller, SettlementPanel) : Constructor
++ addSettlement(String) : void
++ setSettlement(String) : void
++ goTo(String) : int
++ updateUI() : void
+- selectSettlementModel(String) : Settlement
+- selectSettlementView(String) : JButton
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>414</y>
+      <w>128</w>
+      <h>14</h>
+    </coordinates>
+    <panel_attributes>Settlement
+--
+- location : int
+--
++ Settlement(String, Job[], Resource[], Resource[], int, Building, String, Tech, int) : Constructor
+layer=1
+group=20
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>400</y>
+      <w>6</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>354</y>
+      <w>50</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>/BuildingList/
+--
+# ageBuildings : ArrayList &lt;Building&gt;
+--
++ BuildingList() : Constructor
++ getBuildings() : ArrayList &lt;Building&gt;
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>122</x>
+      <y>394</y>
+      <w>46</w>
+      <h>10</h>
+    </coordinates>
+    <panel_attributes>CaveAgeBuildings
+--
++ CaveAgeBuildings() : Constructor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>142</x>
+      <y>370</y>
+      <w>6</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>232</y>
+      <w>78</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>ToolbarController
+--
+- app : Controller
+- panel : JPanel
+--
++ ToolbarController(Controller, JPanel, Empire) : Constructor
++ menu() : void
++ research() : void
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>908</x>
+      <y>272</y>
+      <w>42</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>/IOController/
+--
+--
+_+ saveGame(Controller) : void_
+_+ loadGame(String) : Controller_
+_+ saveSettings(Settings) : void_
+_+ loadSettings() : Settings_
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>956</x>
+      <y>272</y>
+      <w>48</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Settings
+--
+- hotkeys : KeyEvent[]
+--
++ settings() : Constructor
++ settings(KeyEvent[]) : Constructor
++ getHotkeys() : KeyEvent[]
++ setHotkeys(KeyEvent[]) : void
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>272</y>
+      <w>120</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>MapController
+--
+- app : Controller
+- buildingMenu : BuildingMenu
+- exploreMenu : ExploreMenu
+- worldMapModel : game.model.maps.WorldMap
+- worldMapView : game.view.maps.WorldMap
+- regionalMaps : HashMap &lt;game.model.maps.RegionalMap, game.view.maps.RegionalMap&gt;
+- localMaps : HashMap &lt;game.model.maps.LocalMap, game.view.maps.LocalMap&gt;
+--
++ MapController(Controller, game.model.maps.WorldMap, game.view.maps.WorldMap, 
+     game.model.maps.RegionalMap[], game.view.maps.RegionalMap[],
+     game.model.maps.LocalMap, game.view.maps.LocalMap) : Constructor
++ setValue(String, int, int, int) : void
++ getValue(String, int, int, int) : int
++ updateUI() : void
++ goTo(String, int) : void
+- selectModelMap(String, int, int) : game.model.Map
+- selectViewMap(String, int, int) : game.view.Map
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>300</y>
+      <w>82</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>ResourceController
+--
+- app : Controller
+- resourcePanel : ResourcePanel
+--
++ ResourceController(Controller, ResourcePanel) : Constructor
++ updateUI() : void
+- selectResource() : Resource
+- selectLabel() : JLabel
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>916</x>
+      <y>338</y>
+      <w>58</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+- empire : Empire
+- frame : JFrame
+- resourceController : ResourceController
+- mapController : MapController
+- toolbarController : ToolbarController
+- settlementController : SettlementController
+- settings : Settings
+_+ SETTLEMENT : int_
+_+ TOOLBAR : int_
+_+ SETTINGS : int_
+_+ IO : int_
+_+ MAP : int_
+_+ RESOURCE : int_
+--
++ Controller() : Constructor
++ farmTasks(int)
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>906</x>
+      <y>204</y>
+      <w>224</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>EmptyPackage
+--
+bg=magenta
+group=21</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

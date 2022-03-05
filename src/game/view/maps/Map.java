@@ -1,4 +1,4 @@
-package game.view.map;
+package game.view.maps;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -52,8 +52,15 @@ public class Map extends JPanel
 		return null;
 	}
 	
-	public void explore(int row, int col)
+	public void exploreTile(int row, int col)
 	{
-		getTile(row, col).setIsExplored(true);
+		try
+		{
+			getTile(row, col).setIsExplored(true);
+		}
+		catch(NullPointerException doesNotExist)
+		{
+			System.out.println("tile doesn't exist");
+		}
 	}
 }

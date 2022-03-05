@@ -9,11 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import game.controller.Controller;
+import game.view.exitDialog.ExitDialog;
 import gui.utility.JButton;
+import gui.utility.MainPanel;
 
-public class MainContentPane extends JPanel
+public class MainContentPane extends MainPanel
 {
-	private Controller app;
 	private MainMenu frame;
 	private SpringLayout layout;
 	private JPanel buttonPanel;
@@ -24,8 +25,7 @@ public class MainContentPane extends JPanel
 	
 	public MainContentPane(Controller app, MainMenu frame)
 	{
-		super();
-		this.app = app;
+		super(app);
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel();
@@ -40,7 +40,7 @@ public class MainContentPane extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	protected void setupPanel()
 	{
 		setupButtonPanel();
 		this.add(buttonPanel);
@@ -58,7 +58,7 @@ public class MainContentPane extends JPanel
 		buttonPanel.setOpaque(false);
 	}
 	
-	private void setupLayout()
+	protected void setupLayout()
 	{
 		this.setLayout(layout);
 		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -10, SpringLayout.SOUTH, this);
@@ -67,7 +67,7 @@ public class MainContentPane extends JPanel
 		layout.putConstraint(SpringLayout.EAST, buttonPanel, -20, SpringLayout.EAST, this);
 	}
 	
-	private void setupListeners()
+	protected void setupListeners()
 	{
 		this.addKeyListener(new KeyListener()
 		{

@@ -1,9 +1,10 @@
-package game.view.map;
+package game.view.exploreMenu;
 
 import javax.swing.JDialog;
 
 import game.controller.Controller;
 import game.view.gameView.GameFrame;
+import game.view.maps.Tile;
 /**
  * The dialog for exploring a tile.
  * @author Jay Clegg
@@ -11,7 +12,7 @@ import game.view.gameView.GameFrame;
  */
 public class ExploreMenu extends JDialog
 {
-	private Controller app;
+	private ExploreMenuPane contentPane;
 	
 	/**
 	 * Builds the frame for exploring a tile.
@@ -22,7 +23,7 @@ public class ExploreMenu extends JDialog
 	public ExploreMenu(Controller app, GameFrame parent, Tile tile)
 	{
 		super(parent);
-		this.app = app;
+		this.contentPane = new ExploreMenuPane(app, this);
 		this.setLocationRelativeTo(tile);
 		
 		setupFrame();
@@ -31,7 +32,7 @@ public class ExploreMenu extends JDialog
 	public void setupFrame()
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setContentPane(new ExploreMenuPane(app, this));
+		this.setContentPane(contentPane);
 		this.setSize(200, 100);
 		this.setUndecorated(true);
 		this.setVisible(true);

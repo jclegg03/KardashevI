@@ -8,11 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import game.controller.Controller;
+import game.controller.WIP;
 import gui.utility.JButton;
+import gui.utility.MainPanel;
 
-public class MenuContentPane extends JPanel
+public class MenuContentPane extends MainPanel
 {
-	private Controller app;
 	private GameMenu frame;
 	private SpringLayout layout;
 	private JPanel buttonPanel;
@@ -25,7 +26,7 @@ public class MenuContentPane extends JPanel
 	
 	public MenuContentPane(Controller app, GameMenu frame)
 	{
-		this.app = app;
+		super(app);
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel(new GridLayout(0, 1, 0, 5));
@@ -41,7 +42,7 @@ public class MenuContentPane extends JPanel
 		setupListeners();
 	}
 	
-	private void setupPanel()
+	protected void setupPanel()
 	{
 		this.setFocusable(true);
 		
@@ -56,7 +57,7 @@ public class MenuContentPane extends JPanel
 		this.add(buttonPanel);
 	}
 	
-	private void setupLayout()
+	protected void setupLayout()
 	{
 		this.setLayout(layout);
 
@@ -66,7 +67,8 @@ public class MenuContentPane extends JPanel
 		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 	}
 	
-	private void setupListeners()
+	@WIP
+	protected void setupListeners()
 	{
 		this.addKeyListener(new KeyListener()
 		{

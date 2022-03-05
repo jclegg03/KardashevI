@@ -1,14 +1,15 @@
-package game.model.units;
+package game.model.resources;
 
 import java.io.Serializable;
 
+import game.model.units.Describable;
+
 public class Resource implements Serializable, Describable
 {
-	static final long serialVersionUID = 5937278606306862480l;
-	int numOwned;
-	int numProduced;
-	String name;
-	String description;	
+	private int numOwned;
+	private int numProduced;
+	private String name;
+	private String description;	
 	
 	public Resource(int numOwned, int numProduced, String name)
 	{

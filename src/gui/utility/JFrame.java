@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 
 import game.controller.Controller;
 
-public class JFrame extends javax.swing.JFrame
+public abstract class JFrame extends javax.swing.JFrame
 {
 	protected Controller app;
 	

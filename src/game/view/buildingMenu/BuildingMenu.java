@@ -1,9 +1,10 @@
-package game.view.map;
+package game.view.buildingMenu;
 
 import javax.swing.JDialog;
 
 import game.controller.Controller;
 import game.view.gameView.GameFrame;
+import game.view.maps.Tile;
 
 /**
  * The dialog for building on tiles.

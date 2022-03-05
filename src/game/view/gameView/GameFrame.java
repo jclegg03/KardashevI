@@ -7,7 +7,6 @@ import gui.utility.JFrame;
 
 public class GameFrame extends JFrame
 {
-	private Controller app;
 	private JPanel contentPane;
 	
 	public GameFrame(Controller app)

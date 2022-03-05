@@ -2,9 +2,10 @@ package game.model.units;
 
 import java.io.Serializable;
 
-public class Job implements Serializable
+import game.model.resources.Resource;
+
+public class Job implements Serializable, Describable
 {
-	static final long serialVersionUID = 4878178l;
 	private String name;
 	private String description;
 	private Resource[] resourcesProduced;
@@ -31,6 +32,11 @@ public class Job implements Serializable
 	public String getDescription()
 	{
 		return this.description;
+	}
+	
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 	
 	public Resource[] getResourcesProduced()

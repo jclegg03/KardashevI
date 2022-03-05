@@ -2,16 +2,18 @@ package game.model.units;
 
 import java.io.Serializable;
 
+import game.model.resources.Tech;
+
 /**
  * The structure for armies.
  * @author Jay Clegg on 11/17/2021
  *
  */
-public class Army implements Serializable
+public class Army implements Serializable, Describable, Requires
 {
-	static final long serialVersionUID = 281092651274l;
-	private String type;
 	private String name;
+	private String type;
+	private String description;
 	private Tech requirement;
 	private int health;
 	private int morale;
@@ -20,18 +22,19 @@ public class Army implements Serializable
 	
 	/**
 	 * Builds an army.
-	 * @param type The type of army.
 	 * @param name The name of the army.
+	 * @param type The type of army.
 	 * @param requirement The tech requirement to build the army.
 	 * @param health The health of the army.
 	 * @param morale The morale of the army.
 	 * @param damage The damage the army does.
 	 * @param buildtime The time the army takes to build.
 	 */
-	public Army(String type, String name, Tech requirement, int health, int morale, int damage, int buildTime)
+	public Army(String name, String type, String description, Tech requirement, int health, int morale, int damage, int buildTime)
 	{
-		this.type = type;
 		this.name = name;
+		this.type = type;
+		this.description = description;
 		this.requirement = requirement;
 		this.health = health;
 		this.morale = morale;
@@ -57,10 +60,6 @@ public class Army implements Serializable
 		return this.name;
 	}
 	
-	/**
-	 * Gives the tech requirement of an army.
-	 * @return The tech requirement of the army.
-	 */
 	public Tech getRequirement()
 	{
 		return this.requirement;
@@ -129,7 +128,6 @@ public class Army implements Serializable
 		this.damage = damage;
 	}
 	
-	//doucmentation by Oracle
 	@Override
 	public String toString()
 	{
@@ -142,5 +140,15 @@ public class Army implements Serializable
 				+ this.getDamage() + "damage.";
 		
 		return details;
+	}
+	
+	public String getDescription()
+	{
+		return this.toString();
+	}
+	
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 }
