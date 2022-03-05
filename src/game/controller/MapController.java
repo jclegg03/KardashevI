@@ -76,7 +76,7 @@ public class MapController implements Serializable
 		}
 		else
 		{
-			map = selectMapModel(level, row, col);
+			map = selectMapModel(level, id, row, col);
 		}
 		
 		value = map.getValue(row, col);
@@ -96,14 +96,28 @@ public class MapController implements Serializable
 	
 	private game.model.maps.Map selectMapModel(String level, String id, int row, int col)
 	{
-		game.model.maps.Map map = null;
-		
 		if(level.equals(LOCAL))
 		{
-			
+			for(game.model.maps.LocalMap localMap : localMaps.keySet())
+			{
+				if(localMap.getId().equals(id))
+				{
+					return (game.model.maps.Map) localMap;
+				}
+			}
+		}
+		else
+		{
+			for(game.model.maps.RegionalMap regionalMap : regionalMaps.keySet())
+			{
+				if(regionalMap.getId().equals(id))
+				{
+					return (game.model.maps.Map) regionalMap; 
+				}
+			}
 		}
 		
-		return map;
+		return null;
 	}
 	
 	private game.view.maps.Map selectMapView(String level, int row, int col)
