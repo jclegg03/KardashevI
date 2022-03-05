@@ -14,7 +14,7 @@ import gui.utility.JButton;
  * @author Jay Clegg
  *
  */
-public class Map extends JPanel
+public abstract class Map extends JPanel
 {
 	protected Controller app;
 	protected GridLayout layout;
@@ -36,10 +36,9 @@ public class Map extends JPanel
 		}
 		
 		this.setBackground(Color.BLACK);
-		this.getTile((int) (Math.random() * rows), (int) (Math.random() * cols)).setIsExplored(true);
 	}
 	
-	private Tile getTile(int row, int col)
+	protected Tile getTile(int row, int col)
 	{
 		for(Component component : this.getComponents())
 		{

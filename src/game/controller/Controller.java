@@ -2,13 +2,12 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.model.empire.Empire;
 import game.view.buildingMenu.BuildingMenu;
 import game.view.exitDialog.ExitDialog;
 import game.view.exploreMenu.ExploreMenu;
 import game.view.gameMenu.GameMenu;
-import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
-import game.view.gameView.SettlementPanel;
 import game.view.mainMenu.MainMenu;
 import game.view.maps.Tile;
 import game.view.newGameDialog.NewGameDialog;
@@ -23,12 +22,14 @@ import gui.utility.JFrame;
  */
 public class Controller implements Serializable
 {
+	private Empire empire;
 	private JFrame frame;
-	private BuildingMenu buildingMenu;
-	private ExploreMenu exploreMenu;
-	private Tile selectedTile;
-	private SettlementPanel settlementPanel;
-	private GameContentPane contentPane;
+	private MapController mapController;
+	private ResourceController resourceController;
+	private Settings settings;
+	private SettlementController settlementController;
+	private ToolbarController toolbarController;
+	
 	/**
 	 * Builds the game controller.
 	 * @author Jay Clegg
@@ -36,10 +37,6 @@ public class Controller implements Serializable
 	public Controller()
 	{
 		this.frame = new MainMenu(this);
-		this.buildingMenu = null;
-		this.exploreMenu = null;
-		this.settlementPanel = null;
-		this.contentPane = null;
 	}
 	
 	/**
@@ -176,14 +173,13 @@ public class Controller implements Serializable
 		frame.dispose();
 		frame = new GameFrame(this);
 		
-		contentPane = (GameContentPane) (frame.getContentPane());
-		settlementPanel = contentPane.getSettlementPanel();
 		settlementPanel.addSettlement("Cave");
 		settlementPanel.addSettlement("test");
 	}
 	
 	/**
 	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button action.
+	 * @author Jay Clegg
 	 */
 	private void returnFocus()
 	{
