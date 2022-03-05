@@ -6,6 +6,7 @@ import game.model.empire.Empire;
 
 public abstract class Map implements Serializable
 {
+	protected String id;
 	protected int[][] map;
 	protected Empire empire;
 	
@@ -30,8 +31,18 @@ public abstract class Map implements Serializable
 		
 	}
 	
+	public String getId()
+	{
+		return this.id;
+	}
+	
 	public Empire getEmpire()
 	{
 		return this.empire;
+	}
+	
+	public int getValue(int row, int col)
+	{
+		return map[row][col];
 	}
 }

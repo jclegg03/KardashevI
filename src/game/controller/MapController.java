@@ -60,16 +60,26 @@ public class MapController implements Serializable
 		}
 	}
 	
-	public void setValue(String level, int row, int col, int newValue)
+	public void setValue(String level, String id, int row, int col, int newValue)
 	{
 		
 	}
 	
-	public int getValue(String level, int row, int col)
+	public int getValue(String level, String id, int row, int col)
 	{
 		int value = 0;
+		game.model.maps.Map map = null;
 		
+		if(level.equals(WORLD))
+		{
+			map = worldMapModel;
+		}
+		else
+		{
+			map = selectMapModel(level, row, col);
+		}
 		
+		value = map.getValue(row, col);
 		
 		return value;
 	}
@@ -84,11 +94,14 @@ public class MapController implements Serializable
 		
 	}
 	
-	private game.model.maps.Map selectMapModel(String level, int row, int col)
+	private game.model.maps.Map selectMapModel(String level, String id, int row, int col)
 	{
 		game.model.maps.Map map = null;
 		
-		
+		if(level.equals(LOCAL))
+		{
+			
+		}
 		
 		return map;
 	}

@@ -16,6 +16,7 @@ import gui.utility.JButton;
  */
 public abstract class Map extends JPanel
 {
+	protected String id;
 	protected Controller app;
 	protected GridLayout layout;
 	
