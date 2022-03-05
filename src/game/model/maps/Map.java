@@ -6,9 +6,6 @@ import game.model.empire.Empire;
 
 public abstract class Map implements Serializable
 {
-	public static final String LOCAL = "Local";
-	public static final String REGIONAL = "Regional";
-	public static final String WORLD = "World";
 	protected int[][] map;
 	protected Empire empire;
 	
