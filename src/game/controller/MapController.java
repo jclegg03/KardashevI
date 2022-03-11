@@ -3,10 +3,18 @@ package game.controller;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import game.model.maps.EmpireLocalMap;
+import game.model.maps.EmpireMap;
+import game.model.maps.EmpireRegionalMap;
+import game.model.maps.EmpireWorldMap;
 import game.view.buildingMenu.BuildingMenu;
 import game.view.exploreMenu.ExploreMenu;
 import game.view.gameView.GameFrame;
+import game.view.maps.LocalMap;
+import game.view.maps.Map;
+import game.view.maps.RegionalMap;
 import game.view.maps.Tile;
+import game.view.maps.WorldMap;
 
 /**
  * This class moves data from the model to the view and vice versa.
@@ -25,10 +33,10 @@ public class MapController implements Serializable
 	private Controller app;
 	private BuildingMenu buildingMenu;
 	private ExploreMenu exploreMenu;
-	private game.model.maps.EmpireWorldMap worldMapModel;
-	private game.view.maps.WorldMap worldMapView;
-	private HashMap<game.model.maps.EmpireRegionalMap, game.view.maps.RegionalMap> regionalMaps;
-	private HashMap<game.model.maps.EmpireLocalMap, game.view.maps.LocalMap> localMaps;
+	private EmpireWorldMap worldMapModel;
+	private WorldMap worldMapView;
+	private HashMap<EmpireRegionalMap, RegionalMap> regionalMaps;
+	private HashMap<EmpireLocalMap, LocalMap> localMaps;
 	private Tile selectedTile;
 	
 	/**
@@ -42,15 +50,15 @@ public class MapController implements Serializable
 	 * @param localMapModels The LocalMaps in the model.
 	 * @param localMapViews The LocalMaps in the view.
 	 */
-	public MapController(Controller app, game.model.maps.EmpireWorldMap worldMapModel, game.view.maps.WorldMap worldMapView,
-			game.model.maps.EmpireRegionalMap[] regionalMapModels, game.view.maps.RegionalMap[] regionalMapViews,
-			game.model.maps.EmpireLocalMap[] localMapModels, game.view.maps.LocalMap[] localMapViews)
+	public MapController(Controller app, EmpireWorldMap worldMapModel, WorldMap worldMapView,
+			EmpireRegionalMap[] regionalMapModels, RegionalMap[] regionalMapViews,
+			EmpireLocalMap[] localMapModels, LocalMap[] localMapViews)
 	{
 		this.app = app;
 		this.worldMapModel = worldMapModel;
 		this.worldMapView = worldMapView;
-		this.regionalMaps = new HashMap<game.model.maps.EmpireRegionalMap, game.view.maps.RegionalMap>();
-		this.localMaps = new HashMap<game.model.maps.EmpireLocalMap, game.view.maps.LocalMap>();
+		this.regionalMaps = new HashMap<EmpireRegionalMap, RegionalMap>();
+		this.localMaps = new HashMap<EmpireLocalMap, LocalMap>();
 		
 		for(int index = 0; index < regionalMapModels.length; index++)
 		{
@@ -71,7 +79,7 @@ public class MapController implements Serializable
 	public int getValue(String level, String id, int row, int col)
 	{
 		int value = 0;
-		game.model.maps.EmpireMap map = null;
+		EmpireMap map = null;
 		
 		if(level.equals(WORLD))
 		{
@@ -97,25 +105,25 @@ public class MapController implements Serializable
 		
 	}
 	
-	private game.model.maps.EmpireMap selectMapModel(String level, String id, int row, int col)
+	private EmpireMap selectMapModel(String level, String id, int row, int col)
 	{
 		if(level.equals(LOCAL))
 		{
-			for(game.model.maps.EmpireLocalMap localMap : localMaps.keySet())
+			for(EmpireLocalMap localMap : localMaps.keySet())
 			{
 				if(localMap.getId().equals(id))
 				{
-					return (game.model.maps.EmpireMap) localMap;
+					return (EmpireMap) localMap;
 				}
 			}
 		}
 		else
 		{
-			for(game.model.maps.EmpireRegionalMap regionalMap : regionalMaps.keySet())
+			for(EmpireRegionalMap regionalMap : regionalMaps.keySet())
 			{
 				if(regionalMap.getId().equals(id))
 				{
-					return (game.model.maps.EmpireMap) regionalMap; 
+					return (EmpireMap) regionalMap; 
 				}
 			}
 		}
@@ -123,9 +131,9 @@ public class MapController implements Serializable
 		return null;
 	}
 	
-	private game.view.maps.Map selectMapView(String level, int row, int col)
+	private Map selectMapView(String level, int row, int col)
 	{
-		game.view.maps.Map map = null;
+		Map map = null;
 		
 		
 		
