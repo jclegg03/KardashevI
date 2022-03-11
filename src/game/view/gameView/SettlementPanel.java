@@ -8,12 +8,13 @@ import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import game.controller.Controller;
+import game.controller.SettlementController;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
 public class SettlementPanel extends MainPanel
 {
+	private SettlementController app;
 	private SpringLayout layout;
 	private SpringLayout settlementLayout;
 	private JScrollPane settlementListHolder;
@@ -21,9 +22,10 @@ public class SettlementPanel extends MainPanel
 	private JLabel title;
 	private int settlementCount;
 		
-	public SettlementPanel(Controller app)
+	public SettlementPanel(SettlementController app)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.layout = new SpringLayout();
 		this.settlementLayout = new SpringLayout();
 		this.settlementListHolder = new JScrollPane();

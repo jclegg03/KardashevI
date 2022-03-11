@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import game.view.buildingMenu.BuildingMenu;
 import game.view.exploreMenu.ExploreMenu;
+import game.view.gameView.GameFrame;
+import game.view.maps.Tile;
 
 /**
  * This class moves data from the model to the view and vice versa.
@@ -27,6 +29,7 @@ public class MapController implements Serializable
 	private game.view.maps.WorldMap worldMapView;
 	private HashMap<game.model.maps.EmpireRegionalMap, game.view.maps.RegionalMap> regionalMaps;
 	private HashMap<game.model.maps.EmpireLocalMap, game.view.maps.LocalMap> localMaps;
+	private Tile selectedTile;
 	
 	/**
 	 * Builds a MapController with the specified parameters.
@@ -127,5 +130,58 @@ public class MapController implements Serializable
 		
 		
 		return map;
+	}
+	
+	/**
+	 * Once a tile is clicked, this method gives the option to explore or build on it.
+	 * @author Jay Clegg
+	 * @param tile
+	 */
+	public void tileOptions(Tile tile)
+	{
+		this.selectedTile = tile;
+		
+		if(tile.getIsExplored())
+		{
+			buildingMenu();
+		}
+		else
+		{
+			exploreMenu();
+		}
+		app.returnFocus();
+	}
+	
+	/**
+	 * Handles the building menu.
+	 * @author Jay Clegg
+	 */
+	private void buildingMenu()
+	{
+		if(buildingMenu != null)
+		{
+			buildingMenu.dispose();
+		}
+		buildingMenu = new BuildingMenu(this, (GameFrame) app.getFrame(), selectedTile);
+	}
+	
+	/**
+	 * Handles the explore menu.
+	 * @author Jay Clegg
+	 */
+	private void exploreMenu()
+	{
+		if(exploreMenu != null)
+		{
+			exploreMenu.dispose();
+		}
+		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame(), selectedTile);
+	}
+	
+	@WIP
+	public void exploreTile()
+	{
+		selectedTile.setIsExplored(true);
+		exploreMenu.dispose();
 	}
 }

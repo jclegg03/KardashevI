@@ -16,6 +16,7 @@ import gui.utility.MainPanel;
 
 public class NewContentPane extends MainPanel
 {
+	private Controller app;
 	private NewGameDialog frame;
 	private SpringLayout layout;
 	private JTextField textField;
@@ -25,7 +26,8 @@ public class NewContentPane extends MainPanel
 	
 	public NewContentPane(Controller app, NewGameDialog frame)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.textField = new JTextField("Empire Name");

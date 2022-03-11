@@ -1,6 +1,6 @@
 package game.view.buildingMenu;
 
-import game.controller.Controller;
+import game.controller.MapController;
 import game.controller.WIP;
 import gui.utility.MainPanel;
 
@@ -11,12 +11,13 @@ import gui.utility.MainPanel;
  */
 public class BuildingMenuPane extends MainPanel
 {
+	private MapController app;
 	private BuildingMenu frame;
 	
-	
-	public BuildingMenuPane(Controller app, BuildingMenu frame)
+	public BuildingMenuPane(MapController app, BuildingMenu frame)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.frame = frame;
 		
 		setupPanel();

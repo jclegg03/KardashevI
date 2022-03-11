@@ -2,7 +2,7 @@ package game.view.exploreMenu;
 
 import javax.swing.JDialog;
 
-import game.controller.Controller;
+import game.controller.MapController;
 import game.view.gameView.GameFrame;
 import game.view.maps.Tile;
 /**
@@ -20,7 +20,7 @@ public class ExploreMenu extends JDialog
 	 * @param app The controller for the game.
 	 * @param parent The window that owns the dialog.
 	 */
-	public ExploreMenu(Controller app, GameFrame parent, Tile tile)
+	public ExploreMenu(MapController app, GameFrame parent, Tile tile)
 	{
 		super(parent);
 		this.contentPane = new ExploreMenuPane(app, this);

@@ -1,10 +1,10 @@
 package game.view.maps;
 
-import game.controller.Controller;
+import game.controller.MapController;
 
 public class RegionalMap extends Map
 {
-	public RegionalMap(Controller app)
+	public RegionalMap(MapController app)
 	{
 		super(app, 5, 5);
 	}

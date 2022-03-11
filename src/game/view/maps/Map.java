@@ -6,8 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import game.controller.Controller;
-import gui.utility.JButton;
+import game.controller.MapController;
 
 /**
  * The base class for each map level.
@@ -17,10 +16,10 @@ import gui.utility.JButton;
 public abstract class Map extends JPanel
 {
 	protected String id;
-	protected Controller app;
+	protected MapController app;
 	protected GridLayout layout;
 	
-	public Map(Controller app, int rows, int cols)
+	public Map(MapController app, int rows, int cols)
 	{
 		this.app = app;
 		this.layout = new GridLayout(rows, cols, 1, 1);

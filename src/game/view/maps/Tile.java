@@ -2,7 +2,7 @@ package game.view.maps;
 
 import java.awt.Color;
 
-import game.controller.Controller;
+import game.controller.MapController;
 import gui.utility.JButton;
 
 /**
@@ -12,7 +12,7 @@ import gui.utility.JButton;
  */
 public class Tile extends JButton
 {	
-	private Controller app;
+	private MapController app;
 	private boolean isExplored;
 	
 	/**
@@ -22,7 +22,7 @@ public class Tile extends JButton
 	 * @param row Which row this tile is in.
 	 * @param col Which column this tile is in.
 	 */
-	public Tile(Controller app, int row, int col)
+	public Tile(MapController app, int row, int col)
 	{
 		super();
 		this.app = app;

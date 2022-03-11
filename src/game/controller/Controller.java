@@ -3,13 +3,10 @@ package game.controller;
 import java.io.Serializable;
 
 import game.model.empire.Empire;
-import game.view.buildingMenu.BuildingMenu;
 import game.view.exitDialog.ExitDialog;
-import game.view.exploreMenu.ExploreMenu;
 import game.view.gameMenu.GameMenu;
 import game.view.gameView.GameFrame;
 import game.view.mainMenu.MainMenu;
-import game.view.maps.Tile;
 import game.view.newGameDialog.NewGameDialog;
 import gui.utility.JFrame;
 
@@ -99,66 +96,6 @@ public class Controller implements Serializable
 		frame = new MainMenu(this);
 	}
 	
-	public void selectSettlement(String name)
-	{
-		settlementPanel.addSettlement("hello");
-		
-		
-		returnFocus();
-	}
-	
-	/**
-	 * Once a tile is clicked, this method gives the option to explore or build on it.
-	 * @author Jay Clegg
-	 * @param tile
-	 */
-	public void tileOptions(Tile tile)
-	{
-		this.selectedTile = tile;
-		if(tile.getIsExplored())
-		{
-			buildingMenu();
-		}
-		else
-		{
-			exploreMenu();
-		}
-		returnFocus();
-	}
-	
-	/**
-	 * Handles the building menu.
-	 * @author Jay Clegg
-	 */
-	private void buildingMenu()
-	{
-		if(buildingMenu != null)
-		{
-			buildingMenu.dispose();
-		}
-		buildingMenu = new BuildingMenu(this, (GameFrame) frame, selectedTile);
-	}
-	
-	/**
-	 * Handles the explore menu.
-	 * @author Jay Clegg
-	 */
-	private void exploreMenu()
-	{
-		if(exploreMenu != null)
-		{
-			exploreMenu.dispose();
-		}
-		exploreMenu = new ExploreMenu(this, (GameFrame) frame, selectedTile);
-	}
-	
-	@WIP
-	public void exploreTile()
-	{
-		selectedTile.setIsExplored(true);
-		exploreMenu.dispose();
-	}
-	
 	/**
 	 * Once the user has entered an empire name, this method starts the game and builds the empire.
 	 * @author Jay Clegg
@@ -168,21 +105,27 @@ public class Controller implements Serializable
 	@WIP
 	public void createEmpire(String empireName, NewGameDialog dialog)
 	{
+		this.resourceController = new ResourceController(this);
+		this.mapController = new MapController(this, null, null, null, null, null, null);
+		this.settlementController = new SettlementController(this, null);
+		this.toolbarController = new ToolbarController(this);
 		
 		dialog.dispose();
 		frame.dispose();
-		frame = new GameFrame(this);
-		
-		settlementPanel.addSettlement("Cave");
-		settlementPanel.addSettlement("test");
+		frame = new GameFrame(this, settlementController, mapController);
 	}
 	
 	/**
 	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button action.
 	 * @author Jay Clegg
 	 */
-	private void returnFocus()
+	public void returnFocus()
 	{
 		frame.getContentPane().requestFocus();
+	}
+	
+	public JFrame getFrame()
+	{
+		return this.getFrame();
 	}
 }

@@ -1,10 +1,10 @@
 package game.view.maps;
 
-import game.controller.Controller;
+import game.controller.MapController;
 
 public class WorldMap extends Map
 {
-	public WorldMap(Controller app)
+	public WorldMap(MapController app)
 	{
 		super(app, 20, 20);
 	}

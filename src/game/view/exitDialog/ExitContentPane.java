@@ -15,6 +15,7 @@ import gui.utility.MainPanel;
 
 public class ExitContentPane extends MainPanel
 {
+	private Controller app;
 	private ExitDialog frame;
 	private SpringLayout layout;
 	private JLabel prompt;
@@ -24,7 +25,8 @@ public class ExitContentPane extends MainPanel
 	
 	public ExitContentPane(Controller app, ExitDialog frame)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.prompt = new JLabel("Are you sure you want to quit?", SwingConstants.CENTER);

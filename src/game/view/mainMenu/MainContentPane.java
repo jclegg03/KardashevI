@@ -15,6 +15,7 @@ import gui.utility.MainPanel;
 
 public class MainContentPane extends MainPanel
 {
+	private Controller app;
 	private MainMenu frame;
 	private SpringLayout layout;
 	private JPanel buttonPanel;
@@ -25,7 +26,8 @@ public class MainContentPane extends MainPanel
 	
 	public MainContentPane(Controller app, MainMenu frame)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel();

@@ -2,7 +2,7 @@ package game.view.buildingMenu;
 
 import javax.swing.JDialog;
 
-import game.controller.Controller;
+import game.controller.MapController;
 import game.view.gameView.GameFrame;
 import game.view.maps.Tile;
 
@@ -13,9 +13,9 @@ import game.view.maps.Tile;
  */
 public class BuildingMenu extends JDialog
 {
-	private Controller app;
+	private MapController app;
 	
-	public BuildingMenu(Controller app, GameFrame parent, Tile tile)
+	public BuildingMenu(MapController app, GameFrame parent, Tile tile)
 	{
 		super(parent, "Buildings");
 		this.app = app;

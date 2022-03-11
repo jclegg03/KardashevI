@@ -14,6 +14,7 @@ import gui.utility.MainPanel;
 
 public class MenuContentPane extends MainPanel
 {
+	private Controller app;
 	private GameMenu frame;
 	private SpringLayout layout;
 	private JPanel buttonPanel;
@@ -26,7 +27,8 @@ public class MenuContentPane extends MainPanel
 	
 	public MenuContentPane(Controller app, GameMenu frame)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
 		this.buttonPanel = new JPanel(new GridLayout(0, 1, 0, 5));

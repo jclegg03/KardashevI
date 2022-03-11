@@ -2,7 +2,7 @@ package game.view.exploreMenu;
 
 import java.awt.GridLayout;
 
-import game.controller.Controller;
+import game.controller.MapController;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
@@ -13,13 +13,15 @@ import gui.utility.MainPanel;
  */
 public class ExploreMenuPane extends MainPanel
 {
+	private MapController app;
 	private JButton exploreButton;
 	private JButton cancelButton;
 	private ExploreMenu frame;
 	
-	public ExploreMenuPane(Controller app, ExploreMenu frame)
+	public ExploreMenuPane(MapController app, ExploreMenu frame)
 	{
-		super(app);
+		super();
+		this.app = app;
 		this.exploreButton = new JButton("Explore");
 		this.cancelButton = new JButton("Cancel");
 		this.frame = frame;
