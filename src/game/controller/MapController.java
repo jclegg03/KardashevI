@@ -43,32 +43,19 @@ public class MapController implements Serializable
 	 * Builds a MapController with the specified parameters.
 	 * @author Jay Clegg
 	 * @param app The Controller that owns this class.
-	 * @param worldMapModel The WorldMap in the model.
-	 * @param worldMapView The WorldMap in the view.
-	 * @param regionalMapModels The RegionalMaps in the model.
-	 * @param regionalMapViews The RegionalMaps in the view.
-	 * @param localMapModels The LocalMaps in the model.
-	 * @param localMapViews The LocalMaps in the view.
 	 */
-	public MapController(Controller app, EmpireWorldMap worldMapModel, WorldMap worldMapView,
-			EmpireRegionalMap[] regionalMapModels, RegionalMap[] regionalMapViews,
-			EmpireLocalMap[] localMapModels, LocalMap[] localMapViews)
+	public MapController(Controller app)
 	{
 		this.app = app;
-		this.worldMapModel = worldMapModel;
-		this.worldMapView = worldMapView;
 		this.regionalMaps = new HashMap<EmpireRegionalMap, RegionalMap>();
 		this.localMaps = new HashMap<EmpireLocalMap, LocalMap>();
 		
-		for(int index = 0; index < regionalMapModels.length; index++)
-		{
-			regionalMaps.put(regionalMapModels[index], regionalMapViews[index]);
-		}
+		buildMaps();
+	}
+	
+	private void buildMaps()
+	{
 		
-		for(int index = 0; index < localMapModels.length; index++)
-		{
-			localMaps.put(localMapModels[index], localMapViews[index]);
-		}
 	}
 	
 	public void setValue(String level, String id, int row, int col, int newValue)

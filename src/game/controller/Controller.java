@@ -106,7 +106,7 @@ public class Controller implements Serializable
 	public void createEmpire(String empireName, NewGameDialog dialog)
 	{
 		this.resourceController = new ResourceController(this);
-		this.mapController = new MapController(this, null, null, null, null, null, null);
+		this.mapController = new MapController(this);
 		this.settlementController = new SettlementController(this, null);
 		this.toolbarController = new ToolbarController(this);
 		
