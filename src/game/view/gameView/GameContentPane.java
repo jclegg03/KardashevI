@@ -12,6 +12,7 @@ import javax.swing.SpringLayout;
 
 import game.controller.Controller;
 import game.view.gameMenu.GameMenu;
+import game.view.maps.LocalMap;
 import game.view.maps.Map;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
@@ -32,7 +33,7 @@ public class GameContentPane extends MainPanel
 		super(app);
 		this.frame = frame;
 		this.layout = new SpringLayout();
-		this.map = new Map(app, 20, 20);
+		this.map = new LocalMap(app);
 		layout.putConstraint(SpringLayout.SOUTH, map, 0, SpringLayout.SOUTH, this);
 		this.resourcePanel = new ResourcePanel(app);
 		layout.putConstraint(SpringLayout.NORTH, map, 0, SpringLayout.SOUTH, resourcePanel);

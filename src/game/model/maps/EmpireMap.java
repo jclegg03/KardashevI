@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import game.model.empire.Empire;
 
-public abstract class Map implements Serializable
+public abstract class EmpireMap implements Serializable
 {
 	protected String id;
 	protected int[][] map;
 	protected Empire empire;
 	
-	public Map(int rows, int cols, Empire empire)
+	public EmpireMap(int rows, int cols, Empire empire)
 	{
 		this.map = new int[rows][cols];
 		this.empire = empire;

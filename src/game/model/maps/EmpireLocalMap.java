@@ -2,9 +2,9 @@ package game.model.maps;
 
 import game.model.empire.Empire;
 
-public class WorldMap extends Map
+public class EmpireLocalMap extends EmpireMap
 {
-	public WorldMap(Empire empire)
+	public EmpireLocalMap(Empire empire)
 	{
 		super(20, 20, empire);
 	}

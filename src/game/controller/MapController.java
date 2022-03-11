@@ -23,10 +23,10 @@ public class MapController implements Serializable
 	private Controller app;
 	private BuildingMenu buildingMenu;
 	private ExploreMenu exploreMenu;
-	private game.model.maps.WorldMap worldMapModel;
+	private game.model.maps.EmpireWorldMap worldMapModel;
 	private game.view.maps.WorldMap worldMapView;
-	private HashMap<game.model.maps.RegionalMap, game.view.maps.RegionalMap> regionalMaps;
-	private HashMap<game.model.maps.LocalMap, game.view.maps.LocalMap> localMaps;
+	private HashMap<game.model.maps.EmpireRegionalMap, game.view.maps.RegionalMap> regionalMaps;
+	private HashMap<game.model.maps.EmpireLocalMap, game.view.maps.LocalMap> localMaps;
 	
 	/**
 	 * Builds a MapController with the specified parameters.
@@ -39,15 +39,15 @@ public class MapController implements Serializable
 	 * @param localMapModels The LocalMaps in the model.
 	 * @param localMapViews The LocalMaps in the view.
 	 */
-	public MapController(Controller app, game.model.maps.WorldMap worldMapModel, game.view.maps.WorldMap worldMapView,
-			game.model.maps.RegionalMap[] regionalMapModels, game.view.maps.RegionalMap[] regionalMapViews,
-			game.model.maps.LocalMap[] localMapModels, game.view.maps.LocalMap[] localMapViews)
+	public MapController(Controller app, game.model.maps.EmpireWorldMap worldMapModel, game.view.maps.WorldMap worldMapView,
+			game.model.maps.EmpireRegionalMap[] regionalMapModels, game.view.maps.RegionalMap[] regionalMapViews,
+			game.model.maps.EmpireLocalMap[] localMapModels, game.view.maps.LocalMap[] localMapViews)
 	{
 		this.app = app;
 		this.worldMapModel = worldMapModel;
 		this.worldMapView = worldMapView;
-		this.regionalMaps = new HashMap<game.model.maps.RegionalMap, game.view.maps.RegionalMap>();
-		this.localMaps = new HashMap<game.model.maps.LocalMap, game.view.maps.LocalMap>();
+		this.regionalMaps = new HashMap<game.model.maps.EmpireRegionalMap, game.view.maps.RegionalMap>();
+		this.localMaps = new HashMap<game.model.maps.EmpireLocalMap, game.view.maps.LocalMap>();
 		
 		for(int index = 0; index < regionalMapModels.length; index++)
 		{
@@ -68,7 +68,7 @@ public class MapController implements Serializable
 	public int getValue(String level, String id, int row, int col)
 	{
 		int value = 0;
-		game.model.maps.Map map = null;
+		game.model.maps.EmpireMap map = null;
 		
 		if(level.equals(WORLD))
 		{
@@ -94,25 +94,25 @@ public class MapController implements Serializable
 		
 	}
 	
-	private game.model.maps.Map selectMapModel(String level, String id, int row, int col)
+	private game.model.maps.EmpireMap selectMapModel(String level, String id, int row, int col)
 	{
 		if(level.equals(LOCAL))
 		{
-			for(game.model.maps.LocalMap localMap : localMaps.keySet())
+			for(game.model.maps.EmpireLocalMap localMap : localMaps.keySet())
 			{
 				if(localMap.getId().equals(id))
 				{
-					return (game.model.maps.Map) localMap;
+					return (game.model.maps.EmpireMap) localMap;
 				}
 			}
 		}
 		else
 		{
-			for(game.model.maps.RegionalMap regionalMap : regionalMaps.keySet())
+			for(game.model.maps.EmpireRegionalMap regionalMap : regionalMaps.keySet())
 			{
 				if(regionalMap.getId().equals(id))
 				{
-					return (game.model.maps.Map) regionalMap; 
+					return (game.model.maps.EmpireMap) regionalMap; 
 				}
 			}
 		}
