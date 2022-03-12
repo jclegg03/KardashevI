@@ -27,7 +27,7 @@ public class Tile extends JButton
 		super();
 		this.app = app;
 		this.isExplored = false;
-		this.setName("row " + row + " col " + col);
+		this.setName("row" + row + "col" + col);
 		this.setBorder(null);
 		this.setOpaque(true);
 		this.setBackground(Color.BLUE);

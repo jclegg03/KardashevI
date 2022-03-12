@@ -6,6 +6,6 @@ public class RegionalMap extends Map
 {
 	public RegionalMap(MapController app)
 	{
-		super(app, 5, 5);
+		super(app, 5, 5, MapController.REGIONAL);
 	}
 }

@@ -6,6 +6,6 @@ public class WorldMap extends Map
 {
 	public WorldMap(MapController app)
 	{
-		super(app, 20, 20);
+		super(app, 20, 20, MapController.WORLD);
 	}
 }

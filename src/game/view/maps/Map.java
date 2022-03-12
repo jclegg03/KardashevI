@@ -18,11 +18,13 @@ public abstract class Map extends JPanel
 	protected String id;
 	protected MapController app;
 	protected GridLayout layout;
+	protected String level;
 	
-	public Map(MapController app, int rows, int cols)
+	public Map(MapController app, int rows, int cols, String level)
 	{
 		this.app = app;
 		this.layout = new GridLayout(rows, cols, 1, 1);
+		this.level = level;
 		this.setLayout(layout);
 		
 		for(int row = 0; row < rows; row++)
@@ -61,5 +63,10 @@ public abstract class Map extends JPanel
 		{
 			System.out.println("tile doesn't exist");
 		}
+	}
+	
+	public String getLevel()
+	{
+		return this.level;
 	}
 }

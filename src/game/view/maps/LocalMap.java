@@ -6,6 +6,6 @@ public class LocalMap extends Map
 {
 	public LocalMap(MapController app)
 	{
-		super(app, 20, 20);
+		super(app, 20, 20, MapController.LOCAL);
 	}
 }
