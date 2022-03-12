@@ -2,12 +2,16 @@ package game.model.maps;
 
 import java.io.Serializable;
 
+import game.model.biomes.Biome;
 import game.model.empire.Empire;
+import game.model.units.Building;
 
 public abstract class EmpireMap implements Serializable
 {
 	protected String id;
 	protected int[][] map;
+	protected Biome[][] biomes;
+	protected Building[][] buildings;
 	protected Empire empire;
 	
 	public EmpireMap(int rows, int cols, Empire empire)
@@ -31,11 +35,6 @@ public abstract class EmpireMap implements Serializable
 		
 	}
 	
-	public String getId()
-	{
-		return this.id;
-	}
-	
 	public Empire getEmpire()
 	{
 		return this.empire;
@@ -44,5 +43,20 @@ public abstract class EmpireMap implements Serializable
 	public int getValue(int row, int col)
 	{
 		return map[row][col];
+	}
+	
+	public Biome getBiome(int row, int col)
+	{
+		return biomes[row][col];
+	}
+	
+	public Building getBuilding(int row, int col)
+	{
+		return buildings[row][col];
+	}
+	
+	public String getId()
+	{
+		return this.id;
 	}
 }
