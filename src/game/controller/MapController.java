@@ -88,7 +88,7 @@ public class MapController implements Serializable
 		
 	}
 	
-	public void goTo()
+	private void goTo(String level, int row, int col)
 	{
 		
 	}
@@ -137,14 +137,22 @@ public class MapController implements Serializable
 	{
 		this.selectedTile = tile;
 		
-		if(tile.getIsExplored())
+		if(currentMap.getLevel().equals(LOCAL))
 		{
-			buildingMenu();
+			if(tile.getIsExplored())
+			{
+				buildingMenu();
+			}
+			else
+			{
+				exploreMenu();
+			}
 		}
 		else
 		{
-			exploreMenu();
+			goTo(currentMap.getLevel(), tile.getMapLocation()[0], tile.getMapLocation()[1]);
 		}
+		
 		app.returnFocus();
 	}
 	

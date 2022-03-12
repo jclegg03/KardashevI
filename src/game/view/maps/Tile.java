@@ -14,6 +14,7 @@ public class Tile extends JButton
 {	
 	private MapController app;
 	private boolean isExplored;
+	private int[] location;
 	
 	/**
 	 * Builds the tile object.
@@ -27,6 +28,9 @@ public class Tile extends JButton
 		super();
 		this.app = app;
 		this.isExplored = false;
+		this.location = new int[2];
+		location[0] = row;
+		location[1] = col;
 		this.setName("row" + row + "col" + col);
 		this.setBorder(null);
 		this.setOpaque(true);
@@ -54,5 +58,10 @@ public class Tile extends JButton
 	public boolean getIsExplored()
 	{
 		return this.isExplored;
+	}
+	
+	public int[] getMapLocation()
+	{
+		return this.location;
 	}
 }
