@@ -3,6 +3,7 @@ package game.model.lists;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import game.model.biomes.Biome;
 import game.model.biomes.LocalBiome;
 import game.model.biomes.RegionalBiome;
 import game.model.biomes.WorldBiome;
@@ -27,6 +28,10 @@ public class BiomeList
 		addWorldBiomes();
 		addRegionalBiomes();
 		addLocalBiomes();
+		
+		worldBiomes.sort(null);
+		regionalBiomes.sort(null);
+		localBiomes.sort(null);
 	}
 	
 	private void addWorldBiomes()
@@ -54,8 +59,8 @@ public class BiomeList
 		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Cold Deep Ocean", 25));
 		
 		regionalBiomes.add(new RegionalBiome(new Color(190, 196, 196), "Glacier", 10));
-		regionalBiomes.add(new RegionalBiome(new Color(75, 75, 75), "Ore Rich", 10));//here
-		regionalBiomes.add(new RegionalBiome(new Color(76, 76, 76), "Stony", 80));
+		regionalBiomes.add(new RegionalBiome(new Color(75, 75, 75), "Ore Rich", 10));
+		regionalBiomes.add(new RegionalBiome(new Color(76, 76, 76), "Stoney", 80));
 		
 		regionalBiomes.add(new RegionalBiome(new Color(4, 117, 40), "Grasslands", 50));
 		regionalBiomes.add(new RegionalBiome(new Color(41, 123, 230), "Lake", 50));
@@ -87,6 +92,55 @@ public class BiomeList
 		localBiomes.add(new LocalBiome(new Color(190, 196, 196), "Glacier", 99));
 		localBiomes.add(new LocalBiome(new Color(191, 197, 197), "Diamond", 1));
 		
+		localBiomes.add(new LocalBiome(new Color(75, 75, 75), "Ore Rich", 90));
+		localBiomes.add(new LocalBiome(new Color(76, 76, 76), "Stone", 10));
 		
+		localBiomes.add(new LocalBiome(new Color(75, 75, 75), "Coal Vein", 20));
+		localBiomes.add(new LocalBiome(new Color(76, 76, 76), "Stoney", 80));
+		
+		localBiomes.add(new LocalBiome(new Color(4, 117, 40), "Grasslands", 95));
+		localBiomes.add(new LocalBiome(new Color(41, 123, 230), "Small Lake", 5));
+		
+		localBiomes.add(new LocalBiome(new Color(4, 117, 40), "Island", 25));
+		localBiomes.add(new LocalBiome(new Color(41, 123, 230), "Large Lake", 75));
+	}
+	
+	public WorldBiome getWorldBiome(String name)
+	{
+		return worldBiomes.get(indexOf(worldBiomes, name, 0, worldBiomes.size(), 0l));
+	}
+	
+	public RegionalBiome getRegionalBiome(String name)
+	{
+		return regionalBiomes.get(indexOf(regionalBiomes, name, 0, regionalBiomes.size(), 0));
+	}
+	
+	public LocalBiome getLocalBiome(String name)
+	{
+		return localBiomes.get(indexOf(localBiomes, name, 0, localBiomes.size(), false));
+	}
+	
+	private int indexOf(ArrayList<LocalBiome> source, String name, int low, int high, boolean notUsed)
+	{
+		int middle = (low + high) / 2;
+		if(source.get(middle).getName().equals(name)) return middle;
+		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
+		else return indexOf(source, name, middle + 1, high, notUsed);
+	}
+	
+	private int indexOf(ArrayList<RegionalBiome> source, String name, int low, int high, int notUsed)
+	{
+		int middle = (low + high) / 2;
+		if(source.get(middle).getName().equals(name)) return middle;
+		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
+		else return indexOf(source, name, middle + 1, high, notUsed);
+	}
+	
+	private int indexOf(ArrayList<WorldBiome> source, String name, int low, int high, long notUsed)
+	{
+		int middle = (low + high) / 2;
+		if(source.get(middle).getName().equals(name)) return middle;
+		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
+		else return indexOf(source, name, middle + 1, high, notUsed);
 	}
 }

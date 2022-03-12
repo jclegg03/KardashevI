@@ -1,8 +1,9 @@
 package game.model.biomes;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public abstract class Biome
+public abstract class Biome implements Comparable<Biome>, Serializable
 {
 	protected Color color;
 	protected final String NAME;
@@ -28,5 +29,11 @@ public abstract class Biome
 	public int getWeight()
 	{
 		return this.WEIGHT;
+	}
+	
+	@Override
+	public int compareTo(Biome otherBiome)
+	{
+		return this.NAME.compareTo(otherBiome.getName());
 	}
 }
