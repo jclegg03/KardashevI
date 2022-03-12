@@ -88,10 +88,6 @@ public class MapController implements Serializable
 		
 	}
 	
-	private void goTo(String level, int row, int col)
-	{
-		
-	}
 	
 	private EmpireMap selectMapModel(String level, String id, int row, int col)
 	{
@@ -117,15 +113,6 @@ public class MapController implements Serializable
 		}
 		
 		return null;
-	}
-	
-	private Map selectMapView(String level, int row, int col)
-	{
-		Map map = null;
-		
-		
-		
-		return map;
 	}
 	
 	/**
@@ -154,6 +141,11 @@ public class MapController implements Serializable
 		}
 		
 		app.returnFocus();
+	}
+	
+	private void goTo(String level, int row, int col)
+	{
+		
 	}
 	
 	/**
