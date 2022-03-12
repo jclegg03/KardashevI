@@ -56,6 +56,23 @@ public class MapController implements Serializable
 	
 	private void buildMaps()
 	{
+		buildWorldMap();
+		buildRegionalMaps();
+		buildLocalMaps();
+	}
+	
+	private void buildWorldMap()
+	{
+		
+	}
+	
+	private void buildRegionalMaps()
+	{
+		
+	}
+	
+	private void buildLocalMaps()
+	{
 		
 	}
 	
