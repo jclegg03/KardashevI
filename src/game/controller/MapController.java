@@ -1,4 +1,4 @@
-package game.controller;
+package game.controller;	
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -38,6 +38,7 @@ public class MapController implements Serializable
 	private HashMap<EmpireRegionalMap, RegionalMap> regionalMaps;
 	private HashMap<EmpireLocalMap, LocalMap> localMaps;
 	private Tile selectedTile;
+	private Map currentMap;
 	
 	/**
 	 * Builds a MapController with the specified parameters.

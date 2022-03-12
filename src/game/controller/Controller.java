@@ -105,14 +105,17 @@ public class Controller implements Serializable
 	@WIP
 	public void createEmpire(String empireName, NewGameDialog dialog)
 	{
-		this.resourceController = new ResourceController(this);
-		this.mapController = new MapController(this);
-		this.settlementController = new SettlementController(this, null);
+		this.empire = new Empire(empireName);
+		this.settlementController = new SettlementController(this);
 		this.toolbarController = new ToolbarController(this);
+		this.mapController = new MapController(this);
+		this.resourceController = new ResourceController(this);
 		
 		dialog.dispose();
 		frame.dispose();
 		frame = new GameFrame(this, settlementController, mapController);
+		
+		settlementController.finishSetup();
 	}
 	
 	/**
@@ -126,6 +129,6 @@ public class Controller implements Serializable
 	
 	public JFrame getFrame()
 	{
-		return this.getFrame();
+		return this.frame;
 	}
 }
