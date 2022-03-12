@@ -145,7 +145,14 @@ public class MapController implements Serializable
 	
 	private void goTo(String level, int row, int col)
 	{
-		
+		if(level.equals(REGIONAL))
+		{
+			
+		}
+		else
+		{
+			
+		}
 	}
 	
 	/**
