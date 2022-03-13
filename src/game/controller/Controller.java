@@ -131,4 +131,9 @@ public class Controller implements Serializable
 	{
 		return this.frame;
 	}
+	
+	public Empire getEmpire()
+	{
+		return this.empire;
+	}
 }
