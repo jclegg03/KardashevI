@@ -18,6 +18,8 @@ public abstract class EmpireMap implements Serializable
 	{
 		this.map = new int[rows][cols];
 		this.empire = empire;
+		this.biomes = new Biome[rows][cols];
+		this.buildings = new Building[rows][cols];
 	}
 	
 	public void explore(int row, int col)
@@ -59,4 +61,6 @@ public abstract class EmpireMap implements Serializable
 	{
 		return this.id;
 	}
+	
+	public abstract Biome[][] getBiomes();
 }

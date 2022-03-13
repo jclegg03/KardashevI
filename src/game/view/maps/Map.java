@@ -31,7 +31,7 @@ public abstract class Map extends JPanel
 		{
 			for(int col = 0; col < cols; col++)
 			{
-				Tile tile = new Tile(app, row, col);
+				Tile tile = new Tile(app, row, col, level);
 				
 				this.add(tile);
 			}
@@ -40,11 +40,11 @@ public abstract class Map extends JPanel
 		this.setBackground(Color.BLACK);
 	}
 	
-	protected Tile getTile(int row, int col)
+	public Tile getTile(int row, int col)
 	{
 		for(Component component : this.getComponents())
 		{
-			if(component.getName().equals("row " + row + " col " + col))
+			if(component.getName().equals("row" + row + "col" + col))
 			{
 				return (Tile) component;
 			}

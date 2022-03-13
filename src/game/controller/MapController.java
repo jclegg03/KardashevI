@@ -1,8 +1,12 @@
 package game.controller;	
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import game.model.biomes.Biome;
+import game.model.biomes.WorldBiome;
+import game.model.lists.BiomeList;
 import game.model.maps.EmpireLocalMap;
 import game.model.maps.EmpireMap;
 import game.model.maps.EmpireRegionalMap;
@@ -39,6 +43,7 @@ public class MapController implements Serializable
 	private HashMap<EmpireLocalMap, LocalMap> localMaps;
 	private Tile selectedTile;
 	private Map currentMap;
+	private BiomeList biomes;
 	
 	/**
 	 * Builds a MapController with the specified parameters.
@@ -50,6 +55,7 @@ public class MapController implements Serializable
 		this.app = app;
 		this.regionalMaps = new HashMap<EmpireRegionalMap, RegionalMap>();
 		this.localMaps = new HashMap<EmpireLocalMap, LocalMap>();
+		this.biomes = new BiomeList();
 		
 		buildMaps();
 	}
@@ -63,17 +69,92 @@ public class MapController implements Serializable
 	
 	private void buildWorldMap()
 	{
+		worldMapModel = new EmpireWorldMap(app.getEmpire());
+		worldMapView = new WorldMap(this);
+		Biome[][] biomes = worldMapModel.getBiomes();
+		for(int row = 0; row < biomes.length; row++)
+		{
+			for(int col = 0; col < biomes[row].length; col++)
+			{
+				WorldBiome current;
+				int number = randomNumber();
+				if(number < 65) current = this.biomes.getWorldBiome("Deep Ocean");
+				else if(number < 71) current = this.biomes.getWorldBiome("Shallow Ocean");
+				else if(number < 81) current = this.biomes.getWorldBiome("Desert");
+				else if(number < 82) current = this.biomes.getWorldBiome("Icy Ocean");
+				else if(number < 87) current = this.biomes.getWorldBiome("Mountainous");
+				else current = this.biomes.getWorldBiome("Fertile");
+				
+				biomes[row][col] = current.copy();
+				
+				worldMapView.getTile(row, col).setBackground(current.getColor());
+			}
+		}
 		
+		if(! worldContainsFertile())
+		{
+			biomes[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = this.biomes.getWorldBiome("Fertile").copy();
+		}
+		
+		exploreRandomWorld();
+	}
+	
+	private boolean worldContainsFertile()
+	{
+		for(Biome[] row : worldMapModel.getBiomes())
+		{
+			for(Biome biome : row)
+			{
+				if(biome.equals((Biome) this.biomes.getWorldBiome("Fertile"))) return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private void exploreRandomWorld()
+	{
+		ArrayList<int[]> locations = new ArrayList<int[]>();
+		
+		for(int row = 0; row < worldMapModel.getBiomes().length; row++)
+		{
+			for(int col = 0; col < worldMapModel.getBiomes()[row].length; col++)
+			{
+				if(worldMapModel.getBiome(row, col).equals(this.biomes.getWorldBiome("Fertile")))
+				{
+					int[] current = new int[2];
+					current[0] = row;
+					current[1] = col;
+					locations.add(current);
+				}
+			}
+		}
+		
+		int random = (int) (Math.random() * locations.size());
+		int row = locations.get(random)[0];
+		int col = locations.get(random)[1];
+		worldMapView.getTile(row, col).setIsExplored(true);
 	}
 	
 	private void buildRegionalMaps()
 	{
-		
+		for(int row = 0; row < worldMapModel.getBiomes().length; row++)
+		{
+			for(int col = 0; col < worldMapModel.getBiomes()[row].length; col++)
+			{
+				
+			}
+		}
 	}
 	
 	private void buildLocalMaps()
 	{
 		
+	}
+	
+	private int randomNumber()
+	{
+		return (int) (Math.random() * 100);
 	}
 	
 	public void setValue(String level, String id, int row, int col, int newValue)

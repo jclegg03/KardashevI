@@ -8,4 +8,10 @@ public class WorldBiome extends Biome
 	{
 		super(color, name, weight);
 	}
+
+	@Override
+	public WorldBiome copy()
+	{
+		return new WorldBiome(this.color, this.NAME, this.WEIGHT);
+	}
 }

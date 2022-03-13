@@ -140,4 +140,9 @@ public class GameContentPane extends MainPanel
 	{
 		return this.map;
 	}
+	
+	public void setMap(Map map)
+	{
+		this.map = map;
+	}
 }

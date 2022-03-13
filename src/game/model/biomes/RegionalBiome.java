@@ -8,4 +8,10 @@ public class RegionalBiome extends Biome
 	{
 		super(color, name, weight);
 	}
+
+	@Override
+	public RegionalBiome copy()
+	{
+		return new RegionalBiome(this.color, this.NAME, this.WEIGHT);
+	}
 }

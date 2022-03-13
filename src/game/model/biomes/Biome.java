@@ -31,9 +31,23 @@ public abstract class Biome implements Comparable<Biome>, Serializable
 		return this.WEIGHT;
 	}
 	
+	public abstract Biome copy();
+	
 	@Override
 	public int compareTo(Biome otherBiome)
 	{
 		return this.NAME.compareTo(otherBiome.getName());
+	}
+	
+	@Override
+	public String toString()
+	{
+		return this.NAME;
+	}
+	
+	@Override
+	public boolean equals(Object biome)
+	{
+		return ((Biome) (biome)).getName().equals(this.getName());
 	}
 }

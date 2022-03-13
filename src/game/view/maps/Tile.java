@@ -15,6 +15,7 @@ public class Tile extends JButton
 	private MapController app;
 	private boolean isExplored;
 	private int[] location;
+	private String level;
 	
 	/**
 	 * Builds the tile object.
@@ -23,12 +24,13 @@ public class Tile extends JButton
 	 * @param row Which row this tile is in.
 	 * @param col Which column this tile is in.
 	 */
-	public Tile(MapController app, int row, int col)
+	public Tile(MapController app, int row, int col, String level)
 	{
 		super();
 		this.app = app;
 		this.isExplored = false;
 		this.location = new int[2];
+		this.level = level;
 		location[0] = row;
 		location[1] = col;
 		this.setName("row" + row + "col" + col);
@@ -63,5 +65,10 @@ public class Tile extends JButton
 	public int[] getMapLocation()
 	{
 		return this.location;
+	}
+	
+	public String getLevel()
+	{
+		return this.level;
 	}
 }
