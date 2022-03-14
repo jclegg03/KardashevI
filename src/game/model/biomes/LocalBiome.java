@@ -25,4 +25,10 @@ public class LocalBiome extends Biome implements Allows
 	{
 		allowedBuildings.add(building);
 	}
+
+	@Override
+	public Biome copy()
+	{
+		return new LocalBiome(this.color, this.NAME, this.WEIGHT);
+	}
 }
