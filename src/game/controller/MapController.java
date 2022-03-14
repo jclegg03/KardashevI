@@ -89,6 +89,7 @@ public class MapController implements Serializable
 				biomes[row][col] = current.copy();
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire()));
 			}
 		}
 		

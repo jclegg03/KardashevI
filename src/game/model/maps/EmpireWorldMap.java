@@ -3,7 +3,6 @@ package game.model.maps;
 import java.util.HashMap;
 
 import game.controller.MapController;
-import game.model.biomes.Biome;
 import game.model.biomes.WorldBiome;
 import game.model.empire.Empire;
 
@@ -15,6 +14,7 @@ public class EmpireWorldMap extends EmpireMap
 	{
 		super(20, 20, empire);
 		this.id = MapController.WORLD;
+		this.regionalMaps = new HashMap<int[], EmpireRegionalMap>();
 	}
 	
 	@Override
