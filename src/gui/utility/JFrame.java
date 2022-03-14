@@ -18,7 +18,8 @@ public abstract class JFrame extends javax.swing.JFrame
 	
 	private void setupFrame()
 	{
-		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+//		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setUndecorated(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
