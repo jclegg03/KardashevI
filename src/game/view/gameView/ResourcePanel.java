@@ -96,10 +96,6 @@ public class ResourcePanel extends JPanel
 			}
 			update();
 		}
-		else
-		{
-			System.out.println("No such resource");
-		}
 	}
 	
 	/**
