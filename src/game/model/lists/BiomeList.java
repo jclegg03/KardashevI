@@ -55,7 +55,7 @@ public class BiomeList
 		regionalBiomes.add(new RegionalBiome(new Color(116, 130, 23), "Desert", 99));
 		regionalBiomes.add(new RegionalBiome(new Color(39, 0, 232), "Oasis", 1));
 		
-		regionalBiomes.add(new RegionalBiome(new Color(116, 181, 184), "Icebergs", 75));
+		regionalBiomes.add(new RegionalBiome(new Color(116, 181, 184), "Iceberg", 75));
 		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Cold Deep Ocean", 25));
 		
 		regionalBiomes.add(new RegionalBiome(new Color(190, 196, 196), "Glacier", 10));

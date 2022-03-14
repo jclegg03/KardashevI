@@ -1,5 +1,6 @@
 package game.model.maps;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import game.controller.MapController;
@@ -23,17 +24,20 @@ public class EmpireWorldMap extends EmpireMap
 		return (WorldBiome) super.getBiome(row, col);
 	}
 
-	@Override
 	public EmpireRegionalMap getMap(int row, int col)
 	{
 		int[] key = {row, col};
 		return regionalMaps.get(key);
 	}
-
-	@Override
-	public void addMap(int row, int col, EmpireMap map)
+	
+	public void addMap(int row, int col, EmpireRegionalMap map)
 	{
 		int[] key = {row, col};
-		regionalMaps.put(key, (EmpireRegionalMap) map);
+		regionalMaps.put(key, map);
+	}
+	
+	public Collection<EmpireRegionalMap> getRegionalMaps()
+	{
+		return regionalMaps.values();
 	}
 }

@@ -9,15 +9,4 @@ public class EmpireLocalMap extends EmpireMap
 	{
 		super(20, 20, empire);
 	}
-	
-	@Override @Deprecated
-	public EmpireMap getMap(int row, int col)
-	{
-		return null;
-	}
-
-	@Override @Deprecated
-	public void addMap(int row, int col, EmpireMap map)
-	{
-	}
 }

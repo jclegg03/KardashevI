@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import game.model.biomes.Biome;
+import game.model.biomes.RegionalBiome;
 import game.model.biomes.WorldBiome;
 import game.model.lists.BiomeList;
 import game.model.maps.EmpireLocalMap;
@@ -13,6 +14,7 @@ import game.model.maps.EmpireRegionalMap;
 import game.model.maps.EmpireWorldMap;
 import game.view.buildingMenu.BuildingMenu;
 import game.view.exploreMenu.ExploreMenu;
+import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
 import game.view.maps.LocalMap;
 import game.view.maps.Map;
@@ -43,6 +45,7 @@ public class MapController implements Serializable
 	private HashMap<EmpireLocalMap, LocalMap> localMaps;
 	private Tile selectedTile;
 	private Map currentMap;
+	private int currentRow, currentCol;
 	private BiomeList biomes;
 	
 	/**
@@ -89,7 +92,7 @@ public class MapController implements Serializable
 				biomes[row][col] = current.copy();
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire()));
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current));
 			}
 		}
 		
@@ -136,17 +139,62 @@ public class MapController implements Serializable
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
 		worldMapView.getTile(row, col).setIsExplored(true);
+		currentRow = row;
+		currentCol = col;
 	}
 	
 	private void buildRegionalMaps()
 	{
-		for(int row = 0; row < worldMapModel.getBiomes().length; row++)
-		{
-			for(int col = 0; col < worldMapModel.getBiomes()[row].length; col++)
+			for(EmpireRegionalMap currentMap : worldMapModel.getRegionalMaps())
 			{
+				RegionalMap mapView = new RegionalMap(this);
+				WorldBiome currentBiome = currentMap.getParentBiome();
+				Biome[][] mapBiomes = currentMap.getBiomes();
+				for(int row = 0; row < mapBiomes.length; row++)
+				{
+					for(int col = 0; col < mapBiomes[row].length;)
+					{
+						int random = randomNumber();
+						RegionalBiome current;
+						if(currentBiome.equals(biomes.getWorldBiome("Deep Ocean")))
+						{
+							current = biomes.getRegionalBiome("Deep Ocean");
+						}
+						else if(currentBiome.equals(biomes.getWorldBiome("Shallow Ocean")))
+						{
+							if(random < 80) current = biomes.getRegionalBiome("Shallow Ocean");
+							else if(random < 90) current = biomes.getRegionalBiome("Reef");
+							else current = biomes.getRegionalBiome("Shore");
+						}
+						else if(currentBiome.equals(biomes.getWorldBiome("Desert")))
+						{
+							if(random < 99) current = biomes.getRegionalBiome("Desert");
+							else current = biomes.getRegionalBiome("Oasis");
+						}
+						else if(currentBiome.equals(biomes.getWorldBiome("Icy Ocean")))
+						{
+							if(random < 75) current = biomes.getRegionalBiome("Iceberg");
+							else current = biomes.getRegionalBiome("Cold Deep Ocean");
+						}
+						else if(currentBiome.equals(biomes.getWorldBiome("Mountainous")))
+						{
+							if(random < 10) current = biomes.getRegionalBiome("Glacier");
+							else if(random < 20) current = biomes.getRegionalBiome("Ore Rich");
+							else current = biomes.getRegionalBiome("Stoney");
+						}
+						else
+						{
+							if(random < 50) current = biomes.getRegionalBiome("Grasslands");
+							else current = biomes.getRegionalBiome("Lake");
+						}
+						
+						mapBiomes[row][col] = current.copy();
+						mapView.getTile(row, col).setBackground(current.getColor());
+					}
+				}
 				
+				regionalMaps.put(currentMap, mapView);
 			}
-		}
 	}
 	
 	private void buildLocalMaps()
@@ -185,7 +233,7 @@ public class MapController implements Serializable
 	
 	public void updateUI()
 	{
-		
+		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
 	}
 	
 	
@@ -247,12 +295,17 @@ public class MapController implements Serializable
 	{
 		if(level.equals(REGIONAL))
 		{
-			
+			localMaps.get(worldMapModel.getMap(currentRow, currentCol).getMap(row, col));
+			updateUI();
 		}
 		else
 		{
-			
+			currentMap = regionalMaps.get(worldMapModel.getMap(row, col));
+			updateUI();
 		}
+		
+		currentRow = row;
+		currentCol = col;
 	}
 	
 	/**

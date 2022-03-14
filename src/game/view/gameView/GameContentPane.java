@@ -148,5 +148,7 @@ public class GameContentPane extends MainPanel
 	public void setMap(Map map)
 	{
 		this.map = map;
+		this.map.setVisible(false);
+		this.map.setVisible(true);
 	}
 }

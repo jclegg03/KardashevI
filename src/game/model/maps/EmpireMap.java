@@ -66,8 +66,4 @@ public abstract class EmpireMap implements Serializable
 	{
 		return this.biomes;
 	}
-	
-	public abstract EmpireMap getMap(int row, int col);
-	
-	public abstract void addMap(int row, int col, EmpireMap map);
 }
