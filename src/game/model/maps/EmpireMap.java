@@ -62,7 +62,10 @@ public abstract class EmpireMap implements Serializable
 		return this.id;
 	}
 	
-	public abstract Biome[][] getBiomes();
+	public Biome[][] getBiomes()
+	{
+		return this.biomes;
+	}
 	
 	public abstract EmpireMap getMap(int row, int col);
 	
