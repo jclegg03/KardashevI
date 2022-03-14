@@ -38,7 +38,7 @@ public class GameContentPane extends MainPanel
 		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
-		this.map = new LocalMap(mapController);
+		this.map = app.getMapController().getCurrentMap();
 		layout.putConstraint(SpringLayout.SOUTH, map, 0, SpringLayout.SOUTH, this);
 		this.resourcePanel = new ResourcePanel(app);
 		layout.putConstraint(SpringLayout.NORTH, map, 0, SpringLayout.SOUTH, resourcePanel);

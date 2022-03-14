@@ -58,6 +58,7 @@ public class MapController implements Serializable
 		this.biomes = new BiomeList();
 		
 		buildMaps();
+		currentMap = worldMapView;
 	}
 	
 	private void buildMaps()
@@ -284,5 +285,10 @@ public class MapController implements Serializable
 	{
 		selectedTile.setIsExplored(true);
 		exploreMenu.dispose();
+	}
+	
+	public Map getCurrentMap()
+	{
+		return this.currentMap;
 	}
 }

@@ -136,4 +136,9 @@ public class Controller implements Serializable
 	{
 		return this.empire;
 	}
+	
+	public MapController getMapController()
+	{
+		return this.mapController;
+	}
 }
