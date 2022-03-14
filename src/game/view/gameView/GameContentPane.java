@@ -1,5 +1,6 @@
 package game.view.gameView;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -14,7 +15,6 @@ import game.controller.Controller;
 import game.controller.MapController;
 import game.controller.SettlementController;
 import game.view.gameMenu.GameMenu;
-import game.view.maps.LocalMap;
 import game.view.maps.Map;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
@@ -24,6 +24,7 @@ public class GameContentPane extends MainPanel
 	private Controller app;
 	private GameFrame frame;
 	private SpringLayout layout;
+	private JPanel mapPanel;
 	private Map map;
 	private ResourcePanel resourcePanel;
 	private SettlementPanel settlementPanel;
@@ -38,6 +39,7 @@ public class GameContentPane extends MainPanel
 		this.app = app;
 		this.frame = frame;
 		this.layout = new SpringLayout();
+		this.mapPanel = new JPanel();
 		this.map = app.getMapController().getCurrentMap();
 		this.resourcePanel = new ResourcePanel(app);
 		this.settlementPanel = new SettlementPanel(settlementController);
@@ -55,8 +57,10 @@ public class GameContentPane extends MainPanel
 		this.setFocusable(true);
 		
 		setupUtilityPanel();
+		mapPanel.add(map);
+		mapPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		this.add(map);
+		this.add(mapPanel);
 		this.add(resourcePanel);
 		this.add(settlementPanel);
 		this.add(utilityPanel);
@@ -73,21 +77,21 @@ public class GameContentPane extends MainPanel
 	{
 		this.setLayout(layout);
 		
-		layout.putConstraint(SpringLayout.SOUTH, map, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.SOUTH, mapPanel, 0, SpringLayout.SOUTH, this);
 		
-		layout.putConstraint(SpringLayout.NORTH, map, 0, SpringLayout.SOUTH, resourcePanel);
+		layout.putConstraint(SpringLayout.NORTH, mapPanel, 0, SpringLayout.SOUTH, resourcePanel);
 		layout.putConstraint(SpringLayout.NORTH, resourcePanel, 0, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, resourcePanel, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.EAST, resourcePanel, 0, SpringLayout.EAST, this);
 		
-		layout.putConstraint(SpringLayout.WEST, map, 0, SpringLayout.EAST, settlementPanel);
+		layout.putConstraint(SpringLayout.WEST, mapPanel, 0, SpringLayout.EAST, settlementPanel);
 		layout.putConstraint(SpringLayout.SOUTH, resourcePanel, 0, SpringLayout.NORTH, settlementPanel);
 		layout.putConstraint(SpringLayout.NORTH, settlementPanel, 50, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, settlementPanel, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.SOUTH, settlementPanel, 0, SpringLayout.SOUTH, this);
 		layout.putConstraint(SpringLayout.EAST, settlementPanel, (int) (-9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.EAST, this);
 		
-		layout.putConstraint(SpringLayout.EAST, map, 0, SpringLayout.WEST, utilityPanel);
+		layout.putConstraint(SpringLayout.EAST, mapPanel, 0, SpringLayout.WEST, utilityPanel);
 		layout.putConstraint(SpringLayout.NORTH, utilityPanel, 50, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, utilityPanel, (int) (9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.SOUTH, utilityPanel, 0, SpringLayout.SOUTH, this);
@@ -147,8 +151,10 @@ public class GameContentPane extends MainPanel
 	
 	public void setMap(Map map)
 	{
+		mapPanel.remove(this.map);
 		this.map = map;
-		this.map.setVisible(false);
-		this.map.setVisible(true);
+		mapPanel.add(this.map);
+		mapPanel.setVisible(false);
+		mapPanel.setVisible(true);
 	}
 }

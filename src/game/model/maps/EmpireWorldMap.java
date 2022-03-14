@@ -9,13 +9,13 @@ import game.model.empire.Empire;
 
 public class EmpireWorldMap extends EmpireMap
 {
-	private HashMap<int[], EmpireRegionalMap> regionalMaps;
+	private HashMap<Location, EmpireRegionalMap> regionalMaps;
 	
 	public EmpireWorldMap(Empire empire)
 	{
 		super(20, 20, empire);
 		this.id = MapController.WORLD;
-		this.regionalMaps = new HashMap<int[], EmpireRegionalMap>();
+		this.regionalMaps = new HashMap<Location, EmpireRegionalMap>();
 	}
 	
 	@Override
@@ -26,14 +26,22 @@ public class EmpireWorldMap extends EmpireMap
 
 	public EmpireRegionalMap getMap(int row, int col)
 	{
-		int[] key = {row, col};
-		return regionalMaps.get(key);
+		return regionalMaps.get(getLocation(row, col));
+	}
+	
+	private Location getLocation(int row, int col)
+	{
+		Location test = new Location(row, col);
+		for(Location location : regionalMaps.keySet())
+		{
+			if(location.equals(test)) return location;
+		}
+		return null;
 	}
 	
 	public void addMap(int row, int col, EmpireRegionalMap map)
 	{
-		int[] key = {row, col};
-		regionalMaps.put(key, map);
+		regionalMaps.put(new Location(row, col), map);
 	}
 	
 	public Collection<EmpireRegionalMap> getRegionalMaps()

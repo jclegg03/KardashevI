@@ -152,7 +152,7 @@ public class MapController implements Serializable
 				Biome[][] mapBiomes = currentMap.getBiomes();
 				for(int row = 0; row < mapBiomes.length; row++)
 				{
-					for(int col = 0; col < mapBiomes[row].length;)
+					for(int col = 0; col < mapBiomes[row].length; col++)
 					{
 						int random = randomNumber();
 						RegionalBiome current;
