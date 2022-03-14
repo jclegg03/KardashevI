@@ -18,12 +18,6 @@ public class EmpireWorldMap extends EmpireMap
 	}
 	
 	@Override
-	public Biome[][] getBiomes()
-	{
-		return this.biomes;
-	}
-	
-	@Override
 	public WorldBiome getBiome(int row, int col)
 	{
 		return (WorldBiome) super.getBiome(row, col);
