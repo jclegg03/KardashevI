@@ -25,6 +25,17 @@ public class LocalBiome extends Biome implements Allows
 	{
 		allowedBuildings.add(building);
 	}
+	
+	@Override
+	public boolean isAllowed(Building building)
+	{
+		for(Building allowed : allowedBuildings)
+		{
+			if(allowed.equals(building)) return true;
+		}
+		
+		return false;
+	}
 
 	@Override
 	public Biome copy()
