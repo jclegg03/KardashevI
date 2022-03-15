@@ -15,7 +15,7 @@ import game.controller.MapController;
  */
 public abstract class Map extends JPanel
 {
-	protected String id;
+	protected String name;
 	protected MapController app;
 	protected GridLayout layout;
 	protected String level;
@@ -68,5 +68,11 @@ public abstract class Map extends JPanel
 	public String getLevel()
 	{
 		return this.level;
+	}
+	
+	@Override
+	public String getName()
+	{
+		return this.name;
 	}
 }
