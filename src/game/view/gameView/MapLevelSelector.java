@@ -1,10 +1,11 @@
 package game.view.gameView;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 import game.controller.MapController;
@@ -19,7 +20,7 @@ public class MapLevelSelector extends MainPanel
 	private SpringLayout layout;
 	private JButton zoomOutButton;
 	private JLabel mapLevel;
-	private JTextArea mapName;
+	private JTextField mapName;
 	
 	public MapLevelSelector(MapController app, Map currentMap)
 	{
@@ -29,7 +30,7 @@ public class MapLevelSelector extends MainPanel
 		this.layout = new SpringLayout();
 		this.zoomOutButton = new JButton();
 		this.mapLevel = new JLabel(currentMap.getLevel());
-		this.mapName = new JTextArea(currentMap.getName());
+		this.mapName = new JTextField(currentMap.getName());
 		
 		setupPanel();
 		setupLayout();
@@ -39,6 +40,9 @@ public class MapLevelSelector extends MainPanel
 	@Override
 	protected void setupPanel()
 	{
+		mapLevel.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+		mapName.setFont(mapLevel.getFont());
+		
 		this.add(zoomOutButton);
 		this.add(mapLevel);
 		this.add(mapName);
@@ -81,7 +85,7 @@ public class MapLevelSelector extends MainPanel
 				{
 					currentMap.setName(mapName.getText());
 					app.updateMapName(mapName.getText());
-					update();
+					update(currentMap.getName(), currentMap.getLevel());
 					app.getController().returnFocus();
 				}
 			}
@@ -93,8 +97,10 @@ public class MapLevelSelector extends MainPanel
 		});
 	}
 	
-	public void update()
+	public void update(String name, String level)
 	{
+		mapName.setText(name);
+		mapLevel.setText(level);
 		this.setVisible(false);
 		this.setVisible(true);
 	}

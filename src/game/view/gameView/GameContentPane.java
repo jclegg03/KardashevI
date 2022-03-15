@@ -158,6 +158,8 @@ public class GameContentPane extends MainPanel
 		mapPanel.add(this.map);
 		mapPanel.setVisible(false);
 		mapPanel.setVisible(true);
+		mapSelector.update(map.getName(), map.getLevel());
+		addMapSelector();
 	}
 	
 	public void addMapSelector()
@@ -170,6 +172,5 @@ public class GameContentPane extends MainPanel
 		layout.putConstraint(SpringLayout.NORTH, mapSelector, 0, SpringLayout.SOUTH, mapPanel);
 		this.setVisible(false);
 		this.setVisible(true);
-		mapSelector.update();
 	}
 }
