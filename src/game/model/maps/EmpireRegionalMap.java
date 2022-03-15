@@ -18,6 +18,8 @@ public class EmpireRegionalMap extends EmpireMap
 		this.localMaps = new HashMap<int[], EmpireLocalMap>();
 		this.parentBiome = parentBiome.copy();
 		this.name = "Regional Map " + count;
+		System.out.println(name);
+		count++;
 	}
 
 	public EmpireLocalMap getMap(int row, int col)
