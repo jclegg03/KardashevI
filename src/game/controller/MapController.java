@@ -45,6 +45,7 @@ public class MapController implements Serializable
 	private HashMap<EmpireLocalMap, LocalMap> localMaps;
 	private Tile selectedTile;
 	private Map currentMap;
+	private RegionalMap previousMap;
 	private int currentRow, currentCol;
 	private BiomeList biomes;
 	
@@ -212,24 +213,24 @@ public class MapController implements Serializable
 		
 	}
 	
-	public int getValue(String level, String id, int row, int col)
-	{
-		int value = 0;
-		EmpireMap map = null;
-		
-		if(level.equals(WORLD))
-		{
-			map = worldMapModel;
-		}
-		else
-		{
-			map = selectMapModel(level, id, row, col);
-		}
-		
-		value = map.getValue(row, col);
-		
-		return value;
-	}
+//	public int getValue(String level, String id, int row, int col)
+//	{
+//		int value = 0;
+//		EmpireMap map = null;
+//		
+//		if(level.equals(WORLD))
+//		{
+//			map = worldMapModel;
+//		}
+//		else
+//		{
+//			map = selectMapModel(level, row, col);
+//		}
+//		
+//		value = map.getValue(row, col);
+//		
+//		return value;
+//	}
 	
 	public void updateUI()
 	{
@@ -237,28 +238,26 @@ public class MapController implements Serializable
 	}
 	
 	
-	private EmpireMap selectMapModel(String level, String id, int row, int col)
+	private EmpireMap selectMapModel(Map value)
 	{
-		if(level.equals(LOCAL))
+		if(value.getLevel().equals(LOCAL))
 		{
-			for(EmpireLocalMap localMap : localMaps.keySet())
+			for(EmpireRegionalMap region : regionalMaps.keySet())
 			{
-				if(localMap.getId().equals(id))
+				for(EmpireLocalMap map : region.getLocalMaps())
 				{
-					return (EmpireMap) localMap;
+					if(localMaps.get(map).equals(value)) return map;
 				}
 			}
 		}
-		else
+		else if(value.getLevel().equals(REGIONAL))
 		{
-			for(EmpireRegionalMap regionalMap : regionalMaps.keySet())
+			for(EmpireRegionalMap regionalMap : worldMapModel.getRegionalMaps())
 			{
-				if(regionalMap.getId().equals(id))
-				{
-					return (EmpireMap) regionalMap; 
-				}
+				if(regionalMaps.get(regionalMap).equals(value)) return regionalMap;
 			}
 		}
+		else if(value.getLevel().equals(WORLD)) return worldMapModel;
 		
 		return null;
 	}
@@ -295,7 +294,8 @@ public class MapController implements Serializable
 	{
 		if(level.equals(REGIONAL))
 		{
-			localMaps.get(worldMapModel.getMap(currentRow, currentCol).getMap(row, col));
+			previousMap = (RegionalMap) currentMap;
+			currentMap = localMaps.get(worldMapModel.getMap(currentRow, currentCol).getMap(row, col));
 			updateUI();
 		}
 		else
@@ -344,5 +344,33 @@ public class MapController implements Serializable
 	public Map getCurrentMap()
 	{
 		return this.currentMap;
+	}
+	
+	public void zoomOut()
+	{
+		if(currentMap.getLevel().equals(LOCAL))
+		{
+			currentMap = previousMap;
+			updateUI();
+		}
+		else
+		{
+			currentMap = worldMapView;
+			updateUI();
+		}
+		
+		app.returnFocus();
+	}
+	
+	public Controller getController()
+	{
+		return this.app;
+	}
+	
+	public void updateMapName(String name)
+	{
+		selectMapModel(currentMap).setName(name);
+		
+		app.returnFocus();
 	}
 }
