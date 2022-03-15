@@ -14,8 +14,8 @@ public class EmpireWorldMap extends EmpireMap
 	public EmpireWorldMap(Empire empire)
 	{
 		super(20, 20, empire);
-		this.id = MapController.WORLD;
 		this.regionalMaps = new HashMap<Location, EmpireRegionalMap>();
+		this.name = "World Map";
 	}
 	
 	@Override

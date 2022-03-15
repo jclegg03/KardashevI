@@ -8,7 +8,7 @@ import game.model.units.Building;
 
 public abstract class EmpireMap implements Serializable
 {
-	protected String id;
+	protected String name;
 	protected int[][] map;
 	protected Biome[][] biomes;
 	protected Building[][] buildings;
@@ -57,13 +57,18 @@ public abstract class EmpireMap implements Serializable
 		return buildings[row][col];
 	}
 	
-	public String getId()
-	{
-		return this.id;
-	}
-	
 	public Biome[][] getBiomes()
 	{
 		return this.biomes;
+	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 }

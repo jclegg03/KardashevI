@@ -1,5 +1,8 @@
 package game.view.gameView;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
@@ -36,19 +39,46 @@ public class MapLevelSelector extends MainPanel
 	@Override
 	protected void setupPanel()
 	{
-		
+		this.add(zoomOutButton);
+		this.add(mapLevel);
+		this.add(mapName);
 	}
 	
 	@Override
 	protected void setupLayout()
 	{
-		
+		this.setLayout(layout);
 	}
 	
 	@Override
 	protected void setupListeners()
 	{
+		zoomOutButton.addActionListener(click -> app.zoomOut());
 		
+		mapName.addKeyListener(new KeyListener()
+		{
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
+			}
+
+			@Override
+			public void keyPressed(KeyEvent key)
+			{
+				if(key.getKeyChar() == KeyEvent.VK_ENTER)
+				{
+					currentMap.setName(mapName.getText());
+					app.updateMapName(mapName.getText());
+					update();
+					app.getController().returnFocus();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent key)
+			{
+			}
+		});
 	}
 	
 	public void update()
