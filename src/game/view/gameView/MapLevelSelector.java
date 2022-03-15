@@ -48,6 +48,18 @@ public class MapLevelSelector extends MainPanel
 	protected void setupLayout()
 	{
 		this.setLayout(layout);
+		layout.putConstraint(SpringLayout.NORTH, mapName, 5, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, mapName, 5, SpringLayout.EAST, mapLevel);
+		layout.putConstraint(SpringLayout.SOUTH, mapName, -5, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, mapName, -5, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.NORTH, mapLevel, 5, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, mapLevel, 5, SpringLayout.EAST, zoomOutButton);
+		layout.putConstraint(SpringLayout.SOUTH, mapLevel, -5, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, mapLevel, 200, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, zoomOutButton, 5, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, zoomOutButton, 5, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, zoomOutButton, -5, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, zoomOutButton, 105, SpringLayout.WEST, this);
 	}
 	
 	@Override

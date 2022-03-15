@@ -302,6 +302,7 @@ public class MapController implements Serializable
 		{
 			currentMap = regionalMaps.get(worldMapModel.getMap(row, col));
 			updateUI();
+			((GameContentPane) app.getFrame().getContentPane()).addMapSelector();
 		}
 		
 		currentRow = row;

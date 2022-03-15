@@ -31,6 +31,7 @@ public class GameContentPane extends MainPanel
 	private JPanel utilityPanel;
 	private JButton researchButton;
 	private JButton menuButton;
+	private MapLevelSelector mapSelector;
 	
 	public GameContentPane(Controller app, SettlementController settlementController,
 			MapController mapController, GameFrame frame)
@@ -46,6 +47,7 @@ public class GameContentPane extends MainPanel
 		this.utilityPanel = new JPanel();
 		this.researchButton = new JButton("Research");
 		this.menuButton = new JButton("Menu");
+		this.mapSelector = new MapLevelSelector(mapController, map);
 		
 		setupPanel();
 		setupLayout();
@@ -156,5 +158,18 @@ public class GameContentPane extends MainPanel
 		mapPanel.add(this.map);
 		mapPanel.setVisible(false);
 		mapPanel.setVisible(true);
+	}
+	
+	public void addMapSelector()
+	{
+		this.add(mapSelector);
+		layout.putConstraint(SpringLayout.SOUTH, mapPanel, -110, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.SOUTH, mapSelector, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, mapSelector, 0, SpringLayout.WEST, utilityPanel);
+		layout.putConstraint(SpringLayout.WEST, mapSelector, 0, SpringLayout.EAST, settlementPanel);
+		layout.putConstraint(SpringLayout.NORTH, mapSelector, 0, SpringLayout.SOUTH, mapPanel);
+		this.setVisible(false);
+		this.setVisible(true);
+		mapSelector.update();
 	}
 }
