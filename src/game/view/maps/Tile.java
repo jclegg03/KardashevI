@@ -35,7 +35,7 @@ public class Tile extends JButton
 		location[1] = col;
 		this.setName("row" + row + "col" + col);
 		this.setBorder(null);
-		this.setOpaque(true);
+		this.setOpaque(false);
 		this.setBackground(Color.BLUE);
 		
 		this.addActionListener(click -> app.tileOptions(this));

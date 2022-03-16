@@ -81,4 +81,36 @@ public abstract class Map extends JPanel
 	{
 		this.name = name;
 	}
+	
+	public Tile[][] getTiles2D()
+	{
+		Tile[][] tiles = new Tile[layout.getRows()][layout.getColumns()];
+		
+		for(int row = 0; row < tiles.length; row++)
+		{
+			for(int col = 0; col < tiles[row].length; col++)
+			{
+				tiles[row][col] = getTile(row, col);
+			}
+		}
+		
+		return tiles;
+	}
+	
+	public Tile[] getTiles()
+	{
+		Tile[][] tiles = getTiles2D();
+		Tile[] linearTiles = new Tile[tiles.length * tiles[0].length];
+		int index = 0;
+		
+		for(Tile[] row : tiles)
+		{
+			for(Tile tile : row)
+			{
+				linearTiles[index] = tile;
+				index++;
+			}
+		}
+		return linearTiles;
+	}
 }

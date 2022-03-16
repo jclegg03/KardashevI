@@ -133,7 +133,7 @@ public class BiomeList
 		int middle = (low + high) / 2;
 		if(source.get(middle).getName().equals(name)) return middle;
 		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
-		else return indexOf(source, name, middle + 1, high, notUsed);
+		else return indexOf(source, name, middle + 1, high, (int) notUsed);
 	}
 	
 	private int indexOf(ArrayList<WorldBiome> source, String name, int low, int high, long notUsed)
