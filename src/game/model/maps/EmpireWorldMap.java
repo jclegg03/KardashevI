@@ -26,18 +26,23 @@ public class EmpireWorldMap extends EmpireMap
 
 	public EmpireRegionalMap getMap(int row, int col)
 	{
-		return regionalMaps.get(getLocation(row, col));
+		
+		return regionalMaps.get(selectLocation(row, col));
 	}
 	
-	private Location getLocation(int row, int col)
+	private Location selectLocation(int row, int col)
 	{
-		Location test = new Location(row, col);
 		for(Location location : regionalMaps.keySet())
 		{
-			if(location.equals(test)) return location;
+			if(new Location(row, col).equals(location))
+			{
+				return location;
+			}
 		}
+		
 		return null;
 	}
+	
 	
 	public void addMap(int row, int col, EmpireRegionalMap map)
 	{

@@ -94,29 +94,30 @@ public class MapController implements Serializable
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
 				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current));
+				worldMapModel.setValue(row, col, UNEXPLORED);
 			}
 		}
 		
-		if(! worldContainsFertile())
-		{
-			biomes[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = this.biomes.getWorldBiome("Fertile").copy();
-		}
+//		if(! worldContainsFertile())
+//		{
+//			biomes[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = this.biomes.getWorldBiome("Fertile").copy();
+//		}
 		
 		exploreRandomWorld();
 	}
 	
-	private boolean worldContainsFertile()
-	{
-		for(Biome[] row : worldMapModel.getBiomes2D())
-		{
-			for(Biome biome : row)
-			{
-				if(biome.equals((Biome) this.biomes.getWorldBiome("Fertile"))) return true;
-			}
-		}
-		
-		return false;
-	}
+//	private boolean worldContainsFertile()
+//	{
+//		for(Biome[] row : worldMapModel.getBiomes2D())
+//		{
+//			for(Biome biome : row)
+//			{
+//				if(biome.equals((Biome) this.biomes.getWorldBiome("Fertile"))) return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
 	
 	private void exploreRandomWorld()
 	{
@@ -192,6 +193,7 @@ public class MapController implements Serializable
 						
 						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
+//						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire()), current.copy());
 					}
 				}
 				
@@ -237,7 +239,13 @@ public class MapController implements Serializable
 	
 	private void buildLocalMaps()
 	{
-		
+		for(EmpireRegionalMap region : worldMapModel.getRegionalMaps())
+		{
+			for(EmpireLocalMap currentMap : region.getLocalMaps())
+			{
+				
+			}
+		}
 	}
 	
 	private int randomNumber()
