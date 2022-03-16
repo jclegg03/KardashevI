@@ -139,7 +139,7 @@ public class MapController implements Serializable
 		int random = (int) (Math.random() * locations.size());
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
-		worldMapView.getTile(row, col).setIsExplored(true);
+		worldMapView.getTile(row, col).setIsExplored(true);	
 		currentRow = row;
 		currentCol = col;
 	}
@@ -196,6 +196,42 @@ public class MapController implements Serializable
 				
 				regionalMaps.put(currentMap, mapView);
 			}
+			
+			exploreRandomRegion();
+	}
+	
+	private void exploreRandomRegion()
+	{
+		ArrayList<int[]> locations = new ArrayList<int[]>();
+		RegionalMap regionExplored = null;
+		for(Tile tile : worldMapView.getTiles())
+		{
+			if(tile.getIsExplored())
+			{
+				regionExplored = regionalMaps.get(worldMapModel.getMap(tile.getMapLocation()[0], tile.getMapLocation()[1]));
+			}
+		}
+		
+		EmpireRegionalMap regionalMap = (EmpireRegionalMap) selectMapModel(regionExplored);
+		
+		for(int row = 0; row < regionalMap.getBiomes().length; row++)
+		{
+			for(int col = 0; col < regionalMap.getBiomes()[0].length; col++)
+			{
+				if(regionalMap.getBiome(row, col).equals(biomes.getRegionalBiome("Grasslands")))
+				{
+					int[] location = {row, col};
+					locations.add(location);
+				}
+			}
+		}
+		
+		int random = (int) (Math.random() * locations.size());
+		int row = locations.get(random)[0];
+		int col = locations.get(random)[1];
+		regionExplored.getTile(row, col).setIsExplored(true);
+		currentRow = row;
+		currentCol = col;
 	}
 	
 	private void buildLocalMaps()
@@ -208,7 +244,7 @@ public class MapController implements Serializable
 		return (int) (Math.random() * 100);
 	}
 	
-	public void setValue(String level, String id, int row, int col, int newValue)
+	public void setValue(EmpireMap map, int row, int col, int newValue)
 	{
 		
 	}
