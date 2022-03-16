@@ -22,19 +22,9 @@ public abstract class EmpireMap implements Serializable
 		this.buildings = new Building[rows][cols];
 	}
 	
-	public void explore(int row, int col)
+	public void setValue(int row, int col, int value)
 	{
-		
-	}
-	
-	public void claim(int row, int col)
-	{
-		
-	}
-	
-	public void transfer(int row, int col, Empire empire)
-	{
-		
+		map[row][col] = value;
 	}
 	
 	public Empire getEmpire()
@@ -57,7 +47,7 @@ public abstract class EmpireMap implements Serializable
 		return buildings[row][col];
 	}
 	
-	public Biome[][] getBiomes()
+	public Biome[][] getBiomes2D()
 	{
 		return this.biomes;
 	}

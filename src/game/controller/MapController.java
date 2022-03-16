@@ -76,7 +76,7 @@ public class MapController implements Serializable
 	{
 		worldMapModel = new EmpireWorldMap(app.getEmpire());
 		worldMapView = new WorldMap(this);
-		Biome[][] biomes = worldMapModel.getBiomes();
+		Biome[][] biomes = worldMapModel.getBiomes2D();
 		for(int row = 0; row < biomes.length; row++)
 		{
 			for(int col = 0; col < biomes[row].length; col++)
@@ -107,7 +107,7 @@ public class MapController implements Serializable
 	
 	private boolean worldContainsFertile()
 	{
-		for(Biome[] row : worldMapModel.getBiomes())
+		for(Biome[] row : worldMapModel.getBiomes2D())
 		{
 			for(Biome biome : row)
 			{
@@ -122,9 +122,9 @@ public class MapController implements Serializable
 	{
 		ArrayList<int[]> locations = new ArrayList<int[]>();
 		
-		for(int row = 0; row < worldMapModel.getBiomes().length; row++)
+		for(int row = 0; row < worldMapModel.getBiomes2D().length; row++)
 		{
-			for(int col = 0; col < worldMapModel.getBiomes()[row].length; col++)
+			for(int col = 0; col < worldMapModel.getBiomes2D()[row].length; col++)
 			{
 				if(worldMapModel.getBiome(row, col).equals(this.biomes.getWorldBiome("Fertile")))
 				{
@@ -140,6 +140,7 @@ public class MapController implements Serializable
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
 		worldMapView.getTile(row, col).setIsExplored(true);	
+		setValue(worldMapModel, row, col, EXPLORED);
 		currentRow = row;
 		currentCol = col;
 	}
@@ -150,7 +151,7 @@ public class MapController implements Serializable
 			{
 				RegionalMap mapView = new RegionalMap(this);
 				WorldBiome currentBiome = currentMap.getParentBiome();
-				Biome[][] mapBiomes = currentMap.getBiomes();
+				Biome[][] mapBiomes = currentMap.getBiomes2D();
 				for(int row = 0; row < mapBiomes.length; row++)
 				{
 					for(int col = 0; col < mapBiomes[row].length; col++)
@@ -214,9 +215,9 @@ public class MapController implements Serializable
 		
 		EmpireRegionalMap regionalMap = (EmpireRegionalMap) selectMapModel(regionExplored);
 		
-		for(int row = 0; row < regionalMap.getBiomes().length; row++)
+		for(int row = 0; row < regionalMap.getBiomes2D().length; row++)
 		{
-			for(int col = 0; col < regionalMap.getBiomes()[0].length; col++)
+			for(int col = 0; col < regionalMap.getBiomes2D()[0].length; col++)
 			{
 				if(regionalMap.getBiome(row, col).equals(biomes.getRegionalBiome("Grasslands")))
 				{
@@ -246,7 +247,7 @@ public class MapController implements Serializable
 	
 	public void setValue(EmpireMap map, int row, int col, int newValue)
 	{
-		
+		map.setValue(row, col, newValue);
 	}
 	
 //	public int getValue(String level, String id, int row, int col)
