@@ -75,4 +75,10 @@ public abstract class Map extends JPanel
 	{
 		return this.name;
 	}
+	
+	@Override
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 }

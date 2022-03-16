@@ -131,7 +131,7 @@ public class GameContentPane extends MainPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				new GameMenu(app, frame);
-				frame.getContentPane().requestFocus();
+				app.returnFocus();
 			}
 		});
 	}
@@ -158,7 +158,7 @@ public class GameContentPane extends MainPanel
 		mapPanel.add(this.map);
 		mapPanel.setVisible(false);
 		mapPanel.setVisible(true);
-		mapSelector.update(map.getName(), map.getLevel());
+		mapSelector.update(map);
 		addMapSelector();
 	}
 	

@@ -85,7 +85,7 @@ public class MapLevelSelector extends MainPanel
 				{
 					currentMap.setName(mapName.getText());
 					app.updateMapName(mapName.getText());
-					update(currentMap.getName(), currentMap.getLevel());
+					update(currentMap);
 					app.getController().returnFocus();
 				}
 			}
@@ -97,10 +97,11 @@ public class MapLevelSelector extends MainPanel
 		});
 	}
 	
-	public void update(String name, String level)
+	public void update(Map map)
 	{
-		mapName.setText(name);
-		mapLevel.setText(level);
+		this.currentMap = map;
+		mapName.setText(map.getName());
+		mapLevel.setText(map.getLevel());
 		this.setVisible(false);
 		this.setVisible(true);
 	}

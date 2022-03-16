@@ -83,7 +83,7 @@ public class MapController implements Serializable
 			{
 				WorldBiome current;
 				int number = randomNumber();
-				if(number < 65) current = this.biomes.getWorldBiome("Deep Ocean");
+				if(number < 50) current = this.biomes.getWorldBiome("Deep Ocean");
 				else if(number < 71) current = this.biomes.getWorldBiome("Shallow Ocean");
 				else if(number < 81) current = this.biomes.getWorldBiome("Desert");
 				else if(number < 82) current = this.biomes.getWorldBiome("Icy Ocean");
