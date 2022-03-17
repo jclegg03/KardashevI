@@ -164,33 +164,40 @@ public class MapController implements Serializable
 						{
 							current = biomes.getRegionalBiome("Deep Ocean");
 						}
+						
 						else if(currentBiome.equals(biomes.getWorldBiome("Shallow Ocean")))
 						{
 							if(random < 80) current = biomes.getRegionalBiome("Shallow Ocean");
 							else if(random < 90) current = biomes.getRegionalBiome("Reef");
 							else current = biomes.getRegionalBiome("Shore");
 						}
+						
 						else if(currentBiome.equals(biomes.getWorldBiome("Desert")))
 						{
 							if(random < 99) current = biomes.getRegionalBiome("Desert");
 							else current = biomes.getRegionalBiome("Oasis");
 						}
+						
 						else if(currentBiome.equals(biomes.getWorldBiome("Icy Ocean")))
 						{
 							if(random < 75) current = biomes.getRegionalBiome("Iceberg");
 							else current = biomes.getRegionalBiome("Cold Deep Ocean");
 						}
+						
 						else if(currentBiome.equals(biomes.getWorldBiome("Mountainous")))
 						{
 							if(random < 10) current = biomes.getRegionalBiome("Glacier");
 							else if(random < 20) current = biomes.getRegionalBiome("Ore Rich");
 							else current = biomes.getRegionalBiome("Stoney");
 						}
-						else
+						
+						else if(currentBiome.equals(biomes.getWorldBiome("Fertile")))
 						{
 							if(random < 50) current = biomes.getRegionalBiome("Grasslands");
 							else current = biomes.getRegionalBiome("Lake");
 						}
+						
+						else current = null;
 						
 						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
@@ -285,11 +292,11 @@ public class MapController implements Serializable
 							}
 							else
 							{
-								current = biomes.getLocalBiome("Oaisis");
+								current = biomes.getLocalBiome("Oasis");
 							}
 						}
 						
-						else if(currentBiome.equals(biomes.getRegionalBiome("Oaisis")))
+						else if(currentBiome.equals(biomes.getRegionalBiome("Oasis")))
 						{
 							if(random < 33)
 							{
@@ -301,7 +308,7 @@ public class MapController implements Serializable
 							}
 							else
 							{
-								current = biomes.getLocalBiome("Desert");
+								current = biomes.getLocalBiome("Sand");
 							}
 						}
 						
@@ -316,8 +323,86 @@ public class MapController implements Serializable
 								current = biomes.getLocalBiome("Icy Ocean");
 							}
 						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Cold Deep Ocean")))
+						{
+							if(random < 5)
+							{
+								current = biomes.getLocalBiome("Small Berg");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Cold Deep Ocean");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Glacier")))
+						{
+							if(random < 99)
+							{
+								current = biomes.getLocalBiome("Glacier");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Diamond");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Ore Rich")))
+						{
+							if(random < 10)
+							{
+								current = biomes.getLocalBiome("Stone");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Ore Rich");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Stoney")))
+						{
+							if(random < 20)
+							{
+								current = biomes.getLocalBiome("Coal");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Stoney");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Grasslands")))
+						{
+							if(random < 95)
+							{
+								current = biomes.getLocalBiome("Grasslands");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Small Lake");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Lake")))
+						{
+							if(random < 25)
+							{
+								current = biomes.getLocalBiome("Island");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Large Lake");
+							}
+						}
+						
+						else current = null;
+						
+						localBiomes[row][col] = current.copy();
+						mapView.getTile(row, col).setBackground(current.getColor());
 					}
 				}
+				localMaps.put(currentMap, mapView);
 			}
 		}
 	}
