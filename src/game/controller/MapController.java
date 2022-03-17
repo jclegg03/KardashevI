@@ -407,6 +407,27 @@ public class MapController implements Serializable
 				localMaps.put(currentMap, mapView);
 			}
 		}
+		
+		exploreRandomLocation();
+	}
+	
+	private void exploreRandomLocation()
+	{
+		EmpireRegionalMap region = worldMapModel.getMap(currentRow, currentCol);
+		EmpireLocalMap exploredMap = null;
+		
+		for(int row = 0; row < 4; row++)
+		{
+			for(int col = 0; col < 4; col++)
+			{
+				if(region.getValue(row, col) == EXPLORED)
+				{
+					exploredMap = region.getMap(row, col);
+				}
+			}
+		}
+		
+		
 	}
 	
 	private int randomNumber()
