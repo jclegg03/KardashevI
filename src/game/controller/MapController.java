@@ -202,6 +202,7 @@ public class MapController implements Serializable
 						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
 						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current));
+						currentMap.setValue(row, col, UNEXPLORED);
 					}
 				}
 				
@@ -400,6 +401,7 @@ public class MapController implements Serializable
 						
 						localBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
+						currentMap.setValue(row, col, UNEXPLORED);
 					}
 				}
 				localMaps.put(currentMap, mapView);
