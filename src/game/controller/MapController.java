@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import game.model.biomes.Biome;
+import game.model.biomes.LocalBiome;
 import game.model.biomes.RegionalBiome;
 import game.model.biomes.WorldBiome;
 import game.model.lists.BiomeList;
@@ -193,7 +194,7 @@ public class MapController implements Serializable
 						
 						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
-//						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire()), current.copy());
+						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current));
 					}
 				}
 				
@@ -233,6 +234,8 @@ public class MapController implements Serializable
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
 		regionExplored.getTile(row, col).setIsExplored(true);
+		regionalMap.setValue(row, col, EXPLORED);
+		
 		currentRow = row;
 		currentCol = col;
 	}
@@ -243,7 +246,78 @@ public class MapController implements Serializable
 		{
 			for(EmpireLocalMap currentMap : region.getLocalMaps())
 			{
+				RegionalBiome currentBiome = currentMap.getParentBiome();
+				Biome[][] localBiomes = currentMap.getBiomes2D();
+				LocalMap mapView = new LocalMap(this);
 				
+				for(int row = 0; row < localBiomes.length; row++)
+				{
+					for(int col = 0; col < localBiomes[row].length; col++)
+					{
+						LocalBiome current;
+						int random = randomNumber();
+						
+						if(currentBiome.equals(biomes.getRegionalBiome("Deep Ocean")))
+						{
+							current = biomes.getLocalBiome("Deep Ocean");
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Shallow Ocean")))
+						{
+							current = biomes.getLocalBiome("Shallow Ocean");
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Reef")))
+						{
+							current = biomes.getLocalBiome("Reef");
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Shore")))
+						{
+							current = biomes.getLocalBiome("Shore");
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Desert")))
+						{
+							if(random < 99)
+							{
+								current = biomes.getLocalBiome("Desert");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Oaisis");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Oaisis")))
+						{
+							if(random < 33)
+							{
+								current = biomes.getLocalBiome("Water");
+							}
+							else if(random < 66)
+							{
+								current = biomes.getLocalBiome("Fertile");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Desert");
+							}
+						}
+						
+						else if(currentBiome.equals(biomes.getRegionalBiome("Iceberg")))
+						{
+							if(random < 90)
+							{
+								current = biomes.getLocalBiome("Ice");
+							}
+							else
+							{
+								current = biomes.getLocalBiome("Icy Ocean");
+							}
+						}
+					}
+				}
 			}
 		}
 	}

@@ -8,14 +8,14 @@ import game.model.empire.Empire;
 
 public class EmpireRegionalMap extends EmpireMap
 {
-	private HashMap<int[], EmpireLocalMap> localMaps;
+	private HashMap<Location, EmpireLocalMap> localMaps;
 	private WorldBiome parentBiome;
 	private static int count;
 	
 	public EmpireRegionalMap(Empire empire, WorldBiome parentBiome)
 	{
 		super(5, 5, empire);
-		this.localMaps = new HashMap<int[], EmpireLocalMap>();
+		this.localMaps = new HashMap<Location, EmpireLocalMap>();
 		this.parentBiome = parentBiome.copy();
 		this.name = "Regional Map " + count;
 		count++;
@@ -23,14 +23,26 @@ public class EmpireRegionalMap extends EmpireMap
 
 	public EmpireLocalMap getMap(int row, int col)
 	{
-		int[] key = {row, col};
-		return localMaps.get(key);
+		return localMaps.get(selectLocation(row, col));
+	}
+	
+	private Location selectLocation(int row, int col)
+	{
+		for(Location location : localMaps.keySet())
+		{
+			if(location.equals(new Location(row, col)))
+			{
+				return location;
+			}
+		}
+		
+		return null;
 	}
 
-	public void addMap(int row, int col, EmpireMap map)
+	public void addMap(int row, int col, EmpireLocalMap map)
 	{
-		int[] key = {row, col};
-		localMaps.put(key, (EmpireLocalMap) map);
+		Location key = new Location(row, col);
+		localMaps.put(key, map);
 	}
 	
 	public WorldBiome getParentBiome()

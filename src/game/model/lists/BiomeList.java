@@ -84,7 +84,7 @@ public class BiomeList
 		localBiomes.add(new LocalBiome(new Color(116, 130, 23), "Sand", 34));
 		
 		localBiomes.add(new LocalBiome(new Color(116, 181, 184), "Ice", 90));
-		localBiomes.add(new LocalBiome(new Color(10, 10, 107), "Icy Ocean", 10));
+		localBiomes.add(new LocalBiome(new Color(10, 10, 107), "Icy Ocean", 10));//here
 		
 		localBiomes.add(new LocalBiome(new Color(116, 181, 184), "Small Berg", 5));
 		localBiomes.add(new LocalBiome(new Color(10, 10, 107), "Cold Deep Ocean", 95));
