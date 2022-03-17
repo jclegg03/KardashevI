@@ -243,9 +243,9 @@ public class MapController implements Serializable
 		int col = locations.get(random)[1];
 		regionExplored.getTile(row, col).setIsExplored(true);
 		regionalMap.setValue(row, col, EXPLORED);
-		
 		currentRow = row;
 		currentCol = col;
+		
 	}
 	
 	private void buildLocalMaps()
@@ -413,21 +413,54 @@ public class MapController implements Serializable
 	
 	private void exploreRandomLocation()
 	{
-		EmpireRegionalMap region = worldMapModel.getMap(currentRow, currentCol);
+		RegionalMap region = null;
+		for(Tile tile : worldMapView.getTiles())
+		{
+			if(tile.getIsExplored())
+			{
+				region = regionalMaps.get(worldMapModel.getMap(tile.getMapLocation()[0], tile.getMapLocation()[1]));
+			}
+		}
 		EmpireLocalMap exploredMap = null;
 		
-		for(int row = 0; row < 4; row++)
+		for(int row = 0; row < region.getTiles2D().length; row++)
 		{
-			for(int col = 0; col < 4; col++)
+			for(int col = 0; col < region.getTiles2D()[0].length; col++)
 			{
-				if(region.getValue(row, col) == EXPLORED)
+				if(region.getTile(row, col).getIsExplored())
 				{
-					exploredMap = region.getMap(row, col);
+					EmpireRegionalMap regionMapModel = (EmpireRegionalMap) selectMapModel(region);
+					exploredMap = regionMapModel.getMap(row, col);
 				}
 			}
 		}
+		LocalMap mapView = localMaps.get(exploredMap);
 		
+		int randRow = (int) (Math.random() * exploredMap.getBiomes2D().length - 1) + 1;
+		int randCol = (int) (Math.random() * exploredMap.getBiomes2D()[0].length - 1) + 1;
 		
+		exploredMap.setValue(randRow, randCol, EXPLORED);
+		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
+		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setIsExplored(true);
+		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
+		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
+		
+		randCol--;
+		exploredMap.setValue(randRow, randCol, EXPLORED);
+		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
+		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setIsExplored(true);
+		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
+		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
+		
+		randCol += 2;
+		exploredMap.setValue(randRow, randCol, EXPLORED);
+		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
+		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setIsExplored(true);
+		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
+		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
 	}
 	
 	private int randomNumber()
