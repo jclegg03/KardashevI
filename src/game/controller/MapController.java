@@ -505,11 +505,26 @@ public class MapController implements Serializable
 		else
 		{
 			currentMap = regionalMaps.get(worldMapModel.getMap(row, col));
+			currentRow = row;
+			currentCol = col;
+			updateUI();
+		}
+	}
+	
+	public void zoomOut()
+	{
+		if(currentMap.getLevel().equals(LOCAL))
+		{
+			currentMap = previousMap;
+			updateUI();
+		}
+		else
+		{
+			currentMap = worldMapView;
 			updateUI();
 		}
 		
-		currentRow = row;
-		currentCol = col;
+		app.returnFocus();
 	}
 	
 	/**
@@ -550,21 +565,6 @@ public class MapController implements Serializable
 		return this.currentMap;
 	}
 	
-	public void zoomOut()
-	{
-		if(currentMap.getLevel().equals(LOCAL))
-		{
-			currentMap = previousMap;
-			updateUI();
-		}
-		else
-		{
-			currentMap = worldMapView;
-			updateUI();
-		}
-		
-		app.returnFocus();
-	}
 	
 	public Controller getController()
 	{
