@@ -63,7 +63,6 @@ public class MapController implements Serializable
 		this.biomes = new BiomeList();
 		
 		buildMaps();
-		currentMap = worldMapView;
 	}
 	
 	private void buildMaps()
@@ -461,6 +460,8 @@ public class MapController implements Serializable
 		mapView.getTile(randRow, randCol).setIsExplored(true);
 		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
 		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
+		
+		currentMap = mapView;
 	}
 	
 	private int randomNumber()

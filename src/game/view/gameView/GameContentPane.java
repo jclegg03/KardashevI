@@ -159,10 +159,9 @@ public class GameContentPane extends MainPanel
 		mapPanel.setVisible(false);
 		mapPanel.setVisible(true);
 		mapSelector.update(map);
-		addMapSelector();
 	}
 	
-	public void addMapSelector()
+	private void addMapSelector()
 	{
 		this.add(mapSelector);
 		layout.putConstraint(SpringLayout.SOUTH, mapPanel, -110, SpringLayout.SOUTH, this);
