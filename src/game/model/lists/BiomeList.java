@@ -8,12 +8,21 @@ import game.model.biomes.LocalBiome;
 import game.model.biomes.RegionalBiome;
 import game.model.biomes.WorldBiome;
 
+/**
+ * The lists of every biome used in the game.
+ * @author Jay Clegg
+ *
+ */
 public class BiomeList
 {
 	private ArrayList<WorldBiome> worldBiomes;
 	private ArrayList<RegionalBiome> regionalBiomes;
 	private ArrayList<LocalBiome> localBiomes;
 	
+	/**
+	 * Builds the biomes and adds them to their respective lists.
+	 * @author Jay Clegg
+	 */
 	public BiomeList()
 	{
 		this.worldBiomes = new ArrayList<WorldBiome>();
@@ -23,6 +32,10 @@ public class BiomeList
 		addBiomes();
 	}
 	
+	/**
+	 * Helper method, calls other helpers to build all the biome lists then sort them.
+	 * @author Jay Clegg
+	 */
 	private void addBiomes()
 	{
 		addWorldBiomes();
@@ -34,6 +47,10 @@ public class BiomeList
 		localBiomes.sort(null);
 	}
 	
+	/**
+	 * Helper method, builds and adds all the world biomes.
+	 * @author Jay Clegg
+	 */
 	private void addWorldBiomes()
 	{
 		worldBiomes.add(new WorldBiome(new Color(10, 10, 107), "Deep Ocean", 65));
@@ -44,6 +61,10 @@ public class BiomeList
 		worldBiomes.add(new WorldBiome(new Color(75, 153, 105), "Fertile", 13));
 	}
 	
+	/**
+	 * Helper method, builds and adds all the regional biomes.
+	 * @author Jay Clegg
+	 */
 	private void addRegionalBiomes()
 	{
 		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Deep Ocean", 100));
@@ -66,6 +87,10 @@ public class BiomeList
 		regionalBiomes.add(new RegionalBiome(new Color(41, 123, 230), "Lake", 50));
 	}
 	
+	/**
+	 * Helper method, builds and adds the local biomes.
+	 * @author Jay Clegg
+	 */
 	private void addLocalBiomes()
 	{
 		localBiomes.add(new LocalBiome(new Color(10, 10, 107), "Deep Ocean", 100));
@@ -105,42 +130,111 @@ public class BiomeList
 		localBiomes.add(new LocalBiome(new Color(41, 123, 230), "Large Lake", 75));
 	}
 	
+	/**
+	 * Returns the world biome with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the biome.
+	 * @return The world biome with that name.
+	 */
 	public WorldBiome getWorldBiome(String name)
 	{
-		return worldBiomes.get(indexOf(worldBiomes, name, 0, worldBiomes.size(), 0l));
+		return worldBiomes.get(indexOfWorld(worldBiomes, name, 0, worldBiomes.size()));
 	}
 	
+	/**
+	 * Returns the regional biome with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the biome.
+	 * @return The regional biome with that name.
+	 */
 	public RegionalBiome getRegionalBiome(String name)
 	{
-		return regionalBiomes.get(indexOf(regionalBiomes, name, 0, regionalBiomes.size(), 0));
+		return regionalBiomes.get(indexOfRegional(regionalBiomes, name, 0, regionalBiomes.size()));
 	}
 	
+	/**
+	 * Returns the local biome with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the biome.
+	 * @return The local biome with that name.
+	 */
 	public LocalBiome getLocalBiome(String name)
 	{
-		return localBiomes.get(indexOf(localBiomes, name, 0, localBiomes.size(), false));
+		return localBiomes.get(indexOfLocal(localBiomes, name, 0, localBiomes.size()));
 	}
 	
-	private int indexOf(ArrayList<LocalBiome> source, String name, int low, int high, boolean notUsed)
+	/**
+	 * Gets the index of the local biome with the specified name recursively.
+	 * @author Jay Clegg
+	 * @param source The array list of local biomes.
+	 * @param name The name of the desired local biome.
+	 * @param low The smallest possible index (Usually 0).
+	 * @param high The largest possible index (Usually size).
+	 * @return The index of the desired local biome.
+	 * @throws A null pointer exception if there is no such local biome.
+	 */
+	private int indexOfLocal(ArrayList<LocalBiome> source, String name, int low, int high)
 	{
+		try
+		{
 		int middle = (low + high) / 2;
 		if(source.get(middle).getName().equals(name)) return middle;
-		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
-		else return indexOf(source, name, middle + 1, high, notUsed);
+		else if(source.get(middle).getName().compareTo(name) > 0) return indexOfLocal(source, name, low, middle - 1);
+		else return indexOfLocal(source, name, middle + 1, high);
+		}
+		catch(StackOverflowError stackOverflow)
+		{
+			throw new NullPointerException("No such local biome.");
+		}
 	}
 	
-	private int indexOf(ArrayList<RegionalBiome> source, String name, int low, int high, int notUsed)
+	/**
+	 * Gets the index of the regional biome with the specified name recursively.
+	 * @author Jay Clegg
+	 * @param source The array list of regional biomes.
+	 * @param name The name of the desired regional biome.
+	 * @param low The smallest possible index (Usually 0).
+	 * @param high The largest possible index (Usually size).
+	 * @return The index of the desired regional biome.
+	 * @throws A null pointer exception if there is no such regional biome.
+	 */
+	private int indexOfRegional(ArrayList<RegionalBiome> source, String name, int low, int high)
 	{
+		try
+		{
 		int middle = (low + high) / 2;
 		if(source.get(middle).getName().equals(name)) return middle;
-		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
-		else return indexOf(source, name, middle + 1, high, (int) notUsed);
+		else if(source.get(middle).getName().compareTo(name) > 0) return indexOfRegional(source, name, low, middle - 1);
+		else return indexOfRegional(source, name, middle + 1, high);
+		}
+		catch(StackOverflowError stackOverflow)
+		{
+			throw new NullPointerException("No such regional biome.");
+		}
 	}
 	
-	private int indexOf(ArrayList<WorldBiome> source, String name, int low, int high, long notUsed)
+	/**
+	 * Gets the index of the world biome with the specified name recursively.
+	 * @author Jay Clegg
+	 * @param source The array list of world biomes.
+	 * @param name The name of the desired world biome.
+	 * @param low The smallest possible index (Usually 0).
+	 * @param high The largest possible index (Usually size).
+	 * @return The index of the desired world biome.
+	 * @throws A null pointer exception if there is no such world biome.
+	 */
+	private int indexOfWorld(ArrayList<WorldBiome> source, String name, int low, int high)
 	{
+		try
+		{
 		int middle = (low + high) / 2;
 		if(source.get(middle).getName().equals(name)) return middle;
-		else if(source.get(middle).getName().compareTo(name) > 0) return indexOf(source, name, low, middle - 1, notUsed);
-		else return indexOf(source, name, middle + 1, high, notUsed);
+		else if(source.get(middle).getName().compareTo(name) > 0) return indexOfWorld(source, name, low, middle - 1);
+		else return indexOfWorld(source, name, middle + 1, high);
+		}
+		catch(StackOverflowError stackOverflow)
+		{
+			throw new NullPointerException("No such world biome");
+		}
 	}
 }

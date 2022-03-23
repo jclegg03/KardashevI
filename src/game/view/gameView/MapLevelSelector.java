@@ -69,7 +69,7 @@ public class MapLevelSelector extends MainPanel
 	@Override
 	protected void setupListeners()
 	{
-		zoomOutButton.addActionListener(click -> app.zoomOut());
+		zoomOutButton.addActionListener(click -> app.zoomMapOut());
 		
 		mapName.addKeyListener(new KeyListener()
 		{

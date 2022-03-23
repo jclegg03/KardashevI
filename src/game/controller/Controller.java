@@ -46,19 +46,28 @@ public class Controller implements Serializable
 		frame.getContentPane().requestFocus();
 	}
 	
+	/**
+	 * Creates a load game menu.
+	 * @author Jay Clegg
+	 */
 	public void loadGame()
 	{
 		
 	}
 	
+	/**
+	 * Creates a save game menu.
+	 * @author Jay Clegg
+	 */
 	public void settings()
 	{
 		
 	}
 	
 	/**
-	 * Quits the game.
+	 * Quits the game and disposes of the exit dialog and frame.
 	 * @param dialog The exit dialog.
+	 * @author Jay Clegg
 	 */
 	public void quit(ExitDialog dialog)
 	{
@@ -67,7 +76,7 @@ public class Controller implements Serializable
 	}
 	
 	/**
-	 * Quits the game from in a game.
+	 * Makes an exit dialog from in a game.
 	 * @param menu The in game menu.
 	 */
 	public void quit(GameMenu menu)

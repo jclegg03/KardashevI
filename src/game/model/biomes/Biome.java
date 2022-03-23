@@ -3,12 +3,24 @@ package game.model.biomes;
 import java.awt.Color;
 import java.io.Serializable;
 
+/**
+ * The parent class for all types of biomes.
+ * @author Jay Clegg
+ *
+ */
 public abstract class Biome implements Comparable<Biome>, Serializable
 {
 	protected Color color;
 	protected final String NAME;
 	protected final int WEIGHT;
 	
+	/**
+	 * Builds a biome with the specified color, name, and weight.
+	 * @author Jay Clegg
+	 * @param color The color this biome will have when displayed.
+	 * @param name The name of this biome.
+	 * @param weight How frequently this biome should show up.
+	 */
 	public Biome(Color color, String name, int weight)
 	{
 		this.color = color;
@@ -31,6 +43,11 @@ public abstract class Biome implements Comparable<Biome>, Serializable
 		return this.WEIGHT;
 	}
 	
+	/**
+	 * Makes a copy of the biome.
+	 * @author Jay Clegg
+	 * @return The copy of the biome.
+	 */
 	public abstract Biome copy();
 	
 	@Override

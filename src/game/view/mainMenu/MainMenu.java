@@ -21,4 +21,10 @@ public class MainMenu extends JFrame
 		
 		this.setVisible(true);
 	}
+	
+	@Override
+	public MainContentPane getContentPane()
+	{
+		return this.contentPane;
+	}
 }

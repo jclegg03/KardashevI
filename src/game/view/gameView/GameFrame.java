@@ -1,7 +1,5 @@
 package game.view.gameView;
 
-import javax.swing.JPanel;
-
 import game.controller.Controller;
 import game.controller.MapController;
 import game.controller.SettlementController;
@@ -9,7 +7,7 @@ import gui.utility.JFrame;
 
 public class GameFrame extends JFrame
 {
-	private JPanel contentPane;
+	private GameContentPane contentPane;
 	
 	public GameFrame(Controller app, SettlementController settlementController, MapController mapController)
 	{
@@ -24,5 +22,11 @@ public class GameFrame extends JFrame
 		this.setContentPane(contentPane);
 		
 		this.setVisible(true);
+	}
+	
+	@Override
+	public GameContentPane getContentPane()
+	{
+		return this.contentPane;
 	}
 }

@@ -24,7 +24,7 @@ import game.view.maps.Tile;
 import game.view.maps.WorldMap;
 
 /**
- * This class moves data from the model to the view and vice versa.
+ * Builds and maintains the maps used in the game.
  * @author Jay Clegg
  *
  */
@@ -65,6 +65,10 @@ public class MapController implements Serializable
 		buildMaps();
 	}
 	
+	/**
+	 * Builds the maps for the game.
+	 * @author Jay Clegg
+	 */
 	private void buildMaps()
 	{
 		buildWorldMap();
@@ -72,6 +76,10 @@ public class MapController implements Serializable
 		buildLocalMaps();
 	}
 	
+	/**
+	 * Builds the world maps
+	 * @author Jay Clegg
+	 */
 	private void buildWorldMap()
 	{
 		worldMapModel = new EmpireWorldMap(app.getEmpire());
@@ -103,9 +111,13 @@ public class MapController implements Serializable
 //			biomes[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = this.biomes.getWorldBiome("Fertile").copy();
 //		}
 		
-		exploreRandomWorld();
+		exploreRandomRegionalMap();
 	}
 	
+	/**
+	 * This method can be used to check if there is a fertile biome for exploring.
+	 * Not used since the odds of generation without a fertile biome is very low.
+	 */
 //	private boolean worldContainsFertile()
 //	{
 //		for(Biome[] row : worldMapModel.getBiomes2D())
@@ -119,7 +131,12 @@ public class MapController implements Serializable
 //		return false;
 //	}
 	
-	private void exploreRandomWorld()
+	/**
+	 * Explores a random regional map on the world map.
+	 * This will only explore a fertile region.
+	 * @author Jay Clegg
+	 */
+	private void exploreRandomRegionalMap()
 	{
 		ArrayList<int[]> locations = new ArrayList<int[]>();
 		
@@ -146,6 +163,10 @@ public class MapController implements Serializable
 		currentCol = col;
 	}
 	
+	/**
+	 * Builds all the regional maps.
+	 * @author Jay Clegg
+	 */
 	private void buildRegionalMaps()
 	{
 			for(EmpireRegionalMap currentMap : worldMapModel.getRegionalMaps())
@@ -208,10 +229,14 @@ public class MapController implements Serializable
 				regionalMaps.put(currentMap, mapView);
 			}
 			
-			exploreRandomRegion();
+			exploreRandomLocalMap();
 	}
 	
-	private void exploreRandomRegion()
+	/**
+	 * Explores a random local map on the explored regional map.
+	 * @author Jay Clegg
+	 */
+	private void exploreRandomLocalMap()
 	{
 		ArrayList<int[]> locations = new ArrayList<int[]>();
 		RegionalMap regionExplored = null;
@@ -247,6 +272,10 @@ public class MapController implements Serializable
 		
 	}
 	
+	/**
+	 * Builds all the local maps.
+	 * @author Jay Clegg
+	 */
 	private void buildLocalMaps()
 	{
 		for(EmpireRegionalMap region : worldMapModel.getRegionalMaps())
@@ -410,6 +439,10 @@ public class MapController implements Serializable
 		exploreRandomLocation();
 	}
 	
+	/**
+	 * Explores a random 3 x 3 square of tiles on the explored local map.
+	 * @author Jay Clegg
+	 */
 	private void exploreRandomLocation()
 	{
 		RegionalMap region = null;
@@ -464,11 +497,24 @@ public class MapController implements Serializable
 		currentMap = mapView;
 	}
 	
+	/**
+	 * Generates a random number from 0 to 99 which is used to randomly generate biomes.
+	 * @author Jay Clegg
+	 * @return
+	 */
 	private int randomNumber()
 	{
 		return (int) (Math.random() * 100);
 	}
 	
+	/**
+	 * Sets the value of the specified tile to the specified value in the specified map.
+	 * @author Jay Clegg
+	 * @param map The map in question.
+	 * @param row The row where the value is located.
+	 * @param col The column where the value is located.
+	 * @param newValue The new value for the tile.
+	 */
 	public void setValue(EmpireMap map, int row, int col, int newValue)
 	{
 		map.setValue(row, col, newValue);
@@ -493,12 +539,12 @@ public class MapController implements Serializable
 //		return value;
 //	}
 	
-	public void updateUI()
-	{
-		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
-	}
-	
-	
+	/**
+	 * Allows for the selection of a specific map's model based on the values in the HashMaps.
+	 * @author Jay Clegg
+	 * @param value The value in the HashMap
+	 * @return The key to that value in the HashMap.
+	 */
 	private EmpireMap selectMapModel(Map value)
 	{
 		if(value.getLevel().equals(LOCAL))
@@ -524,9 +570,19 @@ public class MapController implements Serializable
 	}
 	
 	/**
-	 * Once a tile is clicked, this method gives the option to explore or build on it.
+	 * Changes the map on the game screen.
 	 * @author Jay Clegg
-	 * @param tile
+	 */
+	public void updateUI()
+	{
+		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
+	}
+	
+	/**
+	 * Once a tile is clicked, this method gives the option to explore or build on it.
+	 * It also focuses the map view on the selected map if necessary.
+	 * @author Jay Clegg
+	 * @param tile The tile which was clicked.
 	 */
 	public void tileOptions(Tile tile)
 	{
@@ -551,6 +607,14 @@ public class MapController implements Serializable
 		app.returnFocus();
 	}
 	
+	/**
+	 * Adjusts the values of the current map so the correct map can be displayed.
+	 * Also updates the UI after setting the new map.
+	 * @author Jay Clegg
+	 * @param level The level the tile is on.
+	 * @param row The row the tile is in.
+	 * @param col The column the tile is in.
+	 */
 	private void goTo(String level, int row, int col)
 	{
 		if(level.equals(REGIONAL))
@@ -568,7 +632,14 @@ public class MapController implements Serializable
 		}
 	}
 	
-	public void zoomOut()
+	/**
+	 * Zooms the map out to a higher level. </br>
+	 * Local zooms to regional. </br>
+	 * Regional zooms to world. </br>
+	 * World zooms to nothing!
+	 * @author Jay Clegg
+	 */
+	public void zoomMapOut()
 	{
 		if(currentMap.getLevel().equals(LOCAL))
 		{
@@ -598,7 +669,7 @@ public class MapController implements Serializable
 	}
 	
 	/**
-	 * Handles the explore menu.
+	 * Makes the explore menu.
 	 * @author Jay Clegg
 	 */
 	private void exploreMenu()
@@ -610,11 +681,28 @@ public class MapController implements Serializable
 		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame(), selectedTile);
 	}
 	
+	/**
+	 * Explores a tile.
+	 * @author Jay Clegg
+	 */
 	@WIP
+	//Needs to adjust the map model values too.
 	public void exploreTile()
 	{
 		selectedTile.setIsExplored(true);
 		exploreMenu.dispose();
+	}
+	
+	/**
+	 * When the user changes the name of a map, the change is saved by this.
+	 * @author Jay Clegg
+	 * @param name The new name of the map.
+	 */
+	public void updateMapName(String name)
+	{
+		selectMapModel(currentMap).setName(name);
+		
+		app.returnFocus();
 	}
 	
 	public Map getCurrentMap()
@@ -622,16 +710,8 @@ public class MapController implements Serializable
 		return this.currentMap;
 	}
 	
-	
 	public Controller getController()
 	{
 		return this.app;
-	}
-	
-	public void updateMapName(String name)
-	{
-		selectMapModel(currentMap).setName(name);
-		
-		app.returnFocus();
 	}
 }

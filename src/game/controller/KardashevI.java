@@ -13,6 +13,6 @@ public class KardashevI
 	 */
 	public static void main(String[] args)
 	{
-		Controller app = new Controller();
+		new Controller();
 	}
 }
