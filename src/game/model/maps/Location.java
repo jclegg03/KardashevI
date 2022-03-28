@@ -1,10 +1,21 @@
 package game.model.maps;
 
+/**
+ * A location on an empire map. Used as a key to find the associated lower level map.
+ * @author Jay Clegg
+ *
+ */
 public class Location
 {
 	private int row;
 	private int col;
 	
+	/**
+	 * Builds a location key.
+	 * @author Jay Clegg
+	 * @param row The row of the key.
+	 * @param col The column of the key.
+	 */
 	public Location(int row, int col)
 	{
 		this.row = row;

@@ -6,6 +6,11 @@ import game.model.biomes.Biome;
 import game.model.empire.Empire;
 import game.model.units.Building;
 
+/**
+ * The base class for all maps in the model.
+ * @author Jay Clegg
+ *
+ */
 public abstract class EmpireMap implements Serializable
 {
 	protected String name;
@@ -14,6 +19,13 @@ public abstract class EmpireMap implements Serializable
 	protected Building[][] buildings;
 	protected Empire empire;
 	
+	/**
+	 * Builds a map with the specified amounts of rows and columns, with an empire owning it.
+	 * @param rows The number of rows on the map.
+	 * @param cols The number of columns on the map.
+	 * @param empire The empire that owns this map.
+	 * @author Jay Clegg
+	 */
 	public EmpireMap(int rows, int cols, Empire empire)
 	{
 		this.map = new int[rows][cols];
