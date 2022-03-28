@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import game.model.units.Describable;
 
+/**
+ * The model for resources empires own.
+ * @author Jay Clegg
+ *
+ */
 public class Resource implements Serializable, Describable
 {
 	private int numOwned;
@@ -11,6 +16,13 @@ public class Resource implements Serializable, Describable
 	private String name;
 	private String description;	
 	
+	/**
+	 * Builds a resource without a description.
+	 * @author Jay Clegg
+	 * @param numOwned The number of this resource the empire currently owns.
+	 * @param numProduced The amount of this resource the empire produces monthly.
+	 * @param name The name of the resource.
+	 */
 	public Resource(int numOwned, int numProduced, String name)
 	{
 		this.numOwned = numOwned;
@@ -19,6 +31,14 @@ public class Resource implements Serializable, Describable
 		this.description = "";
 	}
 	
+	/**
+	 * Builds a resource with a description.
+	 * @author Jay Clegg
+	 * @param numOwned The number of this resource the empire owns.
+	 * @param numProduced The amount of this resource the empire produces.
+	 * @param name The name of this resource.
+	 * @param description The description of this resource.
+	 */
 	public Resource(int numOwned, int numProduced, String name, String description)
 	{
 		this.numOwned = numOwned;
