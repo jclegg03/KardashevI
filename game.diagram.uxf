@@ -188,7 +188,7 @@ group=1</panel_attributes>
       <x>1878</x>
       <y>984</y>
       <w>216</w>
-      <h>138</h>
+      <h>102</h>
     </coordinates>
     <panel_attributes>ExitContentPane
 --
@@ -200,10 +200,7 @@ group=1</panel_attributes>
 - cancelButton : JButton
 --
 + ExitContentPane(Controller, ExitDialog) : Constructor
-- setupPanel() : void
 - setupButtonPanel() : void
-- setupLauout() : void
-- setupListeners() : void
 group=1</panel_attributes>
     <additional_attributes/>
   </element>
@@ -213,7 +210,7 @@ group=1</panel_attributes>
       <x>1872</x>
       <y>894</y>
       <w>228</w>
-      <h>246</h>
+      <h>198</h>
     </coordinates>
     <panel_attributes>game.view.exitDialog
 --
@@ -312,7 +309,7 @@ group=22</panel_attributes>
 --
 + GameFrame(Controller) : Constructor
 - setupFrame() : void
-group=7</panel_attributes>
+group=31</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -352,7 +349,7 @@ group=7</panel_attributes>
 + getSettlementPanel() : SettlementPanel
 + getResourcePanel() : ResourcePanel
 + getMap() : Map
-group=7</panel_attributes>
+group=31</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -372,8 +369,8 @@ group=7</panel_attributes>
 + removeResource(String) : void
 + setResource(String, int, int) : void
 + getResource() : JButton
-- update()
-group=7</panel_attributes>
+- update() : void
+group=31</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -382,11 +379,11 @@ group=7</panel_attributes>
       <x>2166</x>
       <y>396</y>
       <w>168</w>
-      <h>174</h>
+      <h>156</h>
     </coordinates>
     <panel_attributes>SettlementPanel
 --
-- app : Controller
+- app : SettlementController
 - layout : SpringLayout
 - settlementLayout : SpringLayout
 - settlementListHolder : JScrollPane
@@ -395,16 +392,13 @@ group=7</panel_attributes>
 - settlementCount : int
 --
 + SettlementPanel(Controller) : Constructor
-- setupPanel() : void
-- setupListeners() : void
-- setupLayout() : void
 - update() : void
 + addSettlement(String) : void
 + getSettlementCount() : int
 + removeSettlement(String) : void
 + setSettlement(String, String) : void
 + getSettlement(String) : JButton
-group=7</panel_attributes>
+group=31</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -412,13 +406,13 @@ group=7</panel_attributes>
     <coordinates>
       <x>1902</x>
       <y>282</y>
-      <w>438</w>
+      <w>660</w>
       <h>294</h>
     </coordinates>
     <panel_attributes>game.view.gameView
 --
 bg=orange
-group=7</panel_attributes>
+group=31</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -444,10 +438,11 @@ group=8</panel_attributes>
       <x>1626</x>
       <y>360</y>
       <w>228</w>
-      <h>156</h>
+      <h>132</h>
     </coordinates>
     <panel_attributes>MenuContentPane
 --
+- app : Controller
 - frame : GameMenu
 - layout : SpringLayout
 - buttonPanel : JPanel
@@ -459,10 +454,6 @@ group=8</panel_attributes>
 - quitButton : JButton
 --
 + MenuContentPane(Controller, GameMenu) : Constructor
-- setupPanel() : void
-- setupLayout() : void
-- setupListeners() : void
-
 group=8</panel_attributes>
     <additional_attributes/>
   </element>
@@ -472,7 +463,7 @@ group=8</panel_attributes>
       <x>1614</x>
       <y>276</y>
       <w>258</w>
-      <h>246</h>
+      <h>222</h>
     </coordinates>
     <panel_attributes>game.view.gameMenu
 --
@@ -484,15 +475,15 @@ group=8</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1620</x>
-      <y>78</y>
-      <w>210</w>
+      <y>114</y>
+      <w>228</w>
       <h>54</h>
     </coordinates>
     <panel_attributes>ExploreMenu
 --
 - contentPane : ExploreMenuPane
 --
-+ ExploreMenu(Controller, GameFrame) : Constructor
++ ExploreMenu(MapController, GameFrame) : Constructor
 - setupFrame() : void
 group=9</panel_attributes>
     <additional_attributes/>
@@ -501,20 +492,18 @@ group=9</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1620</x>
-      <y>144</y>
-      <w>234</w>
-      <h>102</h>
+      <y>180</y>
+      <w>246</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>ExploreMenuPane
 --
+- app : MapController
 - exploreButton : JButton
 - cancelButton : JButton
 - frame : ExploreMenu
 --
-+ ExploreMenuPane(Controller, ExploreMenu) : Constructor
-- setupFrame() : void
-- setupLayout() : void
-- setupListeners() : void
++ ExploreMenuPane(MapController, ExploreMenu) : Constructor
 group=9</panel_attributes>
     <additional_attributes/>
   </element>
@@ -522,9 +511,9 @@ group=9</panel_attributes>
     <id>UMLPackage</id>
     <coordinates>
       <x>1614</x>
-      <y>60</y>
-      <w>246</w>
-      <h>192</h>
+      <y>96</y>
+      <w>258</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>game.view.exploreMenu
 --
@@ -561,7 +550,7 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>2574</x>
+      <x>2658</x>
       <y>12</y>
       <w>96</w>
       <h>30</h>
@@ -569,220 +558,6 @@ bg=blue</panel_attributes>
     <panel_attributes>Magenta Packages
 are part of the controller
 bg=magenta</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1176</x>
-      <y>390</y>
-      <w>240</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>Army
---
-- name : String
-- type : String
-- requirement : Tech
-- health : int
-- morale : int
-- damage : int
-- buildTime : int
---
-+ Army(String, String, String, Tech, int, int, int, int) : Constructor
-+ toString() : String
-+ getters() : Type
-+ setters(Type) : void
-bg=orange
-layer=1
-group=20</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1014</x>
-      <y>420</y>
-      <w>120</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>/Describable/
---
-/+ setDescription(String) : void/
-/+ getDescription() : String/
-bg=yellow
-
-layer=1
-group=20</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1128</x>
-      <y>444</y>
-      <w>60</w>
-      <h>18</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=20</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1176</x>
-      <y>534</y>
-      <w>336</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>Building
---
-# name : String
-# employs : Job[]
-# produces : Resource[]
-# consumes : Resource[]
-# size : int
-# upgradesTo : Building
-# description : String
-# requirement : Tech
---
-+ Building(String, Job[], Resource[], Resource[], int, Building, String, Tech) : Constructor
-+ getters() : Type
-+ setters(Type) : void
-bg=orange
-
-layer=1
-group=20</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1014</x>
-      <y>504</y>
-      <w>108</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>/Requires/
---
-/+ getRequirement() : Tech/
-bg=red
-
-layer=1
-group=20</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1116</x>
-      <y>492</y>
-      <w>72</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=20</panel_attributes>
-    <additional_attributes>10.0;50.0;50.0;50.0;50.0;10.0;100.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1074</x>
-      <y>456</y>
-      <w>114</w>
-      <h>108</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=20</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0;150.0;30.0;150.0;160.0;170.0;160.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1056</x>
-      <y>528</y>
-      <w>132</w>
-      <h>78</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=20</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0;200.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>822</x>
-      <y>384</y>
-      <w>138</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>Job
---
-- name : String
-- description : String
-- resourcesProduced : Resource[]
-- resourcesConsumed : Resource[]
-- numAvailable : int
-- numEmployed : int
---
-+ getters() : Type
-+ setters(Type) : void
-+ addAvailable(int) : void
-+ addEmployed(int) : void
-bg=yellow
-
-layer=1
-group=20</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>954</x>
-      <y>444</y>
-      <w>72</w>
-      <h>18</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-group=20</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>828</x>
-      <y>558</y>
-      <w>174</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>Population
---
-- name : String
-- size : int
-- growthRate : double
---
-+ Population(String, int, double) : Constructor
-+ Population(String, int) : Constructor
-+ getters() : Type
-+ setters(Type) : void
-+ grow() : void
-layer=1
-group=20</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>816</x>
-      <y>366</y>
-      <w>708</w>
-      <h>390</h>
-    </coordinates>
-    <panel_attributes>game.model.units
---
-bg=blue
-group=20</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1071,12 +846,12 @@ group=16</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1746</x>
-      <y>510</y>
+      <y>492</y>
       <w>186</w>
-      <h>306</h>
+      <h>324</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>290.0;490.0;170.0;490.0;170.0;130.0;10.0;130.0;10.0;10.0</additional_attributes>
+    <additional_attributes>290.0;520.0;170.0;520.0;170.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1104,12 +879,12 @@ group=16</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>2016</x>
-      <y>564</y>
+      <y>546</y>
       <w>216</w>
-      <h>252</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;400.0;120.0;400.0;120.0;70.0;340.0;70.0;340.0;10.0</additional_attributes>
+    <additional_attributes>10.0;430.0;120.0;430.0;120.0;100.0;340.0;100.0;340.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -1264,7 +1039,7 @@ group=19</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2508</x>
+      <x>2664</x>
       <y>90</y>
       <w>90</w>
       <h>36</h>
@@ -1279,7 +1054,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2610</x>
+      <x>2766</x>
       <y>90</y>
       <w>78</w>
       <h>36</h>
@@ -1294,7 +1069,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2508</x>
+      <x>2664</x>
       <y>156</y>
       <w>252</w>
       <h>108</h>
@@ -1310,24 +1085,6 @@ group=24</panel_attributes>
 + updateUI() : void
 - selectSettlement(JButton) : Settlement
 group=24</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1134</x>
-      <y>696</y>
-      <w>384</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>Settlement
---
-- location : int
---
-+ Settlement(String, Job[], Resource[], Resource[], int, Building, String, Tech, int) : Constructor
-layer=1
-group=20
-bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1391,7 +1148,7 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2784</x>
+      <x>2940</x>
       <y>156</y>
       <w>234</w>
       <h>78</h>
@@ -1410,7 +1167,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2508</x>
+      <x>2664</x>
       <y>276</y>
       <w>126</w>
       <h>60</h>
@@ -1428,7 +1185,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2652</x>
+      <x>2808</x>
       <y>276</y>
       <w>144</w>
       <h>72</h>
@@ -1447,7 +1204,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2832</x>
+      <x>2988</x>
       <y>246</y>
       <w>252</w>
       <h>378</h>
@@ -1498,7 +1255,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3042</x>
+      <x>3198</x>
       <y>108</y>
       <w>246</w>
       <h>90</h>
@@ -1519,7 +1276,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2514</x>
+      <x>2670</x>
       <y>444</y>
       <w>186</w>
       <h>192</h>
@@ -1551,7 +1308,7 @@ group=24</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2502</x>
+      <x>2658</x>
       <y>72</y>
       <w>804</w>
       <h>576</h>
@@ -1809,5 +1566,333 @@ layer=2</panel_attributes>
 layer=1
 group=19</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1014</x>
+      <y>420</y>
+      <w>120</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>/Describable/
+--
+/+ setDescription(String) : void/
+/+ getDescription() : String/
+bg=yellow
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1128</x>
+      <y>444</y>
+      <w>60</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1176</x>
+      <y>534</y>
+      <w>336</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Building
+--
+# name : String
+# employs : Job[]
+# produces : Resource[]
+# consumes : Resource[]
+# size : int
+# upgradesTo : Building
+# description : String
+# requirement : Tech
+--
++ Building(String, Job[], Resource[], Resource[], int, Building, String, Tech) : Constructor
++ getters() : Type
++ setters(Type) : void
+bg=orange
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1014</x>
+      <y>504</y>
+      <w>108</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/Requires/
+--
+/+ getRequirement() : Tech/
+bg=red
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1116</x>
+      <y>492</y>
+      <w>72</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;50.0;50.0;50.0;50.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1074</x>
+      <y>456</y>
+      <w>114</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;150.0;30.0;150.0;160.0;170.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1056</x>
+      <y>528</y>
+      <w>132</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;200.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>822</x>
+      <y>384</y>
+      <w>138</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Job
+--
+- name : String
+- description : String
+- resourcesProduced : Resource[]
+- resourcesConsumed : Resource[]
+- numAvailable : int
+- numEmployed : int
+--
++ getters() : Type
++ setters(Type) : void
++ addAvailable(int) : void
++ addEmployed(int) : void
+bg=yellow
+
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>954</x>
+      <y>444</y>
+      <w>72</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=20</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>828</x>
+      <y>558</y>
+      <w>174</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Population
+--
+- name : String
+- size : int
+- growthRate : double
+--
++ Population(String, int, double) : Constructor
++ Population(String, int) : Constructor
++ getters() : Type
++ setters(Type) : void
++ grow() : void
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>816</x>
+      <y>366</y>
+      <w>708</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>game.model.units
+--
+bg=blue
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1134</x>
+      <y>696</y>
+      <w>384</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Settlement
+--
+- location : HashMap&lt;EmpireLocalMap, Location&gt;
+--
++ Settlement(String, Job[], Resource[], Resource[], int, Building, String, Tech, int) : Constructor
+layer=1
+group=20
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1176</x>
+      <y>390</y>
+      <w>246</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>Army
+--
+- name : String
+- type : String
+- description : String
+- requirement : Tech
+- health : int
+- morale : int
+- damage : int
+- buildTime : int
+--
++ Army(String, String, String, Tech, int, int, int, int) : Constructor
++ toString() : String
++ getters() : Type
++ setters(Type) : void
+bg=orange
+layer=1
+group=20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1920</x>
+      <y>120</y>
+      <w>246</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>BuildingMenu
+--
+- app : MapController
+--
++ BuildingMenu(MapController, GameFrame, Tile) : Constructor
+- setupFrame() : void
+group=30</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1920</x>
+      <y>186</y>
+      <w>246</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>BuildingMenuPane
+--
+- app : MapController
+- frame : BuildingMenu
+--
++ BuildingMenuPane(MapController, GameFrame) : Constructor
+
+group=30</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1914</x>
+      <y>102</y>
+      <w>258</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>game.view.buildingMenux
+--
+bg=orange
+group=30</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1890</x>
+      <y>216</y>
+      <w>42</w>
+      <h>612</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=30</panel_attributes>
+    <additional_attributes>50.0;1000.0;10.0;1000.0;10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2340</x>
+      <y>300</y>
+      <w>210</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>MapLevelSelector
+--
+- app : MapController
+- currentMap : Map
+- layout : SpringLayout
+- zoomOutButton : JButton
+- mapLevel : JLabel
+- mapName : JTextField
+--
++ MapLevelSelector(MapController, Map) : Constructor
++ update() : void
+layer=1
+group=31</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2016</x>
+      <y>354</y>
+      <w>576</w>
+      <h>444</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;720.0;150.0;720.0;150.0;400.0;940.0;400.0;940.0;10.0;890.0;10.0</additional_attributes>
   </element>
 </diagram>

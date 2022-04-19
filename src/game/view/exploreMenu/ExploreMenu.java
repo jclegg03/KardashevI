@@ -29,6 +29,10 @@ public class ExploreMenu extends JDialog
 		setupFrame();
 	}
 	
+	/**
+	 * Helper method. Sets the visible and functional aspects of this dialog.
+	 * @author Jay Clegg
+	 */
 	public void setupFrame()
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

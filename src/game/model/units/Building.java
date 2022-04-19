@@ -5,6 +5,11 @@ import java.io.Serializable;
 import game.model.resources.Resource;
 import game.model.resources.Tech;
 
+/**
+ * The model for buildings in the game.
+ * @author Jay Clegg
+ *
+ */
 public class Building implements Serializable, Describable, Requires
 {
 	private String name;

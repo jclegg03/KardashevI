@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import game.controller.Controller;
+import game.controller.ResourceController;
 
 /**
  * The panel which contains the resources (JLabels).
@@ -15,14 +15,14 @@ import game.controller.Controller;
  */
 public class ResourcePanel extends JPanel
 {
-	private Controller app;
+	private ResourceController app;
 	
 	/**
 	 * Builds the resourcePanel.
 	 * @author Jay Clegg
-	 * @param app The Controller which the window will be able to call.
+	 * @param app The Controller this reports to.
 	 */
-	public ResourcePanel(Controller app)
+	public ResourcePanel(ResourceController app)
 	{
 		super();
 		this.app = app;
@@ -118,6 +118,10 @@ public class ResourcePanel extends JPanel
 		return null;
 	}
 	
+	/**
+	 * Updates the visual details of this panel.
+	 * @author Jay Clegg
+	 */
 	private void update()
 	{
 		this.setVisible(false);

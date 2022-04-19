@@ -5,10 +5,21 @@ import javax.swing.JDialog;
 import game.controller.Controller;
 import game.view.gameView.GameFrame;
 
+/**
+ * The in game menu's frame.
+ * @author Jay Clegg
+ *
+ */
 public class GameMenu extends JDialog
 {
 	private MenuContentPane contentPane;
 	
+	/**
+	 * Builds the frame for the menu.
+	 * @author Jay Clegg
+	 * @param app The controller this reports to.
+	 * @param parent The parent frame of the menu.
+	 */
 	public GameMenu(Controller app, GameFrame parent)
 	{
 		super(parent, true);
@@ -17,6 +28,10 @@ public class GameMenu extends JDialog
 		setupFrame();
 	}
 	
+	/**
+	 * Helper method. Adjusts the visible and functional components of this frame.
+	 * @author Jay Clegg
+	 */
 	private void setupFrame()
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

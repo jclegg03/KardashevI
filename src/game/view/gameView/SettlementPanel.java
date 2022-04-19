@@ -12,6 +12,11 @@ import game.controller.SettlementController;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The panel that holds all a empires settlements.
+ * @author Jay Clegg
+ *
+ */
 public class SettlementPanel extends MainPanel
 {
 	private SettlementController app;
@@ -21,7 +26,12 @@ public class SettlementPanel extends MainPanel
 	private JPanel settlementList;
 	private JLabel title;
 	private int settlementCount;
-		
+	
+	/**
+	 * Builds the settlement panel.
+	 * @author Jay Clegg
+	 * @param app The controller this reports to.
+	 */
 	public SettlementPanel(SettlementController app)
 	{
 		super();
@@ -67,12 +77,21 @@ public class SettlementPanel extends MainPanel
 		layout.putConstraint(SpringLayout.SOUTH, settlementListHolder, 0, SpringLayout.SOUTH, this);
 	}
 	
+	/**
+	 * Updates the graphics of this panel.
+	 * @author Jay Clegg
+	 */
 	private void update()
 	{
 		this.setVisible(false);
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Adds a settlement with the specified name to the panel.
+	 * @author Jay Clegg
+	 * @param name The name of the settlement.
+	 */
 	public void addSettlement(String name)
 	{
 		JButton settlement = new JButton(name);
@@ -87,6 +106,12 @@ public class SettlementPanel extends MainPanel
 		return this.settlementCount;
 	}
 	
+	/**
+	 * Removes the settlement with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the settlement being removed.
+	 * @throws NullPointerExeception If the specified settlement isn't found.
+	 */
 	public void removeSettlement(String name)
 	{
 		try
@@ -96,10 +121,17 @@ public class SettlementPanel extends MainPanel
 		}
 		catch(NullPointerException nullSettlement)
 		{
-			System.out.println("No such settlement");
+			throw new NullPointerException("No such settlement");
 		}
 	}
 	
+	/**
+	 * Sets the name of a settlement.
+	 * @author Jay Clegg
+	 * @param name The old name of the settlement.
+	 * @param newName The new name of the settlement.
+	 * @throws NullPointerException If the settlement isn't found.
+	 */
 	public void setSettlement(String name, String newName)
 	{
 		JButton settlement = getSettlement(name);
@@ -110,7 +142,7 @@ public class SettlementPanel extends MainPanel
 		}
 		else
 		{
-			System.out.println("No such settlement");
+			throw new NullPointerException("No such settlement");
 		}
 	}
 	

@@ -18,6 +18,12 @@ public class ExploreMenuPane extends MainPanel
 	private JButton cancelButton;
 	private ExploreMenu frame;
 	
+	/**
+	 * Builds this content pane.
+	 * @author Jay Clegg
+	 * @param app The controller this reports to.
+	 * @param frame The parent frame of this container.
+	 */
 	public ExploreMenuPane(MapController app, ExploreMenu frame)
 	{
 		super();

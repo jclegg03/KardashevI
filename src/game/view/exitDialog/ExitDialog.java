@@ -5,10 +5,21 @@ import javax.swing.JDialog;
 import game.controller.Controller;
 import gui.utility.JFrame;
 
+/**
+ * The visible dialog for exiting the game.
+ * @author Jay Clegg
+ *
+ */
 public class ExitDialog extends JDialog
 {
 	private ExitContentPane contentPane;
 	
+	/**
+	 * Builds the exit dialog.
+	 * @author Jay Clegg
+	 * @param app The controller this dialog reports to.
+	 * @param parent The parent frame of this dialog.
+	 */
 	public ExitDialog(Controller app, JFrame parent)
 	{
 		super(parent, true);
@@ -17,6 +28,10 @@ public class ExitDialog extends JDialog
 		setupDialog();
 	}
 	
+	/**
+	 * Sets the visible and functional aspects of this dialog.
+	 * @author Jay Clegg
+	 */
 	private void setupDialog()
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

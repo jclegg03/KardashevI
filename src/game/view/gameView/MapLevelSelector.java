@@ -13,6 +13,11 @@ import game.view.maps.Map;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The utility bar for changing map levels and renaming maps (The default names are boring!)
+ * @author Jay Clegg
+ *
+ */
 public class MapLevelSelector extends MainPanel
 {
 	private MapController app;
@@ -22,6 +27,12 @@ public class MapLevelSelector extends MainPanel
 	private JLabel mapLevel;
 	private JTextField mapName;
 	
+	/**
+	 * Builds the map level selector
+	 * @author Jay Clegg
+	 * @param app The controller this reports to.
+	 * @param currentMap The currently displayed map.
+	 */
 	public MapLevelSelector(MapController app, Map currentMap)
 	{
 		super();
@@ -97,6 +108,11 @@ public class MapLevelSelector extends MainPanel
 		});
 	}
 	
+	/**
+	 * Updates the visuals to match the details of the current map.
+	 * @author Jay Clegg
+	 * @param map The new current map.
+	 */
 	public void update(Map map)
 	{
 		this.currentMap = map;

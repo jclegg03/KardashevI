@@ -13,6 +13,11 @@ import game.controller.Controller;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The container for the pieces of the exit dialog.
+ * @author Jay Clegg
+ *
+ */
 public class ExitContentPane extends MainPanel
 {
 	private Controller app;
@@ -23,6 +28,12 @@ public class ExitContentPane extends MainPanel
 	private JButton confirmButton;
 	private JButton cancelButton;
 	
+	/**
+	 * Builds the container.
+	 * @author Jay Clegg
+	 * @param app The controller this reports to.
+	 * @param frame The frame which holds this.
+	 */
 	public ExitContentPane(Controller app, ExitDialog frame)
 	{
 		super();
@@ -49,6 +60,10 @@ public class ExitContentPane extends MainPanel
 		this.add(buttonPanel);
 	}
 	
+	/**
+	 * Helper method. Adds buttons to the button panel inside of this.
+	 * @author Jay Clegg
+	 */
 	private void setupButtonPanel()
 	{
 		buttonPanel.setLayout(new GridLayout(1, 0, 5, 0));

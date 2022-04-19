@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import game.model.resources.Resource;
 
+/**
+ * The model for jobs in an empire.
+ * @author Jay Clegg
+ *
+ */
 public class Job implements Serializable, Describable
 {
 	private String name;
@@ -13,6 +18,16 @@ public class Job implements Serializable, Describable
 	private int numAvailable;
 	private int numEmployed;
 	
+	/**
+	 * Builds a job.
+	 * @author Jay Clegg
+	 * @param name The name of the job.
+	 * @param description The job's description.
+	 * @param resourcesProduced The resources it produces.
+	 * @param resourcesConsumed The resources it consumes.
+	 * @param numAvailalbe The number of available jobs.
+	 * @param numEmployed The number of people employed by this job.
+	 */
 	public Job(String name, String description, Resource[] resourcesProduced, Resource[] resourcesConsumed,
 			int numAvailalbe, int numEmployed)
 	{
@@ -79,11 +94,21 @@ public class Job implements Serializable, Describable
 		this.numEmployed = numEmployed;
 	}
 	
+	/**
+	 * Adds the specified amount of jobs.
+	 * @author Jay Clegg
+	 * @param moreJobs
+	 */
 	public void addAvailalbe(int moreJobs)
 	{
 		numAvailable += moreJobs;
 	}
 	
+	/**
+	 * Adds the specified amount of employees.
+	 * @author Jay Clegg
+	 * @param moreWorkers
+	 */
 	public void addEmployed(int moreWorkers)
 	{
 		numEmployed += moreWorkers;

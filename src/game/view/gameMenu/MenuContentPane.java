@@ -12,6 +12,11 @@ import game.controller.WIP;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The container for all the components in the in game menu.
+ * @author Jay Clegg
+ *
+ */
 public class MenuContentPane extends MainPanel
 {
 	private Controller app;
@@ -25,6 +30,12 @@ public class MenuContentPane extends MainPanel
 	private JButton mainMenuButton;
 	private JButton quitButton;
 	
+	/**
+	 * Builds the container and its components.
+	 * @author Jay Clegg
+	 * @param app The controller this reports to.
+	 * @param frame The frame that contains this.
+	 */
 	public MenuContentPane(Controller app, GameMenu frame)
 	{
 		super();

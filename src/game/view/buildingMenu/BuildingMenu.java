@@ -15,6 +15,13 @@ public class BuildingMenu extends JDialog
 {
 	private MapController app;
 	
+	/**
+	 * Makes the building menu.
+	 * @author Jay Clegg
+	 * @param app The map controller this reports to.
+	 * @param parent The frame to which this belongs.
+	 * @param tile Used to display this on the location that was clicked.
+	 */
 	public BuildingMenu(MapController app, GameFrame parent, Tile tile)
 	{
 		super(parent, "Buildings");
@@ -24,6 +31,10 @@ public class BuildingMenu extends JDialog
 		setupFrame();
 	}
 	
+	/**
+	 * Helper method to build the frame. Sets the size, the look, and operations of this frame.
+	 * @author Jay Clegg
+	 */
 	private void setupFrame()
 	{
 		this.setResizable(false);

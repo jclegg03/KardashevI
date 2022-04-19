@@ -1,5 +1,10 @@
 package game.model.units;
 
+/**
+ * Classes which implement this can be described.
+ * @author Jay Clegg
+ *
+ */
 public interface Describable
 {
 	/**
