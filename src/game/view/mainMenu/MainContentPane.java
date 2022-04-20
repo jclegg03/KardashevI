@@ -13,6 +13,11 @@ import game.view.exitDialog.ExitDialog;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The content pane for the main menu.
+ * @author Jay Clegg
+ *
+ */
 public class MainContentPane extends MainPanel
 {
 	private Controller app;
@@ -24,6 +29,12 @@ public class MainContentPane extends MainPanel
 	private JButton settingsButton;
 	private JButton quitButton;
 	
+	/**
+	 * Builds the main menu.
+	 * @param app The controller this reports to.
+	 * @param frame The frame this panel is in.
+	 * @author Jay Clegg
+	 */
 	public MainContentPane(Controller app, MainMenu frame)
 	{
 		super();
@@ -50,6 +61,10 @@ public class MainContentPane extends MainPanel
 		this.setBackground(java.awt.Color.BLUE);
 	}
 	
+	/**
+	 * Sets the layout and adds buttons to the button panel.
+	 * @author Jay Clegg
+	 */
 	private void setupButtonPanel()
 	{
 		buttonPanel.setLayout(new GridLayout(1, 0, 20, 0));

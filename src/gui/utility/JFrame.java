@@ -4,10 +4,19 @@ import java.awt.Toolkit;
 
 import game.controller.Controller;
 
+/**
+ * The base class for JFrames used in this project.
+ * @author Jay Clegg
+ *
+ */
 public abstract class JFrame extends javax.swing.JFrame
 {
 	protected Controller app;
 	
+	/**
+	 * Builds the JFrame.
+	 * @param app The controller the frame reports to.
+	 */
 	public JFrame(Controller app)
 	{
 		super("Kardashev I");
@@ -16,6 +25,10 @@ public abstract class JFrame extends javax.swing.JFrame
 		setupFrame();
 	}
 	
+	/**
+	 * Sets the visible and back end of the frame up.
+	 * @author Jay Clegg
+	 */
 	private void setupFrame()
 	{
 //		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());

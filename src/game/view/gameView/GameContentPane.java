@@ -19,6 +19,11 @@ import game.view.maps.Map;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The content pane for the game.
+ * @author Jay Clegg
+ *
+ */
 public class GameContentPane extends MainPanel
 {
 	private Controller app;
@@ -33,8 +38,13 @@ public class GameContentPane extends MainPanel
 	private JButton menuButton;
 	private MapLevelSelector mapSelector;
 	
-	public GameContentPane(Controller app, SettlementController settlementController,
-			MapController mapController, GameFrame frame)
+	/**
+	 * Builds the content pane.
+	 * @param app The controller this class reports to.
+	 * @param frame The frame this class is displayed in.
+	 * @author Jay Clegg
+	 */
+	public GameContentPane(Controller app, GameFrame frame)
 	{
 		super();
 		this.app = app;
@@ -42,12 +52,12 @@ public class GameContentPane extends MainPanel
 		this.layout = new SpringLayout();
 		this.mapPanel = new JPanel();
 		this.map = app.getMapController().getCurrentMap();
-		this.resourcePanel = new ResourcePanel(app);
-		this.settlementPanel = new SettlementPanel(settlementController);
+		this.resourcePanel = new ResourcePanel(app.getResourceController());
+		this.settlementPanel = new SettlementPanel(app.getSettlementController());
 		this.utilityPanel = new JPanel();
 		this.researchButton = new JButton("Research");
 		this.menuButton = new JButton("Menu");
-		this.mapSelector = new MapLevelSelector(mapController, map);
+		this.mapSelector = new MapLevelSelector(app.getMapController(), map);
 		
 		setupPanel();
 		setupLayout();
@@ -161,6 +171,10 @@ public class GameContentPane extends MainPanel
 		mapSelector.update(map);
 	}
 	
+	/**
+	 * Adds the map selector to the panel.
+	 * @author Jay Clegg
+	 */
 	private void addMapSelector()
 	{
 		this.add(mapSelector);

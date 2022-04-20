@@ -6,7 +6,7 @@ import game.controller.MapController;
 import gui.utility.JButton;
 
 /**
- * Each map tile is made of one of these.
+ * A visual representation of a map tile. A piece on the map's grid.
  * @author Jay Clegg
  *
  */

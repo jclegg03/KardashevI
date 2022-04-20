@@ -14,6 +14,11 @@ import game.controller.Controller;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
 
+/**
+ * The content pane for the new game dialog.
+ * @author Jay Clegg
+ *
+ */
 public class NewContentPane extends MainPanel
 {
 	private Controller app;
@@ -24,6 +29,11 @@ public class NewContentPane extends MainPanel
 	private JButton cancelButton;
 	private JButton confirmButton;
 	
+	/**
+	 * Builds the new game content pane.
+	 * @param app The controller this reports to.
+	 * @param frame The frame that contains this.
+	 */
 	public NewContentPane(Controller app, NewGameDialog frame)
 	{
 		super();

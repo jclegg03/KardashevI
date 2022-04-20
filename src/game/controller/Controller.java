@@ -122,7 +122,7 @@ public class Controller implements Serializable
 		
 		dialog.dispose();
 		frame.dispose();
-		frame = new GameFrame(this, settlementController, mapController);
+		frame = new GameFrame(this);
 		
 		settlementController.finishSetup();
 	}
@@ -149,5 +149,15 @@ public class Controller implements Serializable
 	public MapController getMapController()
 	{
 		return this.mapController;
+	}
+	
+	public ResourceController getResourceController()
+	{
+		return this.resourceController;
+	}
+	
+	public SettlementController getSettlementController()
+	{
+		return this.settlementController;
 	}
 }

@@ -21,14 +21,18 @@ public class GameFrame extends JFrame
 	 * @param settlementController
 	 * @param mapController
 	 */
-	public GameFrame(Controller app, SettlementController settlementController, MapController mapController)
+	public GameFrame(Controller app)
 	{
 		super(app);
-		this.contentPane = new GameContentPane(app, settlementController, mapController, this);
+		this.contentPane = new GameContentPane(app, this);
 		
 		setupFrame();
 	}
 	
+	/**
+	 * Sets up visual and background details of the frame.
+	 * @author Jay Clegg
+	 */
 	private void setupFrame()
 	{
 		this.setContentPane(contentPane);
