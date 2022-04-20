@@ -47,7 +47,8 @@ public class MapController implements Serializable
 	private Tile selectedTile;
 	private Map currentMap;
 	private RegionalMap previousMap;
-	private int currentRow, currentCol;
+	private int currentRow;
+	private int currentCol;
 	private BiomeList biomes;
 	
 	/**
@@ -690,6 +691,7 @@ public class MapController implements Serializable
 	public void exploreTile()
 	{
 		selectedTile.setIsExplored(true);
+		
 		exploreMenu.dispose();
 	}
 	
