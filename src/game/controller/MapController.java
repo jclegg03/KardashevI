@@ -577,7 +577,46 @@ public class MapController implements Serializable
 			}
 			else
 			{
-				exploreMenu();
+				ArrayList<Tile> adjecentTiles = new ArrayList<Tile>();
+				int[] location = selectedTile.getMapLocation();
+				boolean canExplore = false;
+				
+				//right
+				if(currentMap.getTile(location[0] + 1, location[1]) != null)
+				{
+					adjecentTiles.add(currentMap.getTile(location[0] + 1, location[1]));
+				}
+				
+				//left
+				if(currentMap.getTile(location[0] - 1, location[1]) != null)
+				{
+					adjecentTiles.add(currentMap.getTile(location[0] - 1, location[1]));
+				}
+				
+				//up
+				if(currentMap.getTile(location[0], location[1] - 1) != null)
+				{
+					adjecentTiles.add(currentMap.getTile(location[0], location[1] - 1));
+				}
+				
+				//down
+				if(currentMap.getTile(location[0], location[1] + 1) != null)
+				{
+					adjecentTiles.add(currentMap.getTile(location[0], location[1] + 1));
+				}
+				
+				for(Tile adjecent : adjecentTiles)
+				{
+					if(adjecent.getIsExplored())
+					{
+						canExplore = true;
+					}
+				}
+				
+				if(canExplore)
+				{
+					exploreMenu();
+				}
 			}
 		}
 		else
@@ -683,6 +722,10 @@ public class MapController implements Serializable
 		{
 			EmpireRegionalMap map = (EmpireRegionalMap) selectMapModel(currentMap);
 			map.setValue(location[0], location[1], EXPLORED);
+		}
+		else
+		{
+			worldMapModel.setValue(location[0], location[1], EXPLORED);
 		}
 	}
 	
