@@ -520,25 +520,6 @@ public class MapController implements Serializable
 		map.setValue(row, col, newValue);
 	}
 	
-//	public int getValue(String level, String id, int row, int col)
-//	{
-//		int value = 0;
-//		EmpireMap map = null;
-//		
-//		if(level.equals(WORLD))
-//		{
-//			map = worldMapModel;
-//		}
-//		else
-//		{
-//			map = selectMapModel(level, row, col);
-//		}
-//		
-//		value = map.getValue(row, col);
-//		
-//		return value;
-//	}
-	
 	/**
 	 * Allows for the selection of a specific map's model based on the values in the HashMaps.
 	 * @author Jay Clegg
@@ -685,12 +666,24 @@ public class MapController implements Serializable
 	 * Explores a tile.
 	 * @author Jay Clegg
 	 */
-	@WIP
-	//Needs to adjust the map model values too.
 	public void exploreTile()
 	{
 		selectedTile.setIsExplored(true);
 		exploreMenu.dispose();
+		
+		String level = currentMap.getLevel();
+		int[] location = selectedTile.getMapLocation();
+		
+		if(level.equals(LOCAL))
+		{
+			EmpireLocalMap map = (EmpireLocalMap) selectMapModel(currentMap);
+			map.setValue(location[0], location[1], EXPLORED);
+		}
+		else if(level.equals(REGIONAL))
+		{
+			EmpireRegionalMap map = (EmpireRegionalMap) selectMapModel(currentMap);
+			map.setValue(location[0], location[1], EXPLORED);
+		}
 	}
 	
 	/**
