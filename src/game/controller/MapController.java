@@ -161,6 +161,7 @@ public class MapController implements Serializable
 		setValue(worldMapModel, row, col, EXPLORED);
 		currentRow = row;
 		currentCol = col;
+		selectedTile = worldMapView.getTile(row, col);
 	}
 	
 	/**
@@ -269,7 +270,7 @@ public class MapController implements Serializable
 		regionalMap.setValue(row, col, EXPLORED);
 		currentRow = row;
 		currentCol = col;
-		
+		selectedTile = regionExplored.getTile(row, col);
 	}
 	
 	/**
@@ -494,6 +495,7 @@ public class MapController implements Serializable
 		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
 		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
 		
+		previousMap = region;
 		currentMap = mapView;
 	}
 	
@@ -577,54 +579,66 @@ public class MapController implements Serializable
 			}
 			else
 			{
-				ArrayList<Tile> adjecentTiles = new ArrayList<Tile>();
-				int[] location = selectedTile.getMapLocation();
-				boolean canExplore = false;
-				
-				//right
-				if(currentMap.getTile(location[0] + 1, location[1]) != null)
-				{
-					adjecentTiles.add(currentMap.getTile(location[0] + 1, location[1]));
-				}
-				
-				//left
-				if(currentMap.getTile(location[0] - 1, location[1]) != null)
-				{
-					adjecentTiles.add(currentMap.getTile(location[0] - 1, location[1]));
-				}
-				
-				//up
-				if(currentMap.getTile(location[0], location[1] - 1) != null)
-				{
-					adjecentTiles.add(currentMap.getTile(location[0], location[1] - 1));
-				}
-				
-				//down
-				if(currentMap.getTile(location[0], location[1] + 1) != null)
-				{
-					adjecentTiles.add(currentMap.getTile(location[0], location[1] + 1));
-				}
-				
-				for(Tile adjecent : adjecentTiles)
-				{
-					if(adjecent.getIsExplored())
-					{
-						canExplore = true;
-					}
-				}
-				
-				if(canExplore)
-				{
-					exploreMenu();
-				}
+				checkExplore();
 			}
 		}
 		else
 		{
-			goTo(currentMap.getLevel(), tile.getMapLocation()[0], tile.getMapLocation()[1]);
+			if(selectedTile.getIsExplored())
+			{
+				goTo(currentMap.getLevel(), tile.getMapLocation()[0], tile.getMapLocation()[1]);
+			}
+			else
+			{
+				checkExplore();
+			}
 		}
 		
 		app.returnFocus();
+	}
+	
+	private void checkExplore()
+	{
+		ArrayList<Tile> adjecentTiles = new ArrayList<Tile>();
+		int[] location = selectedTile.getMapLocation();
+		boolean canExplore = false;
+		
+		//right
+		if(currentMap.getTile(location[0] + 1, location[1]) != null)
+		{
+			adjecentTiles.add(currentMap.getTile(location[0] + 1, location[1]));
+		}
+		
+		//left
+		if(currentMap.getTile(location[0] - 1, location[1]) != null)
+		{
+			adjecentTiles.add(currentMap.getTile(location[0] - 1, location[1]));
+		}
+		
+		//up
+		if(currentMap.getTile(location[0], location[1] - 1) != null)
+		{
+			adjecentTiles.add(currentMap.getTile(location[0], location[1] - 1));
+		}
+		
+		//down
+		if(currentMap.getTile(location[0], location[1] + 1) != null)
+		{
+			adjecentTiles.add(currentMap.getTile(location[0], location[1] + 1));
+		}
+		
+		for(Tile adjecent : adjecentTiles)
+		{
+			if(adjecent.getIsExplored())
+			{
+				canExplore = true;
+			}
+		}
+		
+		if(canExplore)
+		{
+			exploreMenu();
+		}
 	}
 	
 	/**
