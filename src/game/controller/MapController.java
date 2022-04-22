@@ -469,8 +469,8 @@ public class MapController implements Serializable
 		}
 		LocalMap mapView = localMaps.get(exploredMap);
 		
-		int randRow = (int) (Math.random() * exploredMap.getBiomes2D().length - 1) + 1;
-		int randCol = (int) (Math.random() * exploredMap.getBiomes2D()[0].length - 1) + 1;
+		int randRow = (int) (Math.random() * (exploredMap.getBiomes2D().length - 2)) + 1;
+		int randCol = (int) (Math.random() * (exploredMap.getBiomes2D()[0].length - 2)) + 1;
 		
 		exploredMap.setValue(randRow, randCol, EXPLORED);
 		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
