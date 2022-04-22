@@ -24,8 +24,8 @@ public class ExploreMenu extends JDialog
 	{
 		super(parent);
 		this.contentPane = new ExploreMenuPane(app, this);
-		this.setLocationRelativeTo(tile);
 		
+		this.setLocation(parent.getMousePosition(true));
 		setupFrame();
 	}
 	
