@@ -712,7 +712,7 @@ public class MapController implements Serializable
 		{
 			exploreMenu.dispose();
 		}
-		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame(), selectedTile);
+		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame());
 	}
 	
 	/**
