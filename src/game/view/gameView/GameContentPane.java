@@ -122,7 +122,7 @@ public class GameContentPane extends MainPanel
 			@Override
 			public void keyPressed(KeyEvent key)
 			{
-				
+				addMapSelector();
 			}
 
 			@Override
