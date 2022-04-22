@@ -1,5 +1,7 @@
 package game.view.exploreMenu;
 
+import java.awt.Point;
+
 import javax.swing.JDialog;
 
 import game.controller.MapController;
@@ -20,12 +22,20 @@ public class ExploreMenu extends JDialog
 	 * @param app The controller for the game.
 	 * @param parent The window that owns the dialog.
 	 */
-	public ExploreMenu(MapController app, GameFrame parent, Tile tile)
+	public ExploreMenu(MapController app, GameFrame parent)
 	{
 		super(parent);
 		this.contentPane = new ExploreMenuPane(app, this);
 		
-		this.setLocation(parent.getMousePosition(true));
+		Point position = parent.getMousePosition(true);
+		position.x -= 100;
+		position.y -= 50;
+		if(position.y >= parent.getSize().height - 100)
+		{
+			position.y -= 100;
+		}
+		this.setLocation(position);
+		
 		setupFrame();
 	}
 	
