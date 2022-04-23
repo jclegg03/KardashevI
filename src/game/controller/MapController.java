@@ -571,6 +571,8 @@ public class MapController implements Serializable
 	{
 		this.selectedTile = tile;
 		
+		clearMenus();
+		
 		if(currentMap.getLevel().equals(LOCAL))
 		{
 			if(tile.getIsExplored())
@@ -595,6 +597,19 @@ public class MapController implements Serializable
 		}
 		
 		app.returnFocus();
+	}
+	
+	private void clearMenus()
+	{
+		if(buildingMenu != null)
+		{
+			buildingMenu.dispose();
+		}
+		
+		if(exploreMenu != null)
+		{
+			exploreMenu.dispose();
+		}
 	}
 	
 	private void checkExplore()
@@ -695,10 +710,6 @@ public class MapController implements Serializable
 	 */
 	private void buildingMenu()
 	{
-		if(buildingMenu != null)
-		{
-			buildingMenu.dispose();
-		}
 		buildingMenu = new BuildingMenu(this, (GameFrame) app.getFrame(), selectedTile);
 	}
 	
@@ -708,10 +719,6 @@ public class MapController implements Serializable
 	 */
 	private void exploreMenu()
 	{
-		if(exploreMenu != null)
-		{
-			exploreMenu.dispose();
-		}
 		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame());
 	}
 	
@@ -731,6 +738,11 @@ public class MapController implements Serializable
 		{
 			EmpireLocalMap map = (EmpireLocalMap) selectMapModel(currentMap);
 			map.setValue(location[0], location[1], EXPLORED);
+			
+			if(currentMap.getIsFullyExplored())
+			{
+				app.addMapSelector();
+			}
 		}
 		else if(level.equals(REGIONAL))
 		{
