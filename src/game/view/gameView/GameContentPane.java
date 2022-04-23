@@ -119,7 +119,6 @@ public class GameContentPane extends MainPanel
 			@Override
 			public void keyPressed(KeyEvent key)
 			{
-				addMapSelector();
 			}
 
 			@Override
@@ -172,7 +171,7 @@ public class GameContentPane extends MainPanel
 	 * Adds the map selector to the panel.
 	 * @author Jay Clegg
 	 */
-	private void addMapSelector()
+	public void addMapSelector()
 	{
 		this.add(mapSelector);
 		layout.putConstraint(SpringLayout.SOUTH, mapPanel, -110, SpringLayout.SOUTH, this);
