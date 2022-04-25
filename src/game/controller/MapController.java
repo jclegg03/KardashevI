@@ -498,6 +498,14 @@ public class MapController implements Serializable
 		
 		previousMap = region;
 		currentMap = mapView;
+		
+		//Displays entire first map.
+		for(Tile tile : currentMap.getTiles())
+		{
+			tile.setIsExplored(true);
+		}
+		
+		currentMap.getTile(randRow, randCol).setIsExplored(false);
 	}
 	
 	/**
@@ -674,7 +682,7 @@ public class MapController implements Serializable
 			}
 			if(west != null && location[1] == 0)
 			{
-				canExplore = east.getTile(location[0], size - 1).getIsExplored();
+				canExplore = west.getTile(location[0], size - 1).getIsExplored();
 			}
 		}
 		
@@ -702,13 +710,11 @@ public class MapController implements Serializable
 			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", localMaps.get(parent.getMap(row, col - 1)));
 		}
 		else
-		{
-			EmpireWorldMap parent = (EmpireWorldMap) previous;
-			
-			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", regionalMaps.get(parent.getMap(row - 1, col)));
-			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", regionalMaps.get(parent.getMap(row + 1, col)));
-			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", regionalMaps.get(parent.getMap(row, col + 1)));
-			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", regionalMaps.get(parent.getMap(row, col - 1)));
+		{	
+			if(worldMapModel.getMap(row - 1, col) != null) adjecentMaps.put("north", regionalMaps.get(worldMapModel.getMap(row - 1, col)));
+			if(worldMapModel.getMap(row + 1, col) != null) adjecentMaps.put("south", regionalMaps.get(worldMapModel.getMap(row + 1, col)));
+			if(worldMapModel.getMap(row, col + 1) != null) adjecentMaps.put("east", regionalMaps.get(worldMapModel.getMap(row, col + 1)));
+			if(worldMapModel.getMap(row, col - 1) != null) adjecentMaps.put("west", regionalMaps.get(worldMapModel.getMap(row, col - 1)));
 		}
 		
 		return adjecentMaps;
@@ -748,6 +754,8 @@ public class MapController implements Serializable
 	 */
 	public void zoomMapOut()
 	{
+		clearMenus();
+		
 		if(currentMap.getLevel().equals(LOCAL))
 		{
 			currentMap = previousMap;
