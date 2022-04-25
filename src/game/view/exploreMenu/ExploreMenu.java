@@ -1,5 +1,6 @@
 package game.view.exploreMenu;
 
+import java.awt.MouseInfo;
 import java.awt.Point;
 
 import javax.swing.JDialog;
@@ -27,7 +28,7 @@ public class ExploreMenu extends JDialog
 		super(parent);
 		this.contentPane = new ExploreMenuPane(app, this);
 		
-		Point position = parent.getMousePosition(true);
+		Point position = MouseInfo.getPointerInfo().getLocation();
 		position.x -= 100;
 		position.y -= 50;
 		if(position.y >= parent.getSize().height - 100)
