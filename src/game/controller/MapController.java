@@ -653,7 +653,29 @@ public class MapController implements Serializable
 		
 		if(! canExplore && ! currentMap.getLevel().equals(WORLD))
 		{
+			HashMap<String, Map> adjecentMaps = getAdjecentMaps();
+			Map north = adjecentMaps.get("north");
+			Map south = adjecentMaps.get("south");
+			Map east = adjecentMaps.get("east");
+			Map west = adjecentMaps.get("west");
+			int size = north.getTiles2D().length;
 			
+			if(north != null && location[0] == 0)
+			{
+				canExplore = north.getTile(size - 1, location[1]).getIsExplored();
+			}
+			if(south != null && location[0] == size - 1)
+			{
+				canExplore = south.getTile(0, location[1]).getIsExplored();
+			}
+			if(east != null && location[1] == size - 1)
+			{
+				canExplore = east.getTile(location[0], 0).getIsExplored();
+			}
+			if(west != null && location[1] == 0)
+			{
+				canExplore = east.getTile(location[0], size - 1).getIsExplored();
+			}
 		}
 		
 		if(canExplore)
