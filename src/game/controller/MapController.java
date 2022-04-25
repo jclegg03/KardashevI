@@ -671,15 +671,15 @@ public class MapController implements Serializable
 			{
 				canExplore = north.getTile(size - 1, location[1]).getIsExplored();
 			}
-			if(south != null && location[0] == size - 1)
+			if(south != null && location[0] == size - 1 && ! canExplore)
 			{
 				canExplore = south.getTile(0, location[1]).getIsExplored();
 			}
-			if(east != null && location[1] == size - 1)
+			if(east != null && location[1] == size - 1 && ! canExplore)
 			{
 				canExplore = east.getTile(location[0], 0).getIsExplored();
 			}
-			if(west != null && location[1] == 0)
+			if(west != null && location[1] == 0 && ! canExplore)
 			{
 				canExplore = west.getTile(location[0], size - 1).getIsExplored();
 			}
