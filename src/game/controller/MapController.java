@@ -48,7 +48,8 @@ public class MapController implements Serializable
 	private Tile selectedTile;
 	private Map currentMap;
 	private RegionalMap previousMap;
-	private int currentRow, currentCol;
+	private int currentRow;
+	private int currentCol;
 	private BiomeList biomes;
 	
 	/**
@@ -269,8 +270,6 @@ public class MapController implements Serializable
 		int col = locations.get(random)[1];
 		regionExplored.getTile(row, col).setIsExplored(true);
 		regionalMap.setValue(row, col, EXPLORED);
-		currentRow = row;
-		currentCol = col;
 		selectedTile = regionExplored.getTile(row, col);
 	}
 	
