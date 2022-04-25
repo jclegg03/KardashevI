@@ -665,7 +665,7 @@ public class MapController implements Serializable
 			Map south = adjecentMaps.get("south");
 			Map east = adjecentMaps.get("east");
 			Map west = adjecentMaps.get("west");
-			int size = north.getTiles2D().length;
+			int size = currentMap.getTiles2D().length;
 			
 			if(north != null && location[0] == 0)
 			{
