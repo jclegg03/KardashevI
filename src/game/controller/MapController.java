@@ -662,14 +662,31 @@ public class MapController implements Serializable
 		}
 	}
 	
-	private ArrayList<Map> adjecentMaps()
+	private HashMap<String, Map> getAdjecentMaps()
 	{
-		EmpireMap model = selectMapModel(currentMap);
-		ArrayList<Map> adjecentMaps = new ArrayList<Map>();
+		EmpireMap current = selectMapModel(currentMap);
+		EmpireMap previous = selectMapModel(previousMap);
+		HashMap<String, Map> adjecentMaps = new HashMap<String, Map>();
+		int row = current.getLocation().getRow();
+		int col = current.getLocation().getCol();
 		
 		if(currentMap.getLevel().equals(LOCAL))
 		{
+			EmpireRegionalMap parent = (EmpireRegionalMap) previous;
 			
+			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", localMaps.get(parent.getMap(row - 1, col)));
+			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", localMaps.get(parent.getMap(row + 1, col)));
+			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", localMaps.get(parent.getMap(row, col + 1)));
+			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("east", localMaps.get(parent.getMap(row, col - 1)));
+		}
+		else
+		{
+			EmpireWorldMap parent = (EmpireWorldMap) previous;
+			
+			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", regionalMaps.get(parent.getMap(row - 1, col)));
+			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", regionalMaps.get(parent.getMap(row + 1, col)));
+			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", regionalMaps.get(parent.getMap(row, col + 1)));
+			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("east", regionalMaps.get(parent.getMap(row, col - 1)));
 		}
 		
 		return adjecentMaps;
