@@ -699,7 +699,7 @@ public class MapController implements Serializable
 			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", localMaps.get(parent.getMap(row - 1, col)));
 			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", localMaps.get(parent.getMap(row + 1, col)));
 			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", localMaps.get(parent.getMap(row, col + 1)));
-			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("east", localMaps.get(parent.getMap(row, col - 1)));
+			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", localMaps.get(parent.getMap(row, col - 1)));
 		}
 		else
 		{
@@ -708,7 +708,7 @@ public class MapController implements Serializable
 			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", regionalMaps.get(parent.getMap(row - 1, col)));
 			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", regionalMaps.get(parent.getMap(row + 1, col)));
 			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", regionalMaps.get(parent.getMap(row, col + 1)));
-			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("east", regionalMaps.get(parent.getMap(row, col - 1)));
+			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", regionalMaps.get(parent.getMap(row, col - 1)));
 		}
 		
 		return adjecentMaps;
