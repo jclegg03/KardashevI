@@ -20,9 +20,9 @@ public class EmpireLocalMap extends EmpireMap
 	 * @param empire The empire which owns this map.
 	 * @param parentBiome The biome used to generate this maps biomes.
 	 */
-	public EmpireLocalMap(Empire empire, RegionalBiome parentBiome)
+	public EmpireLocalMap(Empire empire, RegionalBiome parentBiome, Location location)
 	{
-		super(10, 10, empire);
+		super(10, 10, empire, location);
 		this.name = "Local Map " + count;
 		this.parentBiome = parentBiome.copy();
 	}

@@ -13,6 +13,7 @@ import game.model.maps.EmpireLocalMap;
 import game.model.maps.EmpireMap;
 import game.model.maps.EmpireRegionalMap;
 import game.model.maps.EmpireWorldMap;
+import game.model.maps.Location;
 import game.view.buildingMenu.BuildingMenu;
 import game.view.exploreMenu.ExploreMenu;
 import game.view.gameView.GameContentPane;
@@ -101,7 +102,7 @@ public class MapController implements Serializable
 				biomes[row][col] = current.copy();
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current));
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col)));
 				worldMapModel.setValue(row, col, UNEXPLORED);
 			}
 		}
@@ -222,7 +223,7 @@ public class MapController implements Serializable
 						
 						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current));
+						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col)));
 						currentMap.setValue(row, col, UNEXPLORED);
 					}
 				}
@@ -650,10 +651,28 @@ public class MapController implements Serializable
 			}
 		}
 		
+		if(! canExplore && ! currentMap.getLevel().equals(WORLD))
+		{
+			
+		}
+		
 		if(canExplore)
 		{
 			exploreMenu();
 		}
+	}
+	
+	private ArrayList<Map> adjecentMaps()
+	{
+		EmpireMap model = selectMapModel(currentMap);
+		ArrayList<Map> adjecentMaps = new ArrayList<Map>();
+		
+		if(currentMap.getLevel().equals(LOCAL))
+		{
+			
+		}
+		
+		return adjecentMaps;
 	}
 	
 	/**

@@ -18,6 +18,7 @@ public abstract class EmpireMap implements Serializable
 	protected Biome[][] biomes;
 	protected Building[][] buildings;
 	protected Empire empire;
+	protected Location location;
 	
 	/**
 	 * Builds a map with the specified amounts of rows and columns, with an empire owning it.
@@ -26,12 +27,13 @@ public abstract class EmpireMap implements Serializable
 	 * @param empire The empire that owns this map.
 	 * @author Jay Clegg
 	 */
-	public EmpireMap(int rows, int cols, Empire empire)
+	public EmpireMap(int rows, int cols, Empire empire, Location location)
 	{
 		this.map = new int[rows][cols];
 		this.empire = empire;
 		this.biomes = new Biome[rows][cols];
 		this.buildings = new Building[rows][cols];
+		this.location = location;
 	}
 	
 	public void setValue(int row, int col, int value)
@@ -72,5 +74,10 @@ public abstract class EmpireMap implements Serializable
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	
+	public Location getLocation()
+	{
+		return this.location;
 	}
 }

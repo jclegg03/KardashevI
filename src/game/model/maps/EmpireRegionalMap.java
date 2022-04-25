@@ -23,9 +23,9 @@ public class EmpireRegionalMap extends EmpireMap
 	 * @param empire The owner of the map.
 	 * @param parentBiome The biome used to generate this maps biomes.
 	 */
-	public EmpireRegionalMap(Empire empire, WorldBiome parentBiome)
+	public EmpireRegionalMap(Empire empire, WorldBiome parentBiome, Location location)
 	{
-		super(5, 5, empire);
+		super(5, 5, empire, location);
 		this.localMaps = new HashMap<Location, EmpireLocalMap>();
 		this.parentBiome = parentBiome.copy();
 		this.name = "Regional Map " + count;
