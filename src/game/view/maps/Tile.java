@@ -13,7 +13,6 @@ import gui.utility.JButton;
 public class Tile extends JButton
 {	
 	private MapController app;
-	private boolean isExplored;
 	private int[] location;
 	private String level;
 	
@@ -28,7 +27,6 @@ public class Tile extends JButton
 	{
 		super();
 		this.app = app;
-		this.isExplored = false;
 		this.location = new int[2];
 		this.level = level;
 		location[0] = row;
@@ -39,27 +37,6 @@ public class Tile extends JButton
 		this.setBackground(Color.BLUE);
 		
 		this.addActionListener(click -> app.tileOptions(this));
-	}
-
-	/**
-	 * Sets this tile to be explored and updates the opaque value.
-	 * @author Jay Clegg
-	 * @param isExplored Whether or not the tile has been explored.
-	 */
-	public void setIsExplored(boolean isExplored)
-	{
-		this.isExplored = isExplored;
-		this.setOpaque(isExplored);
-	}
-	
-	/**
-	 * Gets the value of isExplored.
-	 * @author Jay Clegg
-	 * @return Whether or not the tile has been explored.
-	 */
-	public boolean getIsExplored()
-	{
-		return this.isExplored;
 	}
 	
 	public int[] getMapLocation()
