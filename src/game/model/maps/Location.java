@@ -9,6 +9,7 @@ public class Location
 {
 	private int row;
 	private int col;
+	private int state;
 	
 	/**
 	 * Builds a location key.

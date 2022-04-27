@@ -80,4 +80,14 @@ public abstract class EmpireMap implements Serializable
 	{
 		return this.location;
 	}
+	
+	public int getRows()
+	{
+		return this.map.length;
+	}
+	
+	public int getCols()
+	{
+		return this.map[0].length;
+	}
 }
