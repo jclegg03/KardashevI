@@ -105,7 +105,7 @@ public class MapController implements Serializable
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
 				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col)));
-				worldMapModel.setValue(row, col, UNEXPLORED);
+				worldMapModel.setState(row, col, UNEXPLORED);
 			}
 		}
 		
@@ -226,7 +226,7 @@ public class MapController implements Serializable
 						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
 						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col)));
-						currentMap.setValue(row, col, UNEXPLORED);
+						currentMap.setState(row, col, UNEXPLORED);
 					}
 				}
 				
@@ -270,7 +270,7 @@ public class MapController implements Serializable
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
 		regionExplored.getTile(row, col).setIsExplored(true);
-		regionalMap.setValue(row, col, EXPLORED);
+		regionalMap.setState(row, col, EXPLORED);
 		selectedTile = regionExplored.getTile(row, col);
 	}
 	
@@ -431,7 +431,7 @@ public class MapController implements Serializable
 						
 						localBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.setValue(row, col, UNEXPLORED);
+						currentMap.setState(row, col, UNEXPLORED);
 					}
 				}
 				localMaps.put(currentMap, mapView);
@@ -473,25 +473,25 @@ public class MapController implements Serializable
 		int randRow = (int) (Math.random() * (exploredMap.getBiomes2D().length - 2)) + 1;
 		int randCol = (int) (Math.random() * (exploredMap.getBiomes2D()[0].length - 2)) + 1;
 		
-		exploredMap.setValue(randRow, randCol, EXPLORED);
-		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
-		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
 		mapView.getTile(randRow, randCol).setIsExplored(true);
 		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
 		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
 		
 		randCol--;
-		exploredMap.setValue(randRow, randCol, EXPLORED);
-		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
-		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
 		mapView.getTile(randRow, randCol).setIsExplored(true);
 		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
 		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
 		
 		randCol += 2;
-		exploredMap.setValue(randRow, randCol, EXPLORED);
-		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
-		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
 		mapView.getTile(randRow, randCol).setIsExplored(true);
 		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
 		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
@@ -530,7 +530,7 @@ public class MapController implements Serializable
 	 */
 	public void setValue(EmpireMap map, int row, int col, int newValue)
 	{
-		map.setValue(row, col, newValue);
+		map.setState(row, col, newValue);
 	}
 	
 	/**
@@ -824,7 +824,7 @@ public class MapController implements Serializable
 		if(level.equals(LOCAL))
 		{
 			EmpireLocalMap map = (EmpireLocalMap) selectMapModel(currentMap);
-			map.setValue(location[0], location[1], EXPLORED);
+			map.setState(location[0], location[1], EXPLORED);
 			
 			if(currentMap.getIsFullyExplored())
 			{
@@ -834,11 +834,11 @@ public class MapController implements Serializable
 		else if(level.equals(REGIONAL))
 		{
 			EmpireRegionalMap map = (EmpireRegionalMap) selectMapModel(currentMap);
-			map.setValue(location[0], location[1], EXPLORED);
+			map.setState(location[0], location[1], EXPLORED);
 		}
 		else
 		{
-			worldMapModel.setValue(location[0], location[1], EXPLORED);
+			worldMapModel.setState(location[0], location[1], EXPLORED);
 		}
 	}
 	
