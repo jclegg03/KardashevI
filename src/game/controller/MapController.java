@@ -101,10 +101,8 @@ public class MapController implements Serializable
 				else if(number < 87) current = this.biomes.getWorldBiome("Mountainous");
 				else current = this.biomes.getWorldBiome("Fertile");
 				
-				biomes[row][col] = current.copy();
-				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col)));
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col, current, REGIONAL)));
 				worldMapModel.setState(row, col, UNEXPLORED);
 			}
 		}
@@ -223,9 +221,8 @@ public class MapController implements Serializable
 						
 						else current = null;
 						
-						mapBiomes[row][col] = current.copy();
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col)));
+						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col, current, LOCAL)));
 						currentMap.setState(row, col, UNEXPLORED);
 					}
 				}
