@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import game.model.biomes.Biome;
@@ -498,13 +499,15 @@ public class MapController implements Serializable
 		previousMap = region;
 		currentMap = mapView;
 		
-		//Displays entire first map.
-		for(Tile tile : currentMap.getTiles())
-		{
-			tile.setIsExplored(true);
-		}
+		//Displays entire first map. Except 1 tile.
+//		for(Tile tile : currentMap.getTiles())
+//		{
+//			tile.setIsExplored(true);
+//		}
+//		
+//		currentMap.getTile(randRow, randCol).setIsExplored(false);
 		
-		currentMap.getTile(randRow, randCol).setIsExplored(false);
+		mapView.getTile(randRow, randCol).setIsExplored(false);
 	}
 	
 	/**
@@ -762,8 +765,27 @@ public class MapController implements Serializable
 		}
 		else
 		{
-			currentMap = worldMapView;
-			updateUI();
+			boolean canZoom = false;
+			
+			if(currentMap.getLevel().equals(REGIONAL))
+			{
+				EmpireRegionalMap currentModel = (EmpireRegionalMap) selectMapModel(currentMap);
+				int numMaps = currentModel.getLocalMaps().size();
+				int mapsExplored = 0;
+				
+				for(EmpireLocalMap localMap : currentModel.getLocalMaps())
+				{
+					if(localMaps.get(localMap).getIsFullyExplored()) mapsExplored++;
+				}
+				
+				canZoom = mapsExplored == numMaps;
+			}
+			
+			if(canZoom)
+			{
+				currentMap = worldMapView;
+				updateUI();
+			}
 		}
 		
 		app.returnFocus();

@@ -43,7 +43,6 @@ public abstract class Map extends JPanel
 			for(int col = 0; col < cols; col++)
 			{
 				Tile tile = new Tile(app, row, col, level);
-				
 				this.add(tile);
 			}
 		}
