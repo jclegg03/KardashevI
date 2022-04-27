@@ -13,7 +13,8 @@ import gui.utility.JButton;
 public class Tile extends JButton
 {	
 	private MapController app;
-	private int[] location;
+	private int row;
+	private int col;
 	private String level;
 	
 	/**
@@ -27,10 +28,9 @@ public class Tile extends JButton
 	{
 		super();
 		this.app = app;
-		this.location = new int[2];
 		this.level = level;
-		location[0] = row;
-		location[1] = col;
+		this.row = row;
+		this.col = col;
 		this.setName("row" + row + "col" + col);
 		this.setBorder(null);
 		this.setOpaque(false);
@@ -39,9 +39,14 @@ public class Tile extends JButton
 		this.addActionListener(click -> app.tileOptions(this));
 	}
 	
-	public int[] getMapLocation()
+	public int getRow()
 	{
-		return this.location;
+		return row;
+	}
+	
+	public int getCol()
+	{
+		return col;
 	}
 	
 	public String getLevel()

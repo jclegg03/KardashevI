@@ -128,4 +128,9 @@ public abstract class EmpireMap implements Serializable
 		
 		return map;
 	}
+	
+	public Location getLocation(int row, int col)
+	{
+		return map[row][col];
+	}
 }
