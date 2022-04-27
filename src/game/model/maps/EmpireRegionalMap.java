@@ -48,7 +48,7 @@ public class EmpireRegionalMap extends EmpireMap
 	{
 		for(Location location : localMaps.keySet())
 		{
-			if(location.equals(new Location(row, col)))
+			if(location.equals(new Location(row, col, null, null)))
 			{
 				return location;
 			}
@@ -66,7 +66,7 @@ public class EmpireRegionalMap extends EmpireMap
 	 */
 	public void addMap(int row, int col, EmpireLocalMap map)
 	{
-		Location key = new Location(row, col);
+		Location key = new Location(row, col, null, null);
 		localMaps.put(key, map);
 	}
 	
