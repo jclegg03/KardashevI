@@ -14,11 +14,9 @@ import game.model.units.Building;
 public abstract class EmpireMap implements Serializable
 {
 	protected String name;
-	protected int[][] map;
-	protected Biome[][] biomes;
-	protected Building[][] buildings;
 	protected Empire empire;
 	protected Location location;
+	protected Location[][] map;
 	
 	/**
 	 * Builds a map with the specified amounts of rows and columns, with an empire owning it.
@@ -29,16 +27,14 @@ public abstract class EmpireMap implements Serializable
 	 */
 	public EmpireMap(int rows, int cols, Empire empire, Location location)
 	{
-		this.map = new int[rows][cols];
+		this.map = new Location[rows][cols];
 		this.empire = empire;
-		this.biomes = new Biome[rows][cols];
-		this.buildings = new Building[rows][cols];
 		this.location = location;
 	}
 	
-	public void setValue(int row, int col, int value)
+	public void setState(int row, int col, int state)
 	{
-		map[row][col] = value;
+		map[row][col].setState(state);;
 	}
 	
 	public Empire getEmpire()
@@ -46,24 +42,34 @@ public abstract class EmpireMap implements Serializable
 		return this.empire;
 	}
 	
-	public int getValue(int row, int col)
+	public int getState(int row, int col)
 	{
-		return map[row][col];
+		return map[row][col].getState();
 	}
 	
 	public Biome getBiome(int row, int col)
 	{
-		return biomes[row][col];
+		return map[row][col].getBiome();
 	}
 	
 	public Building getBuilding(int row, int col)
 	{
-		return buildings[row][col];
+		return map[row][col].getBuilding();
 	}
 	
 	public Biome[][] getBiomes2D()
 	{
-		return this.biomes;
+		Biome[][] biomes = new Biome[map.length][map[0].length];
+		
+		for(int row = 0; row < biomes.length; row++)
+		{
+			for(int col = 0; col < biomes[row].length; col++)
+			{
+				biomes[row][col] = map[row][col].getBiome();
+			}
+		}
+		
+		return biomes;
 	}
 	
 	public String getName()
