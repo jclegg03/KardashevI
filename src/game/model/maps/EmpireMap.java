@@ -34,7 +34,12 @@ public abstract class EmpireMap implements Serializable
 	
 	public void setState(int row, int col, int state)
 	{
-		map[row][col].setState(state);;
+		map[row][col].setState(state);
+	}
+	
+	public void assignLocation(Location location)
+	{
+		map[location.getRow()][location.getCol()] = location;
 	}
 	
 	public Empire getEmpire()
