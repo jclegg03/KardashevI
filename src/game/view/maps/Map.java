@@ -19,7 +19,6 @@ public abstract class Map extends JPanel
 	protected MapController app;
 	protected GridLayout layout;
 	protected String level;
-	protected boolean isFullyExplored;
 	
 	/**
 	 * Builds the visible map.
@@ -34,7 +33,6 @@ public abstract class Map extends JPanel
 		this.app = app;
 		this.layout = new GridLayout(rows, cols, 1, 1);
 		this.level = level;
-		this.isFullyExplored = false;
 		
 		this.setLayout(layout);
 		
@@ -68,24 +66,6 @@ public abstract class Map extends JPanel
 		}
 		
 		return null;
-	}
-	
-	/**
-	 * Sets a tile to explored.
-	 * @author Jay Clegg
-	 * @param row The row of the desired tile.
-	 * @param col The column of the desired tile.
-	 */
-	public void exploreTile(int row, int col)
-	{
-		try
-		{
-			getTile(row, col).setIsExplored(true);
-		}
-		catch(NullPointerException doesNotExist)
-		{
-			System.out.println("tile doesn't exist");
-		}
 	}
 	
 	public String getLevel()
@@ -145,28 +125,5 @@ public abstract class Map extends JPanel
 			}
 		}
 		return linearTiles;
-	}
-	
-	public boolean getIsFullyExplored()
-	{
-		if(! isFullyExplored)
-		{
-			updateIsFullyExplored();
-		}
-		
-		return isFullyExplored;
-	}
-	
-	private void updateIsFullyExplored()
-	{
-		for(Tile tile : getTiles())
-		{
-			if(! tile.getIsExplored())
-			{
-				return;
-			}
-		}
-		
-		isFullyExplored = true;
 	}
 }
