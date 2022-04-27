@@ -1,6 +1,7 @@
 package game.model.maps;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import game.model.biomes.Biome;
 import game.model.empire.Empire;
@@ -100,5 +101,31 @@ public abstract class EmpireMap implements Serializable
 	public int getCols()
 	{
 		return this.map[0].length;
+	}
+	
+	public Location[][] getLocations2D()
+	{
+		return map;
+	}
+	
+	public Location[] getLocations()
+	{
+		Location[] map = new Location[this.map.length * this.map[0].length];
+		ArrayList<Location> temp = new ArrayList<Location>();
+		
+		for(Location[] locations : this.map)
+		{
+			for(Location location : locations)
+			{
+				temp.add(location);
+			}
+		}
+		
+		for(int index = 0; index < temp.size(); index++)
+		{
+			map[index] = temp.get(index);
+		}
+		
+		return map;
 	}
 }
