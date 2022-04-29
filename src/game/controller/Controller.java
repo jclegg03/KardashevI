@@ -128,6 +128,7 @@ public class Controller implements Serializable
 		frame = new GameFrame(this);
 		
 		settlementController.finishSetup();
+		mapController.updateUI();
 	}
 	
 	/**

@@ -159,7 +159,7 @@ public class MapController implements Serializable
 		int random = (int) (Math.random() * locations.size());
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
-		worldMapView.getTile(row, col).setOpaque(true);	
+//		worldMapView.getTile(row, col).setOpaque(true);
 		setValue(worldMapModel, row, col, EXPLORED);
 		currentRow = row;
 		currentCol = col;
@@ -268,7 +268,7 @@ public class MapController implements Serializable
 		int random = (int) (Math.random() * locations.size());
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
-		regionExplored.getTile(row, col).setOpaque(true);
+//		regionExplored.getTile(row, col).setOpaque(true);
 		regionalMap.setState(row, col, EXPLORED);
 		selectedTile = regionExplored.getTile(row, col);
 	}
@@ -472,25 +472,25 @@ public class MapController implements Serializable
 		exploredMap.setState(randRow, randCol, EXPLORED);
 		exploredMap.setState(randRow - 1, randCol, EXPLORED);
 		exploredMap.setState(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setOpaque(true);
-		mapView.getTile(randRow + 1, randCol).setOpaque(true);
-		mapView.getTile(randRow - 1, randCol).setOpaque(true);
+//		mapView.getTile(randRow, randCol).setOpaque(true);
+//		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+//		mapView.getTile(randRow - 1, randCol).setOpaque(true);
 		
 		randCol--;
 		exploredMap.setState(randRow, randCol, EXPLORED);
 		exploredMap.setState(randRow - 1, randCol, EXPLORED);
 		exploredMap.setState(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setOpaque(true);
-		mapView.getTile(randRow + 1, randCol).setOpaque(true);
-		mapView.getTile(randRow - 1, randCol).setOpaque(true);
+//		mapView.getTile(randRow, randCol).setOpaque(true);
+//		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+//		mapView.getTile(randRow - 1, randCol).setOpaque(true);
 		
 		randCol += 2;
 		exploredMap.setState(randRow, randCol, EXPLORED);
 		exploredMap.setState(randRow - 1, randCol, EXPLORED);
 		exploredMap.setState(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setOpaque(true);
-		mapView.getTile(randRow + 1, randCol).setOpaque(true);
-		mapView.getTile(randRow - 1, randCol).setOpaque(true);
+//		mapView.getTile(randRow, randCol).setOpaque(true);
+//		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+//		mapView.getTile(randRow - 1, randCol).setOpaque(true);
 		
 		previousMap = regionalMaps.get(region);
 		currentMap = mapView;
@@ -565,6 +565,11 @@ public class MapController implements Serializable
 	 */
 	public void updateUI()
 	{
+		for(Tile tile : currentMap.getTiles())
+		{
+			if(selectMapModel(currentMap).getState(tile.getRow(), tile.getCol()) == EXPLORED) tile.setOpaque(true);
+			else if(selectMapModel(currentMap).getState(tile.getRow(), tile.getCol()) == UNEXPLORED) tile.setOpaque(false);
+		}
 		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
 	}
 	
@@ -604,6 +609,8 @@ public class MapController implements Serializable
 				checkExplore();
 			}
 		}
+		
+		updateUI();
 		
 		app.returnFocus();
 	}
@@ -663,28 +670,28 @@ public class MapController implements Serializable
 		
 		if(! canExplore && ! currentMap.getLevel().equals(WORLD))
 		{
-			HashMap<String, Map> adjecentMaps = getAdjecentMaps();
-			Map north = adjecentMaps.get("north");
-			Map south = adjecentMaps.get("south");
-			Map east = adjecentMaps.get("east");
-			Map west = adjecentMaps.get("west");
+			HashMap<String, EmpireMap> adjecentMaps = getAdjecentMaps();
+			EmpireMap north = adjecentMaps.get("north");
+			EmpireMap south = adjecentMaps.get("south");
+			EmpireMap east = adjecentMaps.get("east");
+			EmpireMap west = adjecentMaps.get("west");
 			int size = currentMap.getTiles2D().length;
 			
 			if(north != null && row == 0)
 			{
-				canExplore = north.getTile(size - 1, col).getIsExplored();
+				canExplore = north.getState(size - 1, col) == EXPLORED;
 			}
 			if(south != null && row == size - 1 && ! canExplore)
 			{
-				canExplore = south.getTile(0, col).getIsExplored();
+				canExplore = south.getState(size - 1, col) == EXPLORED;
 			}
 			if(east != null && col == size - 1 && ! canExplore)
 			{
-				canExplore = east.getTile(row, 0).getState() == EXPLORED;
+				canExplore = east.getState(row, 0) == EXPLORED;
 			}
 			if(west != null && col == 0 && ! canExplore)
 			{
-				canExplore = west.getTile(row, size - 1).getIsExplored();
+				canExplore = west.getState(row, size - 1) == EXPLORED;
 			}
 		}
 		
@@ -694,11 +701,11 @@ public class MapController implements Serializable
 		}
 	}
 	
-	private HashMap<String, Map> getAdjecentMaps()
+	private HashMap<String, EmpireMap> getAdjecentMaps()
 	{
 		EmpireMap current = selectMapModel(currentMap);
 		EmpireMap previous = selectMapModel(previousMap);
-		HashMap<String, Map> adjecentMaps = new HashMap<String, Map>();
+		HashMap<String, EmpireMap> adjecentMaps = new HashMap<String, EmpireMap>();
 		int row = current.getLocation().getRow();
 		int col = current.getLocation().getCol();
 		
@@ -706,17 +713,17 @@ public class MapController implements Serializable
 		{
 			EmpireRegionalMap parent = (EmpireRegionalMap) previous;
 			
-			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", localMaps.get(parent.getMap(row - 1, col)));
-			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", localMaps.get(parent.getMap(row + 1, col)));
-			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", localMaps.get(parent.getMap(row, col + 1)));
-			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", localMaps.get(parent.getMap(row, col - 1)));
+			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", parent.getMap(row - 1, col));
+			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", parent.getMap(row + 1, col));
+			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", parent.getMap(row, col + 1));
+			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", parent.getMap(row, col - 1));
 		}
 		else
 		{	
-			if(worldMapModel.getMap(row - 1, col) != null) adjecentMaps.put("north", regionalMaps.get(worldMapModel.getMap(row - 1, col)));
-			if(worldMapModel.getMap(row + 1, col) != null) adjecentMaps.put("south", regionalMaps.get(worldMapModel.getMap(row + 1, col)));
-			if(worldMapModel.getMap(row, col + 1) != null) adjecentMaps.put("east", regionalMaps.get(worldMapModel.getMap(row, col + 1)));
-			if(worldMapModel.getMap(row, col - 1) != null) adjecentMaps.put("west", regionalMaps.get(worldMapModel.getMap(row, col - 1)));
+			if(worldMapModel.getMap(row - 1, col) != null) adjecentMaps.put("north", worldMapModel.getMap(row - 1, col));
+			if(worldMapModel.getMap(row + 1, col) != null) adjecentMaps.put("south", worldMapModel.getMap(row + 1, col));
+			if(worldMapModel.getMap(row, col + 1) != null) adjecentMaps.put("east", worldMapModel.getMap(row, col + 1));
+			if(worldMapModel.getMap(row, col - 1) != null) adjecentMaps.put("west", worldMapModel.getMap(row, col - 1));
 		}
 		
 		return adjecentMaps;
@@ -775,7 +782,7 @@ public class MapController implements Serializable
 				
 				for(EmpireLocalMap localMap : currentModel.getLocalMaps())
 				{
-					if(localMaps.get(localMap).getIsFullyExplored()) mapsExplored++;
+					if(localMap.getIsFullyExplored()) mapsExplored++;
 				}
 				
 				canZoom = mapsExplored == numMaps;
@@ -815,18 +822,19 @@ public class MapController implements Serializable
 	 */
 	public void exploreTile()
 	{
-		selectedTile.setIsExplored(true);
+//		selectedTile.setOpaque(true);
 		exploreMenu.dispose();
 		
 		String level = currentMap.getLevel();
-		int[] location = selectedTile.getMapLocation();
+		int row = selectedTile.getRow();
+		int col = selectedTile.getCol();
 		
 		if(level.equals(LOCAL))
 		{
 			EmpireLocalMap map = (EmpireLocalMap) selectMapModel(currentMap);
-			map.setState(location[0], location[1], EXPLORED);
+			map.setState(row, col, EXPLORED);
 			
-			if(currentMap.getIsFullyExplored())
+			if(selectMapModel(currentMap).getIsFullyExplored())
 			{
 				app.addMapSelector();
 			}
@@ -834,11 +842,11 @@ public class MapController implements Serializable
 		else if(level.equals(REGIONAL))
 		{
 			EmpireRegionalMap map = (EmpireRegionalMap) selectMapModel(currentMap);
-			map.setState(location[0], location[1], EXPLORED);
+			map.setState(row, col, EXPLORED);
 		}
 		else
 		{
-			worldMapModel.setState(location[0], location[1], EXPLORED);
+			worldMapModel.setState(row, col, EXPLORED);
 		}
 	}
 	

@@ -3,6 +3,7 @@ package game.model.maps;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import game.controller.MapController;
 import game.model.biomes.Biome;
 import game.model.empire.Empire;
 import game.model.units.Building;
@@ -132,5 +133,18 @@ public abstract class EmpireMap implements Serializable
 	public Location getLocation(int row, int col)
 	{
 		return map[row][col];
+	}
+	
+	public boolean getIsFullyExplored()
+	{
+		for(Location[] locations : map)
+		{
+			for(Location location : locations)
+			{
+				if(location.getState() == MapController.UNEXPLORED) return false;
+			}
+		}
+		
+		return true;
 	}
 }
