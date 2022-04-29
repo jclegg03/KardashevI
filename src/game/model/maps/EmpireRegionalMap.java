@@ -3,6 +3,7 @@ package game.model.maps;
 import java.util.Collection;
 import java.util.HashMap;
 
+import game.controller.MapController;
 import game.model.biomes.WorldBiome;
 import game.model.empire.Empire;
 
@@ -25,7 +26,7 @@ public class EmpireRegionalMap extends EmpireMap
 	 */
 	public EmpireRegionalMap(Empire empire, WorldBiome parentBiome, Location location)
 	{
-		super(5, 5, empire, location);
+		super(5, 5, empire, location, MapController.REGIONAL);
 		this.localMaps = new HashMap<Location, EmpireLocalMap>();
 		this.parentBiome = parentBiome.copy();
 		this.name = "Regional Map " + count;

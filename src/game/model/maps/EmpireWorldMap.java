@@ -23,7 +23,7 @@ public class EmpireWorldMap extends EmpireMap
 	 */
 	public EmpireWorldMap(Empire empire)
 	{
-		super(20, 20, empire, new Location(0, 0, null, null));
+		super(20, 20, empire, new Location(0, 0, null, null), MapController.WORLD);
 		this.regionalMaps = new HashMap<Location, EmpireRegionalMap>();
 		this.name = "World Map";
 	}
