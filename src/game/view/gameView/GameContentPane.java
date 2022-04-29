@@ -1,6 +1,5 @@
 package game.view.gameView;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,8 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import game.controller.Controller;
-import game.controller.MapController;
-import game.controller.SettlementController;
 import game.view.gameMenu.GameMenu;
 import game.view.maps.Map;
 import gui.utility.JButton;
@@ -122,7 +119,6 @@ public class GameContentPane extends MainPanel
 			@Override
 			public void keyPressed(KeyEvent key)
 			{
-				
 			}
 
 			@Override
@@ -175,7 +171,7 @@ public class GameContentPane extends MainPanel
 	 * Adds the map selector to the panel.
 	 * @author Jay Clegg
 	 */
-	private void addMapSelector()
+	public void addMapSelector()
 	{
 		this.add(mapSelector);
 		layout.putConstraint(SpringLayout.SOUTH, mapPanel, -110, SpringLayout.SOUTH, this);

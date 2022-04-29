@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import game.model.biomes.Biome;
@@ -13,6 +14,7 @@ import game.model.maps.EmpireLocalMap;
 import game.model.maps.EmpireMap;
 import game.model.maps.EmpireRegionalMap;
 import game.model.maps.EmpireWorldMap;
+import game.model.maps.Location;
 import game.view.buildingMenu.BuildingMenu;
 import game.view.exploreMenu.ExploreMenu;
 import game.view.gameView.GameContentPane;
@@ -64,6 +66,24 @@ public class MapController implements Serializable
 		this.biomes = new BiomeList();
 		
 		buildMaps();
+		
+		//This fully explores the starting map minus one square.
+		//The one square has to not be explored so the map selector will appear.
+//		fullyExplore(selectMapModel(currentMap));
+//		currentMap.getTile(0, 0).setOpaque(false);
+//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+		
+		//This fully explores the starting region minus one square.
+		//The one square has to not be explored so the map selector will appear.
+//		fullyExplore(selectMapModel(previousMap));
+//		currentMap.getTile(0, 0).setOpaque(false);
+//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+		
+		//This fully explores the world minus one square.
+		//The one square has to not be explored so the map selector will appear.
+//		fullyExplore(worldMapModel);
+//		currentMap.getTile(0, 0).setOpaque(false);
+//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
 	}
 	
 	/**
@@ -85,10 +105,10 @@ public class MapController implements Serializable
 	{
 		worldMapModel = new EmpireWorldMap(app.getEmpire());
 		worldMapView = new WorldMap(this);
-		Biome[][] biomes = worldMapModel.getBiomes2D();
-		for(int row = 0; row < biomes.length; row++)
+		
+		for(int row = 0; row < worldMapModel.getRows(); row++)
 		{
-			for(int col = 0; col < biomes[row].length; col++)
+			for(int col = 0; col < worldMapModel.getCols(); col++)
 			{
 				WorldBiome current;
 				int number = randomNumber();
@@ -99,11 +119,11 @@ public class MapController implements Serializable
 				else if(number < 87) current = this.biomes.getWorldBiome("Mountainous");
 				else current = this.biomes.getWorldBiome("Fertile");
 				
-				biomes[row][col] = current.copy();
+				worldMapModel.assignLocation(new Location(row, col, current.copy(), null));
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current));
-				worldMapModel.setValue(row, col, UNEXPLORED);
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col, null, null)));
+				worldMapModel.setState(row, col, UNEXPLORED);
 			}
 		}
 		
@@ -158,10 +178,11 @@ public class MapController implements Serializable
 		int random = (int) (Math.random() * locations.size());
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
-		worldMapView.getTile(row, col).setIsExplored(true);	
+		worldMapView.getTile(row, col).setOpaque(true);	
 		setValue(worldMapModel, row, col, EXPLORED);
 		currentRow = row;
 		currentCol = col;
+		selectedTile = worldMapView.getTile(row, col);
 	}
 	
 	/**
@@ -174,10 +195,10 @@ public class MapController implements Serializable
 			{
 				RegionalMap mapView = new RegionalMap(this);
 				WorldBiome currentBiome = currentMap.getParentBiome();
-				Biome[][] mapBiomes = currentMap.getBiomes2D();
-				for(int row = 0; row < mapBiomes.length; row++)
+				
+				for(int row = 0; row < currentMap.getRows(); row++)
 				{
-					for(int col = 0; col < mapBiomes[row].length; col++)
+					for(int col = 0; col < currentMap.getCols(); col++)
 					{
 						int random = randomNumber();
 						RegionalBiome current;
@@ -220,10 +241,10 @@ public class MapController implements Serializable
 						
 						else current = null;
 						
-						mapBiomes[row][col] = current.copy();
+						currentMap.assignLocation(new Location(row, col, current.copy(), null));
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current));
-						currentMap.setValue(row, col, UNEXPLORED);
+						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col, null, null)));
+						currentMap.setState(row, col, UNEXPLORED);
 					}
 				}
 				
@@ -241,11 +262,11 @@ public class MapController implements Serializable
 	{
 		ArrayList<int[]> locations = new ArrayList<int[]>();
 		RegionalMap regionExplored = null;
-		for(Tile tile : worldMapView.getTiles())
+		for(Location location : worldMapModel.getLocations())
 		{
-			if(tile.getIsExplored())
+			if(location.getState() == EXPLORED)
 			{
-				regionExplored = regionalMaps.get(worldMapModel.getMap(tile.getMapLocation()[0], tile.getMapLocation()[1]));
+				regionExplored = regionalMaps.get(worldMapModel.getMap(location.getRow(), location.getCol()));
 			}
 		}
 		
@@ -266,11 +287,9 @@ public class MapController implements Serializable
 		int random = (int) (Math.random() * locations.size());
 		int row = locations.get(random)[0];
 		int col = locations.get(random)[1];
-		regionExplored.getTile(row, col).setIsExplored(true);
-		regionalMap.setValue(row, col, EXPLORED);
-		currentRow = row;
-		currentCol = col;
-		
+		regionExplored.getTile(row, col).setOpaque(true);
+		regionalMap.setState(row, col, EXPLORED);
+		selectedTile = regionExplored.getTile(row, col);
 	}
 	
 	/**
@@ -284,12 +303,12 @@ public class MapController implements Serializable
 			for(EmpireLocalMap currentMap : region.getLocalMaps())
 			{
 				RegionalBiome currentBiome = currentMap.getParentBiome();
-				Biome[][] localBiomes = currentMap.getBiomes2D();
+				
 				LocalMap mapView = new LocalMap(this);
 				
-				for(int row = 0; row < localBiomes.length; row++)
+				for(int row = 0; row < currentMap.getRows(); row++)
 				{
-					for(int col = 0; col < localBiomes[row].length; col++)
+					for(int col = 0; col < currentMap.getCols(); col++)
 					{
 						LocalBiome current;
 						int random = randomNumber();
@@ -428,9 +447,9 @@ public class MapController implements Serializable
 						
 						else current = null;
 						
-						localBiomes[row][col] = current.copy();
+						currentMap.assignLocation(new Location(row, col, current.copy(), null));
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.setValue(row, col, UNEXPLORED);
+						currentMap.setState(row, col, UNEXPLORED);
 					}
 				}
 				localMaps.put(currentMap, mapView);
@@ -446,55 +465,55 @@ public class MapController implements Serializable
 	 */
 	private void exploreRandomLocation()
 	{
-		RegionalMap region = null;
-		for(Tile tile : worldMapView.getTiles())
+		EmpireRegionalMap region = null;
+		for(Location location : worldMapModel.getLocations())
 		{
-			if(tile.getIsExplored())
+			if(location.getState() == EXPLORED)
 			{
-				region = regionalMaps.get(worldMapModel.getMap(tile.getMapLocation()[0], tile.getMapLocation()[1]));
+				region = worldMapModel.getMap(location.getRow(), location.getCol());
 			}
 		}
 		EmpireLocalMap exploredMap = null;
 		
-		for(int row = 0; row < region.getTiles2D().length; row++)
+		for(int row = 0; row < region.getRows(); row++)
 		{
-			for(int col = 0; col < region.getTiles2D()[0].length; col++)
+			for(int col = 0; col < region.getCols(); col++)
 			{
-				if(region.getTile(row, col).getIsExplored())
+				if(region.getState(row, col) == EXPLORED)
 				{
-					EmpireRegionalMap regionMapModel = (EmpireRegionalMap) selectMapModel(region);
-					exploredMap = regionMapModel.getMap(row, col);
+					exploredMap = region.getMap(row, col);
 				}
 			}
 		}
 		LocalMap mapView = localMaps.get(exploredMap);
 		
-		int randRow = (int) (Math.random() * exploredMap.getBiomes2D().length - 1) + 1;
-		int randCol = (int) (Math.random() * exploredMap.getBiomes2D()[0].length - 1) + 1;
+		int randRow = (int) (Math.random() * (exploredMap.getBiomes2D().length - 2)) + 1;
+		int randCol = (int) (Math.random() * (exploredMap.getBiomes2D()[0].length - 2)) + 1;
 		
-		exploredMap.setValue(randRow, randCol, EXPLORED);
-		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
-		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setIsExplored(true);
-		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
-		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setOpaque(true);
+		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+		mapView.getTile(randRow - 1, randCol).setOpaque(true);
 		
 		randCol--;
-		exploredMap.setValue(randRow, randCol, EXPLORED);
-		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
-		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setIsExplored(true);
-		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
-		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setOpaque(true);
+		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+		mapView.getTile(randRow - 1, randCol).setOpaque(true);
 		
 		randCol += 2;
-		exploredMap.setValue(randRow, randCol, EXPLORED);
-		exploredMap.setValue(randRow - 1, randCol, EXPLORED);
-		exploredMap.setValue(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setIsExplored(true);
-		mapView.getTile(randRow + 1, randCol).setIsExplored(true);
-		mapView.getTile(randRow - 1, randCol).setIsExplored(true);
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setOpaque(true);
+		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+		mapView.getTile(randRow - 1, randCol).setOpaque(true);
 		
+		previousMap = regionalMaps.get(region);
 		currentMap = mapView;
 	}
 	
@@ -518,27 +537,8 @@ public class MapController implements Serializable
 	 */
 	public void setValue(EmpireMap map, int row, int col, int newValue)
 	{
-		map.setValue(row, col, newValue);
+		map.setState(row, col, newValue);
 	}
-	
-//	public int getValue(String level, String id, int row, int col)
-//	{
-//		int value = 0;
-//		EmpireMap map = null;
-//		
-//		if(level.equals(WORLD))
-//		{
-//			map = worldMapModel;
-//		}
-//		else
-//		{
-//			map = selectMapModel(level, row, col);
-//		}
-//		
-//		value = map.getValue(row, col);
-//		
-//		return value;
-//	}
 	
 	/**
 	 * Allows for the selection of a specific map's model based on the values in the HashMaps.
@@ -589,23 +589,148 @@ public class MapController implements Serializable
 	{
 		this.selectedTile = tile;
 		
+		EmpireMap map = selectMapModel(currentMap);
+		
+		clearMenus();
+		
 		if(currentMap.getLevel().equals(LOCAL))
 		{
-			if(tile.getIsExplored())
+			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
 			{
 				buildingMenu();
 			}
 			else
 			{
-				exploreMenu();
+				checkExplore();
 			}
 		}
 		else
 		{
-			goTo(currentMap.getLevel(), tile.getMapLocation()[0], tile.getMapLocation()[1]);
+			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
+			{
+				goTo(currentMap.getLevel(), tile.getRow(), tile.getCol());
+			}
+			else
+			{
+				checkExplore();
+			}
 		}
 		
 		app.returnFocus();
+	}
+	
+	private void clearMenus()
+	{
+		if(buildingMenu != null)
+		{
+			buildingMenu.dispose();
+		}
+		
+		if(exploreMenu != null)
+		{
+			exploreMenu.dispose();
+		}
+	}
+	
+	private void checkExplore()
+	{
+		ArrayList<Location> adjecentTiles = new ArrayList<Location>();
+		int row = selectedTile.getRow();
+		int col = selectedTile.getCol();
+		EmpireMap map = selectMapModel(currentMap);
+		boolean canExplore = false;
+		
+		//right
+		if(currentMap.getTile(row + 1, col) != null)
+		{
+			adjecentTiles.add(map.getLocation(row + 1, col));
+		}
+		
+		//left
+		if(currentMap.getTile(row - 1, col) != null)
+		{
+			adjecentTiles.add(map.getLocation(row - 1, col));
+		}
+		
+		//up
+		if(currentMap.getTile(row, col - 1) != null)
+		{
+			adjecentTiles.add(map.getLocation(row, col - 1));
+		}
+		
+		//down
+		if(currentMap.getTile(row, col + 1) != null)
+		{
+			adjecentTiles.add(map.getLocation(row, col + 1));
+		}
+		
+		for(Location adjecent : adjecentTiles)
+		{
+			if(adjecent.getState() == EXPLORED)
+			{
+				canExplore = true;
+			}
+		}
+		
+		if(! canExplore && ! currentMap.getLevel().equals(WORLD))
+		{
+			HashMap<String, EmpireMap> adjecentMaps = getAdjecentMaps();
+			EmpireMap north = adjecentMaps.get("north");
+			EmpireMap south = adjecentMaps.get("south");
+			EmpireMap east = adjecentMaps.get("east");
+			EmpireMap west = adjecentMaps.get("west");
+			int size = currentMap.getTiles2D().length;
+			
+			if(north != null && row == 0)
+			{
+				canExplore = north.getState(size - 1, col) == EXPLORED;
+			}
+			if(south != null && row == size - 1 && ! canExplore)
+			{
+				canExplore = south.getState(0, col) == EXPLORED;
+			}
+			if(east != null && col == size - 1 && ! canExplore)
+			{
+				canExplore = east.getState(row, 0) == EXPLORED;
+			}
+			if(west != null && col == 0 && ! canExplore)
+			{
+				canExplore = west.getState(row, size - 1) == EXPLORED;
+			}
+		}
+		
+		if(canExplore)
+		{
+			exploreMenu();
+		}
+	}
+	
+	private HashMap<String, EmpireMap> getAdjecentMaps()
+	{
+		EmpireMap current = selectMapModel(currentMap);
+		EmpireMap previous = selectMapModel(previousMap);
+		HashMap<String, EmpireMap> adjecentMaps = new HashMap<String, EmpireMap>();
+		int row = current.getLocation().getRow();
+		int col = current.getLocation().getCol();
+		
+		if(currentMap.getLevel().equals(LOCAL))
+		{
+			EmpireRegionalMap parent = (EmpireRegionalMap) previous;
+			
+			if(parent.getMap(row - 1, col) != null) adjecentMaps.put("north", parent.getMap(row - 1, col));
+			if(parent.getMap(row + 1, col) != null) adjecentMaps.put("south", parent.getMap(row + 1, col));
+			if(parent.getMap(row, col + 1) != null) adjecentMaps.put("east", parent.getMap(row, col + 1));
+			if(parent.getMap(row, col - 1) != null) adjecentMaps.put("west", parent.getMap(row, col - 1));
+		}
+		else
+		{	
+			if(worldMapModel.getMap(row - 1, col) != null) adjecentMaps.put("north", worldMapModel.getMap(row - 1, col));
+			if(worldMapModel.getMap(row + 1, col) != null) adjecentMaps.put("south", worldMapModel.getMap(row + 1, col));
+			if(worldMapModel.getMap(row, col + 1) != null) adjecentMaps.put("east", worldMapModel.getMap(row, col + 1));
+			if(worldMapModel.getMap(row, col - 1) != null) adjecentMaps.put("west", worldMapModel.getMap(row, col - 1));
+		}
+		
+		return adjecentMaps;
 	}
 	
 	/**
@@ -642,6 +767,8 @@ public class MapController implements Serializable
 	 */
 	public void zoomMapOut()
 	{
+		clearMenus();
+		
 		if(currentMap.getLevel().equals(LOCAL))
 		{
 			currentMap = previousMap;
@@ -649,8 +776,27 @@ public class MapController implements Serializable
 		}
 		else
 		{
-			currentMap = worldMapView;
-			updateUI();
+			boolean canZoom = false;
+			
+			if(currentMap.getLevel().equals(REGIONAL))
+			{
+				EmpireRegionalMap currentModel = (EmpireRegionalMap) selectMapModel(currentMap);
+				int numMaps = currentModel.getLocalMaps().size();
+				int mapsExplored = 0;
+				
+				for(EmpireLocalMap localMap : currentModel.getLocalMaps())
+				{
+					if(localMap.getIsFullyExplored()) mapsExplored++;
+				}
+				
+				canZoom = mapsExplored == numMaps;
+			}
+			
+			if(canZoom)
+			{
+				currentMap = worldMapView;
+				updateUI();
+			}
 		}
 		
 		app.returnFocus();
@@ -662,10 +808,6 @@ public class MapController implements Serializable
 	 */
 	private void buildingMenu()
 	{
-		if(buildingMenu != null)
-		{
-			buildingMenu.dispose();
-		}
 		buildingMenu = new BuildingMenu(this, (GameFrame) app.getFrame(), selectedTile);
 	}
 	
@@ -675,24 +817,41 @@ public class MapController implements Serializable
 	 */
 	private void exploreMenu()
 	{
-		if(exploreMenu != null)
-		{
-			exploreMenu.dispose();
-		}
-		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame(), selectedTile);
+		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame());
 	}
 	
 	/**
 	 * Explores a tile.
 	 * @author Jay Clegg
 	 */
-	@WIP
-	//Needs to adjust the map model values too.
 	public void exploreTile()
 	{
-		selectedTile.setIsExplored(true);
-		
+		selectedTile.setOpaque(true);
 		exploreMenu.dispose();
+		
+		String level = currentMap.getLevel();
+		int row = selectedTile.getRow();
+		int col = selectedTile.getCol();
+		
+		if(level.equals(LOCAL))
+		{
+			EmpireLocalMap map = (EmpireLocalMap) selectMapModel(currentMap);
+			map.setState(row, col, EXPLORED);
+			
+			if(selectMapModel(currentMap).getIsFullyExplored())
+			{
+				app.addMapSelector();
+			}
+		}
+		else if(level.equals(REGIONAL))
+		{
+			EmpireRegionalMap map = (EmpireRegionalMap) selectMapModel(currentMap);
+			map.setState(row, col, EXPLORED);
+		}
+		else
+		{
+			worldMapModel.setState(row, col, EXPLORED);
+		}
 	}
 	
 	/**
@@ -715,5 +874,41 @@ public class MapController implements Serializable
 	public Controller getController()
 	{
 		return this.app;
+	}
+	
+	public void fullyExplore(EmpireMap map)
+	{
+		if(map.getLevel().equals(LOCAL))
+		{
+			for(Location location : map.getLocations())
+			{
+				location.setState(EXPLORED);
+				localMaps.get(map).getTile(location.getRow(), location.getCol()).setOpaque(true);
+			}
+		}
+		else if(map.getLevel().equals(REGIONAL))
+		{
+			for(Location location : map.getLocations())
+			{
+				location.setState(EXPLORED);
+				regionalMaps.get(map).getTile(location.getRow(), location.getCol()).setOpaque(true);
+			}
+			for(EmpireLocalMap localMap : ((EmpireRegionalMap) (map)).getLocalMaps())
+			{
+				fullyExplore(localMap);
+			}
+		}
+		else
+		{
+			for(Location location : map.getLocations())
+			{
+				location.setState(EXPLORED);
+				worldMapView.getTile(location.getRow(), location.getCol()).setOpaque(true);
+			}
+			for(EmpireRegionalMap region : worldMapModel.getRegionalMaps())
+			{
+				fullyExplore(region);
+			}
+		}
 	}
 }

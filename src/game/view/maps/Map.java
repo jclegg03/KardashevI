@@ -19,6 +19,7 @@ public abstract class Map extends JPanel
 	protected MapController app;
 	protected GridLayout layout;
 	protected String level;
+	protected boolean isFullyExplored;
 	
 	/**
 	 * Builds the visible map.
@@ -33,6 +34,8 @@ public abstract class Map extends JPanel
 		this.app = app;
 		this.layout = new GridLayout(rows, cols, 1, 1);
 		this.level = level;
+		this.isFullyExplored = false;
+		
 		this.setLayout(layout);
 		
 		for(int row = 0; row < rows; row++)
@@ -40,7 +43,6 @@ public abstract class Map extends JPanel
 			for(int col = 0; col < cols; col++)
 			{
 				Tile tile = new Tile(app, row, col, level);
-				
 				this.add(tile);
 			}
 		}
@@ -78,7 +80,7 @@ public abstract class Map extends JPanel
 	{
 		try
 		{
-			getTile(row, col).setIsExplored(true);
+			getTile(row, col).setOpaque(true);
 		}
 		catch(NullPointerException doesNotExist)
 		{

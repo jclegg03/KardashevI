@@ -5,6 +5,7 @@ import java.io.Serializable;
 import game.model.empire.Empire;
 import game.view.exitDialog.ExitDialog;
 import game.view.gameMenu.GameMenu;
+import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
 import game.view.mainMenu.MainMenu;
 import game.view.newGameDialog.NewGameDialog;
@@ -26,6 +27,7 @@ public class Controller implements Serializable
 	private Settings settings;
 	private SettlementController settlementController;
 	private ToolbarController toolbarController;
+	private boolean mapSelectorAdded;
 	
 	/**
 	 * Builds the game controller.
@@ -34,6 +36,7 @@ public class Controller implements Serializable
 	public Controller()
 	{
 		this.frame = new MainMenu(this);
+		this.mapSelectorAdded = false;
 	}
 	
 	/**
@@ -159,5 +162,13 @@ public class Controller implements Serializable
 	public SettlementController getSettlementController()
 	{
 		return this.settlementController;
+	}
+	
+	public void addMapSelector()
+	{
+		if(! mapSelectorAdded)
+		{
+			((GameContentPane) (frame.getContentPane())).addMapSelector();
+		}
 	}
 }

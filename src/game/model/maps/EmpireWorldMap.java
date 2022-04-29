@@ -23,7 +23,7 @@ public class EmpireWorldMap extends EmpireMap
 	 */
 	public EmpireWorldMap(Empire empire)
 	{
-		super(20, 20, empire);
+		super(20, 20, empire, new Location(0, 0, null, null), MapController.WORLD);
 		this.regionalMaps = new HashMap<Location, EmpireRegionalMap>();
 		this.name = "World Map";
 	}
@@ -51,7 +51,7 @@ public class EmpireWorldMap extends EmpireMap
 	{
 		for(Location location : regionalMaps.keySet())
 		{
-			if(new Location(row, col).equals(location))
+			if(new Location(row, col, null, null).equals(location))
 			{
 				return location;
 			}
@@ -69,7 +69,7 @@ public class EmpireWorldMap extends EmpireMap
 	 */
 	public void addMap(int row, int col, EmpireRegionalMap map)
 	{
-		regionalMaps.put(new Location(row, col), map);
+		regionalMaps.put(new Location(row, col, null, null), map);
 	}
 	
 	public Collection<EmpireRegionalMap> getRegionalMaps()

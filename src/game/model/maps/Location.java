@@ -1,5 +1,9 @@
 package game.model.maps;
 
+import game.controller.MapController;
+import game.model.biomes.Biome;
+import game.model.units.Building;
+
 /**
  * A location on an empire map. Used as a key to find the associated lower level map.
  * @author Jay Clegg
@@ -9,6 +13,9 @@ public class Location
 {
 	private int row;
 	private int col;
+	private int state;
+	private Biome biome;
+	private Building building;
 	
 	/**
 	 * Builds a location key.
@@ -16,10 +23,43 @@ public class Location
 	 * @param row The row of the key.
 	 * @param col The column of the key.
 	 */
-	public Location(int row, int col)
+	public Location(int row, int col, Biome biome, Building building)
 	{
 		this.row = row;
 		this.col = col;
+		this.state = MapController.UNEXPLORED;
+		this.biome = biome;
+		this.building = building;
+	}
+	
+	public int getState()
+	{
+		return state;
+	}
+	
+	public void setState(int state)
+	{
+		this.state = state;
+	}
+	
+	public void setBiome(Biome biome)
+	{
+		this.biome = biome;
+	}
+	
+	public Biome getBiome()
+	{
+		return biome;
+	}
+	
+	public Building getBuilding()
+	{
+		return building;
+	}
+	
+	public void setBuilding(Building building)
+	{
+		this.building = building;
 	}
 	
 	public int getRow()

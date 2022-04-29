@@ -1,5 +1,6 @@
 package game.model.maps;
 
+import game.controller.MapController;
 import game.model.biomes.LocalBiome;
 import game.model.biomes.RegionalBiome;
 import game.model.empire.Empire;
@@ -20,9 +21,9 @@ public class EmpireLocalMap extends EmpireMap
 	 * @param empire The empire which owns this map.
 	 * @param parentBiome The biome used to generate this maps biomes.
 	 */
-	public EmpireLocalMap(Empire empire, RegionalBiome parentBiome)
+	public EmpireLocalMap(Empire empire, RegionalBiome parentBiome, Location location)
 	{
-		super(10, 10, empire);
+		super(10, 10, empire, location, MapController.LOCAL);
 		this.name = "Local Map " + count;
 		this.parentBiome = parentBiome.copy();
 	}
@@ -35,6 +36,6 @@ public class EmpireLocalMap extends EmpireMap
 	@Override
 	public LocalBiome getBiome(int row, int col)
 	{
-		return (LocalBiome) biomes[row][col];
+		return (LocalBiome) map[row][col].getBiome();
 	}
 }

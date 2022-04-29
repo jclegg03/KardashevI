@@ -3,6 +3,7 @@ package game.model.maps;
 import java.util.Collection;
 import java.util.HashMap;
 
+import game.controller.MapController;
 import game.model.biomes.WorldBiome;
 import game.model.empire.Empire;
 
@@ -23,9 +24,9 @@ public class EmpireRegionalMap extends EmpireMap
 	 * @param empire The owner of the map.
 	 * @param parentBiome The biome used to generate this maps biomes.
 	 */
-	public EmpireRegionalMap(Empire empire, WorldBiome parentBiome)
+	public EmpireRegionalMap(Empire empire, WorldBiome parentBiome, Location location)
 	{
-		super(5, 5, empire);
+		super(5, 5, empire, location, MapController.REGIONAL);
 		this.localMaps = new HashMap<Location, EmpireLocalMap>();
 		this.parentBiome = parentBiome.copy();
 		this.name = "Regional Map " + count;
@@ -48,7 +49,7 @@ public class EmpireRegionalMap extends EmpireMap
 	{
 		for(Location location : localMaps.keySet())
 		{
-			if(location.equals(new Location(row, col)))
+			if(location.equals(new Location(row, col, null, null)))
 			{
 				return location;
 			}
@@ -66,7 +67,7 @@ public class EmpireRegionalMap extends EmpireMap
 	 */
 	public void addMap(int row, int col, EmpireLocalMap map)
 	{
-		Location key = new Location(row, col);
+		Location key = new Location(row, col, null, null);
 		localMaps.put(key, map);
 	}
 	
