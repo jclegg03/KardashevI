@@ -80,7 +80,7 @@ public abstract class Map extends JPanel
 	{
 		try
 		{
-			getTile(row, col).setIsExplored(true);
+			getTile(row, col).setOpaque(true);
 		}
 		catch(NullPointerException doesNotExist)
 		{
@@ -145,28 +145,5 @@ public abstract class Map extends JPanel
 			}
 		}
 		return linearTiles;
-	}
-	
-	public boolean getIsFullyExplored()
-	{
-		if(! isFullyExplored)
-		{
-			updateIsFullyExplored();
-		}
-		
-		return isFullyExplored;
-	}
-	
-	private void updateIsFullyExplored()
-	{
-		for(Tile tile : getTiles())
-		{
-			if(! tile.getIsExplored())
-			{
-				return;
-			}
-		}
-		
-		isFullyExplored = true;
 	}
 }

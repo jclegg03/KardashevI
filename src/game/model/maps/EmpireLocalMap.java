@@ -35,6 +35,6 @@ public class EmpireLocalMap extends EmpireMap
 	@Override
 	public LocalBiome getBiome(int row, int col)
 	{
-		return (LocalBiome) biomes[row][col];
+		return (LocalBiome) map[row][col].getBiome();
 	}
 }

@@ -71,7 +71,7 @@ public class Empire implements Serializable
 			{
 				for(int col = 0; col < localMap.getCols(); col++)
 				{
-					if(localMap.getValue(row, col) == MapController.EXPLORED) numExplored++;
+					if(localMap.getState(row, col) == MapController.EXPLORED) numExplored++;
 				}
 			}
 			
