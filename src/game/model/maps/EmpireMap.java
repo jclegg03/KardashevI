@@ -132,7 +132,14 @@ public abstract class EmpireMap implements Serializable
 	
 	public Location getLocation(int row, int col)
 	{
-		return map[row][col];
+		try
+		{
+			return map[row][col];
+		}
+		catch(ArrayIndexOutOfBoundsException badIndex)
+		{
+			return null;
+		}
 	}
 	
 	public boolean getIsFullyExplored()
