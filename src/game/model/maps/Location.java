@@ -23,13 +23,13 @@ public class Location
 	 * @param row The row of the key.
 	 * @param col The column of the key.
 	 */
-	public Location(int row, int col)
+	public Location(int row, int col, Biome biome, Building building)
 	{
 		this.row = row;
 		this.col = col;
 		this.state = MapController.UNEXPLORED;
-		this.biome = null;
-		this.building = null;
+		this.biome = biome;
+		this.building = building;
 	}
 	
 	public int getState()

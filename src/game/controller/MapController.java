@@ -87,10 +87,10 @@ public class MapController implements Serializable
 	{
 		worldMapModel = new EmpireWorldMap(app.getEmpire());
 		worldMapView = new WorldMap(this);
-		Biome[][] biomes = worldMapModel.getBiomes2D();
-		for(int row = 0; row < biomes.length; row++)
+		
+		for(int row = 0; row < worldMapModel.getRows(); row++)
 		{
-			for(int col = 0; col < biomes[row].length; col++)
+			for(int col = 0; col < worldMapModel.getCols(); col++)
 			{
 				WorldBiome current;
 				int number = randomNumber();
@@ -101,10 +101,10 @@ public class MapController implements Serializable
 				else if(number < 87) current = this.biomes.getWorldBiome("Mountainous");
 				else current = this.biomes.getWorldBiome("Fertile");
 				
-				biomes[row][col] = current.copy();
+				worldMapModel.assignLocation(new Location(row, col, current.copy(), null));
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col)));
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col, null, null)));
 				worldMapModel.setValue(row, col, UNEXPLORED);
 			}
 		}
@@ -177,10 +177,10 @@ public class MapController implements Serializable
 			{
 				RegionalMap mapView = new RegionalMap(this);
 				WorldBiome currentBiome = currentMap.getParentBiome();
-				Biome[][] mapBiomes = currentMap.getBiomes2D();
-				for(int row = 0; row < mapBiomes.length; row++)
+				
+				for(int row = 0; row < currentMap.getRows(); row++)
 				{
-					for(int col = 0; col < mapBiomes[row].length; col++)
+					for(int col = 0; col < currentMap.getCols(); col++)
 					{
 						int random = randomNumber();
 						RegionalBiome current;
@@ -223,9 +223,9 @@ public class MapController implements Serializable
 						
 						else current = null;
 						
-						mapBiomes[row][col] = current.copy();
+						currentMap.assignLocation(new Location(row, col, current.copy(), null));
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col)));
+						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col, null, null)));
 						currentMap.setValue(row, col, UNEXPLORED);
 					}
 				}
@@ -285,12 +285,12 @@ public class MapController implements Serializable
 			for(EmpireLocalMap currentMap : region.getLocalMaps())
 			{
 				RegionalBiome currentBiome = currentMap.getParentBiome();
-				Biome[][] localBiomes = currentMap.getBiomes2D();
+				
 				LocalMap mapView = new LocalMap(this);
 				
-				for(int row = 0; row < localBiomes.length; row++)
+				for(int row = 0; row < currentMap.getRows(); row++)
 				{
-					for(int col = 0; col < localBiomes[row].length; col++)
+					for(int col = 0; col < currentMap.getCols(); col++)
 					{
 						LocalBiome current;
 						int random = randomNumber();
@@ -429,7 +429,7 @@ public class MapController implements Serializable
 						
 						else current = null;
 						
-						localBiomes[row][col] = current.copy();
+						currentMap.assignLocation(new Location(row, col, current.copy(), null));
 						mapView.getTile(row, col).setBackground(current.getColor());
 						currentMap.setValue(row, col, UNEXPLORED);
 					}
@@ -499,14 +499,14 @@ public class MapController implements Serializable
 		currentMap = mapView;
 		
 //		Displays entire first map. Except 1 tile.
-//		for(Tile tile : currentMap.getTiles())
-//		{
-//			tile.setIsExplored(true);
-//		}
-//		
-//		currentMap.getTile(randRow, randCol).setIsExplored(false);
-//		
-//		mapView.getTile(randRow, randCol).setIsExplored(false);
+		for(Location location : selectMapModel(currentMap).getLocations())
+		{
+			location.setState(EXPLORED);
+			currentMap.getTile(location.getRow(), location.getCol()).setOpaque(true);
+		}
+		
+		selectMapModel(currentMap).getLocation(randRow, randCol).setState(UNEXPLORED);
+		currentMap.getTile(randRow, randCol).setOpaque(true);
 	}
 	
 	/**
