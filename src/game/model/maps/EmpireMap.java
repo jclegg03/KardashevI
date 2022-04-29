@@ -33,6 +33,7 @@ public abstract class EmpireMap implements Serializable
 		this.map = new Location[rows][cols];
 		this.empire = empire;
 		this.location = location;
+		this.level = level;
 	}
 	
 	public void setState(int row, int col, int value)
