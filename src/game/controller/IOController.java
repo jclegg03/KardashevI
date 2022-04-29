@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -15,16 +16,20 @@ public class IOController
 	/**
 	 * The method to save a game.
 	 * @author Jay Clegg
-	 * @param empire The game to be saved.
+	 * @param app The game to be saved.
 	 */
-	public static void saveGame(Controller empire)
+	public static void saveGame(Controller app)
 	{
-		try(FileOutputStream saveStream = new FileOutputStream("empire.kdsi");
+		try(FileOutputStream saveStream = new FileOutputStream(app.getEmpire().getName() + ".kdsi");
 				ObjectOutputStream output = new ObjectOutputStream(saveStream))
 		{
-			output.writeObject(empire);
+			output.writeObject(app);
 		}
-		catch(Exception error)
+		catch(IOException savError)
+		{
+			
+		}
+		catch(Exception generalError)
 		{
 			
 		}
@@ -39,15 +44,57 @@ public class IOController
 	public static Controller loadGame(String file)
 	{
 		Controller loaded = new Controller();
-		try(FileInputStream loadStream = new FileInputStream("empire.kdsi");
+		try(FileInputStream loadStream = new FileInputStream(file);
 				ObjectInputStream input = new ObjectInputStream(loadStream))
 		{
 			loaded = (Controller) (input.readObject());
 		}
-		catch(Exception error)
+		catch(IOException loadError)
 		{
 			
 		}
+		catch(Exception generalError)
+		{
+			
+		}
+		return loaded;
+	}
+	
+	public static void saveSettings(Settings settings)
+	{
+		try(FileOutputStream saveStream = new FileOutputStream("KardashevI.settings");
+				ObjectOutputStream output = new ObjectOutputStream(saveStream))
+		{
+			output.writeObject(settings);
+		}
+		catch(IOException saveError)
+		{
+			
+		}
+		catch(Exception generalError)
+		{
+			
+		}
+	}
+	
+	public static Settings loadSettings()
+	{
+		Settings loaded = new Settings();
+		
+		try(FileInputStream loadStream = new FileInputStream("KardashevI.settings");
+				ObjectInputStream input = new ObjectInputStream(loadStream))
+		{
+			loaded = (Settings) input.readObject();
+		}
+		catch(IOException loadError)
+		{
+			
+		}
+		catch(Exception generalError)
+		{
+			
+		}
+		
 		return loaded;
 	}
 }
