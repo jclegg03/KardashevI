@@ -496,14 +496,16 @@ public class MapController implements Serializable
 		currentMap = mapView;
 		
 		//Displays entire first map. Except 1 tile.
-//		for(Tile tile : currentMap.getTiles())
-//		{
-//			tile.setIsExplored(true);
-//		}
-//		
-//		currentMap.getTile(randRow, randCol).setIsExplored(false);
+		for(Tile tile : currentMap.getTiles())
+		{
+			tile.setOpaque(true);
+			selectMapModel(currentMap).setState(tile.getRow(), tile.getCol(), EXPLORED);
+		}
 		
-//		mapView.getTile(randRow, randCol).setIsExplored(false);
+		currentMap.getTile(randRow, randCol).setOpaque(false);
+		selectMapModel(currentMap).setState(randRow, randCol, UNEXPLORED);
+		
+		mapView.getTile(randRow, randCol).setOpaque(false);
 	}
 	
 	/**
@@ -567,8 +569,8 @@ public class MapController implements Serializable
 	{
 		for(Tile tile : currentMap.getTiles())
 		{
-			if(selectMapModel(currentMap).getState(tile.getRow(), tile.getCol()) == EXPLORED) tile.setOpaque(true);
-			else if(selectMapModel(currentMap).getState(tile.getRow(), tile.getCol()) == UNEXPLORED) tile.setOpaque(false);
+			if(selectMapModel(currentMap).getState(tile.getRow(), tile.getCol()) == EXPLORED && ! tile.isOpaque()) tile.setOpaque(true);
+			else if(selectMapModel(currentMap).getState(tile.getRow(), tile.getCol()) == UNEXPLORED && tile.isOpaque()) tile.setOpaque(false);
 		}
 		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
 	}
