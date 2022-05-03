@@ -106,9 +106,9 @@ public class MenuContentPane extends MainPanel
 		});
 		
 		resumeButton.addActionListener(click -> frame.dispose());
-		//settings
-		//save
-		//load
+		settingsButton.addActionListener(click -> app.settings());
+		saveButton.addActionListener(click -> app.saveGame(frame));
+		loadButton.addActionListener(click -> app.loadGame(frame));
 		mainMenuButton.addActionListener(click -> app.returnToMainMenu(frame));
 		quitButton.addActionListener(click -> app.quit(frame));
 	}

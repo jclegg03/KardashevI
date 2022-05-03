@@ -9,6 +9,7 @@ import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
 import game.view.mainMenu.MainMenu;
 import game.view.newGameDialog.NewGameDialog;
+import game.view.saveDialog.SaveDialog;
 import gui.utility.JFrame;
 
 /**
@@ -46,13 +47,31 @@ public class Controller implements Serializable
 	public void newGame()
 	{
 		new NewGameDialog(this, (MainMenu) frame);
-		frame.getContentPane().requestFocus();
+		returnFocus();
+	}
+	
+	public void saveGame(GameMenu menu)
+	{
+		menu.setVisible(false);
+		new SaveDialog(this);
+		menu.setVisible(true);
+		returnFocus();
+	}
+	
+	public void save()
+	{
+		IOController.saveGame(this);
 	}
 	
 	/**
 	 * Creates a load game menu.
 	 * @author Jay Clegg
 	 */
+	public void loadGame(GameMenu menu)
+	{
+		
+	}
+	
 	public void loadGame()
 	{
 		

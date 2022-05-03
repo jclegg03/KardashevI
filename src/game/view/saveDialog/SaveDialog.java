@@ -19,6 +19,7 @@ public class SaveDialog extends JDialog
 	private void setupDialog()
 	{
 		this.setContentPane(new SavePanel(app, this));
+		this.setSize(600, 200);
 		this.setLocationRelativeTo(null);
 //		this.setUndecorated(true);
 		this.setVisible(true);
