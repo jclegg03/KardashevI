@@ -25,7 +25,7 @@ public class IOController
 		{
 			output.writeObject(app);
 		}
-		catch(IOException savError)
+		catch(IOException saveError)
 		{
 			
 		}
