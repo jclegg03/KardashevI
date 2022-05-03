@@ -1,10 +1,11 @@
 package game.model.lists;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import game.model.resources.Tech;
 
-public abstract class TechList
+public abstract class TechList implements Serializable
 {
 	protected ArrayList <Tech> ageTechs;
 	protected Tech[] requirements;

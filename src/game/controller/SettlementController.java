@@ -1,17 +1,16 @@
 package game.controller;
 
-import java.util.HashMap;
+import java.io.Serializable;
 
 import game.view.gameView.GameContentPane;
 import game.view.gameView.SettlementPanel;
-import gui.utility.JButton;
 
 /**
  * Adds settlements to the view as an empire expands.
  * @author Jay Clegg
  *
  */
-public class SettlementController
+public class SettlementController implements Serializable
 {
 	private Controller app;
 	private SettlementPanel settlementPanel;

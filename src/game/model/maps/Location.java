@@ -1,5 +1,7 @@
 package game.model.maps;
 
+import java.io.Serializable;
+
 import game.controller.MapController;
 import game.model.biomes.Biome;
 import game.model.units.Building;
@@ -9,7 +11,7 @@ import game.model.units.Building;
  * @author Jay Clegg
  *
  */
-public class Location
+public class Location implements Serializable
 {
 	private int row;
 	private int col;

@@ -1,5 +1,7 @@
 package game.controller;
 
+import java.io.Serializable;
+
 import game.view.gameView.GameFrame;
 import game.view.gameView.ResourcePanel;
 
@@ -8,7 +10,7 @@ import game.view.gameView.ResourcePanel;
  * @author Jay Clegg
  *
  */
-public class ResourceController
+public class ResourceController implements Serializable
 {
 	private Controller app;
 	private ResourcePanel resourcePanel;

@@ -1,11 +1,13 @@
 package game.controller;
 
+import java.io.Serializable;
+
 /**
  * Class which handles the button calls from the toolbar.
  * @author Jay Clegg
  *
  */
-public class ToolbarController
+public class ToolbarController implements Serializable
 {
 	private Controller app;
 	

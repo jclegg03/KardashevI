@@ -1,9 +1,9 @@
 package game.model.lists;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import game.model.biomes.Biome;
 import game.model.biomes.LocalBiome;
 import game.model.biomes.RegionalBiome;
 import game.model.biomes.WorldBiome;
@@ -13,7 +13,7 @@ import game.model.biomes.WorldBiome;
  * @author Jay Clegg
  *
  */
-public class BiomeList
+public class BiomeList implements Serializable
 {
 	private ArrayList<WorldBiome> worldBiomes;
 	private ArrayList<RegionalBiome> regionalBiomes;
