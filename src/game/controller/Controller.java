@@ -10,6 +10,7 @@ import game.view.exitDialog.ExitDialog;
 import game.view.gameMenu.GameMenu;
 import game.view.gameView.GameContentPane;
 import game.view.gameView.GameFrame;
+import game.view.loadDialog.LoadDialog;
 import game.view.mainMenu.MainMenu;
 import game.view.newGameDialog.NewGameDialog;
 import game.view.saveDialog.SaveDialog;
@@ -32,6 +33,7 @@ public class Controller implements Serializable
 	private SettlementController settlementController;
 	private ToolbarController toolbarController;
 	private boolean mapSelectorAdded;
+	private int saveIndex;
 	
 	/**
 	 * Builds the game controller.
@@ -103,7 +105,16 @@ public class Controller implements Serializable
 		{
 		}
 		
+		String[] saves = new String[fileNames.size()];
 		
+		for(int index = 0; index < saves.length; index++)
+		{
+			saves[index] = fileNames.get(index);
+		}
+		
+		new LoadDialog(this, frame, saves);
+		
+		this.empire = IOController.loadGame(path + "/" + saves[saveIndex]);
 		
 		returnFocus();
 	}
@@ -220,5 +231,10 @@ public class Controller implements Serializable
 		{
 			((GameContentPane) (frame.getContentPane())).addMapSelector();
 		}
+	}
+	
+	public void setSaveIndex(int saveIndex)
+	{
+		this.saveIndex = saveIndex;
 	}
 }

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import game.model.empire.Empire;
+
 /**
  * The class for saving and loading data.
  * @author Jay Clegg
@@ -41,13 +43,13 @@ public class IOController
 	 * @param file The file where the save data is stored.
 	 * @return The saved empire.
 	 */
-	public static Controller loadGame(String file)
+	public static Empire loadGame(String file)
 	{
-		Controller loaded = new Controller();
+		Empire loaded = null;
 		try(FileInputStream loadStream = new FileInputStream(file);
 				ObjectInputStream input = new ObjectInputStream(loadStream))
 		{
-			loaded = (Controller) (input.readObject());
+			loaded = (Empire) (input.readObject());
 		}
 		catch(IOException loadError)
 		{
