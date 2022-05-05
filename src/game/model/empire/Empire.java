@@ -7,6 +7,7 @@ import game.controller.MapController;
 import game.model.maps.EmpireLocalMap;
 import game.model.maps.EmpireMap;
 import game.model.maps.EmpireRegionalMap;
+import game.model.maps.EmpireWorldMap;
 
 /**
  * The model for an empire.
@@ -93,5 +94,18 @@ public class Empire implements Serializable
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public EmpireWorldMap getWorldMap()
+	{
+		for(EmpireMap map : maps)
+		{
+			if(map.getLevel().equals(MapController.WORLD))
+			{
+				return (EmpireWorldMap) map;
+			}
+		}
+		
+		return null;
 	}
 }

@@ -2,13 +2,12 @@ package game.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
-import game.model.biomes.Biome;
 import game.model.biomes.LocalBiome;
 import game.model.biomes.RegionalBiome;
 import game.model.biomes.WorldBiome;
+import game.model.empire.Empire;
 import game.model.lists.BiomeList;
 import game.model.maps.EmpireLocalMap;
 import game.model.maps.EmpireMap;
@@ -86,6 +85,14 @@ public class MapController implements Serializable
 //		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
 		
 		assignMaps();
+	}
+	
+	public MapController(Empire empire, Controller app)
+	{
+		this.app = app;
+		this.regionalMaps = new HashMap<EmpireRegionalMap, RegionalMap>();
+		this.localMaps = new HashMap<EmpireLocalMap, LocalMap>();
+		this.worldMapModel = empire.ge
 	}
 	
 	private void assignMaps()
