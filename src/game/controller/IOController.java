@@ -18,12 +18,12 @@ public class IOController
 	 * @author Jay Clegg
 	 * @param app The game to be saved.
 	 */
-	public static void saveGame(Controller app)
+	public static void saveGame(Controller app, String details)
 	{
-		try(FileOutputStream saveStream = new FileOutputStream(app.getEmpire().getName() + ".kdsi");
+		try(FileOutputStream saveStream = new FileOutputStream(app.getEmpire().getName() + details + ".kdsi");
 				ObjectOutputStream output = new ObjectOutputStream(saveStream))
 		{
-			output.writeObject(app);
+			output.writeObject(app.getEmpire());
 		}
 		catch(IOException saveError)
 		{

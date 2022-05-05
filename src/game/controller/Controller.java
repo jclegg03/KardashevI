@@ -1,6 +1,9 @@
 package game.controller;
 
+import java.io.File;
 import java.io.Serializable;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import game.model.empire.Empire;
 import game.view.exitDialog.ExitDialog;
@@ -38,6 +41,7 @@ public class Controller implements Serializable
 	{
 		this.frame = new MainMenu(this);
 		this.mapSelectorAdded = false;
+		loadGame();
 	}
 	
 	/**
@@ -58,9 +62,9 @@ public class Controller implements Serializable
 		returnFocus();
 	}
 	
-	public void save()
+	public void save(String details)
 	{
-		IOController.saveGame(this);
+		IOController.saveGame(this, details);
 	}
 	
 	/**
@@ -69,12 +73,39 @@ public class Controller implements Serializable
 	 */
 	public void loadGame(GameMenu menu)
 	{
-		
+		menu.setVisible(false);
+		loadGame();
+		menu.dispose();
+		returnFocus();
 	}
 	
 	public void loadGame()
 	{
+		ArrayList<String> fileNames = new ArrayList<String>();
+		String path = null;
 		
+		try
+		{
+			File folder = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+			
+			folder = new File(folder.getAbsolutePath().substring(0, folder.getAbsolutePath().indexOf("/")));
+			path = folder.getAbsolutePath();
+			folder = folder.getAbsoluteFile();
+			
+			String[] files = folder.list();
+			
+			for(String file : files)
+			{
+				if(file.endsWith(".kdsi")) fileNames.add(file);
+			}
+		} 
+		catch (URISyntaxException error)
+		{
+		}
+		
+		
+		
+		returnFocus();
 	}
 	
 	/**

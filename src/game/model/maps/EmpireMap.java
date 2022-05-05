@@ -17,7 +17,6 @@ public abstract class EmpireMap implements Serializable
 {
 	protected String name;
 	protected Location[][] map;
-	protected Empire empire;
 	protected Location location;
 	protected String level;
 	
@@ -28,10 +27,9 @@ public abstract class EmpireMap implements Serializable
 	 * @param empire The empire that owns this map.
 	 * @author Jay Clegg
 	 */
-	public EmpireMap(int rows, int cols, Empire empire, Location location, String level)
+	public EmpireMap(int rows, int cols, Location location, String level)
 	{
 		this.map = new Location[rows][cols];
-		this.empire = empire;
 		this.location = location;
 		this.level = level;
 	}
@@ -46,10 +44,6 @@ public abstract class EmpireMap implements Serializable
 		map[location.getRow()][location.getCol()] = location;
 	}
 	
-	public Empire getEmpire()
-	{
-		return this.empire;
-	}
 	
 	public int getState(int row, int col)
 	{

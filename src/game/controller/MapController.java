@@ -84,6 +84,13 @@ public class MapController implements Serializable
 //		fullyExplore(worldMapModel);
 //		currentMap.getTile(0, 0).setOpaque(false);
 //		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+		
+		assignMaps();
+	}
+	
+	private void assignMaps()
+	{
+		app.getEmpire().addMap(worldMapModel);
 	}
 	
 	/**
@@ -122,7 +129,7 @@ public class MapController implements Serializable
 				worldMapModel.assignLocation(new Location(row, col, current.copy(), null));
 				
 				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(app.getEmpire(), current, new Location(row, col, null, null)));
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(current, new Location(row, col, null, null)));
 				worldMapModel.setState(row, col, UNEXPLORED);
 			}
 		}
@@ -243,7 +250,7 @@ public class MapController implements Serializable
 						
 						currentMap.assignLocation(new Location(row, col, current.copy(), null));
 						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.addMap(row, col, new EmpireLocalMap(app.getEmpire(), current, new Location(row, col, null, null)));
+						currentMap.addMap(row, col, new EmpireLocalMap(current, new Location(row, col, null, null)));
 						currentMap.setState(row, col, UNEXPLORED);
 					}
 				}
