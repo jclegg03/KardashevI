@@ -114,7 +114,7 @@ public class Controller implements Serializable
 		this.empire = IOController.loadGame(path + "/" + saves[saveIndex]);
 		this.mapController = new MapController(empire, this);
 		this.settlementController = new SettlementController(empire, this);
-		this.toolbarController = new ToolbarController(empire, this);
+		this.toolbarController = new ToolbarController(this);
 		this.resourceController = new ResourceController(empire, this);
 		
 		frame.dispose();
