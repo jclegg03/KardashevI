@@ -115,7 +115,7 @@ public class Controller implements Serializable
 		
 		this.empire = IOController.loadGame(path + "/" + saves[saveIndex]);
 		
-		System.out.println(empire);
+		
 		
 		returnFocus();
 	}
