@@ -32,7 +32,6 @@ public class Controller implements Serializable
 	private Settings settings;
 	private SettlementController settlementController;
 	private ToolbarController toolbarController;
-	private boolean mapSelectorAdded;
 	private int saveIndex;
 	
 	/**
@@ -42,7 +41,6 @@ public class Controller implements Serializable
 	public Controller()
 	{
 		this.frame = new MainMenu(this);
-		this.mapSelectorAdded = false;
 	}
 	
 	/**
@@ -114,8 +112,15 @@ public class Controller implements Serializable
 		new LoadDialog(this, frame, saves);
 		
 		this.empire = IOController.loadGame(path + "/" + saves[saveIndex]);
+		this.mapController = new MapController(empire, this);
+		this.settlementController = new SettlementController(empire, this);
+		this.toolbarController = new ToolbarController(empire, this);
+		this.resourceController = new ResourceController(empire, this);
 		
+		frame.dispose();
+		frame = new GameFrame(this);
 		
+		settlementController.finishSetup();
 		
 		returnFocus();
 	}
@@ -228,7 +233,7 @@ public class Controller implements Serializable
 	
 	public void addMapSelector()
 	{
-		if(! mapSelectorAdded)
+		if(! empire.getMapSelectorAdded())
 		{
 			((GameContentPane) (frame.getContentPane())).addMapSelector();
 		}

@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.model.empire.Empire;
 import game.view.gameView.GameContentPane;
 import game.view.gameView.SettlementPanel;
 
@@ -23,6 +24,14 @@ public class SettlementController implements Serializable
 	 * @param app The controller that owns this settlement controller.
 	 */
 	public SettlementController(Controller app)
+	{
+		this.app = app;
+	}
+	
+	@WIP
+	//need to use the empire to generate data.
+	//Can be done once the model and this class are written.
+	public SettlementController(Empire empire, Controller app)
 	{
 		this.app = app;
 	}

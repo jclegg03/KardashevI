@@ -18,6 +18,7 @@ public class Empire implements Serializable
 {
 	private String name;
 	private boolean isMidgame;
+	private boolean mapSelectorAdded;
 	private ArrayList<EmpireMap> maps;
 	private EmpireRegionalMap startingMap;
 	
@@ -32,6 +33,7 @@ public class Empire implements Serializable
 		this.isMidgame = false;
 		this.maps = new ArrayList<EmpireMap>();
 		this.startingMap = null;
+		this.setMapSelectorAdded(false);
 	}
 	
 	public void setStartingMap(EmpireRegionalMap startingMap)
@@ -112,5 +114,21 @@ public class Empire implements Serializable
 		}
 		
 		return null;
+	}
+
+	/**
+	 * @return The mapSelectorAdded.
+	 */
+	public boolean getMapSelectorAdded()
+	{
+		return mapSelectorAdded;
+	}
+
+	/**
+	 * @param mapSelectorAdded The new value of mapSelectorAdded.
+	 */
+	public void setMapSelectorAdded(boolean mapSelectorAdded)
+	{
+		this.mapSelectorAdded = mapSelectorAdded;
 	}
 }
