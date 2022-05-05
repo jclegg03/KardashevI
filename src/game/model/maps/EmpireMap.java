@@ -144,4 +144,19 @@ public abstract class EmpireMap implements Serializable
 	{
 		return level;
 	}
+	
+	public int[][] getStates2D()
+	{
+		int[][] states = new int[map.length][map[0].length];
+		
+		for(int row = 0; row < map.length; row++)
+		{
+			for(int col = 0; col < map[row].length; col++)
+			{
+				states[row][col] = map[row][col].getState();
+			}
+		}
+		
+		return states;
+	}
 }

@@ -96,6 +96,11 @@ public class Empire implements Serializable
 		return this.name;
 	}
 	
+	public EmpireRegionalMap getStartingMap()
+	{
+		return startingMap;
+	}
+	
 	public EmpireWorldMap getWorldMap()
 	{
 		for(EmpireMap map : maps)
