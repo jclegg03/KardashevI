@@ -43,7 +43,6 @@ public class Controller implements Serializable
 	{
 		this.frame = new MainMenu(this);
 		this.mapSelectorAdded = false;
-		loadGame();
 	}
 	
 	/**
@@ -115,6 +114,8 @@ public class Controller implements Serializable
 		new LoadDialog(this, frame, saves);
 		
 		this.empire = IOController.loadGame(path + "/" + saves[saveIndex]);
+		
+		System.out.println(empire);
 		
 		returnFocus();
 	}
