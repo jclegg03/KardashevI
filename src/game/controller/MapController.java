@@ -81,9 +81,9 @@ public class MapController implements Serializable
 		
 		//This fully explores the world minus one square.
 		//The one square has to not be explored so the map selector will appear.
-		fullyExplore(worldMapModel);
-		currentMap.getTile(0, 0).setOpaque(false);
-		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+//		fullyExplore(worldMapModel);
+//		currentMap.getTile(0, 0).setOpaque(false);
+//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
 		
 		assignMaps();
 	}
