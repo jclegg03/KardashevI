@@ -13,7 +13,7 @@ public class LoadDialog extends JDialog
 	{
 		super(parent, true);
 		this.app = app;
-		this.setContentPane(new LoadPanel(app, saves));
+		this.setContentPane(new LoadPanel(app, saves, this));
 		
 		setupDialog();
 	}
@@ -22,7 +22,8 @@ public class LoadDialog extends JDialog
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(300, 600);
-//		this.setUndecorated(true);
+		this.setLocationRelativeTo(null);
+		this.setUndecorated(true);
 		this.setVisible(true);
 	}
 }
