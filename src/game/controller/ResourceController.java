@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.Serializable;
 
+import game.model.empire.Empire;
 import game.view.gameView.GameFrame;
 import game.view.gameView.ResourcePanel;
 
@@ -21,6 +22,14 @@ public class ResourceController implements Serializable
 	 * @param app
 	 */
 	public ResourceController(Controller app)
+	{
+		this.app = app;
+	}
+	
+	@WIP
+	//Need to use the empire to initialize data.
+	// Can be done once this class and other mechanics are finihsed.
+	public ResourceController(Empire empire, Controller app)
 	{
 		this.app = app;
 	}
