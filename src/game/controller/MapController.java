@@ -81,9 +81,9 @@ public class MapController implements Serializable
 		
 		//This fully explores the world minus one square.
 		//The one square has to not be explored so the map selector will appear.
-//		fullyExplore(worldMapModel);
-//		currentMap.getTile(0, 0).setOpaque(false);
-//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+		fullyExplore(worldMapModel);
+		currentMap.getTile(0, 0).setOpaque(false);
+		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
 		
 		assignMaps();
 	}
@@ -139,6 +139,7 @@ public class MapController implements Serializable
 				{
 					tiles[row][col].setBackground(biomes[row][col].getColor());
 					tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+					if(states[row][col] == EXPLORED) previousMap = mapView;
 				}
 			}
 			
@@ -164,6 +165,7 @@ public class MapController implements Serializable
 					{
 						tiles[row][col].setBackground(biomes[row][col].getColor());
 						tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+						if(regionalMaps.get(region).equals(previousMap) && states[row][col] == EXPLORED) currentMap = mapView;
 					}
 				}
 				
