@@ -21,6 +21,7 @@ public class Empire implements Serializable
 	private boolean mapSelectorAdded;
 	private ArrayList<EmpireMap> maps;
 	private EmpireRegionalMap startingMap;
+	private EmpireLocalMap origin;
 	
 	/**
 	 * Builds an empire based on the specified parameters.
@@ -31,14 +32,25 @@ public class Empire implements Serializable
 	{
 		this.name = name;
 		this.isMidgame = false;
+		this.mapSelectorAdded = false;
 		this.maps = new ArrayList<EmpireMap>();
 		this.startingMap = null;
-		this.setMapSelectorAdded(false);
+		this.origin = null;
 	}
 	
 	public void setStartingMap(EmpireRegionalMap startingMap)
 	{
 		this.startingMap = startingMap;
+	}
+	
+	public void setOrigin(EmpireLocalMap origin)
+	{
+		this.origin = origin;
+	}
+	
+	public EmpireLocalMap getOrigin()
+	{
+		return origin;
 	}
 	
 	public void addMap(EmpireMap map)

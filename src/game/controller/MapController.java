@@ -139,12 +139,13 @@ public class MapController implements Serializable
 				{
 					tiles[row][col].setBackground(biomes[row][col].getColor());
 					tiles[row][col].setOpaque(states[row][col] == EXPLORED);
-					if(states[row][col] == EXPLORED) previousMap = mapView;
 				}
 			}
 			
 			regionalMaps.put(map, mapView);
 		}
+		
+		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
 	}
 	
 	private void loadLocalMaps()
@@ -165,13 +166,14 @@ public class MapController implements Serializable
 					{
 						tiles[row][col].setBackground(biomes[row][col].getColor());
 						tiles[row][col].setOpaque(states[row][col] == EXPLORED);
-						if(regionalMaps.get(region).equals(previousMap) && states[row][col] == EXPLORED) currentMap = mapView;
 					}
 				}
 				
 				localMaps.put(map, mapView);
 			}
 		}
+		
+		currentMap = localMaps.get(app.getEmpire().getOrigin());
 	}
 	
 	private void assignMaps()
@@ -610,6 +612,7 @@ public class MapController implements Serializable
 		
 		previousMap = regionalMaps.get(region);
 		currentMap = mapView;
+		app.getEmpire().setOrigin(exploredMap);
 	}
 	
 	/**
@@ -933,7 +936,7 @@ public class MapController implements Serializable
 			EmpireLocalMap map = (EmpireLocalMap) selectMapModel(currentMap);
 			map.setState(row, col, EXPLORED);
 			
-			if(selectMapModel(currentMap).getIsFullyExplored())
+			if(selectMapModel(currentMap).getIsFullyExplored() && ! app.getEmpire().getMapSelectorAdded())
 			{
 				app.addMapSelector();
 			}

@@ -86,8 +86,19 @@ public class Controller implements Serializable
 		try
 		{
 			File folder = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+//			System.out.println(folder.getAbsolutePath());
+			String pathway = "";
 			
-			folder = new File(folder.getAbsolutePath().substring(0, folder.getAbsolutePath().indexOf("/")));
+			try
+			{
+				pathway = folder.getAbsolutePath().substring(0, folder.getAbsolutePath().indexOf("/"));
+			}
+			catch(StringIndexOutOfBoundsException notFound)
+			{
+				pathway = folder.getAbsolutePath().substring(0, folder.getAbsolutePath().indexOf("\\"));
+			}
+			
+			folder = new File(pathway);
 			path = folder.getAbsolutePath();
 			folder = folder.getAbsoluteFile();
 			
@@ -98,7 +109,7 @@ public class Controller implements Serializable
 				if(file.endsWith(".kdsi")) fileNames.add(file);
 			}
 		} 
-		catch (URISyntaxException error)
+		catch(URISyntaxException error)
 		{
 		}
 		
@@ -121,6 +132,11 @@ public class Controller implements Serializable
 		frame = new GameFrame(this);
 		
 		settlementController.finishSetup();
+		
+		if(empire.getMapSelectorAdded())
+		{
+			addMapSelector();
+		}
 		
 		returnFocus();
 	}
@@ -233,10 +249,9 @@ public class Controller implements Serializable
 	
 	public void addMapSelector()
 	{
-		if(! empire.getMapSelectorAdded())
-		{
-			((GameContentPane) (frame.getContentPane())).addMapSelector();
-		}
+		((GameContentPane) (frame.getContentPane())).addMapSelector();
+		empire.setMapSelectorAdded(true);
+		
 	}
 	
 	public void setSaveIndex(int saveIndex)
