@@ -159,6 +159,8 @@ public class MapController implements Serializable
 		}
 		
 		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
+		currentRow = app.getEmpire().getStartingMap().getLocation().getRow();
+		currentCol = app.getEmpire().getStartingMap().getLocation().getCol();
 	}
 	
 	private void loadLocalMaps()
@@ -717,7 +719,7 @@ public class MapController implements Serializable
 		
 		clearMenus();
 		
-		if(currentMap.getLevel().equals(LOCAL))
+		if(tile.getMap() == null)
 		{
 			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
 			{
