@@ -19,7 +19,7 @@ public class SaveDialog extends JDialog
 	private void setupDialog()
 	{
 		this.setContentPane(new SavePanel(app, this));
-		this.setSize(600, 100);
+		this.setSize(500, 100);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setUndecorated(true);

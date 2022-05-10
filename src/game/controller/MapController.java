@@ -69,9 +69,9 @@ public class MapController implements Serializable
 		
 		//This fully explores the starting map minus one square.
 		//The one square has to not be explored so the map selector will appear.
-//		fullyExplore(selectMapModel(currentMap));
-//		currentMap.getTile(0, 0).setOpaque(false);
-//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+		fullyExplore(selectMapModel(currentMap));
+		currentMap.getTile(0, 0).setOpaque(false);
+		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
 		
 		//This fully explores the starting region minus one square.
 		//The one square has to not be explored so the map selector will appear.
@@ -125,36 +125,15 @@ public class MapController implements Serializable
 	
 	private void loadRegionalMaps()
 	{
-		for(EmpireRegionalMap map : worldMapModel.getRegionalMaps())
-		{
-			RegionalMap mapView = new RegionalMap(this);
-			
-			Biome[][] biomes = map.getBiomes2D();
-			int[][] states = map.getStates2D();
-			Tile[][] tiles = mapView.getTiles2D();
-			
-			for(int row = 0; row < biomes.length; row++)
-			{
-				for(int col = 0; col < biomes[row].length; col++)
-				{
-					tiles[row][col].setBackground(biomes[row][col].getColor());
-					tiles[row][col].setOpaque(states[row][col] == EXPLORED);
-				}
-			}
-			
-			regionalMaps.put(map, mapView);
-		}
+		int mapRow = 0;
+		int mapCol = 0;
 		
-		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
-	}
-	
-	private void loadLocalMaps()
-	{
-		for(EmpireRegionalMap region : regionalMaps.keySet())
+		while(worldMapModel.getMap(mapRow, mapCol) != null)
 		{
-			for(EmpireLocalMap map : region.getLocalMaps())
+			while(worldMapModel.getMap(mapRow, mapCol) != null)
 			{
-				LocalMap mapView = new LocalMap(this);
+				EmpireRegionalMap map = worldMapModel.getMap(mapRow, mapCol);
+				RegionalMap mapView = new RegionalMap(this);
 				
 				Biome[][] biomes = map.getBiomes2D();
 				int[][] states = map.getStates2D();
@@ -169,7 +148,50 @@ public class MapController implements Serializable
 					}
 				}
 				
-				localMaps.put(map, mapView);
+				regionalMaps.put(map, mapView);
+				mapCol++;
+			}
+			
+			mapCol = 0;
+			mapRow++;
+		}
+		
+		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
+	}
+	
+	private void loadLocalMaps()
+	{
+		for(EmpireRegionalMap region : regionalMaps.keySet())
+		{
+			int mapRow = 0;
+			int mapCol = 0;
+			
+			while(region.getMap(mapRow, mapCol) != null)
+			{
+				while(region.getMap(mapRow, mapCol) != null)
+				{
+					EmpireLocalMap map = region.getMap(mapRow, mapCol);
+					LocalMap mapView = new LocalMap(this);
+					
+					Biome[][] biomes = map.getBiomes2D();
+					int[][] states = map.getStates2D();
+					Tile[][] tiles = mapView.getTiles2D();
+					
+					for(int row = 0; row < biomes.length; row++)
+					{
+						for(int col = 0; col < biomes[row].length; col++)
+						{
+							tiles[row][col].setBackground(biomes[row][col].getColor());
+							tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+						}
+					}
+					
+					localMaps.put(map, mapView);
+					mapCol++;
+				}
+				
+				mapCol = 0;
+				mapRow++;
 			}
 		}
 		
