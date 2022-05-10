@@ -16,6 +16,7 @@ public class Tile extends JButton
 	private int row;
 	private int col;
 	private String level;
+	private Map map;
 	
 	/**
 	 * Builds the tile object.
@@ -37,6 +38,32 @@ public class Tile extends JButton
 		this.setBackground(Color.BLUE);
 		
 		this.addActionListener(click -> app.tileOptions(this));
+	}
+	
+	public Tile(MapController app, int row, int col, String level, Map map)
+	{
+		super();
+		this.app = app;
+		this.level = level;
+		this.row = row;
+		this.col = col;
+		this.map = map;
+		this.setName("row" + row + "col" + col);
+		this.setBorder(null);
+		this.setOpaque(false);
+		this.setBackground(Color.BLUE);
+		
+		this.addActionListener(click -> app.tileOptions(this));
+	}
+	
+	public void setMap(Map map)
+	{
+		this.map = map;
+	}
+	
+	public Map getMap()
+	{
+		return map;
 	}
 	
 	public int getRow()
