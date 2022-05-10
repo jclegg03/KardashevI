@@ -135,6 +135,8 @@ public class MapController implements Serializable
 				EmpireRegionalMap map = worldMapModel.getMap(mapRow, mapCol);
 				RegionalMap mapView = new RegionalMap(this);
 				
+				mapView.setName(map.getName());
+				
 				Biome[][] biomes = map.getBiomes2D();
 				int[][] states = map.getStates2D();
 				Tile[][] tiles = mapView.getTiles2D();
@@ -172,6 +174,8 @@ public class MapController implements Serializable
 				{
 					EmpireLocalMap map = region.getMap(mapRow, mapCol);
 					LocalMap mapView = new LocalMap(this);
+					
+					mapView.setName(map.getName());
 					
 					Biome[][] biomes = map.getBiomes2D();
 					int[][] states = map.getStates2D();
@@ -994,6 +998,11 @@ public class MapController implements Serializable
 	public Controller getController()
 	{
 		return this.app;
+	}
+	
+	public String getCurrentMapName()
+	{
+		return selectMapModel(currentMap).getName();
 	}
 	
 	public void fullyExplore(EmpireMap map)

@@ -116,6 +116,7 @@ public class MapLevelSelector extends MainPanel
 	public void update(Map map)
 	{
 		this.currentMap = map;
+		map.setName(app.getCurrentMapName());
 		mapName.setText(map.getName());
 		mapLevel.setText(map.getLevel());
 		this.setVisible(false);

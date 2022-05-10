@@ -20,11 +20,5 @@ public class LocalMap extends Map
 		super(app, 10, 10, MapController.LOCAL);
 		this.name = "Local Map " + count;
 		count++;
-		
-		//Uncomment this to fully explore all local maps.
-//		for(Tile tile : this.getTiles())
-//		{
-//			tile.setIsExplored(true);
-//		}
 	}
 }
