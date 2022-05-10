@@ -26,6 +26,7 @@ public class EmpireLocalMap extends EmpireMap
 		super(10, 10, location, MapController.LOCAL);
 		this.name = "Local Map " + count;
 		this.parentBiome = parentBiome.copy();
+		count++;
 	}
 	
 	public RegionalBiome getParentBiome()
