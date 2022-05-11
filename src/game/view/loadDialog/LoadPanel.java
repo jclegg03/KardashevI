@@ -95,12 +95,18 @@ public class LoadPanel extends MainPanel
 			button.addActionListener(click -> update(button));
 		}
 		
-		cancelButton.addActionListener(click -> parent.dispose());
+		cancelButton.addActionListener(click -> cancel());
 	}
 
 	private void update(JButton button)
 	{
 		app.setSaveIndex(Integer.parseInt(button.getName()));
 		parent.dispose();
+	}
+	
+	private void cancel()
+	{
+		parent.dispose();
+		app.returnFocus();
 	}
 }
