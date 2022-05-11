@@ -19,6 +19,7 @@ public class IOController
 	 * The method to save a game.
 	 * @author Jay Clegg
 	 * @param app The game to be saved.
+	 * @param details Extra information for the save.
 	 */
 	public static void saveGame(Controller app, String details)
 	{
@@ -62,6 +63,11 @@ public class IOController
 		return loaded;
 	}
 	
+	/**
+	 * Saves the game's settings.
+	 * @author Jay Clegg
+	 * @param settings The settings to be saved.
+	 */
 	public static void saveSettings(Settings settings)
 	{
 		try(FileOutputStream saveStream = new FileOutputStream("KardashevI.settings");
@@ -79,6 +85,11 @@ public class IOController
 		}
 	}
 	
+	/**
+	 * Loads the game's settings.
+	 * @author Jay Clegg
+	 * @return The loaded settings.
+	 */
 	public static Settings loadSettings()
 	{
 		Settings loaded = new Settings();
