@@ -18,6 +18,7 @@ public class LoadPanel extends MainPanel
 	private JScrollPane scrollPane;
 	private JPanel buttonPanel;
 	private JButton[] buttons;
+	private JButton cancelButton;
 	private JLabel label;
 	private SpringLayout layout;
 	private LoadDialog parent;
@@ -30,6 +31,7 @@ public class LoadPanel extends MainPanel
 		this.scrollPane = new JScrollPane();
 		this.buttonPanel = new JPanel();
 		this.buttons = new JButton[saves.length];
+		this.cancelButton = new JButton("Cancel");
 		this.label = new JLabel("Saved Games");
 		this.layout = new SpringLayout();
 		this.parent = parent;
@@ -65,6 +67,7 @@ public class LoadPanel extends MainPanel
 
 		this.add(label);
 		this.add(scrollPane);
+		this.add(cancelButton);
 	}
 
 	@Override
@@ -91,6 +94,8 @@ public class LoadPanel extends MainPanel
 		{
 			button.addActionListener(click -> update(button));
 		}
+		
+		cancelButton.addActionListener(click -> parent.dispose());
 	}
 
 	private void update(JButton button)
