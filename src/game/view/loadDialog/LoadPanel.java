@@ -10,6 +10,8 @@ import javax.swing.SpringLayout;
 import game.controller.Controller;
 import gui.utility.JButton;
 import gui.utility.MainPanel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class LoadPanel extends MainPanel
 {
@@ -64,6 +66,9 @@ public class LoadPanel extends MainPanel
 		scrollPane.setViewportView(buttonPanel);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		label.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
 
 		this.add(label);
 		this.add(scrollPane);
@@ -75,16 +80,20 @@ public class LoadPanel extends MainPanel
 	{
 		buttonPanel.setLayout(new GridLayout(0, 1, 0, 3));
 		this.setLayout(layout);
-		
-		layout.putConstraint(SpringLayout.NORTH, scrollPane, 0, SpringLayout.SOUTH, label);
-		layout.putConstraint(SpringLayout.WEST, scrollPane, 0, SpringLayout.WEST, label);
-		layout.putConstraint(SpringLayout.EAST, scrollPane, 0, SpringLayout.EAST, label);
 		layout.putConstraint(SpringLayout.NORTH, label, 0, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.SOUTH, label, 20, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.EAST, label, 0, SpringLayout.EAST, this);
 		
-		layout.putConstraint(SpringLayout.SOUTH, scrollPane, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.NORTH, scrollPane, 10, SpringLayout.SOUTH, label);
+		layout.putConstraint(SpringLayout.WEST, scrollPane, 0, SpringLayout.WEST, cancelButton);
+		
+		layout.putConstraint(SpringLayout.SOUTH, scrollPane, -10, SpringLayout.NORTH, cancelButton);
+		layout.putConstraint(SpringLayout.EAST, scrollPane, 0, SpringLayout.EAST, cancelButton);
+		layout.putConstraint(SpringLayout.NORTH, cancelButton, -30, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.WEST, cancelButton, 10, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, cancelButton, -10, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, cancelButton, -10, SpringLayout.EAST, this);
 	}
 
 	@Override
