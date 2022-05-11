@@ -47,7 +47,7 @@ public abstract class Map extends JPanel
 			}
 		}
 		
-		this.setBackground(Color.BLACK);
+		this.setBackground(Color.GRAY);
 	}
 	
 	/**

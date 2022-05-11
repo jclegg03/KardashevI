@@ -96,6 +96,8 @@ public class MapController implements Serializable
 		this.worldMapModel = empire.getWorldMap();
 		
 		loadMaps();
+		
+		fullyExplore(worldMapModel);
 	}
 	
 	private void loadMaps()
@@ -159,47 +161,59 @@ public class MapController implements Serializable
 		}
 		
 		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
+		currentRow = app.getEmpire().getStartingMap().getLocation().getRow();
+		currentCol = app.getEmpire().getStartingMap().getLocation().getCol();
 	}
 	
 	private void loadLocalMaps()
 	{
-		for(EmpireRegionalMap region : regionalMaps.keySet())
+		int regionRow = 0;
+		int regionCol = 0;
+		while(worldMapModel.getMap(regionRow, regionCol) != null)
 		{
-			int mapRow = 0;
-			int mapCol = 0;
-			
-			while(region.getMap(mapRow, mapCol) != null)
+			while(worldMapModel.getMap(regionRow, regionCol) != null)
 			{
+				EmpireRegionalMap region = worldMapModel.getMap(regionRow, regionCol);
+				int mapRow = 0;
+				int mapCol = 0;
+				
 				while(region.getMap(mapRow, mapCol) != null)
 				{
-					EmpireLocalMap map = region.getMap(mapRow, mapCol);
-					LocalMap mapView = new LocalMap(this);
-					
-					mapView.setName(map.getName());
-					
-					Biome[][] biomes = map.getBiomes2D();
-					int[][] states = map.getStates2D();
-					Tile[][] tiles = mapView.getTiles2D();
-					
-					for(int row = 0; row < biomes.length; row++)
+					while(region.getMap(mapRow, mapCol) != null)
 					{
-						for(int col = 0; col < biomes[row].length; col++)
+						EmpireLocalMap map = region.getMap(mapRow, mapCol);
+						LocalMap mapView = new LocalMap(this);
+						
+						mapView.setName(map.getName());
+						
+						Biome[][] biomes = map.getBiomes2D();
+						int[][] states = map.getStates2D();
+						Tile[][] tiles = mapView.getTiles2D();
+						
+						for(int row = 0; row < biomes.length; row++)
 						{
-							tiles[row][col].setBackground(biomes[row][col].getColor());
-							tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+							for(int col = 0; col < biomes[row].length; col++)
+							{
+								tiles[row][col].setBackground(biomes[row][col].getColor());
+								tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+							}
 						}
+						
+						localMaps.put(map, mapView);
+						mapCol++;
 					}
 					
-					localMaps.put(map, mapView);
-					mapCol++;
+					mapCol = 0;
+					mapRow++;
 				}
-				
-				mapCol = 0;
-				mapRow++;
+				regionCol++;
 			}
+			regionCol = 0;
+			regionRow++;
 		}
 		
 		currentMap = localMaps.get(app.getEmpire().getOrigin());
+		selectedTile = regionalMaps.get(app.getEmpire().getStartingMap()).getTile(selectMapModel(currentMap).getLocation().getRow(), selectMapModel(currentMap).getLocation().getCol());
 	}
 	
 	private void assignMaps()
@@ -224,7 +238,7 @@ public class MapController implements Serializable
 	 */
 	private void buildWorldMap()
 	{
-		worldMapModel = new EmpireWorldMap(app.getEmpire());
+		worldMapModel = new EmpireWorldMap();
 		worldMapView = new WorldMap(this);
 		
 		for(int row = 0; row < worldMapModel.getRows(); row++)

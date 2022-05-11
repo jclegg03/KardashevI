@@ -21,7 +21,7 @@ public class EmpireWorldMap extends EmpireMap
 	 * @param empire The owner of this map.
 	 * @author Jay Clegg
 	 */
-	public EmpireWorldMap(Empire empire)
+	public EmpireWorldMap()
 	{
 		super(20, 20, new Location(0, 0, null, null), MapController.WORLD);
 		this.regionalMaps = new HashMap<Location, EmpireRegionalMap>();
