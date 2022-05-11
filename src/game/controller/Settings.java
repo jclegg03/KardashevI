@@ -7,6 +7,8 @@ import java.io.Serializable;
  * @author Jay Clegg
  *
  */
+@WIP
+//Just a stub for now.
 public class Settings implements Serializable
 {
 

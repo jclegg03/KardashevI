@@ -1188,16 +1188,12 @@ _+ loadSettings() : Settings_</panel_attributes>
       <x>1788</x>
       <y>264</y>
       <w>96</w>
-      <h>48</h>
+      <h>20</h>
     </coordinates>
     <panel_attributes>Settings
 --
-- hotkeys : KeyEvent[]
 --
-+ settings() : Constructor
-+ settings(KeyEvent[]) : Constructor
-+ getHotkeys() : KeyEvent[]
-+ setHotkeys(KeyEvent[]) : void</panel_attributes>
+Will eventually hold hotkeys</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
