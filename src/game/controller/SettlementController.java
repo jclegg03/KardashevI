@@ -11,12 +11,13 @@ import game.view.gameView.SettlementPanel;
  * @author Jay Clegg
  *
  */
+@WIP
+//Need to make a settlement class in the model.
+//private HashMap <Settlement, JButton> settlements;
 public class SettlementController implements Serializable
 {
 	private Controller app;
 	private SettlementPanel settlementPanel;
-	//Need to make a settlement class in the model.
-	//private HashMap <Settlement, JButton> settlements;
 	
 	/**
 	 * Builds a settlement controller.
@@ -28,6 +29,12 @@ public class SettlementController implements Serializable
 		this.app = app;
 	}
 	
+	/**
+	 * Builds a settlement controller from a loaded empire.
+	 * @author Jay Clegg
+	 * @param empire The loaded empire.
+	 * @param app The controller this reports to.
+	 */
 	@WIP
 	//need to use the empire to generate data.
 	//Can be done once the model and this class are written.
@@ -50,7 +57,7 @@ public class SettlementController implements Serializable
 	/**
 	 * Selects a settlement when it is clicked.
 	 * @author Jay Clegg
-	 * @param name
+	 * @param name The name of the settlement selected.
 	 */
 	@WIP
 	//Needs to display a building menu to show the options for the building.

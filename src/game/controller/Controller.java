@@ -124,19 +124,23 @@ public class Controller implements Serializable
 		new LoadDialog(this, frame, saves);
 		
 		this.empire = IOController.loadGame(path + "/" + saves[saveIndex]);
-		this.mapController = new MapController(empire, this);
-		this.settlementController = new SettlementController(empire, this);
-		this.toolbarController = new ToolbarController(this);
-		this.resourceController = new ResourceController(empire, this);
 		
-		frame.dispose();
-		frame = new GameFrame(this);
-		
-		finishSetup();
-		
-		if(empire.getMapSelectorAdded())
+		if(empire != null)
 		{
-			addMapSelector();
+			this.mapController = new MapController(empire, this);
+			this.settlementController = new SettlementController(empire, this);
+			this.toolbarController = new ToolbarController(this);
+			this.resourceController = new ResourceController(empire, this);
+			
+			frame.dispose();
+			frame = new GameFrame(this);
+			
+			finishSetup();
+			
+			if(empire.getMapSelectorAdded())
+			{
+				addMapSelector();
+			}
 		}
 		
 		returnFocus();
