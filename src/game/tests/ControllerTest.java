@@ -34,32 +34,25 @@ class ControllerTest
 	}
 
 	@Test
-	void testRefactor()
+	void testController()
 	{
 		Method [] methods = testedController.getClass().getDeclaredMethods();
+		boolean hasSave = false;
+		boolean hasLoad = false;
 		assertTrue(methods.length >= 2, "You need at least two methods in the controller");
-		boolean hasSingleParameter = false;
-		boolean hasDoubleParameter = false;
 		
 		for (Method method : methods)
 		{
-			if (method.getName().equals("interactWithChatbot"))
-			{
-				if (method.getParameterCount() == 1)
-				{
-					Type[] types = method.getGenericParameterTypes();
-					assertTrue(types[0].getTypeName().equals("java.lang.String"), "The parameter type needs to be: String");
-					hasSingleParameter = true;
-				}
-				else if (method.getParameterCount() == 2)
-				{
-					hasDoubleParameter = true;
-				}
-			}
+			if(method.getName().equals("save")) hasSave = true;
+			else if(method.getName().toLowerCase().contains("load")) hasLoad = true;
 		}
-
-		assertTrue(hasSingleParameter, "You need a single parameter method named interactWithChatbot");
-		assertTrue(hasDoubleParameter, "You need a double parameter method named interactWithChatbot");
+		
+		assertTrue(hasSave, "You need a save method.");
+		assertTrue(hasLoad, "You need a load method.");
+		
+		testedController.loadGame();
+		
+		assertTrue(testedController.getEmpire() != null, "The load method must set the empire variable.");
 	}
 
 }
