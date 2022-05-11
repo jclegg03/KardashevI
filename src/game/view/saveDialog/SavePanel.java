@@ -30,7 +30,6 @@ public class SavePanel extends MainPanel
 		this.confirmButton = new JButton("Confirm");
 		this.cancelButton = new JButton("Cancel");
 		this.layout = new SpringLayout();
-		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 55, SpringLayout.NORTH, this);
 		
 		setupPanel();
 		setupLayout();
@@ -42,6 +41,8 @@ public class SavePanel extends MainPanel
 	{
 		this.setLayout(layout);
 		buttonPanel.setLayout(new GridLayout(1, 0, 10, 0));
+		
+		layout.putConstraint(SpringLayout.NORTH, buttonPanel, 55, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.WEST, buttonPanel, 0, SpringLayout.WEST, detailsField);
 		layout.putConstraint(SpringLayout.SOUTH, buttonPanel, -5, SpringLayout.SOUTH, this);
@@ -56,7 +57,7 @@ public class SavePanel extends MainPanel
 	protected void setupListeners()
 	{
 		cancelButton.addActionListener(click -> parent.dispose());
-		confirmButton.addActionListener(click -> app.save(detailsField.getText()));
+		confirmButton.addActionListener(click -> confirm());
 	}
 	
 	@Override
@@ -67,5 +68,11 @@ public class SavePanel extends MainPanel
 		
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(confirmButton);
+	}
+	
+	private void confirm()
+	{
+		app.save(detailsField.getText());
+		parent.dispose();
 	}
 }
