@@ -264,5 +264,6 @@ public class Controller implements Serializable
 	{
 		toolbarController.finishSetup();
 		settlementController.finishSetup();
+		resourceController.finishSetup();
 	}
 }
