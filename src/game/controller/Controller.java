@@ -25,6 +25,7 @@ import gui.utility.JFrame;
  */
 public class Controller implements Serializable
 {
+	
 	private Empire empire;
 	private JFrame frame;
 	private MapController mapController;
@@ -131,7 +132,7 @@ public class Controller implements Serializable
 		frame.dispose();
 		frame = new GameFrame(this);
 		
-		settlementController.finishSetup();
+		finishSetup();
 		
 		if(empire.getMapSelectorAdded())
 		{
@@ -210,7 +211,7 @@ public class Controller implements Serializable
 		frame.dispose();
 		frame = new GameFrame(this);
 		
-		settlementController.finishSetup();
+		finishSetup();
 	}
 	
 	/**
@@ -257,5 +258,11 @@ public class Controller implements Serializable
 	public void setSaveIndex(int saveIndex)
 	{
 		this.saveIndex = saveIndex;
+	}
+	
+	private void finishSetup()
+	{
+		toolbarController.finishSetup();
+		settlementController.finishSetup();
 	}
 }

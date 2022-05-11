@@ -30,7 +30,7 @@ public class GameContentPane extends MainPanel
 	private Map map;
 	private ResourcePanel resourcePanel;
 	private SettlementPanel settlementPanel;
-	private JPanel utilityPanel;
+	private JPanel toolbarPanel;
 	private JButton researchButton;
 	private JButton menuButton;
 	private MapLevelSelector mapSelector;
@@ -51,7 +51,7 @@ public class GameContentPane extends MainPanel
 		this.map = app.getMapController().getCurrentMap();
 		this.resourcePanel = new ResourcePanel(app.getResourceController());
 		this.settlementPanel = new SettlementPanel(app.getSettlementController());
-		this.utilityPanel = new JPanel();
+		this.toolbarPanel = new JPanel();
 		this.researchButton = new JButton("Research");
 		this.menuButton = new JButton("Menu");
 		this.mapSelector = new MapLevelSelector(app.getMapController(), map);
@@ -72,14 +72,14 @@ public class GameContentPane extends MainPanel
 		this.add(mapPanel);
 		this.add(resourcePanel);
 		this.add(settlementPanel);
-		this.add(utilityPanel);
+		this.add(toolbarPanel);
 	}
 	
 	private void setupUtilityPanel()
 	{
-		utilityPanel.setLayout(new GridLayout(0, 1, 0, 5));
-		utilityPanel.add(researchButton);
-		utilityPanel.add(menuButton);
+		toolbarPanel.setLayout(new GridLayout(0, 1, 0, 5));
+		toolbarPanel.add(researchButton);
+		toolbarPanel.add(menuButton);
 	}
 	
 	protected void setupLayout()
@@ -100,11 +100,11 @@ public class GameContentPane extends MainPanel
 		layout.putConstraint(SpringLayout.SOUTH, settlementPanel, 0, SpringLayout.SOUTH, this);
 		layout.putConstraint(SpringLayout.EAST, settlementPanel, (int) (-9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.EAST, this);
 		
-		layout.putConstraint(SpringLayout.EAST, mapPanel, 0, SpringLayout.WEST, utilityPanel);
-		layout.putConstraint(SpringLayout.NORTH, utilityPanel, 50, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, utilityPanel, (int) (9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.SOUTH, utilityPanel, 0, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, utilityPanel, 0, SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.EAST, mapPanel, 0, SpringLayout.WEST, toolbarPanel);
+		layout.putConstraint(SpringLayout.NORTH, toolbarPanel, 50, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, toolbarPanel, (int) (9 * Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 10), SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.SOUTH, toolbarPanel, 0, SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, toolbarPanel, 0, SpringLayout.EAST, this);
 	}
 	
 	protected void setupListeners()
@@ -152,6 +152,14 @@ public class GameContentPane extends MainPanel
 		return this.resourcePanel;
 	}
 	
+	/**
+	 * @return The toolbarPanel.
+	 */
+	public JPanel getToolbarPanel()
+	{
+		return toolbarPanel;
+	}
+
 	public Map getMap()
 	{
 		return this.map;
@@ -176,7 +184,7 @@ public class GameContentPane extends MainPanel
 		this.add(mapSelector);
 		layout.putConstraint(SpringLayout.SOUTH, mapPanel, -110, SpringLayout.SOUTH, this);
 		layout.putConstraint(SpringLayout.SOUTH, mapSelector, 0, SpringLayout.SOUTH, this);
-		layout.putConstraint(SpringLayout.EAST, mapSelector, 0, SpringLayout.WEST, utilityPanel);
+		layout.putConstraint(SpringLayout.EAST, mapSelector, 0, SpringLayout.WEST, toolbarPanel);
 		layout.putConstraint(SpringLayout.WEST, mapSelector, 0, SpringLayout.EAST, settlementPanel);
 		layout.putConstraint(SpringLayout.NORTH, mapSelector, 0, SpringLayout.SOUTH, mapPanel);
 		this.setVisible(false);
