@@ -16,7 +16,16 @@ import game.view.gameView.SettlementPanel;
 //private HashMap <Settlement, JButton> settlements;
 public class SettlementController implements Serializable
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
+	
+	/**
+	 * The settlement panel this controls.
+	 * @author Jay Clegg
+	 */
 	private SettlementPanel settlementPanel;
 	
 	/**
