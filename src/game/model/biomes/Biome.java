@@ -10,8 +10,22 @@ import java.io.Serializable;
  */
 public abstract class Biome implements Comparable<Biome>, Serializable
 {
-	protected Color color;
+	/**
+	 * The color of this biome.
+	 * @author Jay Clegg
+	 */
+	protected final Color COLOR;
+	
+	/**
+	 * The name of this biome.
+	 * @author Jay Clegg
+	 */
 	protected final String NAME;
+	
+	/**
+	 * How frequently this biome generates.
+	 * @author Jay Clegg
+	 */
 	protected final int WEIGHT;
 	
 	/**
@@ -23,14 +37,40 @@ public abstract class Biome implements Comparable<Biome>, Serializable
 	 */
 	public Biome(Color color, String name, int weight)
 	{
-		this.color = color;
+		this.COLOR = color;
 		this.NAME = name;
 		this.WEIGHT = weight;
 	}
 	
+	@Override
+	public int compareTo(Biome otherBiome)
+	{
+		return this.NAME.compareTo(otherBiome.getName());
+	}
+	
+	/**
+	 * Makes a copy of the biome.
+	 * @author Jay Clegg
+	 * @return The copy of the biome.
+	 */
+	public abstract Biome copy();
+	
+	@Override
+	public boolean equals(Object biome)
+	{
+		try
+		{
+			return ((Biome) (biome)).getName().equals(this.getName());
+		}
+		catch(Exception error)
+		{
+			return false;
+		}
+	}
+	
 	public Color getColor()
 	{
-		return this.color;
+		return this.COLOR;
 	}
 	
 	public String getName()
@@ -43,28 +83,9 @@ public abstract class Biome implements Comparable<Biome>, Serializable
 		return this.WEIGHT;
 	}
 	
-	/**
-	 * Makes a copy of the biome.
-	 * @author Jay Clegg
-	 * @return The copy of the biome.
-	 */
-	public abstract Biome copy();
-	
-	@Override
-	public int compareTo(Biome otherBiome)
-	{
-		return this.NAME.compareTo(otherBiome.getName());
-	}
-	
 	@Override
 	public String toString()
 	{
 		return this.NAME;
-	}
-	
-	@Override
-	public boolean equals(Object biome)
-	{
-		return ((Biome) (biome)).getName().equals(this.getName());
 	}
 }

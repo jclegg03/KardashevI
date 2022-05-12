@@ -13,14 +13,14 @@ import game.model.units.Building;
  */
 public interface Allows
 {
-	public ArrayList<Building> getAllowedBuildings();
-	
 	/**
 	 * Adds a building to the list of allowed buildings.
 	 * @author Jay Clegg
 	 * @param building The building to be added to the list.
 	 */
 	public void addAllowed(Building building);
+	
+	public ArrayList<Building> getAllowedBuildings();
 	
 	/**
 	 * Determines if a certain building is allowed.

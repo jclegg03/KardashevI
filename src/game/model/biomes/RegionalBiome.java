@@ -24,6 +24,6 @@ public class RegionalBiome extends Biome
 	@Override
 	public RegionalBiome copy()
 	{
-		return new RegionalBiome(this.color, this.NAME, this.WEIGHT);
+		return new RegionalBiome(this.COLOR, this.NAME, this.WEIGHT);
 	}
 }

@@ -24,6 +24,6 @@ public class WorldBiome extends Biome
 	@Override
 	public WorldBiome copy()
 	{
-		return new WorldBiome(this.color, this.NAME, this.WEIGHT);
+		return new WorldBiome(this.COLOR, this.NAME, this.WEIGHT);
 	}
 }

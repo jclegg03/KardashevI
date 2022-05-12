@@ -13,6 +13,10 @@ import game.model.units.Building;
  */
 public class LocalBiome extends Biome implements Allows
 {
+	/**
+	 * A list of buildings that can be built on this biome.
+	 * @author Jay Clegg
+	 */
 	private ArrayList<Building> allowedBuildings;
 	
 	/**
@@ -29,17 +33,23 @@ public class LocalBiome extends Biome implements Allows
 	}
 	
 	@Override
-	public ArrayList<Building> getAllowedBuildings()
-	{
-		return this.allowedBuildings;
-	}
-	
-	@Override
 	public void addAllowed(Building building)
 	{
 		allowedBuildings.add(building);
 	}
 	
+	@Override
+	public LocalBiome copy()
+	{
+		return new LocalBiome(this.COLOR, this.NAME, this.WEIGHT);
+	}
+	
+	@Override
+	public ArrayList<Building> getAllowedBuildings()
+	{
+		return this.allowedBuildings;
+	}
+
 	@Override
 	public boolean isAllowed(Building building)
 	{
@@ -49,11 +59,5 @@ public class LocalBiome extends Biome implements Allows
 		}
 		
 		return false;
-	}
-
-	@Override
-	public Biome copy()
-	{
-		return new LocalBiome(this.color, this.NAME, this.WEIGHT);
 	}
 }
