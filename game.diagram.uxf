@@ -1191,7 +1191,7 @@ Will eventually hold hotkeys</panel_attributes>
       <x>2988</x>
       <y>246</y>
       <w>252</w>
-      <h>378</h>
+      <h>492</h>
     </coordinates>
     <panel_attributes>MapController
 --
@@ -1217,6 +1217,11 @@ _+ WORLD : String_
 - biomes : BiomeList
 --
 + MapController(Controller) : Constructor
+- loadMaps() : void
+- loadWorldMap() : void
+- loadRegionalMaps() : void
+- loadLocalMaps() : void
+- assignMaps() : void
 - buildMaps() : void
 - buildWorldMap() : void
 - exploreRandomRegionalMap() : void
@@ -1227,12 +1232,19 @@ _+ WORLD : String_
 - randomNumber() : int
 - selectModelMap(Map) : EmpireMap
 - exploreMenu() : void
-- exploreTile() : void
+- buildingMenu() : void
 - goTo(String, int, int) : void
+- clearMenus() : void
+- checkExplore() : void
+- getAdjecentMaps() : HashMap &lt;String, EmpireMap&gt;
 + tileOptions(Tile) : void
 + updateUI() : void
 + zoomMapOut() : void
-+ updateMapName() : void</panel_attributes>
++ updateMapName(String) : void
++ exploreTile() : void
++ fullyExplore(EmpireMap) : void
++ getters() : Type
++ setters(Type) : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1290,7 +1302,7 @@ _+ WORLD : String_
       <x>2658</x>
       <y>72</y>
       <w>792</w>
-      <h>576</h>
+      <h>684</h>
     </coordinates>
     <panel_attributes>game.controller
 --

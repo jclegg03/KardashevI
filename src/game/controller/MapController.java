@@ -30,27 +30,133 @@ import game.view.maps.WorldMap;
  * @author Jay Clegg
  *
  */
+/**
+ * @author Jay Clegg
+ *
+ */
 public class MapController implements Serializable
 {
+	/**
+	 * A value to represent an empire's owned territory.
+	 * @author Jay Clegg
+	 */
 	public static final int OWNED = 0;
+	
+	/**
+	 * A value to represent an empire's claimed territory.
+	 * @author Jay Clegg
+	 */
 	public static final int CLAIMED = 1;
+	
+	/**
+	 * A value to represent an empire's explored territory.
+	 * @author Jay Clegg
+	 */
 	public static final int EXPLORED = 2;
+	
+	/**
+	 * A value to represent an empire's unexplored territory.
+	 * @author Jay Clegg
+	 */
 	public static final int UNEXPLORED = 3;
+	
+	/**
+	 * A value to designate a map as a local map.
+	 * @author Jay Clegg
+	 */
 	public static final String LOCAL = "Local";
+	
+	/**
+	 * A value to designate a map as a regional map.
+	 * @author Jay Clegg
+	 */
 	public static final String REGIONAL = "Regional";
+	
+	/**
+	 * A value to designate a map as a world map.
+	 * @author Jay Clegg
+	 */
 	public static final String WORLD = "World";
+	
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
+	
+	/**
+	 * The currently displayed building menu.<br>
+	 * This is not initialized by the constructor.
+	 * @author Jay Clegg
+	 */
 	private BuildingMenu buildingMenu;
+	
+	/**
+	 * The currently displayed exploring menu.<br>
+	 * This is not initialized by the constructor.
+	 * @author Jay Clegg
+	 */
 	private ExploreMenu exploreMenu;
+	
+	/**
+	 * The world map inside the model.
+	 * @author Jay Clegg
+	 */
 	private EmpireWorldMap worldMapModel;
+	
+	/**
+	 * The world map in the view.
+	 * @author Jay Clegg
+	 */
 	private WorldMap worldMapView;
+	
+	/**
+	 * A hash map with all the regional maps in the model as keys and the corresponding regional maps in the view as the values.
+	 * @author Jay Clegg
+	 */
 	private HashMap<EmpireRegionalMap, RegionalMap> regionalMaps;
+	
+	/**
+	 * A hash map with all the local maps in the model as keys and the corresponding local maps in the view as the values.
+	 * @author Jay Clegg
+	 */
 	private HashMap<EmpireLocalMap, LocalMap> localMaps;
+	
+	/**
+	 * The currently selected tile. Used to determine which map to go to.<br>
+	 * This is not initialized in the constructor.
+	 * @author Jay Clegg
+	 */
 	private Tile selectedTile;
+	
+	/**
+	 * The currently displayed map.
+	 * @author Jay Clegg
+	 */
 	private Map currentMap;
+	
+	/**
+	 * The previous regional map. Used when zooming out from a local map to a regional map.
+	 * @author Jay Clegg
+	 */
 	private RegionalMap previousMap;
+	
+	/**
+	 * The row of the current regional map. Used to select the correct local map from the regional map.
+	 * @author Jay Clegg
+	 */
 	private int currentRow;
+	
+	/**
+	 * The column of the current regional map. Used to select the correct local map from the regional map.
+	 * @author Jay Clegg
+	 */
 	private int currentCol;
+	
+	/**
+	 * The list of all the biomes. Used only to generate a map for the first time.
+	 * @author Jay Clegg
+	 */
 	private BiomeList biomes;
 	
 	/**
@@ -69,9 +175,9 @@ public class MapController implements Serializable
 		
 		//This fully explores the starting map minus one square.
 		//The one square has to not be explored so the map selector will appear.
-		fullyExplore(selectMapModel(currentMap));
-		currentMap.getTile(0, 0).setOpaque(false);
-		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
+//		fullyExplore(selectMapModel(currentMap));
+//		currentMap.getTile(0, 0).setOpaque(false);
+//		selectMapModel(currentMap).setState(0, 0, UNEXPLORED);
 		
 		//This fully explores the starting region minus one square.
 		//The one square has to not be explored so the map selector will appear.
@@ -88,6 +194,12 @@ public class MapController implements Serializable
 		assignMaps();
 	}
 	
+	/**
+	 * Builds a map controller from a loaded empire.
+	 * @author Jay Clegg
+	 * @param empire The loaded empire.
+	 * @param app The controller this reports to.
+	 */
 	public MapController(Empire empire, Controller app)
 	{
 		this.app = app;
@@ -100,6 +212,10 @@ public class MapController implements Serializable
 		fullyExplore(worldMapModel);
 	}
 	
+	/**
+	 * Loads all the maps. This is only called from the 2 parameter constructor used for loading.
+	 * @author Jay Clegg
+	 */
 	private void loadMaps()
 	{
 		loadWorldMap();
@@ -107,6 +223,10 @@ public class MapController implements Serializable
 		loadLocalMaps();
 	}
 	
+	/**
+	 * Loads the world map.
+	 * @author Jay Clegg
+	 */
 	private void loadWorldMap()
 	{
 		this.worldMapView = new WorldMap(this);
@@ -125,6 +245,10 @@ public class MapController implements Serializable
 		}
 	}
 	
+	/**
+	 * Loads the regional maps.
+	 * @author Jay Clegg
+	 */
 	private void loadRegionalMaps()
 	{
 		int mapRow = 0;
@@ -165,6 +289,10 @@ public class MapController implements Serializable
 		currentCol = app.getEmpire().getStartingMap().getLocation().getCol();
 	}
 	
+	/**
+	 * Loads the local maps.
+	 * @author Jay Clegg
+	 */
 	private void loadLocalMaps()
 	{
 		int regionRow = 0;
@@ -216,6 +344,11 @@ public class MapController implements Serializable
 		selectedTile = regionalMaps.get(app.getEmpire().getStartingMap()).getTile(selectMapModel(currentMap).getLocation().getRow(), selectMapModel(currentMap).getLocation().getCol());
 	}
 	
+	/**
+	 * Gives the empire any maps it needs. Usually because it needs to be saved. Only the world map model is saved since it also
+	 *  contains all the regional and local maps.
+	 * @author Jay Clegg
+	 */
 	private void assignMaps()
 	{
 		app.getEmpire().addMap(worldMapModel);
@@ -757,6 +890,10 @@ public class MapController implements Serializable
 		app.returnFocus();
 	}
 	
+	/**
+	 * Disposes of all displayed menus.
+	 * @author Jay Clegg
+	 */
 	private void clearMenus()
 	{
 		if(buildingMenu != null)
@@ -770,6 +907,10 @@ public class MapController implements Serializable
 		}
 	}
 	
+	/**
+	 * Checks if a tile can be explored.
+	 * @author Jay Clegg
+	 */
 	private void checkExplore()
 	{
 		ArrayList<Location> adjecentTiles = new ArrayList<Location>();
@@ -843,6 +984,11 @@ public class MapController implements Serializable
 		}
 	}
 	
+	/**
+	 * Finds the adjacent maps to the current map.
+	 * @author Jay Clegg
+	 * @return A hash map of string keys (north, south, east, west) and the maps. These maps are the maps adjacent to the current map.
+	 */
 	private HashMap<String, EmpireMap> getAdjecentMaps()
 	{
 		EmpireMap current = selectMapModel(currentMap);
@@ -1019,6 +1165,11 @@ public class MapController implements Serializable
 		return selectMapModel(currentMap).getName();
 	}
 	
+	/**
+	 * Completely explores the given map and the maps contained in it.
+	 * @author Jay Clegg
+	 * @param map
+	 */
 	public void fullyExplore(EmpireMap map)
 	{
 		if(map.getLevel().equals(LOCAL))
