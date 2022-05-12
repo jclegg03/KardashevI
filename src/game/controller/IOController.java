@@ -16,29 +16,6 @@ import game.model.empire.Empire;
 public class IOController
 {
 	/**
-	 * The method to save a game.
-	 * @author Jay Clegg
-	 * @param app The game to be saved.
-	 * @param details Extra information for the save.
-	 */
-	public static void saveGame(Controller app, String details)
-	{
-		try(FileOutputStream saveStream = new FileOutputStream(app.getEmpire().getName() + details + ".kdsi");
-				ObjectOutputStream output = new ObjectOutputStream(saveStream))
-		{
-			output.writeObject(app.getEmpire());
-		}
-		catch(IOException saveError)
-		{
-			
-		}
-		catch(Exception generalError)
-		{
-			
-		}
-	}
-	
-	/**
 	 * The method to load a game.
 	 * @author Jay Clegg
 	 * @param file The file where the save data is stored.
@@ -61,28 +38,6 @@ public class IOController
 			
 		}
 		return loaded;
-	}
-	
-	/**
-	 * Saves the game's settings.
-	 * @author Jay Clegg
-	 * @param settings The settings to be saved.
-	 */
-	public static void saveSettings(Settings settings)
-	{
-		try(FileOutputStream saveStream = new FileOutputStream("KardashevI.settings");
-				ObjectOutputStream output = new ObjectOutputStream(saveStream))
-		{
-			output.writeObject(settings);
-		}
-		catch(IOException saveError)
-		{
-			
-		}
-		catch(Exception generalError)
-		{
-			
-		}
 	}
 	
 	/**
@@ -109,5 +64,50 @@ public class IOController
 		}
 		
 		return loaded;
+	}
+	
+	/**
+	 * The method to save a game.
+	 * @author Jay Clegg
+	 * @param app The game to be saved.
+	 * @param details Extra information for the save.
+	 */
+	public static void saveGame(Controller app, String details)
+	{
+		try(FileOutputStream saveStream = new FileOutputStream(app.getEmpire().getName() + details + ".kdsi");
+				ObjectOutputStream output = new ObjectOutputStream(saveStream))
+		{
+			output.writeObject(app.getEmpire());
+		}
+		catch(IOException saveError)
+		{
+			
+		}
+		catch(Exception generalError)
+		{
+			
+		}
+	}
+	
+	/**
+	 * Saves the game's settings.
+	 * @author Jay Clegg
+	 * @param settings The settings to be saved.
+	 */
+	public static void saveSettings(Settings settings)
+	{
+		try(FileOutputStream saveStream = new FileOutputStream("KardashevI.settings");
+				ObjectOutputStream output = new ObjectOutputStream(saveStream))
+		{
+			output.writeObject(settings);
+		}
+		catch(IOException saveError)
+		{
+			
+		}
+		catch(Exception generalError)
+		{
+			
+		}
 	}
 }
