@@ -53,6 +53,16 @@ public class SettlementController implements Serializable
 	}
 	
 	/**
+	 * Adds a settlement with the specified name to the panel.
+	 * @author Jay Clegg
+	 * @param name The name of the settlement.
+	 */
+	public void addSettlement(String name)
+	{
+		settlementPanel.addSettlement(name);
+	}
+	
+	/**
 	 * Adds the settlement panel to this controller after it has been constructed.
 	 * @author Jay Clegg
 	 */
@@ -75,15 +85,5 @@ public class SettlementController implements Serializable
 		settlementPanel.addSettlement("hello");
 		
 		app.returnFocus();
-	}
-	
-	/**
-	 * Adds a settlement with the specified name to the panel.
-	 * @author Jay Clegg
-	 * @param name The name of the settlement.
-	 */
-	public void addSettlement(String name)
-	{
-		settlementPanel.addSettlement(name);
 	}
 }
