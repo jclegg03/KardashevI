@@ -25,15 +25,59 @@ import gui.utility.JFrame;
  */
 public class Controller implements Serializable
 {
-	
+	/**
+	 * The empire, basically the model.
+	 * @author Jay Clegg
+	 */
 	private Empire empire;
+	
+	/**
+	 * The view.
+	 * @author Jay Clegg
+	 */
 	private JFrame frame;
+	
+	/**
+	 * Used to determine if a game was actually loaded.
+	 * @author Jay Clegg
+	 */
+	private boolean gameLoaded;
+	
+	/**
+	 * A sub controller for the maps.
+	 * @author Jay Clegg
+	 */
 	private MapController mapController;
+	
+	/**
+	 * A sub controller for the resources.
+	 * @author Jay Clegg
+	 */
 	private ResourceController resourceController;
-	private Settings settings;
-	private SettlementController settlementController;
-	private ToolbarController toolbarController;
+	
+	/**
+	 * Used to determine which file to load the empire from.
+	 * @author Jay Clegg
+	 */
 	private int saveIndex;
+	
+	/**
+	 * The app's settings.
+	 * @author Jay Clegg
+	 */
+	private Settings settings;
+	
+	/**
+	 * A sub controller for settlements.
+	 * @author Jay Clegg
+	 */
+	private SettlementController settlementController;
+	
+	/**
+	 * A sub controller for the toolbar.
+	 * @author Jay Clegg
+	 */
+	private ToolbarController toolbarController;
 	
 	/**
 	 * Builds the game controller.
@@ -42,43 +86,81 @@ public class Controller implements Serializable
 	public Controller()
 	{
 		this.frame = new MainMenu(this);
+		this.gameLoaded = false;
 	}
 	
 	/**
-	 * Begins the new game.
+	 * Calls the finish setup of the sub controllers. Used to initialize the view members they have.
 	 * @author Jay Clegg
 	 */
-	public void newGame()
+	private void finishSetup()
 	{
-		new NewGameDialog(this, (MainMenu) frame);
-		returnFocus();
-	}
-	
-	public void saveGame(GameMenu menu)
-	{
-		menu.setVisible(false);
-		new SaveDialog(this);
-		menu.setVisible(true);
-		returnFocus();
-	}
-	
-	public void save(String details)
-	{
-		IOController.saveGame(this, details);
+		toolbarController.finishSetup();
+		settlementController.finishSetup();
+		resourceController.finishSetup();
 	}
 	
 	/**
-	 * Creates a load game menu.
+	 * Adds the map selector to the frame and updates the mapSelectorAdded in the model.
 	 * @author Jay Clegg
 	 */
-	public void loadGame(GameMenu menu)
+	public void addMapSelector()
 	{
-		menu.setVisible(false);
-		loadGame();
-		menu.dispose();
-		returnFocus();
+		((GameContentPane) (frame.getContentPane())).addMapSelector();
+		empire.setMapSelectorAdded(true);
+		
 	}
 	
+	/**
+	 * Once the user has entered an empire name, this method starts the game and builds the empire.
+	 * @author Jay Clegg
+	 * @param empireName The name of the empire.
+	 * @param dialog The dialog used to interact with the user.
+	 */
+	public void createEmpire(String empireName, NewGameDialog dialog)
+	{
+		this.empire = new Empire(empireName);
+		this.settlementController = new SettlementController(this);
+		this.toolbarController = new ToolbarController(this);
+		this.mapController = new MapController(this);
+		this.resourceController = new ResourceController(this);
+		
+		dialog.dispose();
+		frame.dispose();
+		frame = new GameFrame(this);
+		
+		finishSetup();
+	}
+	
+	public Empire getEmpire()
+	{
+		return this.empire;
+	}
+	
+	public JFrame getFrame()
+	{
+		return this.frame;
+	}
+	
+	public MapController getMapController()
+	{
+		return this.mapController;
+	}
+	
+	public ResourceController getResourceController()
+	{
+		return this.resourceController;
+	}
+	
+	public SettlementController getSettlementController()
+	{
+		return this.settlementController;
+	}
+	
+	/**
+	 * Actually loads a game.
+	 * @author Jay Clegg
+	 */
 	public void loadGame()
 	{
 		ArrayList<String> fileNames = new ArrayList<String>();
@@ -141,18 +223,34 @@ public class Controller implements Serializable
 			{
 				addMapSelector();
 			}
+			
+			gameLoaded = true;
 		}
 		
 		returnFocus();
 	}
 	
 	/**
-	 * Creates a save game menu.
+	 * Creates a load game menu.
 	 * @author Jay Clegg
 	 */
-	public void settings()
+	public void loadGame(GameMenu menu)
 	{
-		
+		menu.setVisible(false);
+		loadGame();
+		if(gameLoaded) menu.dispose();
+		else menu.setVisible(true);
+		returnFocus();
+	}
+	
+	/**
+	 * Begins the new game.
+	 * @author Jay Clegg
+	 */
+	public void newGame()
+	{
+		new NewGameDialog(this, (MainMenu) frame);
+		returnFocus();
 	}
 	
 	/**
@@ -169,6 +267,7 @@ public class Controller implements Serializable
 	/**
 	 * Makes an exit dialog from in a game.
 	 * @param menu The in game menu.
+	 * @author Jay Clegg
 	 */
 	public void quit(GameMenu menu)
 	{
@@ -185,6 +284,15 @@ public class Controller implements Serializable
 	}
 	
 	/**
+	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button action.
+	 * @author Jay Clegg
+	 */
+	public void returnFocus()
+	{
+		frame.getContentPane().requestFocus();
+	}
+	
+	/**
 	 * Returns to the main menu from the game.
 	 * @author Jay Clegg
 	 * @param menu The in game menu.
@@ -197,66 +305,26 @@ public class Controller implements Serializable
 	}
 	
 	/**
-	 * Once the user has entered an empire name, this method starts the game and builds the empire.
+	 * Saves a game.
 	 * @author Jay Clegg
-	 * @param empireName The name of the empire.
-	 * @param dialog The dialog used to interact with the user.
+	 * @param details
 	 */
-	@WIP
-	public void createEmpire(String empireName, NewGameDialog dialog)
+	public void save(String details)
 	{
-		this.empire = new Empire(empireName);
-		this.settlementController = new SettlementController(this);
-		this.toolbarController = new ToolbarController(this);
-		this.mapController = new MapController(this);
-		this.resourceController = new ResourceController(this);
-		
-		dialog.dispose();
-		frame.dispose();
-		frame = new GameFrame(this);
-		
-		finishSetup();
+		IOController.saveGame(this, details);
 	}
 	
 	/**
-	 * Returns focus to the main contentPane so it can listen for hotkeys. Should be called at the end of each button action.
+	 * Makes a save dialog.
 	 * @author Jay Clegg
+	 * @param menu The game menu.
 	 */
-	public void returnFocus()
+	public void saveGame(GameMenu menu)
 	{
-		frame.getContentPane().requestFocus();
-	}
-	
-	public JFrame getFrame()
-	{
-		return this.frame;
-	}
-	
-	public Empire getEmpire()
-	{
-		return this.empire;
-	}
-	
-	public MapController getMapController()
-	{
-		return this.mapController;
-	}
-	
-	public ResourceController getResourceController()
-	{
-		return this.resourceController;
-	}
-	
-	public SettlementController getSettlementController()
-	{
-		return this.settlementController;
-	}
-	
-	public void addMapSelector()
-	{
-		((GameContentPane) (frame.getContentPane())).addMapSelector();
-		empire.setMapSelectorAdded(true);
-		
+		menu.setVisible(false);
+		new SaveDialog(this);
+		menu.setVisible(true);
+		returnFocus();
 	}
 	
 	public void setSaveIndex(int saveIndex)
@@ -264,10 +332,14 @@ public class Controller implements Serializable
 		this.saveIndex = saveIndex;
 	}
 	
-	private void finishSetup()
+	/**
+	 * Creates a settings game menu.
+	 * @author Jay Clegg
+	 */
+	@WIP
+	//Does nothing.
+	public void settings()
 	{
-		toolbarController.finishSetup();
-		settlementController.finishSetup();
-		resourceController.finishSetup();
+		
 	}
 }

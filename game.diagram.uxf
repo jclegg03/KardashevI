@@ -1282,9 +1282,14 @@ _+ WORLD : String_
 - toolbarController : ToolbarController
 - settlementController : SettlementController
 - settings : Settings
+- saveIndex : int
+- gameLoaded : boolean
 --
 + Controller() : Constructor
++ saveGame(GameMenu) : void
++ save(String) : void
 + newGame() : void
++ loadGame(GameMenu) : void
 + loadGame() : void
 + settings() : void
 + quit(ExitDialog) : void
@@ -1292,8 +1297,10 @@ _+ WORLD : String_
 + returnToMainMenu(GameMenu) : void
 + createEmpire(String, NewGameDialog) : void
 + returnFocus() : void
++ addMapSelector() : void
 + getters() : Type
-+ setters(Type) : void</panel_attributes>
++ setters(Type) : void
+- finishSetup() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
