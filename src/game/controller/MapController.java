@@ -37,12 +37,6 @@ import game.view.maps.WorldMap;
 public class MapController implements Serializable
 {
 	/**
-	 * A value to represent an empire's owned territory.
-	 * @author Jay Clegg
-	 */
-	public static final int OWNED = 0;
-	
-	/**
 	 * A value to represent an empire's claimed territory.
 	 * @author Jay Clegg
 	 */
@@ -55,22 +49,28 @@ public class MapController implements Serializable
 	public static final int EXPLORED = 2;
 	
 	/**
-	 * A value to represent an empire's unexplored territory.
-	 * @author Jay Clegg
-	 */
-	public static final int UNEXPLORED = 3;
-	
-	/**
 	 * A value to designate a map as a local map.
 	 * @author Jay Clegg
 	 */
 	public static final String LOCAL = "Local";
 	
 	/**
+	 * A value to represent an empire's owned territory.
+	 * @author Jay Clegg
+	 */
+	public static final int OWNED = 0;
+	
+	/**
 	 * A value to designate a map as a regional map.
 	 * @author Jay Clegg
 	 */
 	public static final String REGIONAL = "Regional";
+	
+	/**
+	 * A value to represent an empire's unexplored territory.
+	 * @author Jay Clegg
+	 */
+	public static final int UNEXPLORED = 3;
 	
 	/**
 	 * A value to designate a map as a world map.
@@ -85,6 +85,12 @@ public class MapController implements Serializable
 	private Controller app;
 	
 	/**
+	 * The list of all the biomes. Used only to generate a map for the first time.
+	 * @author Jay Clegg
+	 */
+	private BiomeList biomes;
+	
+	/**
 	 * The currently displayed building menu.<br>
 	 * This is not initialized by the constructor.
 	 * @author Jay Clegg
@@ -92,11 +98,54 @@ public class MapController implements Serializable
 	private BuildingMenu buildingMenu;
 	
 	/**
+	 * The column of the current regional map. Used to select the correct local map from the regional map.
+	 * @author Jay Clegg
+	 */
+	private int currentCol;
+	
+	/**
+	 * The currently displayed map.
+	 * @author Jay Clegg
+	 */
+	private Map currentMap;
+	
+	/**
+	 * The row of the current regional map. Used to select the correct local map from the regional map.
+	 * @author Jay Clegg
+	 */
+	private int currentRow;
+	
+	/**
 	 * The currently displayed exploring menu.<br>
 	 * This is not initialized by the constructor.
 	 * @author Jay Clegg
 	 */
 	private ExploreMenu exploreMenu;
+	
+	/**
+	 * A hash map with all the local maps in the model as keys and the corresponding local maps in the view as the values.
+	 * @author Jay Clegg
+	 */
+	private HashMap<EmpireLocalMap, LocalMap> localMaps;
+	
+	/**
+	 * The previous regional map. Used when zooming out from a local map to a regional map.
+	 * @author Jay Clegg
+	 */
+	private RegionalMap previousMap;
+	
+	/**
+	 * A hash map with all the regional maps in the model as keys and the corresponding regional maps in the view as the values.
+	 * @author Jay Clegg
+	 */
+	private HashMap<EmpireRegionalMap, RegionalMap> regionalMaps;
+	
+	/**
+	 * The currently selected tile. Used to determine which map to go to.<br>
+	 * This is not initialized in the constructor.
+	 * @author Jay Clegg
+	 */
+	private Tile selectedTile;
 	
 	/**
 	 * The world map inside the model.
@@ -109,55 +158,6 @@ public class MapController implements Serializable
 	 * @author Jay Clegg
 	 */
 	private WorldMap worldMapView;
-	
-	/**
-	 * A hash map with all the regional maps in the model as keys and the corresponding regional maps in the view as the values.
-	 * @author Jay Clegg
-	 */
-	private HashMap<EmpireRegionalMap, RegionalMap> regionalMaps;
-	
-	/**
-	 * A hash map with all the local maps in the model as keys and the corresponding local maps in the view as the values.
-	 * @author Jay Clegg
-	 */
-	private HashMap<EmpireLocalMap, LocalMap> localMaps;
-	
-	/**
-	 * The currently selected tile. Used to determine which map to go to.<br>
-	 * This is not initialized in the constructor.
-	 * @author Jay Clegg
-	 */
-	private Tile selectedTile;
-	
-	/**
-	 * The currently displayed map.
-	 * @author Jay Clegg
-	 */
-	private Map currentMap;
-	
-	/**
-	 * The previous regional map. Used when zooming out from a local map to a regional map.
-	 * @author Jay Clegg
-	 */
-	private RegionalMap previousMap;
-	
-	/**
-	 * The row of the current regional map. Used to select the correct local map from the regional map.
-	 * @author Jay Clegg
-	 */
-	private int currentRow;
-	
-	/**
-	 * The column of the current regional map. Used to select the correct local map from the regional map.
-	 * @author Jay Clegg
-	 */
-	private int currentCol;
-	
-	/**
-	 * The list of all the biomes. Used only to generate a map for the first time.
-	 * @author Jay Clegg
-	 */
-	private BiomeList biomes;
 	
 	/**
 	 * Builds a MapController with the specified parameters.
@@ -213,138 +213,6 @@ public class MapController implements Serializable
 	}
 	
 	/**
-	 * Loads all the maps. This is only called from the 2 parameter constructor used for loading.
-	 * @author Jay Clegg
-	 */
-	private void loadMaps()
-	{
-		loadWorldMap();
-		loadRegionalMaps();
-		loadLocalMaps();
-	}
-	
-	/**
-	 * Loads the world map.
-	 * @author Jay Clegg
-	 */
-	private void loadWorldMap()
-	{
-		this.worldMapView = new WorldMap(this);
-		
-		Biome[][] biomes = worldMapModel.getBiomes2D();
-		int[][] states = worldMapModel.getStates2D();
-		Tile[][] tiles = worldMapView.getTiles2D();
-		
-		for(int row = 0; row < biomes.length; row++)
-		{
-			for(int col = 0; col < biomes[row].length; col++)
-			{
-				tiles[row][col].setBackground(biomes[row][col].getColor());
-				tiles[row][col].setOpaque(states[row][col] == EXPLORED);
-			}
-		}
-	}
-	
-	/**
-	 * Loads the regional maps.
-	 * @author Jay Clegg
-	 */
-	private void loadRegionalMaps()
-	{
-		int mapRow = 0;
-		int mapCol = 0;
-		
-		while(worldMapModel.getMap(mapRow, mapCol) != null)
-		{
-			while(worldMapModel.getMap(mapRow, mapCol) != null)
-			{
-				EmpireRegionalMap map = worldMapModel.getMap(mapRow, mapCol);
-				RegionalMap mapView = new RegionalMap(this);
-				
-				mapView.setName(map.getName());
-				
-				Biome[][] biomes = map.getBiomes2D();
-				int[][] states = map.getStates2D();
-				Tile[][] tiles = mapView.getTiles2D();
-				
-				for(int row = 0; row < biomes.length; row++)
-				{
-					for(int col = 0; col < biomes[row].length; col++)
-					{
-						tiles[row][col].setBackground(biomes[row][col].getColor());
-						tiles[row][col].setOpaque(states[row][col] == EXPLORED);
-					}
-				}
-				
-				regionalMaps.put(map, mapView);
-				mapCol++;
-			}
-			
-			mapCol = 0;
-			mapRow++;
-		}
-		
-		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
-		currentRow = app.getEmpire().getStartingMap().getLocation().getRow();
-		currentCol = app.getEmpire().getStartingMap().getLocation().getCol();
-	}
-	
-	/**
-	 * Loads the local maps.
-	 * @author Jay Clegg
-	 */
-	private void loadLocalMaps()
-	{
-		int regionRow = 0;
-		int regionCol = 0;
-		while(worldMapModel.getMap(regionRow, regionCol) != null)
-		{
-			while(worldMapModel.getMap(regionRow, regionCol) != null)
-			{
-				EmpireRegionalMap region = worldMapModel.getMap(regionRow, regionCol);
-				int mapRow = 0;
-				int mapCol = 0;
-				
-				while(region.getMap(mapRow, mapCol) != null)
-				{
-					while(region.getMap(mapRow, mapCol) != null)
-					{
-						EmpireLocalMap map = region.getMap(mapRow, mapCol);
-						LocalMap mapView = new LocalMap(this);
-						
-						mapView.setName(map.getName());
-						
-						Biome[][] biomes = map.getBiomes2D();
-						int[][] states = map.getStates2D();
-						Tile[][] tiles = mapView.getTiles2D();
-						
-						for(int row = 0; row < biomes.length; row++)
-						{
-							for(int col = 0; col < biomes[row].length; col++)
-							{
-								tiles[row][col].setBackground(biomes[row][col].getColor());
-								tiles[row][col].setOpaque(states[row][col] == EXPLORED);
-							}
-						}
-						
-						localMaps.put(map, mapView);
-						mapCol++;
-					}
-					
-					mapCol = 0;
-					mapRow++;
-				}
-				regionCol++;
-			}
-			regionCol = 0;
-			regionRow++;
-		}
-		
-		currentMap = localMaps.get(app.getEmpire().getOrigin());
-		selectedTile = regionalMaps.get(app.getEmpire().getStartingMap()).getTile(selectMapModel(currentMap).getLocation().getRow(), selectMapModel(currentMap).getLocation().getCol());
-	}
-	
-	/**
 	 * Gives the empire any maps it needs. Usually because it needs to be saved. Only the world map model is saved since it also
 	 *  contains all the regional and local maps.
 	 * @author Jay Clegg
@@ -355,209 +223,12 @@ public class MapController implements Serializable
 	}
 	
 	/**
-	 * Builds the maps for the game.
+	 * Handles the building menu.
 	 * @author Jay Clegg
 	 */
-	private void buildMaps()
+	private void buildingMenu()
 	{
-		buildWorldMap();
-		buildRegionalMaps();
-		buildLocalMaps();
-	}
-	
-	/**
-	 * Builds the world maps
-	 * @author Jay Clegg
-	 */
-	private void buildWorldMap()
-	{
-		worldMapModel = new EmpireWorldMap();
-		worldMapView = new WorldMap(this);
-		
-		for(int row = 0; row < worldMapModel.getRows(); row++)
-		{
-			for(int col = 0; col < worldMapModel.getCols(); col++)
-			{
-				WorldBiome current;
-				int number = randomNumber();
-				if(number < 50) current = this.biomes.getWorldBiome("Deep Ocean");
-				else if(number < 71) current = this.biomes.getWorldBiome("Shallow Ocean");
-				else if(number < 81) current = this.biomes.getWorldBiome("Desert");
-				else if(number < 82) current = this.biomes.getWorldBiome("Icy Ocean");
-				else if(number < 87) current = this.biomes.getWorldBiome("Mountainous");
-				else current = this.biomes.getWorldBiome("Fertile");
-				
-				worldMapModel.assignLocation(new Location(row, col, current.copy(), null));
-				
-				worldMapView.getTile(row, col).setBackground(current.getColor());
-				worldMapModel.addMap(row, col, new EmpireRegionalMap(current, new Location(row, col, null, null)));
-				worldMapModel.setState(row, col, UNEXPLORED);
-			}
-		}
-		
-//		if(! worldContainsFertile())
-//		{
-//			biomes[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = this.biomes.getWorldBiome("Fertile").copy();
-//		}
-		
-		exploreRandomRegionalMap();
-	}
-	
-	/**
-	 * This method can be used to check if there is a fertile biome for exploring.
-	 * Not used since the odds of generation without a fertile biome is very low.
-	 */
-//	private boolean worldContainsFertile()
-//	{
-//		for(Biome[] row : worldMapModel.getBiomes2D())
-//		{
-//			for(Biome biome : row)
-//			{
-//				if(biome.equals((Biome) this.biomes.getWorldBiome("Fertile"))) return true;
-//			}
-//		}
-//		
-//		return false;
-//	}
-	
-	/**
-	 * Explores a random regional map on the world map.
-	 * This will only explore a fertile region.
-	 * @author Jay Clegg
-	 */
-	private void exploreRandomRegionalMap()
-	{
-		ArrayList<int[]> locations = new ArrayList<int[]>();
-		
-		for(int row = 0; row < worldMapModel.getBiomes2D().length; row++)
-		{
-			for(int col = 0; col < worldMapModel.getBiomes2D()[row].length; col++)
-			{
-				if(worldMapModel.getBiome(row, col).equals(this.biomes.getWorldBiome("Fertile")))
-				{
-					int[] current = new int[2];
-					current[0] = row;
-					current[1] = col;
-					locations.add(current);
-				}
-			}
-		}
-		
-		int random = (int) (Math.random() * locations.size());
-		int row = locations.get(random)[0];
-		int col = locations.get(random)[1];
-		worldMapView.getTile(row, col).setOpaque(true);	
-		setValue(worldMapModel, row, col, EXPLORED);
-		currentRow = row;
-		currentCol = col;
-		selectedTile = worldMapView.getTile(row, col);
-	}
-	
-	/**
-	 * Builds all the regional maps.
-	 * @author Jay Clegg
-	 */
-	private void buildRegionalMaps()
-	{
-			for(EmpireRegionalMap currentMap : worldMapModel.getRegionalMaps())
-			{
-				RegionalMap mapView = new RegionalMap(this);
-				WorldBiome currentBiome = currentMap.getParentBiome();
-				
-				for(int row = 0; row < currentMap.getRows(); row++)
-				{
-					for(int col = 0; col < currentMap.getCols(); col++)
-					{
-						int random = randomNumber();
-						RegionalBiome current;
-						if(currentBiome.equals(biomes.getWorldBiome("Deep Ocean")))
-						{
-							current = biomes.getRegionalBiome("Deep Ocean");
-						}
-						
-						else if(currentBiome.equals(biomes.getWorldBiome("Shallow Ocean")))
-						{
-							if(random < 80) current = biomes.getRegionalBiome("Shallow Ocean");
-							else if(random < 90) current = biomes.getRegionalBiome("Reef");
-							else current = biomes.getRegionalBiome("Shore");
-						}
-						
-						else if(currentBiome.equals(biomes.getWorldBiome("Desert")))
-						{
-							if(random < 99) current = biomes.getRegionalBiome("Desert");
-							else current = biomes.getRegionalBiome("Oasis");
-						}
-						
-						else if(currentBiome.equals(biomes.getWorldBiome("Icy Ocean")))
-						{
-							if(random < 75) current = biomes.getRegionalBiome("Iceberg");
-							else current = biomes.getRegionalBiome("Cold Deep Ocean");
-						}
-						
-						else if(currentBiome.equals(biomes.getWorldBiome("Mountainous")))
-						{
-							if(random < 10) current = biomes.getRegionalBiome("Glacier");
-							else if(random < 20) current = biomes.getRegionalBiome("Ore Rich");
-							else current = biomes.getRegionalBiome("Stoney");
-						}
-						
-						else if(currentBiome.equals(biomes.getWorldBiome("Fertile")))
-						{
-							if(random < 50) current = biomes.getRegionalBiome("Grasslands");
-							else current = biomes.getRegionalBiome("Lake");
-						}
-						
-						else current = null;
-						
-						currentMap.assignLocation(new Location(row, col, current.copy(), null));
-						mapView.getTile(row, col).setBackground(current.getColor());
-						currentMap.addMap(row, col, new EmpireLocalMap(current, new Location(row, col, null, null)));
-						currentMap.setState(row, col, UNEXPLORED);
-					}
-				}
-				
-				regionalMaps.put(currentMap, mapView);
-			}
-			
-			exploreRandomLocalMap();
-	}
-	
-	/**
-	 * Explores a random local map on the explored regional map.
-	 * @author Jay Clegg
-	 */
-	private void exploreRandomLocalMap()
-	{
-		ArrayList<int[]> locations = new ArrayList<int[]>();
-		RegionalMap regionExplored = null;
-		for(Location location : worldMapModel.getLocations())
-		{
-			if(location.getState() == EXPLORED)
-			{
-				regionExplored = regionalMaps.get(worldMapModel.getMap(location.getRow(), location.getCol()));
-			}
-		}
-		
-		EmpireRegionalMap regionalMap = (EmpireRegionalMap) selectMapModel(regionExplored);
-		
-		for(int row = 0; row < regionalMap.getBiomes2D().length; row++)
-		{
-			for(int col = 0; col < regionalMap.getBiomes2D()[0].length; col++)
-			{
-				if(regionalMap.getBiome(row, col).equals(biomes.getRegionalBiome("Grasslands")))
-				{
-					int[] location = {row, col};
-					locations.add(location);
-				}
-			}
-		}
-		
-		int random = (int) (Math.random() * locations.size());
-		int row = locations.get(random)[0];
-		int col = locations.get(random)[1];
-		regionExplored.getTile(row, col).setOpaque(true);
-		regionalMap.setState(row, col, EXPLORED);
-		selectedTile = regionExplored.getTile(row, col);
+		buildingMenu = new BuildingMenu(this, (GameFrame) app.getFrame(), selectedTile);
 	}
 	
 	/**
@@ -728,183 +399,121 @@ public class MapController implements Serializable
 	}
 	
 	/**
-	 * Explores a random 3 x 3 square of tiles on the explored local map.
+	 * Builds the maps for the game.
 	 * @author Jay Clegg
 	 */
-	private void exploreRandomLocation()
+	private void buildMaps()
 	{
-		EmpireRegionalMap region = null;
-		for(Location location : worldMapModel.getLocations())
-		{
-			if(location.getState() == EXPLORED)
+		buildWorldMap();
+		buildRegionalMaps();
+		buildLocalMaps();
+	}
+	
+	/**
+	 * Builds all the regional maps.
+	 * @author Jay Clegg
+	 */
+	private void buildRegionalMaps()
+	{
+			for(EmpireRegionalMap currentMap : worldMapModel.getRegionalMaps())
 			{
-				region = worldMapModel.getMap(location.getRow(), location.getCol());
-			}
-		}
-		app.getEmpire().setStartingMap(region);
-		
-		EmpireLocalMap exploredMap = null;
-		
-		for(int row = 0; row < region.getRows(); row++)
-		{
-			for(int col = 0; col < region.getCols(); col++)
-			{
-				if(region.getState(row, col) == EXPLORED)
+				RegionalMap mapView = new RegionalMap(this);
+				WorldBiome currentBiome = currentMap.getParentBiome();
+				
+				for(int row = 0; row < currentMap.getRows(); row++)
 				{
-					exploredMap = region.getMap(row, col);
+					for(int col = 0; col < currentMap.getCols(); col++)
+					{
+						int random = randomNumber();
+						RegionalBiome current;
+						if(currentBiome.equals(biomes.getWorldBiome("Deep Ocean")))
+						{
+							current = biomes.getRegionalBiome("Deep Ocean");
+						}
+						
+						else if(currentBiome.equals(biomes.getWorldBiome("Shallow Ocean")))
+						{
+							if(random < 80) current = biomes.getRegionalBiome("Shallow Ocean");
+							else if(random < 90) current = biomes.getRegionalBiome("Reef");
+							else current = biomes.getRegionalBiome("Shore");
+						}
+						
+						else if(currentBiome.equals(biomes.getWorldBiome("Desert")))
+						{
+							if(random < 99) current = biomes.getRegionalBiome("Desert");
+							else current = biomes.getRegionalBiome("Oasis");
+						}
+						
+						else if(currentBiome.equals(biomes.getWorldBiome("Icy Ocean")))
+						{
+							if(random < 75) current = biomes.getRegionalBiome("Iceberg");
+							else current = biomes.getRegionalBiome("Cold Deep Ocean");
+						}
+						
+						else if(currentBiome.equals(biomes.getWorldBiome("Mountainous")))
+						{
+							if(random < 10) current = biomes.getRegionalBiome("Glacier");
+							else if(random < 20) current = biomes.getRegionalBiome("Ore Rich");
+							else current = biomes.getRegionalBiome("Stoney");
+						}
+						
+						else if(currentBiome.equals(biomes.getWorldBiome("Fertile")))
+						{
+							if(random < 50) current = biomes.getRegionalBiome("Grasslands");
+							else current = biomes.getRegionalBiome("Lake");
+						}
+						
+						else current = null;
+						
+						currentMap.assignLocation(new Location(row, col, current.copy(), null));
+						mapView.getTile(row, col).setBackground(current.getColor());
+						currentMap.addMap(row, col, new EmpireLocalMap(current, new Location(row, col, null, null)));
+						currentMap.setState(row, col, UNEXPLORED);
+					}
 				}
+				
+				regionalMaps.put(currentMap, mapView);
 			}
-		}
-		LocalMap mapView = localMaps.get(exploredMap);
-		
-		int randRow = (int) (Math.random() * (exploredMap.getBiomes2D().length - 2)) + 1;
-		int randCol = (int) (Math.random() * (exploredMap.getBiomes2D()[0].length - 2)) + 1;
-		
-		exploredMap.setState(randRow, randCol, EXPLORED);
-		exploredMap.setState(randRow - 1, randCol, EXPLORED);
-		exploredMap.setState(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setOpaque(true);
-		mapView.getTile(randRow + 1, randCol).setOpaque(true);
-		mapView.getTile(randRow - 1, randCol).setOpaque(true);
-		
-		randCol--;
-		exploredMap.setState(randRow, randCol, EXPLORED);
-		exploredMap.setState(randRow - 1, randCol, EXPLORED);
-		exploredMap.setState(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setOpaque(true);
-		mapView.getTile(randRow + 1, randCol).setOpaque(true);
-		mapView.getTile(randRow - 1, randCol).setOpaque(true);
-		
-		randCol += 2;
-		exploredMap.setState(randRow, randCol, EXPLORED);
-		exploredMap.setState(randRow - 1, randCol, EXPLORED);
-		exploredMap.setState(randRow + 1, randCol, EXPLORED);
-		mapView.getTile(randRow, randCol).setOpaque(true);
-		mapView.getTile(randRow + 1, randCol).setOpaque(true);
-		mapView.getTile(randRow - 1, randCol).setOpaque(true);
-		
-		previousMap = regionalMaps.get(region);
-		currentMap = mapView;
-		app.getEmpire().setOrigin(exploredMap);
+			
+			exploreRandomLocalMap();
 	}
 	
 	/**
-	 * Generates a random number from 0 to 99 which is used to randomly generate biomes.
+	 * Builds the world maps
 	 * @author Jay Clegg
-	 * @return
 	 */
-	private int randomNumber()
+	private void buildWorldMap()
 	{
-		return (int) (Math.random() * 100);
-	}
-	
-	/**
-	 * Sets the value of the specified tile to the specified value in the specified map.
-	 * @author Jay Clegg
-	 * @param map The map in question.
-	 * @param row The row where the value is located.
-	 * @param col The column where the value is located.
-	 * @param newValue The new value for the tile.
-	 */
-	public void setValue(EmpireMap map, int row, int col, int newValue)
-	{
-		map.setState(row, col, newValue);
-	}
-	
-	/**
-	 * Allows for the selection of a specific map's model based on the values in the HashMaps.
-	 * @author Jay Clegg
-	 * @param value The value in the HashMap
-	 * @return The key to that value in the HashMap.
-	 */
-	private EmpireMap selectMapModel(Map value)
-	{
-		if(value.getLevel().equals(LOCAL))
-		{
-			for(EmpireRegionalMap region : regionalMaps.keySet())
-			{
-				for(EmpireLocalMap map : region.getLocalMaps())
-				{
-					if(localMaps.get(map).equals(value)) return map;
-				}
-			}
-		}
-		else if(value.getLevel().equals(REGIONAL))
-		{
-			for(EmpireRegionalMap regionalMap : worldMapModel.getRegionalMaps())
-			{
-				if(regionalMaps.get(regionalMap).equals(value)) return regionalMap;
-			}
-		}
-		else if(value.getLevel().equals(WORLD)) return worldMapModel;
+		worldMapModel = new EmpireWorldMap();
+		worldMapView = new WorldMap(this);
 		
-		return null;
-	}
-	
-	/**
-	 * Changes the map on the game screen.
-	 * @author Jay Clegg
-	 */
-	public void updateUI()
-	{
-		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
-	}
-	
-	/**
-	 * Once a tile is clicked, this method gives the option to explore or build on it.
-	 * It also focuses the map view on the selected map if necessary.
-	 * @author Jay Clegg
-	 * @param tile The tile which was clicked.
-	 */
-	public void tileOptions(Tile tile)
-	{
-		this.selectedTile = tile;
-		
-		EmpireMap map = selectMapModel(currentMap);
-		
-		clearMenus();
-		
-		if(currentMap.getLevel().equals(LOCAL))
+		for(int row = 0; row < worldMapModel.getRows(); row++)
 		{
-			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
+			for(int col = 0; col < worldMapModel.getCols(); col++)
 			{
-				buildingMenu();
-			}
-			else
-			{
-				checkExplore();
-			}
-		}
-		else
-		{
-			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
-			{
-				goTo(currentMap.getLevel(), tile.getRow(), tile.getCol());
-			}
-			else
-			{
-				checkExplore();
+				WorldBiome current;
+				int number = randomNumber();
+				if(number < 50) current = this.biomes.getWorldBiome("Deep Ocean");
+				else if(number < 71) current = this.biomes.getWorldBiome("Shallow Ocean");
+				else if(number < 81) current = this.biomes.getWorldBiome("Desert");
+				else if(number < 82) current = this.biomes.getWorldBiome("Icy Ocean");
+				else if(number < 87) current = this.biomes.getWorldBiome("Mountainous");
+				else current = this.biomes.getWorldBiome("Fertile");
+				
+				worldMapModel.assignLocation(new Location(row, col, current.copy(), null));
+				
+				worldMapView.getTile(row, col).setBackground(current.getColor());
+				worldMapModel.addMap(row, col, new EmpireRegionalMap(current, new Location(row, col, null, null)));
+				worldMapModel.setState(row, col, UNEXPLORED);
 			}
 		}
 		
-		app.returnFocus();
-	}
-	
-	/**
-	 * Disposes of all displayed menus.
-	 * @author Jay Clegg
-	 */
-	private void clearMenus()
-	{
-		if(buildingMenu != null)
-		{
-			buildingMenu.dispose();
-		}
+//		if(! worldContainsFertile())
+//		{
+//			biomes[(int) (Math.random() * 20)][(int) (Math.random() * 20)] = this.biomes.getWorldBiome("Fertile").copy();
+//		}
 		
-		if(exploreMenu != null)
-		{
-			exploreMenu.dispose();
-		}
+		exploreRandomRegionalMap();
 	}
 	
 	/**
@@ -985,6 +594,181 @@ public class MapController implements Serializable
 	}
 	
 	/**
+	 * This method can be used to check if there is a fertile biome for exploring.
+	 * Not used since the odds of generation without a fertile biome is very low.
+	 */
+//	private boolean worldContainsFertile()
+//	{
+//		for(Biome[] row : worldMapModel.getBiomes2D())
+//		{
+//			for(Biome biome : row)
+//			{
+//				if(biome.equals((Biome) this.biomes.getWorldBiome("Fertile"))) return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+	
+	/**
+	 * Disposes of all displayed menus.
+	 * @author Jay Clegg
+	 */
+	private void clearMenus()
+	{
+		if(buildingMenu != null)
+		{
+			buildingMenu.dispose();
+		}
+		
+		if(exploreMenu != null)
+		{
+			exploreMenu.dispose();
+		}
+	}
+	
+	/**
+	 * Makes the explore menu.
+	 * @author Jay Clegg
+	 */
+	private void exploreMenu()
+	{
+		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame());
+	}
+	
+	/**
+	 * Explores a random local map on the explored regional map.
+	 * @author Jay Clegg
+	 */
+	private void exploreRandomLocalMap()
+	{
+		ArrayList<int[]> locations = new ArrayList<int[]>();
+		RegionalMap regionExplored = null;
+		for(Location location : worldMapModel.getLocations())
+		{
+			if(location.getState() == EXPLORED)
+			{
+				regionExplored = regionalMaps.get(worldMapModel.getMap(location.getRow(), location.getCol()));
+			}
+		}
+		
+		EmpireRegionalMap regionalMap = (EmpireRegionalMap) selectMapModel(regionExplored);
+		
+		for(int row = 0; row < regionalMap.getBiomes2D().length; row++)
+		{
+			for(int col = 0; col < regionalMap.getBiomes2D()[0].length; col++)
+			{
+				if(regionalMap.getBiome(row, col).equals(biomes.getRegionalBiome("Grasslands")))
+				{
+					int[] location = {row, col};
+					locations.add(location);
+				}
+			}
+		}
+		
+		int random = (int) (Math.random() * locations.size());
+		int row = locations.get(random)[0];
+		int col = locations.get(random)[1];
+		regionExplored.getTile(row, col).setOpaque(true);
+		regionalMap.setState(row, col, EXPLORED);
+		selectedTile = regionExplored.getTile(row, col);
+	}
+	
+	/**
+	 * Explores a random 3 x 3 square of tiles on the explored local map.
+	 * @author Jay Clegg
+	 */
+	private void exploreRandomLocation()
+	{
+		EmpireRegionalMap region = null;
+		for(Location location : worldMapModel.getLocations())
+		{
+			if(location.getState() == EXPLORED)
+			{
+				region = worldMapModel.getMap(location.getRow(), location.getCol());
+			}
+		}
+		app.getEmpire().setStartingMap(region);
+		
+		EmpireLocalMap exploredMap = null;
+		
+		for(int row = 0; row < region.getRows(); row++)
+		{
+			for(int col = 0; col < region.getCols(); col++)
+			{
+				if(region.getState(row, col) == EXPLORED)
+				{
+					exploredMap = region.getMap(row, col);
+				}
+			}
+		}
+		LocalMap mapView = localMaps.get(exploredMap);
+		
+		int randRow = (int) (Math.random() * (exploredMap.getBiomes2D().length - 2)) + 1;
+		int randCol = (int) (Math.random() * (exploredMap.getBiomes2D()[0].length - 2)) + 1;
+		
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setOpaque(true);
+		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+		mapView.getTile(randRow - 1, randCol).setOpaque(true);
+		
+		randCol--;
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setOpaque(true);
+		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+		mapView.getTile(randRow - 1, randCol).setOpaque(true);
+		
+		randCol += 2;
+		exploredMap.setState(randRow, randCol, EXPLORED);
+		exploredMap.setState(randRow - 1, randCol, EXPLORED);
+		exploredMap.setState(randRow + 1, randCol, EXPLORED);
+		mapView.getTile(randRow, randCol).setOpaque(true);
+		mapView.getTile(randRow + 1, randCol).setOpaque(true);
+		mapView.getTile(randRow - 1, randCol).setOpaque(true);
+		
+		previousMap = regionalMaps.get(region);
+		currentMap = mapView;
+		app.getEmpire().setOrigin(exploredMap);
+	}
+	
+	/**
+	 * Explores a random regional map on the world map.
+	 * This will only explore a fertile region.
+	 * @author Jay Clegg
+	 */
+	private void exploreRandomRegionalMap()
+	{
+		ArrayList<int[]> locations = new ArrayList<int[]>();
+		
+		for(int row = 0; row < worldMapModel.getBiomes2D().length; row++)
+		{
+			for(int col = 0; col < worldMapModel.getBiomes2D()[row].length; col++)
+			{
+				if(worldMapModel.getBiome(row, col).equals(this.biomes.getWorldBiome("Fertile")))
+				{
+					int[] current = new int[2];
+					current[0] = row;
+					current[1] = col;
+					locations.add(current);
+				}
+			}
+		}
+		
+		int random = (int) (Math.random() * locations.size());
+		int row = locations.get(random)[0];
+		int col = locations.get(random)[1];
+		worldMapView.getTile(row, col).setOpaque(true);	
+		setValue(worldMapModel, row, col, EXPLORED);
+		currentRow = row;
+		currentCol = col;
+		selectedTile = worldMapView.getTile(row, col);
+	}
+	
+	/**
 	 * Finds the adjacent maps to the current map.
 	 * @author Jay Clegg
 	 * @return A hash map of string keys (north, south, east, west) and the maps. These maps are the maps adjacent to the current map.
@@ -1043,65 +827,175 @@ public class MapController implements Serializable
 	}
 	
 	/**
-	 * Zooms the map out to a higher level. </br>
-	 * Local zooms to regional. </br>
-	 * Regional zooms to world. </br>
-	 * World zooms to nothing!
+	 * Loads the local maps.
 	 * @author Jay Clegg
 	 */
-	public void zoomMapOut()
+	private void loadLocalMaps()
 	{
-		clearMenus();
-		
-		if(currentMap.getLevel().equals(LOCAL))
+		int regionRow = 0;
+		int regionCol = 0;
+		while(worldMapModel.getMap(regionRow, regionCol) != null)
 		{
-			currentMap = previousMap;
-			updateUI();
-		}
-		else
-		{
-			boolean canZoom = false;
-			
-			if(currentMap.getLevel().equals(REGIONAL))
+			while(worldMapModel.getMap(regionRow, regionCol) != null)
 			{
-				EmpireRegionalMap currentModel = (EmpireRegionalMap) selectMapModel(currentMap);
-				int numMaps = currentModel.getLocalMaps().size();
-				int mapsExplored = 0;
+				EmpireRegionalMap region = worldMapModel.getMap(regionRow, regionCol);
+				int mapRow = 0;
+				int mapCol = 0;
 				
-				for(EmpireLocalMap localMap : currentModel.getLocalMaps())
+				while(region.getMap(mapRow, mapCol) != null)
 				{
-					if(localMap.getIsFullyExplored()) mapsExplored++;
+					while(region.getMap(mapRow, mapCol) != null)
+					{
+						EmpireLocalMap map = region.getMap(mapRow, mapCol);
+						LocalMap mapView = new LocalMap(this);
+						
+						mapView.setName(map.getName());
+						
+						Biome[][] biomes = map.getBiomes2D();
+						int[][] states = map.getStates2D();
+						Tile[][] tiles = mapView.getTiles2D();
+						
+						for(int row = 0; row < biomes.length; row++)
+						{
+							for(int col = 0; col < biomes[row].length; col++)
+							{
+								tiles[row][col].setBackground(biomes[row][col].getColor());
+								tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+							}
+						}
+						
+						localMaps.put(map, mapView);
+						mapCol++;
+					}
+					
+					mapCol = 0;
+					mapRow++;
+				}
+				regionCol++;
+			}
+			regionCol = 0;
+			regionRow++;
+		}
+		
+		currentMap = localMaps.get(app.getEmpire().getOrigin());
+		selectedTile = regionalMaps.get(app.getEmpire().getStartingMap()).getTile(selectMapModel(currentMap).getLocation().getRow(), selectMapModel(currentMap).getLocation().getCol());
+	}
+	
+	/**
+	 * Loads all the maps. This is only called from the 2 parameter constructor used for loading.
+	 * @author Jay Clegg
+	 */
+	private void loadMaps()
+	{
+		loadWorldMap();
+		loadRegionalMaps();
+		loadLocalMaps();
+	}
+	
+	/**
+	 * Loads the regional maps.
+	 * @author Jay Clegg
+	 */
+	private void loadRegionalMaps()
+	{
+		int mapRow = 0;
+		int mapCol = 0;
+		
+		while(worldMapModel.getMap(mapRow, mapCol) != null)
+		{
+			while(worldMapModel.getMap(mapRow, mapCol) != null)
+			{
+				EmpireRegionalMap map = worldMapModel.getMap(mapRow, mapCol);
+				RegionalMap mapView = new RegionalMap(this);
+				
+				mapView.setName(map.getName());
+				
+				Biome[][] biomes = map.getBiomes2D();
+				int[][] states = map.getStates2D();
+				Tile[][] tiles = mapView.getTiles2D();
+				
+				for(int row = 0; row < biomes.length; row++)
+				{
+					for(int col = 0; col < biomes[row].length; col++)
+					{
+						tiles[row][col].setBackground(biomes[row][col].getColor());
+						tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+					}
 				}
 				
-				canZoom = mapsExplored == numMaps;
+				regionalMaps.put(map, mapView);
+				mapCol++;
 			}
 			
-			if(canZoom)
-			{
-				currentMap = worldMapView;
-				updateUI();
-			}
+			mapCol = 0;
+			mapRow++;
 		}
 		
-		app.returnFocus();
+		previousMap = regionalMaps.get(app.getEmpire().getStartingMap());
+		currentRow = app.getEmpire().getStartingMap().getLocation().getRow();
+		currentCol = app.getEmpire().getStartingMap().getLocation().getCol();
 	}
 	
 	/**
-	 * Handles the building menu.
+	 * Loads the world map.
 	 * @author Jay Clegg
 	 */
-	private void buildingMenu()
+	private void loadWorldMap()
 	{
-		buildingMenu = new BuildingMenu(this, (GameFrame) app.getFrame(), selectedTile);
+		this.worldMapView = new WorldMap(this);
+		
+		Biome[][] biomes = worldMapModel.getBiomes2D();
+		int[][] states = worldMapModel.getStates2D();
+		Tile[][] tiles = worldMapView.getTiles2D();
+		
+		for(int row = 0; row < biomes.length; row++)
+		{
+			for(int col = 0; col < biomes[row].length; col++)
+			{
+				tiles[row][col].setBackground(biomes[row][col].getColor());
+				tiles[row][col].setOpaque(states[row][col] == EXPLORED);
+			}
+		}
 	}
 	
 	/**
-	 * Makes the explore menu.
+	 * Generates a random number from 0 to 99 which is used to randomly generate biomes.
 	 * @author Jay Clegg
+	 * @return
 	 */
-	private void exploreMenu()
+	private int randomNumber()
 	{
-		exploreMenu = new ExploreMenu(this, (GameFrame) app.getFrame());
+		return (int) (Math.random() * 100);
+	}
+	
+	/**
+	 * Allows for the selection of a specific map's model based on the values in the HashMaps.
+	 * @author Jay Clegg
+	 * @param value The value in the HashMap
+	 * @return The key to that value in the HashMap.
+	 */
+	private EmpireMap selectMapModel(Map value)
+	{
+		if(value.getLevel().equals(LOCAL))
+		{
+			for(EmpireRegionalMap region : regionalMaps.keySet())
+			{
+				for(EmpireLocalMap map : region.getLocalMaps())
+				{
+					if(localMaps.get(map).equals(value)) return map;
+				}
+			}
+		}
+		else if(value.getLevel().equals(REGIONAL))
+		{
+			for(EmpireRegionalMap regionalMap : worldMapModel.getRegionalMaps())
+			{
+				if(regionalMaps.get(regionalMap).equals(value)) return regionalMap;
+			}
+		}
+		else if(value.getLevel().equals(WORLD)) return worldMapModel;
+		
+		return null;
 	}
 	
 	/**
@@ -1136,33 +1030,6 @@ public class MapController implements Serializable
 		{
 			worldMapModel.setState(row, col, EXPLORED);
 		}
-	}
-	
-	/**
-	 * When the user changes the name of a map, the change is saved by this.
-	 * @author Jay Clegg
-	 * @param name The new name of the map.
-	 */
-	public void updateMapName(String name)
-	{
-		selectMapModel(currentMap).setName(name);
-		
-		app.returnFocus();
-	}
-	
-	public Map getCurrentMap()
-	{
-		return this.currentMap;
-	}
-	
-	public Controller getController()
-	{
-		return this.app;
-	}
-	
-	public String getCurrentMapName()
-	{
-		return selectMapModel(currentMap).getName();
 	}
 	
 	/**
@@ -1204,5 +1071,138 @@ public class MapController implements Serializable
 				fullyExplore(region);
 			}
 		}
+	}
+	
+	public Controller getController()
+	{
+		return this.app;
+	}
+	
+	public Map getCurrentMap()
+	{
+		return this.currentMap;
+	}
+	
+	public String getCurrentMapName()
+	{
+		return selectMapModel(currentMap).getName();
+	}
+	
+	/**
+	 * Sets the value of the specified tile to the specified value in the specified map.
+	 * @author Jay Clegg
+	 * @param map The map in question.
+	 * @param row The row where the value is located.
+	 * @param col The column where the value is located.
+	 * @param newValue The new value for the tile.
+	 */
+	public void setValue(EmpireMap map, int row, int col, int newValue)
+	{
+		map.setState(row, col, newValue);
+	}
+	
+	/**
+	 * Once a tile is clicked, this method gives the option to explore or build on it.
+	 * It also focuses the map view on the selected map if necessary.
+	 * @author Jay Clegg
+	 * @param tile The tile which was clicked.
+	 */
+	public void tileOptions(Tile tile)
+	{
+		this.selectedTile = tile;
+		
+		EmpireMap map = selectMapModel(currentMap);
+		
+		clearMenus();
+		
+		if(currentMap.getLevel().equals(LOCAL))
+		{
+			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
+			{
+				buildingMenu();
+			}
+			else
+			{
+				checkExplore();
+			}
+		}
+		else
+		{
+			if(map.getState(tile.getRow(), tile.getCol()) == EXPLORED)
+			{
+				goTo(currentMap.getLevel(), tile.getRow(), tile.getCol());
+			}
+			else
+			{
+				checkExplore();
+			}
+		}
+		
+		app.returnFocus();
+	}
+	
+	/**
+	 * When the user changes the name of a map, the change is saved by this.
+	 * @author Jay Clegg
+	 * @param name The new name of the map.
+	 */
+	public void updateMapName(String name)
+	{
+		selectMapModel(currentMap).setName(name);
+		
+		app.returnFocus();
+	}
+	
+	/**
+	 * Changes the map on the game screen.
+	 * @author Jay Clegg
+	 */
+	public void updateUI()
+	{
+		((GameContentPane) app.getFrame().getContentPane()).setMap(currentMap);
+	}
+	
+	/**
+	 * Zooms the map out to a higher level. </br>
+	 * Local zooms to regional. </br>
+	 * Regional zooms to world. </br>
+	 * World zooms to nothing!
+	 * @author Jay Clegg
+	 */
+	public void zoomMapOut()
+	{
+		clearMenus();
+		
+		if(currentMap.getLevel().equals(LOCAL))
+		{
+			currentMap = previousMap;
+			updateUI();
+		}
+		else
+		{
+			boolean canZoom = false;
+			
+			if(currentMap.getLevel().equals(REGIONAL))
+			{
+				EmpireRegionalMap currentModel = (EmpireRegionalMap) selectMapModel(currentMap);
+				int numMaps = currentModel.getLocalMaps().size();
+				int mapsExplored = 0;
+				
+				for(EmpireLocalMap localMap : currentModel.getLocalMaps())
+				{
+					if(localMap.getIsFullyExplored()) mapsExplored++;
+				}
+				
+				canZoom = mapsExplored == numMaps;
+			}
+			
+			if(canZoom)
+			{
+				currentMap = worldMapView;
+				updateUI();
+			}
+		}
+		
+		app.returnFocus();
 	}
 }
