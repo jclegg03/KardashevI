@@ -36,6 +36,17 @@ public class ToolbarController implements Serializable
 	}
 	
 	/**
+	 * Displays the cheats menu.
+	 * @author Jay Clegg
+	 */
+	@WIP
+	//Does nothing.
+	public void cheat()
+	{
+		
+	}
+	
+	/**
 	 * Finishes adding data members after the GUI has been initialized.
 	 * @author Jay Clegg
 	 */
@@ -62,17 +73,6 @@ public class ToolbarController implements Serializable
 	@WIP
 	//Does nothing
 	public void research()
-	{
-		
-	}
-	
-	/**
-	 * Displays the cheats menu.
-	 * @author Jay Clegg
-	 */
-	@WIP
-	//Does nothing.
-	public void cheat()
 	{
 		
 	}
