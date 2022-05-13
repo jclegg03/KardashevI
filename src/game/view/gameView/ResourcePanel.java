@@ -15,6 +15,10 @@ import game.controller.ResourceController;
  */
 public class ResourcePanel extends JPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private ResourceController app;
 	
 	/**
@@ -29,6 +33,16 @@ public class ResourcePanel extends JPanel
 		this.setLayout(new GridLayout(1, 0, 10, 0));
 		
 		addResource("Population", 20, -1);
+	}
+	
+	/**
+	 * Updates the visual details of this panel.
+	 * @author Jay Clegg
+	 */
+	private void update()
+	{
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 	
 	/**
@@ -56,6 +70,26 @@ public class ResourcePanel extends JPanel
 	}
 	
 	/**
+	 * Gets the label which contains the text.
+	 * @author Jay Clegg
+	 * @param name The name of the resource
+	 * @return The resource. If the resource is not found will return null.
+	 */
+	public JLabel getResource(String name)
+	{
+		for(Component component : this.getComponents())
+		{
+			JLabel label = (JLabel) component;
+			if(label.getText().contains(name))
+			{
+				return label;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Removes the label with the text provided.
 	 * @param name The text to be searched for.
 	 * @author Jay Clegg
@@ -69,7 +103,7 @@ public class ResourcePanel extends JPanel
 		}
 		catch(NullPointerException noSuchSettlement)
 		{
-			System.out.println("No such settlement");
+			
 		}
 	}
 	
@@ -96,35 +130,5 @@ public class ResourcePanel extends JPanel
 			}
 			update();
 		}
-	}
-	
-	/**
-	 * Gets the label which contains the text.
-	 * @author Jay Clegg
-	 * @param name The name of the resource
-	 * @return The resource. If the resource is not found will return null.
-	 */
-	public JLabel getResource(String name)
-	{
-		for(Component component : this.getComponents())
-		{
-			JLabel label = (JLabel) component;
-			if(label.getText().contains(name))
-			{
-				return label;
-			}
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Updates the visual details of this panel.
-	 * @author Jay Clegg
-	 */
-	private void update()
-	{
-		this.setVisible(false);
-		this.setVisible(true);
 	}
 }
