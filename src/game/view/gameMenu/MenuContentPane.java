@@ -19,16 +19,65 @@ import gui.utility.MainPanel;
  */
 public class MenuContentPane extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
-	private GameMenu frame;
-	private SpringLayout layout;
+	
+	/**
+	 * The panel to contain the buttons.
+	 * @author Jay Clegg
+	 */
 	private JPanel buttonPanel;
-	private JButton resumeButton;
-	private JButton settingsButton;
-	private JButton saveButton;
+	
+	/**
+	 * The dialog that contains the panel
+	 * @author Jay Clegg
+	 */
+	private GameMenu frame;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
+	private SpringLayout layout;
+	
+	/**
+	 * The button to load a game.
+	 * @author Jay Clegg
+	 */
 	private JButton loadButton;
+	
+	/**
+	 * The button to go to the main menu.
+	 * @author Jay Clegg
+	 */
 	private JButton mainMenuButton;
+	
+	/**
+	 * The button to completely exit the game.
+	 * @author Jay Clegg
+	 */
 	private JButton quitButton;
+	
+	/**
+	 * The button to resume the game.
+	 * @author Jay Clegg
+	 */
+	private JButton resumeButton;
+	
+	/**
+	 * The button to save a game.
+	 * @author Jay Clegg
+	 */
+	private JButton saveButton;
+	
+	/**
+	 * The button to open the settings menu.
+	 * @author Jay Clegg
+	 */
+	private JButton settingsButton;
 	
 	/**
 	 * Builds the container and its components.
@@ -55,21 +104,6 @@ public class MenuContentPane extends MainPanel
 		setupListeners();
 	}
 	
-	protected void setupPanel()
-	{
-		this.setFocusable(true);
-		
-		buttonPanel.add(resumeButton);
-		buttonPanel.add(settingsButton);
-		buttonPanel.add(saveButton);
-		buttonPanel.add(saveButton);
-		buttonPanel.add(loadButton);
-		buttonPanel.add(mainMenuButton);
-		buttonPanel.add(quitButton);
-		
-		this.add(buttonPanel);
-	}
-	
 	protected void setupLayout()
 	{
 		this.setLayout(layout);
@@ -80,16 +114,10 @@ public class MenuContentPane extends MainPanel
 		layout.putConstraint(SpringLayout.EAST, buttonPanel, -10, SpringLayout.EAST, this);
 	}
 	
-	@WIP
 	protected void setupListeners()
 	{
 		this.addKeyListener(new KeyListener()
 		{
-			@Override
-			public void keyTyped(KeyEvent key)
-			{				
-			}
-
 			@Override
 			public void keyPressed(KeyEvent key)
 			{
@@ -103,6 +131,11 @@ public class MenuContentPane extends MainPanel
 					frame.dispose();
 				}
 			}
+
+			@Override
+			public void keyTyped(KeyEvent key)
+			{				
+			}
 		});
 		
 		resumeButton.addActionListener(click -> frame.dispose());
@@ -111,5 +144,20 @@ public class MenuContentPane extends MainPanel
 		loadButton.addActionListener(click -> app.loadGame(frame));
 		mainMenuButton.addActionListener(click -> app.returnToMainMenu(frame));
 		quitButton.addActionListener(click -> app.quit(frame));
+	}
+	
+	protected void setupPanel()
+	{
+		this.setFocusable(true);
+		
+		buttonPanel.add(resumeButton);
+		buttonPanel.add(settingsButton);
+		buttonPanel.add(saveButton);
+		buttonPanel.add(saveButton);
+		buttonPanel.add(loadButton);
+		buttonPanel.add(mainMenuButton);
+		buttonPanel.add(quitButton);
+		
+		this.add(buttonPanel);
 	}
 }

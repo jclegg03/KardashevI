@@ -12,6 +12,10 @@ import game.view.gameView.GameFrame;
  */
 public class GameMenu extends JDialog
 {
+	/**
+	 * The panel this dialog contains.
+	 * @author Jay Clegg
+	 */
 	private MenuContentPane contentPane;
 	
 	/**
