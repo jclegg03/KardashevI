@@ -11,14 +11,53 @@ import game.model.resources.Tech;
  */
 public class Army implements Serializable, Describable, Requires
 {
-	private String name;
-	private String type;
-	private String description;
-	private Tech requirement;
-	private int health;
-	private int morale;
-	private int damage;
+	/**
+	 * How long it takes to build/train this army.
+	 * @author Jay Clegg
+	 */
 	private int buildTime;
+	
+	/**
+	 * How much damage this army does.
+	 * @author Jay Clegg
+	 */
+	private int damage;
+	
+	/**
+	 * A description of this army.
+	 * @author Jay Clegg
+	 */
+	private String description;
+	
+	/**
+	 * The health of this army.
+	 * @author Jay Clegg
+	 */
+	private int health;
+	
+	/**
+	 * The morale of this army.
+	 * @author Jay Clegg
+	 */
+	private int morale;
+	
+	/**
+	 * The name of this army.
+	 * @author Jay Clegg
+	 */
+	private String name;
+	
+	/**
+	 * The tech requirement if any for this army.
+	 * @author Jay Clegg
+	 */
+	private Tech requirement;
+	
+	/**
+	 * What kind of army this is.
+	 * @author Jay Clegg
+	 */
+	private String type;
 	
 	/**
 	 * Builds an army.
@@ -43,26 +82,17 @@ public class Army implements Serializable, Describable, Requires
 	}
 	
 	/**
-	 * Gives the type of the army.
-	 * @return The type of army.
+	 * Gives the damage of an army.
+	 * @return The damage of the army.
 	 */
-	public String getType()
+	public int getDamage()
 	{
-		return this.type;
+		return this.damage;
 	}
 	
-	/**
-	 * Gives the name of the army.
-	 * @return The name of the army.
-	 */
-	public String getName()
+	public String getDescription()
 	{
-		return this.name;
-	}
-	
-	public Tech getRequirement()
-	{
-		return this.requirement;
+		return this.toString();
 	}
 	
 	/**
@@ -84,21 +114,40 @@ public class Army implements Serializable, Describable, Requires
 	}
 	
 	/**
-	 * Gives the damage of an army.
-	 * @return The damage of the army.
+	 * Gives the name of the army.
+	 * @return The name of the army.
 	 */
-	public int getDamage()
+	public String getName()
 	{
-		return this.damage;
+		return this.name;
+	}
+	
+	public Tech getRequirement()
+	{
+		return this.requirement;
 	}
 	
 	/**
-	 * Changes the name of an army.
-	 * @param name The new name for the army.
+	 * Gives the type of the army.
+	 * @return The type of army.
 	 */
-	public void setName(String name)
+	public String getType()
 	{
-		this.name = name;
+		return this.type;
+	}
+	
+	/**
+	 * Updates the damage of the army.
+	 * @param damage The new damage value.
+	 */
+	public void setDamage(int damage)
+	{
+		this.damage = damage;
+	}
+	
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 	
 	/**
@@ -120,12 +169,12 @@ public class Army implements Serializable, Describable, Requires
 	}
 	
 	/**
-	 * Updates the damage of the army.
-	 * @param damage The new damage value.
+	 * Changes the name of an army.
+	 * @param name The new name for the army.
 	 */
-	public void setDamage(int damage)
+	public void setName(String name)
 	{
-		this.damage = damage;
+		this.name = name;
 	}
 	
 	@Override
@@ -140,15 +189,5 @@ public class Army implements Serializable, Describable, Requires
 				+ this.getDamage() + "damage.";
 		
 		return details;
-	}
-	
-	public String getDescription()
-	{
-		return this.toString();
-	}
-	
-	public void setDescription(String description)
-	{
-		this.description = description;
 	}
 }
