@@ -331,7 +331,7 @@ group=31</panel_attributes>
       <x>1962</x>
       <y>594</y>
       <w>246</w>
-      <h>186</h>
+      <h>168</h>
     </coordinates>
     <panel_attributes>GameContentPane
 --
@@ -344,13 +344,11 @@ group=31</panel_attributes>
 - utilityPanel : JPanel
 - researchButton : JButton
 - menuButton : JButton
+- mapSelector : MapLevelSelector
 --
 + GameContentPane(Controller, GameFrame) : Constructor
-- setupPanel() : void
-- setupLayout() : void
-- setupListeners() : void
-+ getSettlementPanel() : SettlementPanel
-+ getResourcePanel() : ResourcePanel
++ getters() : Type
++ setters(Type) : void
 + getMap() : Map
 - addMapSelector() : void
 group=31</panel_attributes>
@@ -422,14 +420,14 @@ group=31</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1686</x>
+      <x>1680</x>
       <y>576</y>
-      <w>204</w>
+      <w>216</w>
       <h>54</h>
     </coordinates>
     <panel_attributes>GameMenu
 --
-- contentPane - MenuContentPane
+- contentPane : MenuContentPane
 --
 + GameMenu(Controller, GameFrame) : Constructor
 - setupFrame() : void
@@ -439,9 +437,9 @@ group=8</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1686</x>
+      <x>1680</x>
       <y>642</y>
-      <w>228</w>
+      <w>246</w>
       <h>132</h>
     </coordinates>
     <panel_attributes>MenuContentPane
@@ -840,13 +838,13 @@ group=16</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1806</x>
+      <x>1800</x>
       <y>774</y>
-      <w>186</w>
+      <w>192</w>
       <h>324</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>290.0;520.0;170.0;520.0;170.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
+    <additional_attributes>300.0;520.0;180.0;520.0;180.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
