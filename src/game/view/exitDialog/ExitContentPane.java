@@ -20,13 +20,47 @@ import gui.utility.MainPanel;
  */
 public class ExitContentPane extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
-	private ExitDialog frame;
-	private SpringLayout layout;
-	private JLabel prompt;
+	
+	/**
+	 * The panel for all the buttons in this.
+	 * @author Jay Clegg
+	 */
 	private JPanel buttonPanel;
-	private JButton confirmButton;
+	
+	/**
+	 * The button to cancel exiting the game.
+	 * @author Jay Clegg
+	 */
 	private JButton cancelButton;
+	
+	/**
+	 * The button to confirm the user wants to exit.
+	 * @author Jay Clegg
+	 */
+	private JButton confirmButton;
+	
+	/**
+	 * The frame that contains this panel.
+	 * @author Jay Clegg
+	 */
+	private ExitDialog frame;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
+	private SpringLayout layout;
+	
+	/**
+	 * The prompt for the user.
+	 * @author Jay Clegg
+	 */
+	private JLabel prompt;
 	
 	/**
 	 * Builds the container.
@@ -48,16 +82,6 @@ public class ExitContentPane extends MainPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
-	}
-	
-	protected void setupPanel()
-	{
-		this.setFocusable(true);
-		
-		setupButtonPanel();
-		
-		this.add(prompt);
-		this.add(buttonPanel);
 	}
 	
 	/**
@@ -89,11 +113,6 @@ public class ExitContentPane extends MainPanel
 		this.addKeyListener(new KeyListener()
 		{
 			@Override
-			public void keyTyped(KeyEvent key)
-			{
-			}
-
-			@Override
 			public void keyPressed(KeyEvent key)
 			{
 				if(key.getKeyChar() == KeyEvent.VK_ENTER)
@@ -110,9 +129,24 @@ public class ExitContentPane extends MainPanel
 			public void keyReleased(KeyEvent key)
 			{
 			}
+
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
+			}
 		});
 		
 		confirmButton.addActionListener(click -> app.quit(frame));
 		cancelButton.addActionListener(click -> frame.dispose());
+	}
+	
+	protected void setupPanel()
+	{
+		this.setFocusable(true);
+		
+		setupButtonPanel();
+		
+		this.add(prompt);
+		this.add(buttonPanel);
 	}
 }

@@ -12,6 +12,10 @@ import gui.utility.JFrame;
  */
 public class ExitDialog extends JDialog
 {
+	/**
+	 * The panel this holds.
+	 * @author Jay Clegg
+	 */
 	private ExitContentPane contentPane;
 	
 	/**
