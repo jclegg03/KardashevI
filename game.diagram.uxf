@@ -1576,20 +1576,19 @@ group=20</panel_attributes>
       <x>1236</x>
       <y>534</y>
       <w>336</w>
-      <h>126</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Building
 --
-# name : String
-# employs : Job[]
-# produces : Resource[]
-# consumes : Resource[]
-# size : int
-# upgradesTo : Building
-# description : String
-# requirement : Tech
+- name : String
+- employs : Job[]
+- produces : Resource[]
+- consumes : Resource[]
+- size : int
+- upgradesTo : Building
+- description : String
+- requirement : Tech
 --
-+ Building(String, Job[], Resource[], Resource[], int, Building, String, Tech) : Constructor
 + getters() : Type
 + setters(Type) : void
 bg=orange
@@ -1601,9 +1600,9 @@ group=20</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1074</x>
+      <x>1056</x>
       <y>504</y>
-      <w>108</w>
+      <w>126</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>/Requires/
@@ -1654,10 +1653,10 @@ group=20</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>882</x>
+      <x>834</x>
       <y>384</y>
-      <w>138</w>
-      <h>120</h>
+      <w>192</w>
+      <h>138</h>
     </coordinates>
     <panel_attributes>Job
 --
@@ -1668,6 +1667,8 @@ group=20</panel_attributes>
 - numAvailable : int
 - numEmployed : int
 --
++ Job(String, String, Resource[], Resource[],
+										int, int) : Constructor
 + getters() : Type
 + setters(Type) : void
 + addAvailable(int) : void
@@ -1681,14 +1682,14 @@ group=20</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1014</x>
+      <x>1020</x>
       <y>444</y>
-      <w>72</w>
+      <w>66</w>
       <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 group=20</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1716,9 +1717,9 @@ group=20</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>876</x>
+      <x>828</x>
       <y>366</y>
-      <w>708</w>
+      <w>756</w>
       <h>390</h>
     </coordinates>
     <panel_attributes>game.model.units
@@ -1730,9 +1731,9 @@ group=20</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1194</x>
+      <x>1182</x>
       <y>696</y>
-      <w>384</w>
+      <w>396</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>Settlement
@@ -1750,8 +1751,8 @@ bg=orange</panel_attributes>
     <coordinates>
       <x>1236</x>
       <y>390</y>
-      <w>246</w>
-      <h>138</h>
+      <w>270</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Army
 --
@@ -1765,7 +1766,6 @@ bg=orange</panel_attributes>
 - buildTime : int
 --
 + Army(String, String, String, Tech, int, int, int, int) : Constructor
-+ toString() : String
 + getters() : Type
 + setters(Type) : void
 bg=orange
