@@ -1,4 +1,4 @@
-package game.model.empire;
+	package game.model.empire;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,12 +16,41 @@ import game.model.maps.EmpireWorldMap;
  */
 public class Empire implements Serializable
 {
-	private String name;
+	/**
+	 * If the empire is a mid game empire.
+	 * @author Jay Clegg
+	 */
 	private boolean isMidgame;
-	private boolean mapSelectorAdded;
+	
+	/**
+	 * A list of all the maps in the empire. Usually just the world map since that holds everything else.
+	 * @author Jay Clegg
+	 */
 	private ArrayList<EmpireMap> maps;
-	private EmpireRegionalMap startingMap;
+	
+	/**
+	 * If the map selector has been added.
+	 * @author Jay Clegg
+	 */
+	private boolean mapSelectorAdded;
+	
+	/**
+	 * The name of the empire.
+	 * @author Jay Clegg
+	 */
+	private String name;
+	
+	/**
+	 * The starting local map.
+	 * @author Jay Clegg
+	 */
 	private EmpireLocalMap origin;
+	
+	/**
+	 * The starting regional map for this empire.
+	 * @author Jay Clegg
+	 */
+	private EmpireRegionalMap startingMap;
 	
 	/**
 	 * Builds an empire based on the specified parameters.
@@ -38,43 +67,15 @@ public class Empire implements Serializable
 		this.origin = null;
 	}
 	
-	public void setStartingMap(EmpireRegionalMap startingMap)
-	{
-		this.startingMap = startingMap;
-	}
-	
-	public void setOrigin(EmpireLocalMap origin)
-	{
-		this.origin = origin;
-	}
-	
-	public EmpireLocalMap getOrigin()
-	{
-		return origin;
-	}
-	
 	public void addMap(EmpireMap map)
 	{
 		maps.add(map);
 	}
 	
-	public void removeLocalMaps()
-	{
-		for(EmpireMap map : maps)
-		{
-			try
-			{
-				EmpireLocalMap localMap = (EmpireLocalMap) map;
-				
-				maps.remove(maps.indexOf(localMap));
-			}
-			catch(ClassCastException invalidCast)
-			{
-				//Nothing has to be done with these.
-			}
-		}
-	}
-
+	/**
+	 * Checks if a full region has been explored. Updates the value of midgame accordingly.
+	 * @author Jay Clegg
+	 */
 	public void checkMidgame()
 	{
 		for(EmpireLocalMap localMap : startingMap.getLocalMaps())
@@ -99,16 +100,24 @@ public class Empire implements Serializable
 		return isMidgame;
 	}
 	
-	
-	public void setName(String name)
+	/**
+	 * @return The mapSelectorAdded.
+	 */
+	public boolean getMapSelectorAdded()
 	{
-		this.name = name;
+		return mapSelectorAdded;
 	}
 	
 	public String getName()
 	{
 		return this.name;
 	}
+	
+	public EmpireLocalMap getOrigin()
+	{
+		return origin;
+	}
+	
 	
 	public EmpireRegionalMap getStartingMap()
 	{
@@ -127,20 +136,27 @@ public class Empire implements Serializable
 		
 		return null;
 	}
-
-	/**
-	 * @return The mapSelectorAdded.
-	 */
-	public boolean getMapSelectorAdded()
-	{
-		return mapSelectorAdded;
-	}
-
+	
 	/**
 	 * @param mapSelectorAdded The new value of mapSelectorAdded.
 	 */
 	public void setMapSelectorAdded(boolean mapSelectorAdded)
 	{
 		this.mapSelectorAdded = mapSelectorAdded;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public void setOrigin(EmpireLocalMap origin)
+	{
+		this.origin = origin;
+	}
+
+	public void setStartingMap(EmpireRegionalMap startingMap)
+	{
+		this.startingMap = startingMap;
 	}
 }
