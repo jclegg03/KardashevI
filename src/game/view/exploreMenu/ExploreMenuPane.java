@@ -13,9 +13,28 @@ import gui.utility.MainPanel;
  */
 public class ExploreMenuPane extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private MapController app;
+	
+	/**
+	 * The button to confirm the intent to explore a tile.
+	 * @author Jay Clegg
+	 */
 	private JButton exploreButton;
+	
+	/**
+	 * The button to cancel exploring.
+	 * @author Jay Clegg
+	 */
 	private JButton cancelButton;
+	
+	/**
+	 * The dialog that contains this panel.
+	 * @author Jay Clegg
+	 */
 	private ExploreMenu frame;
 	
 	/**

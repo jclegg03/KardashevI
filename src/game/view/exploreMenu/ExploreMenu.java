@@ -15,6 +15,10 @@ import game.view.maps.Tile;
  */
 public class ExploreMenu extends JDialog
 {
+	/**
+	 * The panel this holds.
+	 * @author Jay Clegg
+	 */
 	private ExploreMenuPane contentPane;
 	
 	/**
@@ -44,7 +48,7 @@ public class ExploreMenu extends JDialog
 	 * Helper method. Sets the visible and functional aspects of this dialog.
 	 * @author Jay Clegg
 	 */
-	public void setupFrame()
+	private void setupFrame()
 	{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setContentPane(contentPane);
