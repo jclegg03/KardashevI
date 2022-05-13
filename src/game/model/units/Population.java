@@ -9,9 +9,36 @@ import java.io.Serializable;
  */
 public class Population implements Serializable
 {
-	private String name;
-	private int size;
+	/**
+	 * How quickly this population grows.
+	 * @author Jay Clegg
+	 */
 	private double growthRate;
+	
+	/**
+	 * The name of this population.
+	 * @author Jay Clegg
+	 */
+	private String name;
+	
+	/**
+	 * The size of this populaiton.
+	 * @author Jay Clegg
+	 */
+	private int size;
+	
+	/**
+	 * Builds a populaiton model with a default growth rate of 1.5.
+	 * @author Jay Clegg
+	 * @param name The name of the population.
+	 * @param size The size of the population.
+	 */
+	public Population(String name, int size)
+	{
+		this.name = name;
+		this.size = size;
+		this.growthRate = 1.5;
+	}
 	
 	/**
 	 * Builds a population model.
@@ -27,17 +54,9 @@ public class Population implements Serializable
 		this.growthRate = growthRate;
 	}
 	
-	/**
-	 * Builds a populaiton model with a default growth rate of 1.5.
-	 * @author Jay Clegg
-	 * @param name The name of the population.
-	 * @param size The size of the population.
-	 */
-	public Population(String name, int size)
+	public double getGrowthRate()
 	{
-		this.name = name;
-		this.size = size;
-		this.growthRate = 1.5;
+		return this.growthRate;
 	}
 	
 	public String getName()
@@ -45,29 +64,9 @@ public class Population implements Serializable
 		return this.name;
 	}
 	
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
 	public int getSize()
 	{
 		return this.size;
-	}
-	
-	public void setSize(int size)
-	{
-		this.size = size;
-	}
-	
-	public double getGrowthRate()
-	{
-		return this.growthRate;
-	}
-	
-	public void setGrowthRate(double growthRate)
-	{
-		this.growthRate = growthRate;
 	}
 	
 	/**
@@ -79,5 +78,20 @@ public class Population implements Serializable
 		double population = (double) size;
 		population *= growthRate;
 		size = (int) (population) + 1;
+	}
+	
+	public void setGrowthRate(double growthRate)
+	{
+		this.growthRate = growthRate;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public void setSize(int size)
+	{
+		this.size = size;
 	}
 }
