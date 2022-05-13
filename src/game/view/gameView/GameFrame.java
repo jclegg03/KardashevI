@@ -12,6 +12,10 @@ import gui.utility.JFrame;
  */
 public class GameFrame extends JFrame
 {
+	/**
+	 * The mane panel this frame holds.
+	 * @author Jay Clegg
+	 */
 	private GameContentPane contentPane;
 	
 	/**
