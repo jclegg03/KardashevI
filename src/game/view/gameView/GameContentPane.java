@@ -23,17 +23,71 @@ import gui.utility.MainPanel;
  */
 public class GameContentPane extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
+	
+	/**
+	 * The frame that holds this panel.
+	 * @author Jay Clegg
+	 */
 	private GameFrame frame;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
 	private SpringLayout layout;
-	private JPanel mapPanel;
+	
+	/**
+	 * The currently displayed map.
+	 * @author Jay Clegg
+	 */
 	private Map map;
-	private ResourcePanel resourcePanel;
-	private SettlementPanel settlementPanel;
-	private JPanel toolbarPanel;
-	private JButton researchButton;
-	private JButton menuButton;
+	
+	/**
+	 * The panel to hold the map.
+	 * @author Jay Clegg
+	 */
+	private JPanel mapPanel;
+	
+	/**
+	 * The panel to hold the map selector.
+	 * @author Jay Clegg
+	 */
 	private MapLevelSelector mapSelector;
+	
+	/**
+	 * The button to open the menu.
+	 * @author Jay Clegg
+	 */
+	private JButton menuButton;
+	
+	/**
+	 * The button to research techs. (Currently useless.)
+	 * @author Jay Clegg
+	 */
+	private JButton researchButton;
+	
+	/**
+	 * The panel to hold resource data.
+	 * @author Jay Clegg
+	 */
+	private ResourcePanel resourcePanel;
+	
+	/**
+	 * The panel to hold settlements.
+	 * @author Jay Clegg
+	 */
+	private SettlementPanel settlementPanel;
+	
+	/**
+	 * The panel to hold the toolbar buttons.
+	 * @author Jay Clegg
+	 */
+	private JPanel toolbarPanel;
 	
 	/**
 	 * Builds the content pane.
@@ -59,20 +113,6 @@ public class GameContentPane extends MainPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
-	}
-	
-	protected void setupPanel()
-	{
-		this.setFocusable(true);
-		
-		setupUtilityPanel();
-		mapPanel.add(map);
-		mapPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		this.add(mapPanel);
-		this.add(resourcePanel);
-		this.add(settlementPanel);
-		this.add(toolbarPanel);
 	}
 	
 	private void setupUtilityPanel()
@@ -112,11 +152,6 @@ public class GameContentPane extends MainPanel
 		this.addKeyListener(new KeyListener()
 		{
 			@Override
-			public void keyTyped(KeyEvent key)
-			{
-			}
-
-			@Override
 			public void keyPressed(KeyEvent key)
 			{
 			}
@@ -128,6 +163,11 @@ public class GameContentPane extends MainPanel
 				{
 					menuButton.doClick();
 				}
+			}
+
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
 			}	
 		});
 		
@@ -142,37 +182,18 @@ public class GameContentPane extends MainPanel
 		});
 	}
 	
-	public SettlementPanel getSettlementPanel()
+	protected void setupPanel()
 	{
-		return this.settlementPanel;
-	}
-	
-	public ResourcePanel getResourcePanel()
-	{
-		return this.resourcePanel;
-	}
-	
-	/**
-	 * @return The toolbarPanel.
-	 */
-	public JPanel getToolbarPanel()
-	{
-		return toolbarPanel;
-	}
-
-	public Map getMap()
-	{
-		return this.map;
-	}
-	
-	public void setMap(Map map)
-	{
-		mapPanel.remove(this.map);
-		this.map = map;
-		mapPanel.add(this.map);
-		mapPanel.setVisible(false);
-		mapPanel.setVisible(true);
-		mapSelector.update(map);
+		this.setFocusable(true);
+		
+		setupUtilityPanel();
+		mapPanel.add(map);
+		mapPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		this.add(mapPanel);
+		this.add(resourcePanel);
+		this.add(settlementPanel);
+		this.add(toolbarPanel);
 	}
 	
 	/**
@@ -189,5 +210,38 @@ public class GameContentPane extends MainPanel
 		layout.putConstraint(SpringLayout.NORTH, mapSelector, 0, SpringLayout.SOUTH, mapPanel);
 		this.setVisible(false);
 		this.setVisible(true);
+	}
+	
+	public Map getMap()
+	{
+		return this.map;
+	}
+	
+	public ResourcePanel getResourcePanel()
+	{
+		return this.resourcePanel;
+	}
+
+	public SettlementPanel getSettlementPanel()
+	{
+		return this.settlementPanel;
+	}
+	
+	/**
+	 * @return The toolbarPanel.
+	 */
+	public JPanel getToolbarPanel()
+	{
+		return toolbarPanel;
+	}
+	
+	public void setMap(Map map)
+	{
+		mapPanel.remove(this.map);
+		this.map = map;
+		mapPanel.add(this.map);
+		mapPanel.setVisible(false);
+		mapPanel.setVisible(true);
+		mapSelector.update(map);
 	}
 }
