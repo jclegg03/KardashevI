@@ -17,22 +17,41 @@ import org.junit.jupiter.api.Test;
 
 import game.controller.Controller;
 
+/**
+ * Tests the controller.
+ */
 class ControllerTest
 {
+	/**
+	 * The controller that will be tested.
+	 */
 	private Controller testedController;
-
+	
+	/**
+	 * Initializes the controller.
+	 * @throws Exception If there is an error.
+	 */
 	@BeforeEach
 	void setUp() throws Exception
 	{
 		this.testedController = new Controller();
 	}
 
+	/**
+	 * Sets the tested controller to null.
+	 * @throws Exception If there is an error.
+	 */
 	@AfterEach
 	void tearDown() throws Exception
 	{
 		this.testedController = null;
 	}
 
+	/**
+	 * Tests the controller for methods.
+	 * Checks for a save and load method.
+	 * Checks that the load method actually loads an empire.
+	 */
 	@Test
 	void testController()
 	{

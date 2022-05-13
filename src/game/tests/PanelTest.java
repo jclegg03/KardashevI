@@ -29,18 +29,36 @@ import game.controller.Controller;
 import game.view.mainMenu.MainContentPane;
 import game.view.mainMenu.MainMenu;
 
+/**
+ * Tests the panel.
+ */
 class PanelTest
 {
+	/**
+	 * The controller used to make the test panel.
+	 */
 	private Controller testedController;
+	
+	/**
+	 * The panel to be tested.
+	 */
 	private MainContentPane testedPanel;
 
+	/**
+	 * Initializes the class variables.
+	 * @throws Exception If there is an error.
+	 */
 	@BeforeEach
 	void setUp() throws Exception
 	{
 		this.testedController = new Controller();
 		this.testedPanel = new MainContentPane(testedController, new MainMenu(testedController));
 	}
-
+	
+	/**
+	 * Sets the variables to null after the test.
+	 * @throws Exception If there is an error.
+	 */
 	@AfterEach
 	void tearDown() throws Exception
 	{
@@ -48,6 +66,12 @@ class PanelTest
 		this.testedPanel = null;
 	}
 
+	/**
+	 * Tests the methods in the panel.
+	 * Makes sure there are at least 4 methods.
+	 * Makes sure all methods are protected.
+	 * Makes sure there is a setupPanel, setupLayout, and setupListeners methods.
+	 */
 	@Test
 	void testPanelMethods()
 	{
@@ -62,17 +86,17 @@ class PanelTest
 			if (method.getName().equals("setupPanel"))
 			{
 				hasSetupPanel = true;
-				assertTrue(Modifier.isProtected(method.getModifiers()), "The setupPanel method must be private");
+				assertTrue(Modifier.isProtected(method.getModifiers()), "The setupPanel method must be protected");
 			}
 			else if (method.getName().equals("setupListeners"))
 			{
 				hasSetupListeners = true;
-				assertTrue(Modifier.isProtected(method.getModifiers()), "The setupListeners method must be private");
+				assertTrue(Modifier.isProtected(method.getModifiers()), "The setupListeners method must be protected");
 			}
 			else if (method.getName().equals("setupLayout"))
 			{
 				hasSetupLayout = true;
-				assertTrue(Modifier.isProtected(method.getModifiers()), "The setupLayout method must be private");
+				assertTrue(Modifier.isProtected(method.getModifiers()), "The setupLayout method must be protected");
 			}
 		}
 		assertTrue(hasSetupPanel, "You need a method named setupPanel");
