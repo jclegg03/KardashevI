@@ -9,9 +9,20 @@ import gui.utility.MainPanel;
  * @author Jay Clegg
  *
  */
+@WIP
+//Empty for now.
 public class BuildingMenuPane extends MainPanel
 {
+	/**
+	 * The controller this reportrs to.
+	 * @author Jay Clegg
+	 */
 	private MapController app;
+	
+	/**
+	 * The parent dialog of this.
+	 * @author Jay Clegg
+	 */
 	private BuildingMenu frame;
 	
 	/**
@@ -32,18 +43,21 @@ public class BuildingMenuPane extends MainPanel
 	}
 	
 	@WIP
+	//empty
 	protected void setupPanel()
 	{
 		
 	}
 	
 	@WIP
+	//empty
 	protected void setupLayout()
 	{
 		
 	}
 	
 	@WIP
+	//empty
 	protected void setupListeners()
 	{
 		

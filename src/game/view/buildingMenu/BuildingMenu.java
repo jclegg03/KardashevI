@@ -3,6 +3,7 @@ package game.view.buildingMenu;
 import javax.swing.JDialog;
 
 import game.controller.MapController;
+import game.controller.WIP;
 import game.view.gameView.GameFrame;
 import game.view.maps.Tile;
 
@@ -11,8 +12,14 @@ import game.view.maps.Tile;
  * @author Jay Clegg
  *
  */
+@WIP
+//Not sized
 public class BuildingMenu extends JDialog
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private MapController app;
 	
 	/**
