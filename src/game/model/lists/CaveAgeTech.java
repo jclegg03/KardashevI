@@ -2,10 +2,20 @@ package game.model.lists;
 
 import game.model.resources.Tech;
 
+/**
+ * A list of technologies a cave age empire can research.
+ * @author Jay Clegg
+ *
+ */
 public class CaveAgeTech extends TechList
 {
+	/**
+	 * Builds the list of techs an empire can have.
+	 * @author Jay Clegg
+	 */
 	public CaveAgeTech()
 	{
+		super();
 		Tech sticks = new Tech("Sticks", 5);
 		ageTechs.add(sticks);
 		
