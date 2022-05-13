@@ -15,10 +15,29 @@ import game.model.units.Building;
  */
 public abstract class EmpireMap implements Serializable
 {
-	protected String name;
-	protected Location[][] map;
+	/**
+	 * The 
+	 * @author Jay Clegg
+	 */
+	protected final String LEVEL;
+	
+	/**
+	 * This maps location on the map above it.
+	 * @author Jay Clegg
+	 */
 	protected Location location;
-	protected String level;
+	
+	/**
+	 * The data about the map.
+	 * @author Jay Clegg
+	 */
+	protected Location[][] map;
+	
+	/**
+	 * The name of the map.
+	 * @author Jay Clegg
+	 */
+	protected String name;
 	
 	/**
 	 * Builds a map with the specified amounts of rows and columns, with an empire owning it.
@@ -31,23 +50,17 @@ public abstract class EmpireMap implements Serializable
 	{
 		this.map = new Location[rows][cols];
 		this.location = location;
-		this.level = level;
+		this.LEVEL = level;
 	}
 	
-	public void setState(int row, int col, int value)
-	{
-		map[row][col].setState(value);
-	}
-	
+	/**
+	 * Assigns a specific location to a place on the map.
+	 * @author Jay Clegg
+	 * @param location
+	 */
 	public void assignLocation(Location location)
 	{
 		map[location.getRow()][location.getCol()] = location;
-	}
-	
-	
-	public int getState(int row, int col)
-	{
-		return map[row][col].getState();
 	}
 	
 	public Biome getBiome(int row, int col)
@@ -55,10 +68,6 @@ public abstract class EmpireMap implements Serializable
 		return map[row][col].getBiome();
 	}
 	
-	public Building getBuilding(int row, int col)
-	{
-		return map[row][col].getBuilding();
-	}
 	
 	public Biome[][] getBiomes2D()
 	{
@@ -75,14 +84,32 @@ public abstract class EmpireMap implements Serializable
 		return biomes;
 	}
 	
-	public String getName()
+	public Building getBuilding(int row, int col)
 	{
-		return this.name;
+		return map[row][col].getBuilding();
 	}
 	
-	public void setName(String name)
+	public int getCols()
 	{
-		this.name = name;
+		return this.map[0].length;
+	}
+	
+	public boolean getIsFullyExplored()
+	{
+		for(Location[] locations : map)
+		{
+			for(Location location : locations)
+			{
+				if(location.getState() == MapController.UNEXPLORED) return false; 
+			}
+		}
+		
+		return true;
+	}
+	
+	public String getLevel()
+	{
+		return LEVEL;
 	}
 	
 	public Location getLocation()
@@ -102,16 +129,6 @@ public abstract class EmpireMap implements Serializable
 		}
 	}
 	
-	public int getRows()
-	{
-		return this.map.length;
-	}
-	
-	public int getCols()
-	{
-		return this.map[0].length;
-	}
-	
 	public ArrayList<Location> getLocations()
 	{
 		ArrayList<Location> locations = new ArrayList<Location>();
@@ -127,22 +144,19 @@ public abstract class EmpireMap implements Serializable
 		return locations;
 	}
 	
-	public boolean getIsFullyExplored()
+	public String getName()
 	{
-		for(Location[] locations : map)
-		{
-			for(Location location : locations)
-			{
-				if(location.getState() == MapController.UNEXPLORED) return false; 
-			}
-		}
-		
-		return true;
+		return this.name;
 	}
 	
-	public String getLevel()
+	public int getRows()
 	{
-		return level;
+		return this.map.length;
+	}
+	
+	public int getState(int row, int col)
+	{
+		return map[row][col].getState();
 	}
 	
 	public int[][] getStates2D()
@@ -158,5 +172,15 @@ public abstract class EmpireMap implements Serializable
 		}
 		
 		return states;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public void setState(int row, int col, int value)
+	{
+		map[row][col].setState(value);
 	}
 }

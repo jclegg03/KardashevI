@@ -14,9 +14,23 @@ import game.model.empire.Empire;
  */
 public class EmpireRegionalMap extends EmpireMap
 {
-	private HashMap<Location, EmpireLocalMap> localMaps;
-	private WorldBiome parentBiome;
+	/**
+	 * Used to generate unique names for the maps. Incremented in the constructor.
+	 * @author Jay Clegg
+	 */
 	private static int count;
+	
+	/**
+	 * A hash map of the locations on this map and the local map they link to.
+	 * @author Jay Clegg
+	 */
+	private HashMap<Location, EmpireLocalMap> localMaps;
+	
+	/**
+	 * The biome this map overall has. Used to determine which biomes can be generated.
+	 * @author Jay Clegg
+	 */
+	private WorldBiome parentBiome;
 	
 	/**
 	 * Builds the regional map.
@@ -31,11 +45,6 @@ public class EmpireRegionalMap extends EmpireMap
 		this.parentBiome = parentBiome.copy();
 		this.name = "Regional Map " + count;
 		count++;
-	}
-	
-	public EmpireLocalMap getMap(int row, int col)
-	{
-		return localMaps.get(selectLocation(row, col));
 	}
 	
 	/**
@@ -71,13 +80,18 @@ public class EmpireRegionalMap extends EmpireMap
 		localMaps.put(key, map);
 	}
 	
-	public WorldBiome getParentBiome()
-	{
-		return this.parentBiome;
-	}
-	
 	public Collection<EmpireLocalMap> getLocalMaps()
 	{
 		return localMaps.values();
+	}
+	
+	public EmpireLocalMap getMap(int row, int col)
+	{
+		return localMaps.get(selectLocation(row, col));
+	}
+	
+	public WorldBiome getParentBiome()
+	{
+		return this.parentBiome;
 	}
 }

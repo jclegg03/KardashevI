@@ -13,10 +13,34 @@ import game.model.units.Building;
  */
 public class Location implements Serializable
 {
-	private int row;
-	private int col;
+	/**
+	 * The row of this location.
+	 * @author Jay Clegg
+	 */
+	private final int ROW;
+	
+	/**
+	 * The column of this location.
+	 * @author Jay Clegg
+	 */
+	private final int COL;
+	
+	/**
+	 * What this empire knows about this location. One of the MapController constants.
+	 * @author Jay Clegg
+	 */
 	private int state;
+	
+	/**
+	 * The biome of this location.
+	 * @author Jay Clegg
+	 */
 	private Biome biome;
+	
+	/**
+	 * The building on this location.
+	 * @author Jay Clegg
+	 */
 	private Building building;
 	
 	/**
@@ -27,8 +51,8 @@ public class Location implements Serializable
 	 */
 	public Location(int row, int col, Biome biome, Building building)
 	{
-		this.row = row;
-		this.col = col;
+		this.ROW = row;
+		this.COL = col;
 		this.state = MapController.UNEXPLORED;
 		this.biome = biome;
 		this.building = building;
@@ -66,12 +90,12 @@ public class Location implements Serializable
 	
 	public int getRow()
 	{
-		return row;
+		return ROW;
 	}
 
 	public int getCol()
 	{
-		return col;
+		return COL;
 	}
 
 	@Override

@@ -12,7 +12,17 @@ import game.model.empire.Empire;
  */
 public class EmpireLocalMap extends EmpireMap
 {
+	/**
+	 * Used to name the local maps distinctly.
+	 * Increments in the constructor.
+	 * @author Jay Clegg
+	 */
 	private static int count;
+	
+	/**
+	 * The biome used to determine which biomes can generate here.
+	 * @author Jay Clegg
+	 */
 	private RegionalBiome parentBiome;
 	
 	/**
@@ -29,14 +39,14 @@ public class EmpireLocalMap extends EmpireMap
 		count++;
 	}
 	
-	public RegionalBiome getParentBiome()
-	{
-		return this.parentBiome;
-	}
-	
 	@Override
 	public LocalBiome getBiome(int row, int col)
 	{
 		return (LocalBiome) map[row][col].getBiome();
+	}
+	
+	public RegionalBiome getParentBiome()
+	{
+		return this.parentBiome;
 	}
 }

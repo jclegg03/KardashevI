@@ -14,6 +14,10 @@ import game.model.empire.Empire;
  */
 public class EmpireWorldMap extends EmpireMap
 {
+	/**
+	 * A hash map of locations and the regional maps they link to.
+	 * @author Jay Clegg
+	 */
 	private HashMap<Location, EmpireRegionalMap> regionalMaps;
 	
 	/**
@@ -26,18 +30,6 @@ public class EmpireWorldMap extends EmpireMap
 		super(20, 20, new Location(0, 0, null, null), MapController.WORLD);
 		this.regionalMaps = new HashMap<Location, EmpireRegionalMap>();
 		this.name = "World Map";
-	}
-	
-	@Override
-	public WorldBiome getBiome(int row, int col)
-	{
-		return (WorldBiome) super.getBiome(row, col);
-	}
-
-	public EmpireRegionalMap getMap(int row, int col)
-	{
-		
-		return regionalMaps.get(selectLocation(row, col));
 	}
 	
 	/**
@@ -59,7 +51,7 @@ public class EmpireWorldMap extends EmpireMap
 		
 		return null;
 	}
-	
+
 	/**
 	 * Adds a regional map to this world map.
 	 * @param row The row where this regional map is.
@@ -70,6 +62,18 @@ public class EmpireWorldMap extends EmpireMap
 	public void addMap(int row, int col, EmpireRegionalMap map)
 	{
 		regionalMaps.put(new Location(row, col, null, null), map);
+	}
+	
+	@Override
+	public WorldBiome getBiome(int row, int col)
+	{
+		return (WorldBiome) super.getBiome(row, col);
+	}
+	
+	public EmpireRegionalMap getMap(int row, int col)
+	{
+		
+		return regionalMaps.get(selectLocation(row, col));
 	}
 	
 	public Collection<EmpireRegionalMap> getRegionalMaps()
