@@ -11,10 +11,29 @@ import game.model.units.Describable;
  */
 public class Resource implements Serializable, Describable
 {
-	private int numOwned;
-	private int numProduced;
+	/**
+	 * A description of this resource.
+	 * @author Jay Clegg
+	 */
+	private String description;
+	
+	/**
+	 * The name of this resource.
+	 * @author Jay Clegg
+	 */
 	private String name;
-	private String description;	
+	
+	/**
+	 * The amount of this resource the empire has.
+	 * @author Jay Clegg
+	 */
+	private int numOwned;
+	
+	/**
+	 * The amount of this resource the empire produces monthly.
+	 * @author Jay Clegg
+	 */
+	private int numProduced;	
 	
 	/**
 	 * Builds a resource without a description.
@@ -47,6 +66,16 @@ public class Resource implements Serializable, Describable
 		this.description = description;
 	}
 	
+	public String getDescription()
+	{
+		return this.description;
+	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
 	public int getNumOwned()
 	{
 		return this.numOwned;
@@ -57,14 +86,9 @@ public class Resource implements Serializable, Describable
 		return this.numProduced;
 	}
 	
-	public String getName()
+	public void setDescription(String description)
 	{
-		return this.name;
-	}
-	
-	public String getDescription()
-	{
-		return this.description;
+		this.description = description;
 	}
 	
 	public void setNumOwned(int numOwned)
@@ -75,10 +99,5 @@ public class Resource implements Serializable, Describable
 	public void setNumProduced(int numProduced)
 	{
 		this.numProduced = numProduced;
-	}
-	
-	public void setDescription(String description)
-	{
-		this.description = description;
 	}
 }

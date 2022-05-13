@@ -11,12 +11,63 @@ import game.model.units.Describable;
  */
 public class Tech implements Serializable, Describable
 {
-	private String name;
-	private String description;
+	/**
+	 * The amount of research this tech takes.
+	 * @author Jay Clegg
+	 */
 	private int cost;
-	private Tech[] requirements;
+	
+	/**
+	 * A description of this technology.
+	 * @author Jay Clegg
+	 */
+	private String description;
+	
+	/**
+	 * If this tech has been researched.
+	 * @author Jay Clegg
+	 */
 	private boolean isResearched;
 	
+	/**
+	 * The name of this technology.
+	 * @author Jay Clegg
+	 */
+	private String name;
+	
+	/**
+	 * Any requirements this tech has.
+	 * @author Jay Clegg
+	 */
+	private Tech[] requirements;
+	
+	/**
+	 * Builds a technology with a name and cost. (No prerequisites)
+	 * @param name The name of the technology.
+	 * @param cost The cost of the technology.
+	 */
+	public Tech(String name, int cost)
+	{
+		this.name = name;
+		this.cost = cost;
+		this.requirements = new Tech[0];
+		this.isResearched = false;
+	}
+	
+	/**
+	 * Builds a base researched technology with a name and cost.
+	 * @param name The name of the technology.
+	 * @param cost The cost of the technology.
+	 * @param isResearched If the technology has been researched. (Usually true)
+	 */
+	public Tech(String name, int cost, boolean isResearched)
+	{
+		this.name = name;
+		this.cost = cost;
+		this.requirements = new Tech[0];
+		this.isResearched = isResearched;
+	}
+
 	/**
 	 * Builds a technology with a name, cost and prerequisites.
 	 * @param name The name of the technology.
@@ -31,19 +82,6 @@ public class Tech implements Serializable, Describable
 		this.isResearched = false;
 	}
 	
-	/**
-	 * Builds a technology with a name and cost. (No prerequisites)
-	 * @param name The name of the technology.
-	 * @param cost The cost of the technology.
-	 */
-	public Tech(String name, int cost)
-	{
-		this.name = name;
-		this.cost = cost;
-		this.requirements = new Tech[0];
-		this.isResearched = false;
-	}
-
 	/**
 	 * Builds a researched technology with a name, cost, and prerequisites.
 	 * @param name The name of the technology.
@@ -60,17 +98,46 @@ public class Tech implements Serializable, Describable
 	}
 	
 	/**
-	 * Builds a base researched technology with a name and cost.
-	 * @param name The name of the technology.
-	 * @param cost The cost of the technology.
-	 * @param isResearched If the technology has been researched. (Usually true)
+	 * Determines if a tech can be researched.
+	 * @author Jay Clegg
+	 * @return if the tech can be researched.
 	 */
-	public Tech(String name, int cost, boolean isResearched)
+	public boolean canBeResearched()
 	{
-		this.name = name;
-		this.cost = cost;
-		this.requirements = new Tech[0];
-		this.isResearched = isResearched;
+		if(requirements.length == 0)
+		{
+			return true;
+		}
+		else
+		{
+			for(Tech tech : requirements)
+			{
+				if(! tech.getIsResearched())
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	
+	public int getCost()
+	{
+		return this.cost;
+	}
+	
+	public String getDescription()
+	{
+		return this.description;
+	}
+	
+	/**
+	 * If the technology has been researched.
+	 * @return true if the technology is researched, false if not.
+	 */
+	public boolean getIsResearched()
+	{
+		return this.isResearched;
 	}
 	
 	/**
@@ -80,16 +147,6 @@ public class Tech implements Serializable, Describable
 	public String getName()
 	{
 		return this.name;
-	}
-	
-	public String getDescription()
-	{
-		return this.description;
-	}
-	
-	public int getCost()
-	{
-		return this.cost;
 	}
 	
 	/**
@@ -102,26 +159,17 @@ public class Tech implements Serializable, Describable
 	}
 	
 	/**
-	 * If the technology has been researched.
-	 * @return true if the technology is researched, false if not.
-	 */
-	public boolean getIsResearched()
-	{
-		return this.isResearched;
-	}
-	
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-	
-	/**
 	 * Sets the cost of the technology.
 	 * @param cost The new cost of the technology.
 	 */
 	public void setCost(int cost)
 	{
 		this.cost = cost;
+	}
+	
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 	
 	/**
@@ -151,29 +199,5 @@ public class Tech implements Serializable, Describable
 		}
 		
 		return details;
-	}
-	
-	/**
-	 * Determines if a tech can be researched.
-	 * @author Jay Clegg
-	 * @return if the tech can be researched.
-	 */
-	public boolean canBeResearched()
-	{
-		if(requirements.length == 0)
-		{
-			return true;
-		}
-		else
-		{
-			for(Tech tech : requirements)
-			{
-				if(! tech.getIsResearched())
-				{
-					return false;
-				}
-			}
-			return true;
-		}
 	}
 }
