@@ -11,12 +11,41 @@ import game.model.resources.Resource;
  */
 public class Job implements Serializable, Describable
 {
-	private String name;
+	/**
+	 * A description of this job.
+	 * @author Jay Clegg
+	 */
 	private String description;
-	private Resource[] resourcesProduced;
-	private Resource[] resourcesConsumed;
+	
+	/**
+	 * The name of this job.
+	 * @author Jay Clegg
+	 */
+	private String name;
+	
+	/**
+	 * The amount of this job availalbe.
+	 * @author Jay Clegg
+	 */
 	private int numAvailable;
+	
+	/**
+	 * The amount of people currently working this job.
+	 * @author Jay Clegg
+	 */
 	private int numEmployed;
+	
+	/**
+	 * The resources consumed by this job.
+	 * @author Jay Clegg
+	 */
+	private Resource[] resourcesConsumed;
+	
+	/**
+	 * The resources produced by this job.
+	 * @author Jay Clegg
+	 */
+	private Resource[] resourcesProduced;
 	
 	/**
 	 * Builds a job.
@@ -39,61 +68,6 @@ public class Job implements Serializable, Describable
 		this.numEmployed = numEmployed;
 	}
 	
-	public String getName()
-	{
-		return this.name;
-	}
-	
-	public String getDescription()
-	{
-		return this.description;
-	}
-	
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-	
-	public Resource[] getResourcesProduced()
-	{
-		return this.resourcesProduced;
-	}
-	
-	public Resource[] getResoucesConsumed()
-	{
-		return this.resourcesConsumed;
-	}
-	
-	public int getNumAvailable()
-	{
-		return this.numAvailable;
-	}
-	
-	public int getNumEmployed()
-	{
-		return this.numEmployed;
-	}
-	
-	public void setResourcesProduced(Resource[] resourcesProduced)
-	{
-		this.resourcesProduced = resourcesProduced;
-	}
-	
-	public void setResourcesConsumed(Resource[] resourcesConsumed)
-	{
-		this.resourcesConsumed = resourcesConsumed;
-	}
-	
-	public void setNumAvailable(int numAvailable)
-	{
-		this.numAvailable = numAvailable;
-	}
-	
-	public void setNumEmployed(int numEmployed)
-	{
-		this.numEmployed = numEmployed;
-	}
-	
 	/**
 	 * Adds the specified amount of jobs.
 	 * @author Jay Clegg
@@ -112,5 +86,60 @@ public class Job implements Serializable, Describable
 	public void addEmployed(int moreWorkers)
 	{
 		numEmployed += moreWorkers;
+	}
+	
+	public String getDescription()
+	{
+		return this.description;
+	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public int getNumAvailable()
+	{
+		return this.numAvailable;
+	}
+	
+	public int getNumEmployed()
+	{
+		return this.numEmployed;
+	}
+	
+	public Resource[] getResoucesConsumed()
+	{
+		return this.resourcesConsumed;
+	}
+	
+	public Resource[] getResourcesProduced()
+	{
+		return this.resourcesProduced;
+	}
+	
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+	
+	public void setNumAvailable(int numAvailable)
+	{
+		this.numAvailable = numAvailable;
+	}
+	
+	public void setNumEmployed(int numEmployed)
+	{
+		this.numEmployed = numEmployed;
+	}
+	
+	public void setResourcesConsumed(Resource[] resourcesConsumed)
+	{
+		this.resourcesConsumed = resourcesConsumed;
+	}
+	
+	public void setResourcesProduced(Resource[] resourcesProduced)
+	{
+		this.resourcesProduced = resourcesProduced;
 	}
 }
