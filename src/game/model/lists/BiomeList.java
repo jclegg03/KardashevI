@@ -15,9 +15,23 @@ import game.model.biomes.WorldBiome;
  */
 public class BiomeList implements Serializable
 {
-	private ArrayList<WorldBiome> worldBiomes;
-	private ArrayList<RegionalBiome> regionalBiomes;
+	/**
+	 * A list of all the local biomes.
+	 * @author Jay Clegg
+	 */
 	private ArrayList<LocalBiome> localBiomes;
+	
+	/**
+	 * A list of all the regional biomes.
+	 * @author Jay Clegg
+	 */
+	private ArrayList<RegionalBiome> regionalBiomes;
+	
+	/**
+	 * A list of all the world biomes.
+	 * @author Jay Clegg
+	 */
+	private ArrayList<WorldBiome> worldBiomes;
 	
 	/**
 	 * Builds the biomes and adds them to their respective lists.
@@ -45,46 +59,6 @@ public class BiomeList implements Serializable
 		worldBiomes.sort(null);
 		regionalBiomes.sort(null);
 		localBiomes.sort(null);
-	}
-	
-	/**
-	 * Helper method, builds and adds all the world biomes.
-	 * @author Jay Clegg
-	 */
-	private void addWorldBiomes()
-	{
-		worldBiomes.add(new WorldBiome(new Color(10, 10, 107), "Deep Ocean", 65));
-		worldBiomes.add(new WorldBiome(new Color(12, 94, 112), "Shallow Ocean", 6));
-		worldBiomes.add(new WorldBiome(new Color(116, 130, 23), "Desert", 10));
-		worldBiomes.add(new WorldBiome(new Color(99, 127, 150), "Icy Ocean", 1));
-		worldBiomes.add(new WorldBiome(new Color(54, 63, 71), "Mountainous", 5));
-		worldBiomes.add(new WorldBiome(new Color(75, 153, 105), "Fertile", 13));
-	}
-	
-	/**
-	 * Helper method, builds and adds all the regional biomes.
-	 * @author Jay Clegg
-	 */
-	private void addRegionalBiomes()
-	{
-		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Deep Ocean", 100));
-		
-		regionalBiomes.add(new RegionalBiome(new Color(12, 94, 112), "Shallow Ocean", 80));
-		regionalBiomes.add(new RegionalBiome(new Color(10, 148, 111), "Reef", 10));
-		regionalBiomes.add(new RegionalBiome(new Color(133, 106, 25), "Shore", 10));
-		
-		regionalBiomes.add(new RegionalBiome(new Color(116, 130, 23), "Desert", 99));
-		regionalBiomes.add(new RegionalBiome(new Color(39, 0, 232), "Oasis", 1));
-		
-		regionalBiomes.add(new RegionalBiome(new Color(116, 181, 184), "Iceberg", 75));
-		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Cold Deep Ocean", 25));
-		
-		regionalBiomes.add(new RegionalBiome(new Color(190, 196, 196), "Glacier", 10));
-		regionalBiomes.add(new RegionalBiome(new Color(75, 75, 75), "Ore Rich", 10));
-		regionalBiomes.add(new RegionalBiome(new Color(76, 76, 76), "Stoney", 80));
-		
-		regionalBiomes.add(new RegionalBiome(new Color(4, 117, 40), "Grasslands", 50));
-		regionalBiomes.add(new RegionalBiome(new Color(41, 123, 230), "Lake", 50));
 	}
 	
 	/**
@@ -131,36 +105,43 @@ public class BiomeList implements Serializable
 	}
 	
 	/**
-	 * Returns the world biome with the specified name.
+	 * Helper method, builds and adds all the regional biomes.
 	 * @author Jay Clegg
-	 * @param name The name of the biome.
-	 * @return The world biome with that name.
 	 */
-	public WorldBiome getWorldBiome(String name)
+	private void addRegionalBiomes()
 	{
-		return worldBiomes.get(indexOfWorld(worldBiomes, name, 0, worldBiomes.size()));
+		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Deep Ocean", 100));
+		
+		regionalBiomes.add(new RegionalBiome(new Color(12, 94, 112), "Shallow Ocean", 80));
+		regionalBiomes.add(new RegionalBiome(new Color(10, 148, 111), "Reef", 10));
+		regionalBiomes.add(new RegionalBiome(new Color(133, 106, 25), "Shore", 10));
+		
+		regionalBiomes.add(new RegionalBiome(new Color(116, 130, 23), "Desert", 99));
+		regionalBiomes.add(new RegionalBiome(new Color(39, 0, 232), "Oasis", 1));
+		
+		regionalBiomes.add(new RegionalBiome(new Color(116, 181, 184), "Iceberg", 75));
+		regionalBiomes.add(new RegionalBiome(new Color(10, 10, 107), "Cold Deep Ocean", 25));
+		
+		regionalBiomes.add(new RegionalBiome(new Color(190, 196, 196), "Glacier", 10));
+		regionalBiomes.add(new RegionalBiome(new Color(75, 75, 75), "Ore Rich", 10));
+		regionalBiomes.add(new RegionalBiome(new Color(76, 76, 76), "Stoney", 80));
+		
+		regionalBiomes.add(new RegionalBiome(new Color(4, 117, 40), "Grasslands", 50));
+		regionalBiomes.add(new RegionalBiome(new Color(41, 123, 230), "Lake", 50));
 	}
 	
 	/**
-	 * Returns the regional biome with the specified name.
+	 * Helper method, builds and adds all the world biomes.
 	 * @author Jay Clegg
-	 * @param name The name of the biome.
-	 * @return The regional biome with that name.
 	 */
-	public RegionalBiome getRegionalBiome(String name)
+	private void addWorldBiomes()
 	{
-		return regionalBiomes.get(indexOfRegional(regionalBiomes, name, 0, regionalBiomes.size()));
-	}
-	
-	/**
-	 * Returns the local biome with the specified name.
-	 * @author Jay Clegg
-	 * @param name The name of the biome.
-	 * @return The local biome with that name.
-	 */
-	public LocalBiome getLocalBiome(String name)
-	{
-		return localBiomes.get(indexOfLocal(localBiomes, name, 0, localBiomes.size()));
+		worldBiomes.add(new WorldBiome(new Color(10, 10, 107), "Deep Ocean", 65));
+		worldBiomes.add(new WorldBiome(new Color(12, 94, 112), "Shallow Ocean", 6));
+		worldBiomes.add(new WorldBiome(new Color(116, 130, 23), "Desert", 10));
+		worldBiomes.add(new WorldBiome(new Color(99, 127, 150), "Icy Ocean", 1));
+		worldBiomes.add(new WorldBiome(new Color(54, 63, 71), "Mountainous", 5));
+		worldBiomes.add(new WorldBiome(new Color(75, 153, 105), "Fertile", 13));
 	}
 	
 	/**
@@ -177,10 +158,10 @@ public class BiomeList implements Serializable
 	{
 		try
 		{
-		int middle = (low + high) / 2;
-		if(source.get(middle).getName().equals(name)) return middle;
-		else if(source.get(middle).getName().compareTo(name) > 0) return indexOfLocal(source, name, low, middle - 1);
-		else return indexOfLocal(source, name, middle + 1, high);
+			int middle = (low + high) / 2;
+			if(source.get(middle).getName().equals(name)) return middle;
+			else if(source.get(middle).getName().compareTo(name) > 0) return indexOfLocal(source, name, low, middle - 1);
+			else return indexOfLocal(source, name, middle + 1, high);
 		}
 		catch(StackOverflowError stackOverflow)
 		{
@@ -202,10 +183,10 @@ public class BiomeList implements Serializable
 	{
 		try
 		{
-		int middle = (low + high) / 2;
-		if(source.get(middle).getName().equals(name)) return middle;
-		else if(source.get(middle).getName().compareTo(name) > 0) return indexOfRegional(source, name, low, middle - 1);
-		else return indexOfRegional(source, name, middle + 1, high);
+			int middle = (low + high) / 2;
+			if(source.get(middle).getName().equals(name)) return middle;
+			else if(source.get(middle).getName().compareTo(name) > 0) return indexOfRegional(source, name, low, middle - 1);
+			else return indexOfRegional(source, name, middle + 1, high);
 		}
 		catch(StackOverflowError stackOverflow)
 		{
@@ -227,14 +208,47 @@ public class BiomeList implements Serializable
 	{
 		try
 		{
-		int middle = (low + high) / 2;
-		if(source.get(middle).getName().equals(name)) return middle;
-		else if(source.get(middle).getName().compareTo(name) > 0) return indexOfWorld(source, name, low, middle - 1);
-		else return indexOfWorld(source, name, middle + 1, high);
+			int middle = (low + high) / 2;
+			if(source.get(middle).getName().equals(name)) return middle;
+			else if(source.get(middle).getName().compareTo(name) > 0) return indexOfWorld(source, name, low, middle - 1);
+			else return indexOfWorld(source, name, middle + 1, high);
 		}
 		catch(StackOverflowError stackOverflow)
 		{
 			throw new NullPointerException("No such world biome");
 		}
+	}
+	
+	/**
+	 * Returns the local biome with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the biome.
+	 * @return The local biome with that name.
+	 */
+	public LocalBiome getLocalBiome(String name)
+	{
+		return localBiomes.get(indexOfLocal(localBiomes, name, 0, localBiomes.size()));
+	}
+	
+	/**
+	 * Returns the regional biome with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the biome.
+	 * @return The regional biome with that name.
+	 */
+	public RegionalBiome getRegionalBiome(String name)
+	{
+		return regionalBiomes.get(indexOfRegional(regionalBiomes, name, 0, regionalBiomes.size()));
+	}
+	
+	/**
+	 * Returns the world biome with the specified name.
+	 * @author Jay Clegg
+	 * @param name The name of the biome.
+	 * @return The world biome with that name.
+	 */
+	public WorldBiome getWorldBiome(String name)
+	{
+		return worldBiomes.get(indexOfWorld(worldBiomes, name, 0, worldBiomes.size()));
 	}
 }
