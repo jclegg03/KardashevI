@@ -19,13 +19,47 @@ import gui.utility.MainPanel;
  */
 public class SettlementPanel extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private SettlementController app;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
 	private SpringLayout layout;
-	private SpringLayout settlementLayout;
-	private JScrollPane settlementListHolder;
-	private JPanel settlementList;
-	private JLabel title;
+	
+	/**
+	 * The number of settlements.
+	 * @author Jay Clegg
+	 */
 	private int settlementCount;
+	
+	/**
+	 * The layout for the settlements. Needs to be implemented.
+	 * @author Jay Clegg
+	 */
+	private SpringLayout settlementLayout;
+	
+	/**
+	 * The panel to go in the scroll pane. Holds the settlements.
+	 * @author Jay Clegg
+	 */
+	private JPanel settlementList;
+	
+	/**
+	 * The scroll pane to hold the settlements.
+	 * @author Jay Clegg
+	 */
+	private JScrollPane settlementListHolder;
+	
+	/**
+	 * The title. Holds "Settlements"
+	 * @author Jay Clegg
+	 */
+	private JLabel title;
 	
 	/**
 	 * Builds the settlement panel.
@@ -48,19 +82,14 @@ public class SettlementPanel extends MainPanel
 		setupListeners();
 	}
 	
-	protected void setupPanel()
+	/**
+	 * Updates the graphics of this panel.
+	 * @author Jay Clegg
+	 */
+	private void update()
 	{
-		settlementListHolder.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		settlementListHolder.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		this.add(title);
-		this.add(settlementListHolder);
-		settlementListHolder.setViewportView(settlementList);
-		
-	}
-	
-	protected void setupListeners()
-	{
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 	
 	protected void setupLayout()
@@ -77,14 +106,19 @@ public class SettlementPanel extends MainPanel
 		layout.putConstraint(SpringLayout.SOUTH, settlementListHolder, 0, SpringLayout.SOUTH, this);
 	}
 	
-	/**
-	 * Updates the graphics of this panel.
-	 * @author Jay Clegg
-	 */
-	private void update()
+	protected void setupListeners()
 	{
-		this.setVisible(false);
-		this.setVisible(true);
+	}
+	
+	protected void setupPanel()
+	{
+		settlementListHolder.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		settlementListHolder.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		this.add(title);
+		this.add(settlementListHolder);
+		settlementListHolder.setViewportView(settlementList);
+		
 	}
 	
 	/**
@@ -99,6 +133,20 @@ public class SettlementPanel extends MainPanel
 		settlementList.add(settlement);
 		settlementCount += 1;
 		update();
+	}
+	
+	public JButton getSettlement(String name)
+	{
+		for(Component component : this.settlementList.getComponents())
+		{
+			JButton temp = (JButton) component;
+			if(temp.getText().equals(name))
+			{
+				return temp;
+			}
+		}
+		
+		return null;
 	}
 	
 	public int getSettlementCount()
@@ -144,19 +192,5 @@ public class SettlementPanel extends MainPanel
 		{
 			throw new NullPointerException("No such settlement");
 		}
-	}
-	
-	public JButton getSettlement(String name)
-	{
-		for(Component component : this.settlementList.getComponents())
-		{
-			JButton temp = (JButton) component;
-			if(temp.getText().equals(name))
-			{
-				return temp;
-			}
-		}
-		
-		return null;
 	}
 }
