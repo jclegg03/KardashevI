@@ -20,12 +20,41 @@ import gui.utility.MainPanel;
  */
 public class MapLevelSelector extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private MapController app;
+	
+	/**
+	 * The currently displayed map.
+	 * @author Jay Clegg
+	 */
 	private Map currentMap;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
 	private SpringLayout layout;
-	private JButton zoomOutButton;
+	
+	/**
+	 * Diplalys the level of the currently displayed map.
+	 * @author Jay Clegg
+	 */
 	private JLabel mapLevel;
+	
+	/**
+	 * Allows the user to change the name of the map.
+	 * @author Jay Clegg
+	 */
 	private JTextField mapName;
+	
+	/**
+	 * The button to zoom to a higher map level.
+	 * @author Jay Clegg
+	 */
+	private JButton zoomOutButton;
 	
 	/**
 	 * Builds the map level selector
@@ -46,17 +75,6 @@ public class MapLevelSelector extends MainPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
-	}
-	
-	@Override
-	protected void setupPanel()
-	{
-		mapLevel.setFont(new Font(Font.SERIF, Font.BOLD, 20));
-		mapName.setFont(mapLevel.getFont());
-		
-		this.add(zoomOutButton);
-		this.add(mapLevel);
-		this.add(mapName);
 	}
 	
 	@Override
@@ -85,11 +103,6 @@ public class MapLevelSelector extends MainPanel
 		mapName.addKeyListener(new KeyListener()
 		{
 			@Override
-			public void keyTyped(KeyEvent key)
-			{
-			}
-
-			@Override
 			public void keyPressed(KeyEvent key)
 			{
 				if(key.getKeyChar() == KeyEvent.VK_ENTER)
@@ -105,7 +118,23 @@ public class MapLevelSelector extends MainPanel
 			public void keyReleased(KeyEvent key)
 			{
 			}
+
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
+			}
 		});
+	}
+	
+	@Override
+	protected void setupPanel()
+	{
+		mapLevel.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+		mapName.setFont(mapLevel.getFont());
+		
+		this.add(zoomOutButton);
+		this.add(mapLevel);
+		this.add(mapName);
 	}
 	
 	/**
