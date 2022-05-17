@@ -16,16 +16,16 @@ import game.controller.MapController;
 public abstract class Map extends JPanel
 {
 	/**
-	 * The name of the map.
-	 * @author Jay Clegg
-	 */
-	protected String name;
-	
-	/**
 	 * The controller this reports to.
 	 * @author Jay Clegg
 	 */
 	protected MapController app;
+	
+	/**
+	 * If the map has been fully explored.
+	 * @author Jay Clegg
+	 */
+	protected boolean isFullyExplored;
 	
 	/**
 	 * The layout for this map.
@@ -40,10 +40,10 @@ public abstract class Map extends JPanel
 	protected String level;
 	
 	/**
-	 * If the map has been fully explored.
+	 * The name of the map.
 	 * @author Jay Clegg
 	 */
-	protected boolean isFullyExplored;
+	protected String name;
 	
 	/**
 	 * Builds the visible map.
@@ -75,26 +75,6 @@ public abstract class Map extends JPanel
 	}
 	
 	/**
-	 * 
-	 * @author Jay Clegg
-	 * @param row The row of the desired tile.
-	 * @param col The column of the desired tile.
-	 * @return
-	 */
-	public Tile getTile(int row, int col)
-	{
-		for(Component component : this.getComponents())
-		{
-			if(component.getName().equals("row" + row + "col" + col))
-			{
-				return (Tile) component;
-			}
-		}
-		
-		return null;
-	}
-	
-	/**
 	 * Sets a tile to explored.
 	 * @author Jay Clegg
 	 * @param row The row of the desired tile.
@@ -123,30 +103,24 @@ public abstract class Map extends JPanel
 		return this.name;
 	}
 	
-	@Override
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
 	/**
-	 * Returns all the tiles in a 2D array.
+	 * 
 	 * @author Jay Clegg
-	 * @return All the tiles in this map as a 2D array.
+	 * @param row The row of the desired tile.
+	 * @param col The column of the desired tile.
+	 * @return
 	 */
-	public Tile[][] getTiles2D()
+	public Tile getTile(int row, int col)
 	{
-		Tile[][] tiles = new Tile[layout.getRows()][layout.getColumns()];
-		
-		for(int row = 0; row < tiles.length; row++)
+		for(Component component : this.getComponents())
 		{
-			for(int col = 0; col < tiles[row].length; col++)
+			if(component.getName().equals("row" + row + "col" + col))
 			{
-				tiles[row][col] = getTile(row, col);
+				return (Tile) component;
 			}
 		}
 		
-		return tiles;
+		return null;
 	}
 	
 	/**
@@ -169,5 +143,31 @@ public abstract class Map extends JPanel
 			}
 		}
 		return linearTiles;
+	}
+	
+	/**
+	 * Returns all the tiles in a 2D array.
+	 * @author Jay Clegg
+	 * @return All the tiles in this map as a 2D array.
+	 */
+	public Tile[][] getTiles2D()
+	{
+		Tile[][] tiles = new Tile[layout.getRows()][layout.getColumns()];
+		
+		for(int row = 0; row < tiles.length; row++)
+		{
+			for(int col = 0; col < tiles[row].length; col++)
+			{
+				tiles[row][col] = getTile(row, col);
+			}
+		}
+		
+		return tiles;
+	}
+	
+	@Override
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 }

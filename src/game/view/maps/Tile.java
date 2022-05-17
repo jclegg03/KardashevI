@@ -19,12 +19,6 @@ public class Tile extends JButton
 	private MapController app;
 	
 	/**
-	 * The row the button is located in.
-	 * @author Jay Clegg
-	 */
-	private int row;
-	
-	/**
 	 * The column this button is in.
 	 * @author Jay Clegg
 	 */
@@ -35,6 +29,12 @@ public class Tile extends JButton
 	 * @author Jay Clegg
 	 */
 	private String level;
+	
+	/**
+	 * The row the button is located in.
+	 * @author Jay Clegg
+	 */
+	private int row;
 	
 	/**
 	 * Builds the tile object.
@@ -58,11 +58,6 @@ public class Tile extends JButton
 		this.addActionListener(click -> app.tileOptions(this));
 	}
 	
-	public int getRow()
-	{
-		return row;
-	}
-	
 	public int getCol()
 	{
 		return col;
@@ -71,5 +66,10 @@ public class Tile extends JButton
 	public String getLevel()
 	{
 		return this.level;
+	}
+	
+	public int getRow()
+	{
+		return row;
 	}
 }
