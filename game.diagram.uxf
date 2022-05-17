@@ -89,7 +89,7 @@ group=16</panel_attributes>
       <x>2262</x>
       <y>990</y>
       <w>240</w>
-      <h>150</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>MainContentPane
 --
@@ -102,10 +102,7 @@ group=16</panel_attributes>
 - quitButton : JButton
 --
 + MainContentPane(Controller, MainMenu) : Constructor
-- setupPanel() : void
 - setupButtonPanel() : void
-- setupLayout() : void
-- setupListeners() : void
 group=3</panel_attributes>
     <additional_attributes/>
   </element>
@@ -158,7 +155,7 @@ group=2</panel_attributes>
       <x>2244</x>
       <y>900</y>
       <w>264</w>
-      <h>252</h>
+      <h>222</h>
     </coordinates>
     <panel_attributes>game.view.mainMenu
 --

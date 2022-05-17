@@ -10,6 +10,10 @@ import gui.utility.JFrame;
  */
 public class MainMenu extends JFrame
 {
+	/**
+	 * The panel with all the menu buttons and layout.
+	 * @author Jay Clegg
+	 */
 	private MainContentPane contentPane;
 	
 	/**

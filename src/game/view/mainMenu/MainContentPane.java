@@ -20,13 +20,52 @@ import gui.utility.MainPanel;
  */
 public class MainContentPane extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
+	
+	/**
+	 * The frame which contains this panel.
+	 * @author Jay Clegg
+	 */
 	private MainMenu frame;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
 	private SpringLayout layout;
+	
+	/**
+	 * A sub panel for the buttons.
+	 * @author Jay Clegg
+	 */
 	private JPanel buttonPanel;
+	
+	/**
+	 * The button to start a new game.
+	 * @author Jay Clegg
+	 */
 	private JButton newButton;
+	
+	/**
+	 * The button to load a game.
+	 * @author Jay Clegg
+	 */
 	private JButton loadButton;
+	
+	/**
+	 * The button to change the settings of the game.
+	 * @author Jay Clegg
+	 */
 	private JButton settingsButton;
+	
+	/**
+	 * The button to quit the game completely.
+	 * @author Jay Clegg
+	 */
 	private JButton quitButton;
 	
 	/**
