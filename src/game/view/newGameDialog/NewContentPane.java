@@ -28,24 +28,6 @@ public class NewContentPane extends MainPanel
 	private Controller app;
 	
 	/**
-	 * The dialog that contains this panel.
-	 * @author Jay Clegg
-	 */
-	private NewGameDialog frame;
-	
-	/**
-	 * The layout for this panel.
-	 * @author Jay Clegg
-	 */
-	private SpringLayout layout;
-	
-	/**
-	 * The field where a user can enter additional save details.
-	 * @author Jay Clegg
-	 */
-	private JTextField textField;
-	
-	/**
 	 * The panel to hold the buttons.
 	 * @author Jay Clegg
 	 */
@@ -62,6 +44,24 @@ public class NewContentPane extends MainPanel
 	 * @author Jay Clegg
 	 */
 	private JButton confirmButton;
+	
+	/**
+	 * The dialog that contains this panel.
+	 * @author Jay Clegg
+	 */
+	private NewGameDialog frame;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
+	private SpringLayout layout;
+	
+	/**
+	 * The field where a user can enter additional save details.
+	 * @author Jay Clegg
+	 */
+	private JTextField textField;
 	
 	/**
 	 * Builds the new game content pane.
@@ -82,15 +82,6 @@ public class NewContentPane extends MainPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
-	}
-	
-	protected void setupPanel()
-	{
-		setupButtonPanel();
-		this.add(textField);
-		this.add(buttonPanel);
-		this.setFocusable(true);
-		textField.setFocusable(true);
 	}
 	
 	private void setupButtonPanel()
@@ -120,6 +111,16 @@ public class NewContentPane extends MainPanel
 	{
 		this.addKeyListener(new KeyListener()
 		{
+
+			@Override
+			public void keyPressed(KeyEvent key)
+			{
+			}
+
+			@Override
+			public void keyReleased(KeyEvent key)
+			{
+			}
 
 			@Override
 			public void keyTyped(KeyEvent key)
@@ -167,16 +168,6 @@ public class NewContentPane extends MainPanel
 					}
 				}
 			}
-
-			@Override
-			public void keyPressed(KeyEvent key)
-			{
-			}
-
-			@Override
-			public void keyReleased(KeyEvent key)
-			{
-			}
 			
 		});
 		
@@ -185,18 +176,6 @@ public class NewContentPane extends MainPanel
 
 			@Override
 			public void mouseClicked(MouseEvent e)
-			{
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) 
-			{
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) 
 			{
 				
 			}
@@ -218,11 +197,33 @@ public class NewContentPane extends MainPanel
 					textField.setText("Empire Name");
 				}
 			}
+
+			@Override
+			public void mousePressed(MouseEvent e) 
+			{
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) 
+			{
+				
+			}
 			
 		});
 		
 		textField.addKeyListener(new KeyListener()
 		{
+
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e)
+			{
+			}
 
 			@Override
 			public void keyTyped(KeyEvent key)
@@ -251,20 +252,19 @@ public class NewContentPane extends MainPanel
 					}
 				}
 			}
-
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e)
-			{
-			}
 			
 		});
 		
 		cancelButton.addActionListener(click -> frame.dispose());
 		confirmButton.addActionListener(click -> app.createEmpire(textField.getText(), frame));
+	}
+	
+	protected void setupPanel()
+	{
+		setupButtonPanel();
+		this.add(textField);
+		this.add(buttonPanel);
+		this.setFocusable(true);
+		textField.setFocusable(true);
 	}
 }
