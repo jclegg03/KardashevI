@@ -13,17 +13,66 @@ import gui.utility.MainPanel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
+/**
+ * Holds the components of the loading screen.
+ * @author Jay Clegg
+ *
+ */
 public class LoadPanel extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
-	private String[] saves;
-	private JScrollPane scrollPane;
+	
+	/**
+	 * The panel to hold all the buttons.
+	 * @author Jay Clegg
+	 */
 	private JPanel buttonPanel;
+	
+	/**
+	 * All the buttons to be added to the button panel.
+	 * @author Jay Clegg
+	 */
 	private JButton[] buttons;
+	
+	/**
+	 * Cancels loading and gets rid of the dialog.
+	 * @author Jay Clegg
+	 */
 	private JButton cancelButton;
+	
+	/**
+	 * The title of this panel.
+	 * @author Jay Clegg
+	 */
 	private JLabel label;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
 	private SpringLayout layout;
+	
+	/**
+	 * The dialog which contains this.
+	 * @author Jay Clegg
+	 */
 	private LoadDialog parent;
+	
+	/**
+	 * The name of the save games.
+	 * @author Jay Clegg
+	 */
+	private String[] saves;
+	
+	/**
+	 * The scroll pane to hold the button panel in case of overflow.
+	 * @author Jay Clegg
+	 */
+	private JScrollPane scrollPane;
 	
 	public LoadPanel(Controller app, String[] saves, LoadDialog parent)
 	{
@@ -43,6 +92,27 @@ public class LoadPanel extends MainPanel
 		setupListeners();
 	}
 	
+	/**
+	 * Cancels loading and disposes of the dialog.
+	 * @author Jay Clegg
+	 */
+	private void cancel()
+	{
+		parent.dispose();
+		app.returnFocus();
+	}
+
+	/**
+	 * Tells the controller which save file to use based on the button clicked.
+	 * @author Jay Clegg
+	 * @param button The button which was pressed.
+	 */
+	private void loadGame(JButton button)
+	{
+		app.setSaveIndex(Integer.parseInt(button.getName()));
+		parent.dispose();
+	}
+
 	private void setupButtons()
 	{
 		for(int index = 0; index < buttons.length; index++)
@@ -51,28 +121,6 @@ public class LoadPanel extends MainPanel
 			buttons[index] = button;
 			button.setName(index + "");
 		}
-	}
-
-	@Override
-	protected void setupPanel()
-	{
-		setupButtons();
-		
-		for(JButton button : buttons)
-		{
-			buttonPanel.add(button);
-		}
-		
-		scrollPane.setViewportView(buttonPanel);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-
-		this.add(label);
-		this.add(scrollPane);
-		this.add(cancelButton);
 	}
 
 	@Override
@@ -95,27 +143,37 @@ public class LoadPanel extends MainPanel
 		layout.putConstraint(SpringLayout.SOUTH, cancelButton, -10, SpringLayout.SOUTH, this);
 		layout.putConstraint(SpringLayout.EAST, cancelButton, -10, SpringLayout.EAST, this);
 	}
-
+	
 	@Override
 	protected void setupListeners()
 	{
 		for(JButton button : buttons)
 		{
-			button.addActionListener(click -> update(button));
+			button.addActionListener(click -> loadGame(button));
 		}
 		
 		cancelButton.addActionListener(click -> cancel());
 	}
-
-	private void update(JButton button)
-	{
-		app.setSaveIndex(Integer.parseInt(button.getName()));
-		parent.dispose();
-	}
 	
-	private void cancel()
+	@Override
+	protected void setupPanel()
 	{
-		parent.dispose();
-		app.returnFocus();
+		setupButtons();
+		
+		for(JButton button : buttons)
+		{
+			buttonPanel.add(button);
+		}
+		
+		scrollPane.setViewportView(buttonPanel);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		label.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+
+		this.add(label);
+		this.add(scrollPane);
+		this.add(cancelButton);
 	}
 }
