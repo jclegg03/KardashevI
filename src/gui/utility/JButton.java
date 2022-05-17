@@ -10,6 +10,17 @@ import java.awt.Dimension;
 public class JButton extends javax.swing.JButton
 {
 	/**
+	 * Builds a basic button.
+	 * @author Jay Clegg
+	 */
+	public JButton()
+	{
+		super();
+		
+		configureButton();
+	}
+	
+	/**
 	 * Builds a JButton with text.
 	 * @param text The text on the button.
 	 * @author Jay Clegg
@@ -17,17 +28,6 @@ public class JButton extends javax.swing.JButton
 	public JButton(String text)
 	{
 		super(text);
-		
-		configureButton();
-	}
-	
-	/**
-	 * Builds a basic button.
-	 * @author Jay Clegg
-	 */
-	public JButton()
-	{
-		super();
 		
 		configureButton();
 	}

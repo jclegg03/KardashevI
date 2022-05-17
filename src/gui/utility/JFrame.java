@@ -11,6 +11,10 @@ import game.controller.Controller;
  */
 public abstract class JFrame extends javax.swing.JFrame
 {
+	/**
+	 * The controller this frame reports to.
+	 * @author Jay Clegg
+	 */
 	protected Controller app;
 	
 	/**

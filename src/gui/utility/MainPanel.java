@@ -19,7 +19,22 @@ public abstract class MainPanel extends JPanel
 	{
 		super();
 	}
-	protected abstract void setupPanel();
+	
+	/**
+	 * Sets up the layout of the panel. To be implemented in subclasses.
+	 * @author Jay Clegg
+	 */
 	protected abstract void setupLayout();
+	
+	/**
+	 * Adds listeners to the components in the panel. To be implemented in subclasses.
+	 * @author Jay Clegg
+	 */
 	protected abstract void setupListeners();
+	
+	/**
+	 * Sets up the panel by adding components. To be implemented in subclasses.
+	 * @author Jay Clegg
+	 */
+	protected abstract void setupPanel();
 }
