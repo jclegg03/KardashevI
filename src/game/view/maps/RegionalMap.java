@@ -9,6 +9,10 @@ import game.controller.MapController;
  */
 public class RegionalMap extends Map
 {
+	/**
+	 * Counts the amount of times this class has been initialized. Ensures distinct map names.
+	 * @author Jay Clegg
+	 */
 	private static int count;
 	
 	/**

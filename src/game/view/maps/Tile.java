@@ -12,9 +12,28 @@ import gui.utility.JButton;
  */
 public class Tile extends JButton
 {	
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private MapController app;
+	
+	/**
+	 * The row the button is located in.
+	 * @author Jay Clegg
+	 */
 	private int row;
+	
+	/**
+	 * The column this button is in.
+	 * @author Jay Clegg
+	 */
 	private int col;
+	
+	/**
+	 * The map level this tile is on. (Not what it links to)
+	 * @author Jay Clegg
+	 */
 	private String level;
 	
 	/**

@@ -15,10 +15,34 @@ import game.controller.MapController;
  */
 public abstract class Map extends JPanel
 {
+	/**
+	 * The name of the map.
+	 * @author Jay Clegg
+	 */
 	protected String name;
+	
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	protected MapController app;
+	
+	/**
+	 * The layout for this map.
+	 * @author Jay Clegg
+	 */
 	protected GridLayout layout;
+	
+	/**
+	 * The level this map is.
+	 * @author Jay Clegg
+	 */
 	protected String level;
+	
+	/**
+	 * If the map has been fully explored.
+	 * @author Jay Clegg
+	 */
 	protected boolean isFullyExplored;
 	
 	/**
