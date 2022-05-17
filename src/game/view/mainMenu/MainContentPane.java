@@ -27,6 +27,12 @@ public class MainContentPane extends MainPanel
 	private Controller app;
 	
 	/**
+	 * A sub panel for the buttons.
+	 * @author Jay Clegg
+	 */
+	private JPanel buttonPanel;
+	
+	/**
 	 * The frame which contains this panel.
 	 * @author Jay Clegg
 	 */
@@ -39,10 +45,10 @@ public class MainContentPane extends MainPanel
 	private SpringLayout layout;
 	
 	/**
-	 * A sub panel for the buttons.
+	 * The button to load a game.
 	 * @author Jay Clegg
 	 */
-	private JPanel buttonPanel;
+	private JButton loadButton;
 	
 	/**
 	 * The button to start a new game.
@@ -51,22 +57,16 @@ public class MainContentPane extends MainPanel
 	private JButton newButton;
 	
 	/**
-	 * The button to load a game.
+	 * The button to quit the game completely.
 	 * @author Jay Clegg
 	 */
-	private JButton loadButton;
+	private JButton quitButton;
 	
 	/**
 	 * The button to change the settings of the game.
 	 * @author Jay Clegg
 	 */
 	private JButton settingsButton;
-	
-	/**
-	 * The button to quit the game completely.
-	 * @author Jay Clegg
-	 */
-	private JButton quitButton;
 	
 	/**
 	 * Builds the main menu.
@@ -90,14 +90,6 @@ public class MainContentPane extends MainPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
-	}
-	
-	protected void setupPanel()
-	{
-		setupButtonPanel();
-		this.add(buttonPanel);
-		this.setFocusable(true);
-		this.setBackground(java.awt.Color.BLUE);
 	}
 	
 	/**
@@ -129,11 +121,6 @@ public class MainContentPane extends MainPanel
 		{
 
 			@Override
-			public void keyTyped(KeyEvent key)
-			{
-			}
-
-			@Override
 			public void keyPressed(KeyEvent key)
 			{
 				if(key.getKeyChar() == 'q')
@@ -161,6 +148,11 @@ public class MainContentPane extends MainPanel
 					return;
 				}
 			}
+
+			@Override
+			public void keyTyped(KeyEvent key)
+			{
+			}
 			
 		});
 
@@ -168,5 +160,13 @@ public class MainContentPane extends MainPanel
 		loadButton.addActionListener(click -> app.loadGame());
 		settingsButton.addActionListener(click -> app.settings());
 		quitButton.addActionListener(click -> new ExitDialog(app, frame));
+	}
+	
+	protected void setupPanel()
+	{
+		setupButtonPanel();
+		this.add(buttonPanel);
+		this.setFocusable(true);
+		this.setBackground(java.awt.Color.BLUE);
 	}
 }
