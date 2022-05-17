@@ -12,6 +12,10 @@ import game.view.mainMenu.MainMenu;
  */
 public class NewGameDialog extends javax.swing.JDialog
 {
+	/**
+	 * The panel that this holds.
+	 * @author Jay Clegg
+	 */
 	private NewContentPane contentPane;
 	
 	/**

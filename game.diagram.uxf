@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="15.0.0">
   <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -129,7 +129,7 @@ group=2</panel_attributes>
       <x>2208</x>
       <y>1272</y>
       <w>258</w>
-      <h>138</h>
+      <h>114</h>
     </coordinates>
     <panel_attributes>NewContentPane
 --
@@ -142,10 +142,7 @@ group=2</panel_attributes>
 - confirmButton : JButton
 --
 + NewContentPane(Controller, NewGameDialog) : Constructor
-- setupPanel() : void
 - setupButtonPanel() : void
-- setupLayout() : void
-- setupListeners() : void
 group=2</panel_attributes>
     <additional_attributes/>
   </element>
@@ -223,7 +220,7 @@ group=1</panel_attributes>
       <x>2202</x>
       <y>1176</y>
       <w>276</w>
-      <h>252</h>
+      <h>222</h>
     </coordinates>
     <panel_attributes>game.view.newGameDialog
 --
@@ -237,15 +234,18 @@ group=2</panel_attributes>
       <x>1674</x>
       <y>894</y>
       <w>186</w>
-      <h>72</h>
+      <h>156</h>
     </coordinates>
     <panel_attributes>/Map/
 --
+# name : String
 # app : MapController
 # layout : GridLayout
+# level : String
+# isFullyExplored : boolean
 --
-+ Map(MapController, int, int) : Constructor
-# getTile(int, int) : Tile
++ Map(MapController, int, int, String) : Constructor
++ getTile(int, int) : Tile
 + exploreTile(int, int) : void
 group=22</panel_attributes>
     <additional_attributes/>
@@ -254,18 +254,20 @@ group=22</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1674</x>
-      <y>1122</y>
+      <y>1218</y>
       <w>186</w>
-      <h>72</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Tile
 --
 - app : MapController
+- row : int
+- col : int
 - isExplored : boolean
 --
 + Tile(MapController, int, int) : Constructor
-+ setIsExplored() : void
-+ getIsExplored() : boolean
++ getters() : Type
++ setters(Type) : void
 group=22</panel_attributes>
     <additional_attributes/>
   </element>
@@ -275,10 +277,10 @@ group=22</panel_attributes>
       <x>1854</x>
       <y>1014</y>
       <w>138</w>
-      <h>132</h>
+      <h>246</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>210.0;10.0;60.0;10.0;60.0;200.0;10.0;200.0</additional_attributes>
+    <additional_attributes>210.0;10.0;60.0;10.0;60.0;390.0;10.0;390.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -286,7 +288,7 @@ group=22</panel_attributes>
       <x>1668</x>
       <y>876</y>
       <w>204</w>
-      <h>324</h>
+      <h>444</h>
     </coordinates>
     <panel_attributes>game.view.maps
 --
@@ -849,10 +851,10 @@ group=16</panel_attributes>
       <x>1620</x>
       <y>492</y>
       <w>390</w>
-      <h>732</h>
+      <h>864</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>630.0;1050.0;630.0;1090.0;430.0;1090.0;430.0;1200.0;10.0;1200.0;10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>630.0;1050.0;630.0;1090.0;430.0;1090.0;430.0;1420.0;20.0;1420.0;10.0;10.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1299,9 +1301,9 @@ bg=magenta</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1674</x>
-      <y>972</y>
+      <y>1074</y>
       <w>180</w>
-      <h>30</h>
+      <h>36</h>
     </coordinates>
     <panel_attributes>WorldMap
 --
@@ -1315,9 +1317,9 @@ group=22</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1674</x>
-      <y>1008</y>
+      <y>1116</y>
       <w>192</w>
-      <h>42</h>
+      <h>48</h>
     </coordinates>
     <panel_attributes>RegionalMap
 --
@@ -1332,7 +1334,7 @@ group=22</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1674</x>
-      <y>1056</y>
+      <y>1170</y>
       <w>174</w>
       <h>42</h>
     </coordinates>

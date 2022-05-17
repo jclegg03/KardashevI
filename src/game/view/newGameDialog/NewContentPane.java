@@ -21,12 +21,46 @@ import gui.utility.MainPanel;
  */
 public class NewContentPane extends MainPanel
 {
+	/**
+	 * The controller this reports to.
+	 * @author Jay Clegg
+	 */
 	private Controller app;
+	
+	/**
+	 * The dialog that contains this panel.
+	 * @author Jay Clegg
+	 */
 	private NewGameDialog frame;
+	
+	/**
+	 * The layout for this panel.
+	 * @author Jay Clegg
+	 */
 	private SpringLayout layout;
+	
+	/**
+	 * The field where a user can enter additional save details.
+	 * @author Jay Clegg
+	 */
 	private JTextField textField;
+	
+	/**
+	 * The panel to hold the buttons.
+	 * @author Jay Clegg
+	 */
 	private JPanel buttonPanel;
+	
+	/**
+	 * The button to cancel saving.
+	 * @author Jay Clegg
+	 */
 	private JButton cancelButton;
+	
+	/**
+	 * The button to save the game.
+	 * @author Jay Clegg
+	 */
 	private JButton confirmButton;
 	
 	/**
